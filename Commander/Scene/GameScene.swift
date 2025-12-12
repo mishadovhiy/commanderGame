@@ -16,8 +16,8 @@ class GameScene: SKScene {
         physicsWorld.contactDelegate = self
         loadGraund()
         updateGraundPosition()
-        loadArmur(position: .init(x: 0.186, y: 0.22))
-        loadArmur(position: .init(x: 0.271, y: 0.22))
+        loadArmour(position: .init(x: 0.186, y: 0.22))
+        loadArmour(position: .init(x: 0.271, y: 0.22))
 
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
             self.loadRaund()
@@ -68,8 +68,8 @@ fileprivate extension GameScene {
         return path
     }
     
-    func loadArmur(position: CGPoint) {
-        let node = ArmourNode(type: .basuka)
+    func loadArmour(position: CGPoint) {
+        let node = WeaponNode(type: .basuka)
         self.addChild(node)
         node.updatePosition(position: position)
     }
@@ -133,10 +133,10 @@ extension GameScene: SKPhysicsContactDelegate {
         if [a, b].contains(where: {
             $0 is EnemyNode
         }) && [a, b].contains(where: {
-            $0 is ArmourNode
+            $0 is WeaponNode
         }) {
             let enemy = a as? EnemyNode ?? b as! EnemyNode
-            let armour = a as? ArmourNode ?? b as! ArmourNode
+            let armour = a as? WeaponNode ?? b as! WeaponNode
             print("contadsx")
             armour.shoot(enemy: enemy, force: true)
         }

@@ -7,16 +7,18 @@
 
 import SpriteKit
 
-class ArmourNode: SKSpriteNode {
-    let type: ArmourType
+class WeaponNode: SKSpriteNode {
+    
+    let type: WeaponType
     let damage: Int
-    init(type: ArmourType) {
+    
+    init(type: WeaponType) {
         self.type = type
         self.damage = type.damage
         super.init(texture: nil, color: .red.withAlphaComponent(0.2), size: CGSize(width: 100, height: 100))
         
         self.physicsBody = .init(rectangleOf: .init(width: 100, height: 100))
-        self.physicsBody?.categoryBitMask = PhysicsCategory.armour
+        self.physicsBody?.categoryBitMask = PhysicsCategory.weapon
         self.physicsBody?.contactTestBitMask = PhysicsCategory.enemy
         self.physicsBody?.collisionBitMask = 0
         self.physicsBody?.affectedByGravity = false

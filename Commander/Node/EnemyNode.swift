@@ -19,7 +19,7 @@ class EnemyNode: SKSpriteNode {
         super.init(texture: nil, color: .red, size: CGSize(width: 20, height: 20))
         self.physicsBody = .init(rectangleOf: .init(width: 20, height: 20))
         self.physicsBody?.categoryBitMask = PhysicsCategory.enemy
-        self.physicsBody?.contactTestBitMask = PhysicsCategory.armour | PhysicsCategory.bullet
+        self.physicsBody?.contactTestBitMask = PhysicsCategory.weapon | PhysicsCategory.bullet
         self.physicsBody?.collisionBitMask = 0
         self.physicsBody?.affectedByGravity = false
         

@@ -19,11 +19,11 @@
 		823497F22EEB5AB400F82871 /* GameDurationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823497F12EEB5AB400F82871 /* GameDurationType.swift */; };
 		823497F52EEB5C0200F82871 /* LevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823497F42EEB5C0200F82871 /* LevelManager.swift */; };
 		823497F72EEB5DBA00F82871 /* EnemyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823497F62EEB5DBA00F82871 /* EnemyType.swift */; };
-		823497FB2EEB661900F82871 /* ArmourType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823497FA2EEB661900F82871 /* ArmourType.swift */; };
+		823497FB2EEB661900F82871 /* WeaponType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823497FA2EEB661900F82871 /* WeaponType.swift */; };
 		823497FE2EEB67D300F82871 /* LevelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823497FD2EEB67D200F82871 /* LevelModel.swift */; };
 		823498022EEB6B8B00F82871 /* EnemyNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823498012EEB6B8B00F82871 /* EnemyNode.swift */; };
 		823498082EEB729500F82871 /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823498072EEB729500F82871 /* PhysicsCategory.swift */; };
-		8234980A2EEB739F00F82871 /* ArmourNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823498092EEB739F00F82871 /* ArmourNode.swift */; };
+		8234980A2EEB739F00F82871 /* WeaponNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823498092EEB739F00F82871 /* WeaponNode.swift */; };
 		8234980C2EEB77B900F82871 /* BulletNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8234980B2EEB77B900F82871 /* BulletNode.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,11 +42,11 @@
 		823497F12EEB5AB400F82871 /* GameDurationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDurationType.swift; sourceTree = "<group>"; };
 		823497F42EEB5C0200F82871 /* LevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelManager.swift; sourceTree = "<group>"; };
 		823497F62EEB5DBA00F82871 /* EnemyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyType.swift; sourceTree = "<group>"; };
-		823497FA2EEB661900F82871 /* ArmourType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmourType.swift; sourceTree = "<group>"; };
+		823497FA2EEB661900F82871 /* WeaponType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponType.swift; sourceTree = "<group>"; };
 		823497FD2EEB67D200F82871 /* LevelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelModel.swift; sourceTree = "<group>"; };
 		823498012EEB6B8B00F82871 /* EnemyNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyNode.swift; sourceTree = "<group>"; };
 		823498072EEB729500F82871 /* PhysicsCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
-		823498092EEB739F00F82871 /* ArmourNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmourNode.swift; sourceTree = "<group>"; };
+		823498092EEB739F00F82871 /* WeaponNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponNode.swift; sourceTree = "<group>"; };
 		8234980B2EEB77B900F82871 /* BulletNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,7 +101,7 @@
 			children = (
 				823497EB2EEB590B00F82871 /* LvlBuilderDataModel.swift */,
 				823497FD2EEB67D200F82871 /* LevelModel.swift */,
-				823497FA2EEB661900F82871 /* ArmourType.swift */,
+				823497FA2EEB661900F82871 /* WeaponType.swift */,
 				823497EF2EEB5A4900F82871 /* Difficulty.swift */,
 				823497F62EEB5DBA00F82871 /* EnemyType.swift */,
 				823497F12EEB5AB400F82871 /* GameDurationType.swift */,
@@ -121,7 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				823498012EEB6B8B00F82871 /* EnemyNode.swift */,
-				823498092EEB739F00F82871 /* ArmourNode.swift */,
+				823498092EEB739F00F82871 /* WeaponNode.swift */,
 				8234980B2EEB77B900F82871 /* BulletNode.swift */,
 			);
 			path = Node;
@@ -228,7 +228,7 @@
 			files = (
 				823497FE2EEB67D300F82871 /* LevelModel.swift in Sources */,
 				823497EC2EEB590C00F82871 /* LvlBuilderDataModel.swift in Sources */,
-				823497FB2EEB661900F82871 /* ArmourType.swift in Sources */,
+				823497FB2EEB661900F82871 /* WeaponType.swift in Sources */,
 				823498022EEB6B8B00F82871 /* EnemyNode.swift in Sources */,
 				823497CA2EEB1FAA00F82871 /* AppDelegate.swift in Sources */,
 				823497F72EEB5DBA00F82871 /* EnemyType.swift in Sources */,
@@ -238,7 +238,7 @@
 				823497F52EEB5C0200F82871 /* LevelManager.swift in Sources */,
 				823498082EEB729500F82871 /* PhysicsCategory.swift in Sources */,
 				823497F22EEB5AB400F82871 /* GameDurationType.swift in Sources */,
-				8234980A2EEB739F00F82871 /* ArmourNode.swift in Sources */,
+				8234980A2EEB739F00F82871 /* WeaponNode.swift in Sources */,
 				823497CC2EEB1FAA00F82871 /* GameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

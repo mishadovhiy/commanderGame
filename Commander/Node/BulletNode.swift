@@ -9,9 +9,9 @@ import SpriteKit
 
 class BulletNode: SKSpriteNode {
     let damage: Int
-    var armour: ArmourNode?
+    var armour: WeaponNode?
     
-    init(armour: ArmourNode) {
+    init(armour: WeaponNode) {
         self.damage = armour.damage
         self.armour = armour
         super.init(texture: nil, color: .blue, size: .init(width: 10, height: 10))

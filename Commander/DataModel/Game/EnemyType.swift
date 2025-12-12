@@ -19,7 +19,7 @@ enum EnemyType {
     case tankMBT
     case vehicle
     case fastVehicle
-    case armoredVehicle
+    case armouredVehicle
     case flightVehicle
     
     var speed: Int {
@@ -46,7 +46,7 @@ enum EnemyType {
             7
         case .fastVehicle:
             25
-        case .armoredVehicle:
+        case .armouredVehicle:
             10
         case .flightVehicle:
             5
@@ -77,7 +77,7 @@ enum EnemyType {
             7
         case .fastVehicle:
             5
-        case .armoredVehicle:
+        case .armouredVehicle:
             20
         case .flightVehicle:
             30
