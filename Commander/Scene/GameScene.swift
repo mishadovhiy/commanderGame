@@ -30,6 +30,14 @@ class GameScene: SKScene {
         }) as? SKShapeNode
     }
     
+    var enemies: [EnemyNode] {
+        self.children.filter({
+            $0 is EnemyNode
+        }).compactMap({
+            $0 as? EnemyNode
+        })
+    }
+    
     static func configure(lvl: LevelManager) -> Self {
         let scene: Self = .init(fileNamed: Constants.Names.sceneName.rawValue)!
         scene.lvlanager = lvl
@@ -68,14 +76,6 @@ fileprivate extension GameScene {
     
     func updateGraundPosition() {
         enemyGround?.path = graundPath
-    }
-    
-    var enemies: [EnemyNode] {
-        self.children.filter({
-            $0 is EnemyNode
-        }).compactMap({
-            $0 as? EnemyNode
-        })
     }
     
     func loadEnemy(_ type: EnemyType) {
