@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum GameDurationType {
+enum GameDurationType: String, Codable, CaseIterable {
     case infinityHealth, normal, singleLife
 }

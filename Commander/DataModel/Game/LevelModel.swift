@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct LevelModel {
+struct LevelModel: Codable {
     let level: Int
-    let difficulty: Difficulty
-    let duration: GameDurationType
+    var difficulty: Difficulty?
+    var duration: GameDurationType?
 }
 
 extension LevelModel {

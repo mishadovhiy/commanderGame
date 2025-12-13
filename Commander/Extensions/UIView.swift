@@ -20,3 +20,16 @@ extension UIView {
         }
     }
 }
+
+extension Encodable {
+    func dictionary() throws -> [String:Any?]? {
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(self)
+            let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any?]
+            return json
+        } catch {
+            throw error
+        }
+    }
+}

@@ -233,13 +233,31 @@
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Peu-fv-o1r">
                                                 <rect key="frame" x="664" y="0.0" width="70" height="234"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="70" id="UHj-DI-gT7"/>
-                                                </constraints>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iie-mt-9El">
+                                                        <rect key="frame" x="0.0" y="0.0" width="70" height="204"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="70" id="zui-kc-rCd"/>
+                                                        </constraints>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="Upgrade"/>
+                                                        <connections>
+                                                            <action selector="upgradeDidPress:" destination="e5f-or-oUs" eventType="touchUpInside" id="Aiz-ri-DYA"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1cj-md-N39">
+                                                        <rect key="frame" x="0.0" y="204" width="70" height="30"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <connections>
+                                                            <action selector="startGameDidPress:" destination="e5f-or-oUs" eventType="touchUpInside" id="iEF-DD-KHp"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="woi-4I-5rs">
+                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="woi-4I-5rs">
                                         <rect key="frame" x="0.0" y="234" width="734" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="CPO-fl-dLV"/>
@@ -260,6 +278,9 @@
                     <connections>
                         <outlet property="bottomPanelStackView" destination="woi-4I-5rs" id="tZM-jm-dKE"/>
                         <outlet property="pageContainerView" destination="IfC-JS-dSA" id="ZNY-yn-cPS"/>
+                        <outlet property="rightPanelStackView" destination="Peu-fv-o1r" id="vPv-km-beT"/>
+                        <outlet property="startButton" destination="1cj-md-N39" id="np4-F7-yRm"/>
+                        <outlet property="upgradeButton" destination="iie-mt-9El" id="ASc-Sw-0zC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ahH-05-HTu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -288,6 +309,77 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rTL-qQ-8qQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="187" y="2689"/>
+        </scene>
+        <!--Difficulty View Controller-->
+        <scene sceneID="cnT-XG-jKU">
+            <objects>
+                <viewController storyboardIdentifier="DifficultyViewController" id="QQt-0D-dsb" customClass="DifficultyViewController" customModule="Commander" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jig-MZ-gnV">
+                        <rect key="frame" x="0.0" y="0.0" width="852" height="393"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="AFy-T8-Pdr">
+                                <rect key="frame" x="59" y="59" width="734" height="279"/>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pn5-mB-Z2O"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pn5-mB-Z2O" firstAttribute="bottom" secondItem="AFy-T8-Pdr" secondAttribute="bottom" id="6DY-wX-Nkt"/>
+                            <constraint firstItem="AFy-T8-Pdr" firstAttribute="top" secondItem="pn5-mB-Z2O" secondAttribute="top" id="DFB-wg-XT6"/>
+                            <constraint firstItem="AFy-T8-Pdr" firstAttribute="leading" secondItem="pn5-mB-Z2O" secondAttribute="leading" id="Z1h-ba-fwL"/>
+                            <constraint firstItem="pn5-mB-Z2O" firstAttribute="trailing" secondItem="AFy-T8-Pdr" secondAttribute="trailing" id="ZAx-2m-x24"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="difficultyStackView" destination="AFy-T8-Pdr" id="Zz5-Xw-xM9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JCJ-qG-NqB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1018" y="2660"/>
+        </scene>
+        <!--Upgrade Weapon View Controller-->
+        <scene sceneID="rmx-w5-hap">
+            <objects>
+                <viewController storyboardIdentifier="UpgradeWeaponViewController" id="GKF-AS-SXd" customClass="UpgradeWeaponViewController" customModule="Commander" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="D6Q-Ck-LCS">
+                        <rect key="frame" x="0.0" y="0.0" width="852" height="393"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="QZR-1R-89m"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vCF-pg-dKq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1747" y="2768"/>
+        </scene>
+        <!--Level Description View Controller-->
+        <scene sceneID="dU2-eW-Hyv">
+            <objects>
+                <viewController storyboardIdentifier="LevelDescriptionViewController" id="zzv-KW-9Wk" customClass="LevelDescriptionViewController" customModule="Commander" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1P0-b1-Gkj">
+                        <rect key="frame" x="0.0" y="0.0" width="852" height="393"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="FQX-5l-joY">
+                                <rect key="frame" x="59" y="59" width="734" height="279"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="GND-zz-8wn"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="GND-zz-8wn" firstAttribute="trailing" secondItem="FQX-5l-joY" secondAttribute="trailing" id="HI2-hx-zwQ"/>
+                            <constraint firstItem="FQX-5l-joY" firstAttribute="top" secondItem="GND-zz-8wn" secondAttribute="top" id="Mhr-hX-OkN"/>
+                            <constraint firstItem="GND-zz-8wn" firstAttribute="bottom" secondItem="FQX-5l-joY" secondAttribute="bottom" id="SUl-4A-8KM"/>
+                            <constraint firstItem="FQX-5l-joY" firstAttribute="leading" secondItem="GND-zz-8wn" secondAttribute="leading" id="Sc1-wy-aj6"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hoE-oD-EY8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2396" y="2861"/>
         </scene>
     </scenes>
     <resources>
