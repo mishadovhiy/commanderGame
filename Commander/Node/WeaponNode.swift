@@ -11,6 +11,11 @@ class WeaponNode: SKSpriteNode {
     
     let type: WeaponType
     let damage: Int
+    var isEditing: Bool = false {
+        didSet {
+            setEditing()
+        }
+    }
     
     init(type: WeaponType) {
         self.type = type
@@ -89,6 +94,10 @@ class WeaponNode: SKSpriteNode {
         })
     }
         
+    func setEditing() {
+        self.color = (!isEditing ? UIColor.red : UIColor.green).withAlphaComponent(0.2)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

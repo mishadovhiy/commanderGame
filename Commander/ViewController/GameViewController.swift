@@ -11,10 +11,15 @@ import SpriteKit
 class GameViewController: UIViewController {
     
     @IBOutlet private weak var weaponsStackView: UIStackView!
+    private var weaponHolder: CGPoint?
     
     override func loadView() {
         super.loadView()
         loadUI()
+    }
+    
+    private var gameScene: GameScene? {
+        (view as? SKView)?.scene as? GameScene
     }
     
     @IBAction private func speedPressed(_ sender: UIButton) {
@@ -40,11 +45,52 @@ class GameViewController: UIViewController {
     @objc private func weaponDragging(_ sender: UIPanGestureRecognizer) {
         guard let view = sender.view else { return }
         let translation = sender.translation(in: self.view)
-        view.center = CGPoint(
-                x: view.center.x + translation.x,
-                y: view.center.y + translation.y
-            )
+        switch sender.state {
+        case .cancelled, .ended, .failed:
+            didEndDragging(view: view)
+        case .began:
+            weaponHolder = view.center
+        default: break
+        }
+        view.frame.origin = CGPoint(
+            x: view.frame.origin.x + translation.x,
+            y: view.frame.origin.y + translation.y
+        )
         sender.setTranslation(.zero, in: view.superview)
+        
+    }
+    
+    private func didEndDragging(view: UIView) {
+        view.isUserInteractionEnabled = false
+        
+        var position = view.positionInSuperview(s: self.view)
+        position.x += view.frame.size.width / 2
+        position.y += view.frame.size.height / 2
+        let verticalSafeArea = self.view.safeAreaInsets.top + self.view.safeAreaInsets.bottom
+        let hosrizontalSafeArea = self.view.safeAreaInsets.left + self.view.safeAreaInsets.right
+        let superViewSize: CGSize = .init(
+            width: self.view.frame.width + hosrizontalSafeArea,
+            height: self.view.frame.height + verticalSafeArea)
+        let percent = CGPoint(
+            x: (position.x + (hosrizontalSafeArea / 2)) / superViewSize.width,
+            y: (self.view.frame.height - position.y) / superViewSize.height)
+        print(percent, " ghjbnkmnjbh ", position.x)
+        gameScene?.loadArmour(position: percent)
+        UIView.animate(withDuration: 0.3, delay: 0, animations: {
+            view.center = self.weaponHolder ?? .zero
+        }, completion: { _ in
+            view.isUserInteractionEnabled = true
+            self.weaponHolder = nil
+        })
+    }
+    
+    public func didSetEditingWeaponNode() {
+        guard let editingNode = gameScene?.weapons.first(where: {
+            $0.isEditing
+        }) else {
+            return
+        }
+        
     }
 }
 
@@ -84,3 +130,16 @@ extension GameViewController {
     }
 }
 
+extension UIView {
+    func positionInSuperview(_ position: CGPoint = .zero, s: UIView) -> CGPoint {
+        var position = position
+        position.x += frame.minX
+        position.y += frame.minY
+        print(position, " positionpositionposition")
+        if self.superview == s {
+            return position
+        } else {
+            return self.superview?.positionInSuperview(position, s: s) ?? position
+        }
+    }
+}

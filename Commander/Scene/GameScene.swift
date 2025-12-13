@@ -11,6 +11,10 @@ import GameplayKit
 class GameScene: SKScene {
     var lvlanager: LevelManager!
     
+    private var gameVC: GameViewController? {
+        view?.next as? GameViewController
+    }
+    
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         physicsWorld.contactDelegate = self
@@ -38,10 +42,30 @@ class GameScene: SKScene {
         })
     }
     
-    static func configure(lvl: LevelManager) -> Self {
-        let scene: Self = .init(fileNamed: Constants.Names.sceneName.rawValue)!
-        scene.lvlanager = lvl
-        return scene
+    var weapons: [WeaponNode] {
+        self.children.filter({
+            $0 is WeaponNode
+        }).compactMap({
+            $0 as? WeaponNode
+        })
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        weapons.forEach({
+            $0.isEditing = false
+        })
+        super.touchesBegan(touches, with: event)
+        guard let touch = touches.first else { return }
+        let location = touch.location(in: self)
+        guard let weapon = atPoint(location) as? WeaponNode else { return }
+        weapon.isEditing.toggle()
+        gameVC?.didSetEditingWeaponNode()
+    }
+    
+    func loadArmour(position: CGPoint) {
+        let node = WeaponNode(type: .basuka)
+        self.addChild(node)
+        node.updatePosition(position: position)
     }
 }
 
@@ -66,12 +90,6 @@ fileprivate extension GameScene {
             )
         }
         return path
-    }
-    
-    func loadArmour(position: CGPoint) {
-        let node = WeaponNode(type: .basuka)
-        self.addChild(node)
-        node.updatePosition(position: position)
     }
     
     func updateGraundPosition() {
@@ -159,6 +177,14 @@ extension GameScene: SKPhysicsContactDelegate {
             }
             bullet.removeFromParent()
         }
+    }
+}
+
+extension GameScene {
+    static func configure(lvl: LevelManager) -> Self {
+        let scene: Self = .init(fileNamed: Constants.Names.sceneName.rawValue)!
+        scene.lvlanager = lvl
+        return scene
     }
 }
 
