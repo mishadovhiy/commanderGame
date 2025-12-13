@@ -44,7 +44,6 @@ extension LevelsPageViewController: UIPageViewControllerDataSource, UIPageViewCo
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        print("rtefds ", completed, " grfed ", finished)
         if !completed {
             self.index = previousIndex
             return

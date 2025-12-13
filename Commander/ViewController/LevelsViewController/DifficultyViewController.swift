@@ -9,26 +9,34 @@ import UIKit
 
 class DifficultyViewController: UIViewController {
 
+    @IBOutlet weak var backNavigationButton: UIButton!
     @IBOutlet private weak var difficultyStackView: UIStackView!
     private var data: [any RawRepresentable]!
     private var didSelect: ((_ value: String) -> ())!
     
     override func loadView() {
         super.loadView()
+        backNavigationButton.isHidden = navigationController?.viewControllers.count == 1
+        navigationController?.setNavigationBarHidden(true, animated: true)
         self.view.backgroundColor = .red
         data.forEach { item in
             let button = UIButton(type: .system)
+            print(item.rawValue as? String, " gterfwdas")
             button.setTitle(item.rawValue as? String, for: .init())
             button.backgroundColor = .green
             button.layer.name = item.rawValue as? String
             button.addTarget(self, action: #selector(difficultyPressed(_:)), for: .touchUpInside)
             difficultyStackView.addArrangedSubview(button)
         }
-        print(difficultyStackView.arrangedSubviews.count)
+        print(difficultyStackView.arrangedSubviews.count, " egrfwdas")
+        difficultyStackView.backgroundColor = .orange
     }
     
     @objc private func difficultyPressed(_ sender: UIButton) {
         didSelect(sender.layer.name ?? "")
+    }
+    @IBAction func backNavigationPressed(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
     }
 }
 

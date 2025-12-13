@@ -54,13 +54,12 @@ class LevelViewController: UIViewController {
         updateButtonsConstraints()
         drawLevelGround()
     }
-    
+    #warning("refactor")
     func updateButtonsConstraints() {
         print(view.constraints.count, " ytrtgerf ")
         if !view.constraints.isEmpty {
             view.constraints.forEach {
                 if let button = ($0.firstItem as? UIButton ?? $0.secondItem as? UIButton) {
-                    print("sfda")
                     let position = self.data.levels[button.tag].position
                     if $0.firstAttribute == .leading {
                         $0.constant = view.frame.width * position.x
@@ -78,7 +77,6 @@ class LevelViewController: UIViewController {
             return
         }
         view.subviews.forEach { view in
-            print(view.constraints.count, " htrgtfdr")
             
             let position = self.data.levels[view.tag].position
             view.leadingAnchor.constraint(equalTo: view.superview!.leadingAnchor, constant: view.frame.width * position.x).isActive = true

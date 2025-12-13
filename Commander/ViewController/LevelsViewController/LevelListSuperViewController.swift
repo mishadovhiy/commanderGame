@@ -9,6 +9,7 @@ import UIKit
 
 class LevelListSuperViewController: UIViewController {
     
+    @IBOutlet weak var bottomBarConstraint: NSLayoutConstraint!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var rightPanelStackView: UIStackView!
     @IBOutlet weak var upgradeButton: UIButton!
@@ -41,6 +42,7 @@ class LevelListSuperViewController: UIViewController {
     var selectedLevel: LevelModel? {
         didSet {
             let newValueDict = try? selectedLevel?.dictionary()
+            print(selectedLevel, " tgerfwd")
             UIView.animate(withDuration: 0.3, animations: {
                 self.bottomPanelStackView?.isHidden = self.selectedLevel == nil
                 self.startButton.isHidden = newValueDict?.values.contains(where: {$0 == nil}) ?? true
@@ -57,6 +59,12 @@ class LevelListSuperViewController: UIViewController {
         rightPanelNavigation?.pushViewController(UpgradeWeaponViewController.initiate(), animated: true)
     }
     
+    func toGameDurationPicker() {
+        self.bottomPanelNavigation?.pushViewController(
+            DifficultyViewController.initiate(data: GameDurationType.allCases, didSelect: { value in
+                self.selectedLevel?.duration = .init(rawValue: value)
+            }), animated: true)
+    }
 }
 
 extension LevelListSuperViewController: UINavigationControllerDelegate {
@@ -94,27 +102,25 @@ extension LevelListSuperViewController {
         nav.view.layer.name = "rightPanelNavigation"
         rightPanelStackView.addArrangedSubview(nav.view)
         addChild(nav)
-        self.didMove(toParent: nav)
+        didMove(toParent: nav)
     }
     
     func loadBottomNavigationChild() {
+        let rootVC = DifficultyViewController
+            .initiate(
+                data: Difficulty.allCases,
+                didSelect: { value in
+                    self.selectedLevel?.difficulty = .init(rawValue: value)
+                    self.toGameDurationPicker()
+                })
         let nav = UINavigationController(
-            rootViewController: DifficultyViewController
-                .initiate(
-                    data: Difficulty.allCases,
-                    didSelect: { value in
-                        self.selectedLevel?.difficulty = .init(rawValue: value)
-                        self.bottomPanelNavigation?.pushViewController(
-                            DifficultyViewController.initiate(data: GameDurationType.allCases, didSelect: { value in
-                                self.selectedLevel?.duration = .init(rawValue: value)
-                            }), animated: true)
-                    }))
+            rootViewController: rootVC)
         nav.delegate = self
         nav.view.backgroundColor = .red
         nav.view.layer.name = "bottomPanelNavigation"
         bottomPanelStackView.addArrangedSubview(nav.view)
         addChild(nav)
-        self.didMove(toParent: nav)
+        didMove(toParent: nav)
     }
     
     
