@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24127" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24127" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="e5f-or-oUs">
     <device id="retina6_12" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -92,7 +92,7 @@
                                                 <rect key="frame" x="0.0" y="120" width="120" height="0.0"/>
                                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeaponDescriptionCell" translatesAutoresizingMaskIntoConstraints="NO" id="LZk-Y4-ODv" customClass="WeaponDescriptionCell" customModule="Commander" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeaponDescriptionCell" translatesAutoresizingMaskIntoConstraints="NO" id="LZk-Y4-ODv" customClass="WeaponDescriptionCell" customModule="Commander" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="50" width="120" height="129"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="LZk-Y4-ODv" id="N58-e5-mFb">
@@ -213,11 +213,90 @@
             </objects>
             <point key="canvasLocation" x="88" y="63"/>
         </scene>
+        <!--Level List Super View Controller-->
+        <scene sceneID="KGA-MS-nFG">
+            <objects>
+                <viewController storyboardIdentifier="LevelListSuperViewController" id="e5f-or-oUs" customClass="LevelListSuperViewController" customModule="Commander" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="B1R-y9-GK2">
+                        <rect key="frame" x="0.0" y="0.0" width="852" height="393"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Yah-ol-Wln">
+                                <rect key="frame" x="59" y="59" width="734" height="279"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PqH-fW-QiH">
+                                        <rect key="frame" x="0.0" y="0.0" width="734" height="234"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IfC-JS-dSA">
+                                                <rect key="frame" x="0.0" y="0.0" width="664" height="234"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Peu-fv-o1r">
+                                                <rect key="frame" x="664" y="0.0" width="70" height="234"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="70" id="UHj-DI-gT7"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="woi-4I-5rs">
+                                        <rect key="frame" x="0.0" y="234" width="734" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="CPO-fl-dLV"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BYZ-Mu-FPN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BYZ-Mu-FPN" firstAttribute="bottom" secondItem="Yah-ol-Wln" secondAttribute="bottom" id="9bA-Gi-BqT"/>
+                            <constraint firstItem="Yah-ol-Wln" firstAttribute="leading" secondItem="BYZ-Mu-FPN" secondAttribute="leading" id="SZA-KW-vRo"/>
+                            <constraint firstItem="Yah-ol-Wln" firstAttribute="top" secondItem="BYZ-Mu-FPN" secondAttribute="top" id="Trm-v8-PRr"/>
+                            <constraint firstItem="BYZ-Mu-FPN" firstAttribute="trailing" secondItem="Yah-ol-Wln" secondAttribute="trailing" id="jVK-pe-mhC"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bottomPanelStackView" destination="woi-4I-5rs" id="tZM-jm-dKE"/>
+                        <outlet property="pageContainerView" destination="IfC-JS-dSA" id="ZNY-yn-cPS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ahH-05-HTu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="127" y="980"/>
+        </scene>
+        <!--Levels Page View Controller-->
+        <scene sceneID="Erc-LN-ZYo">
+            <objects>
+                <pageViewController storyboardIdentifier="LevelsPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="L4e-Dn-PTZ" customClass="LevelsPageViewController" customModule="Commander" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PjA-Tk-RI7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="163" y="1958"/>
+        </scene>
+        <!--Level View Controller-->
+        <scene sceneID="H5Q-DZ-d0h">
+            <objects>
+                <viewController storyboardIdentifier="LevelViewController" id="7EF-Ly-LDB" customClass="LevelViewController" customModule="Commander" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aok-Ld-vQh">
+                        <rect key="frame" x="0.0" y="0.0" width="852" height="393"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ZDf-39-BzH"/>
+                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rTL-qQ-8qQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="187" y="2689"/>
+        </scene>
     </scenes>
     <resources>
         <image name="arrowshape.right.fill" catalog="system" width="128" height="104"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -64,7 +64,7 @@ class GameViewController: UIViewController {
         sender.tag = sender.tag == 1 ? 0 : 1
         UIView.animate(withDuration: 0.3, delay: 0, options: [.transitionFlipFromRight, .allowUserInteraction]) {
             if #available(iOS 13.0, *) {
-                sender.setImage(.init(systemName: icon), for: .normal)
+                sender.setImage(.init(systemName: icon), for: .init())
             }
             self.weaponsStackView.isHidden = !self.weaponsStackView.isHidden
         }
@@ -136,8 +136,7 @@ class GameViewController: UIViewController {
                 let canUpgrade = self.editingWeapon?.canUpgrade ?? true
                 self.upgradeWeaponButton.isEnabled = canUpgrade
                 let title = canUpgrade ? "Upgrade\n\(self.editingWeapon?.upgradePrice ?? 0)" : "Max"
-                self.upgradeWeaponButton.setTitle(title, for: .normal)
-                self.upgradeWeaponButton.setTitle(title, for: .disabled)
+                self.upgradeWeaponButton.setTitle(title, for: .init())
                 self.setWeaponTableData()
 
             }
@@ -145,8 +144,7 @@ class GameViewController: UIViewController {
             self.view.isUserInteractionEnabled = true
             if self.editingWeapon?.type == nil {
                 self.editingWeaponImageView.image = nil
-                self.upgradeWeaponButton.setTitle("Upgrade", for: .normal)
-                self.upgradeWeaponButton.setTitle("Upgrade", for: .disabled)
+                self.upgradeWeaponButton.setTitle("Upgrade", for: .init())
 
             }
         })

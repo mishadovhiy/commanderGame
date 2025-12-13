@@ -14,7 +14,7 @@
 		823497CF2EEB1FAA00F82871 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 823497C22EEB1FAA00F82871 /* GameScene.sks */; };
 		823497D02EEB1FAA00F82871 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 823497C62EEB1FAA00F82871 /* LaunchScreen.storyboard */; };
 		823497D12EEB1FAA00F82871 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 823497C82EEB1FAA00F82871 /* Main.storyboard */; };
-		823497EC2EEB590C00F82871 /* LvlBuilderDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823497EB2EEB590B00F82871 /* LvlBuilderDataModel.swift */; };
+		823497EC2EEB590C00F82871 /* LvlBuilderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823497EB2EEB590B00F82871 /* LvlBuilderModel.swift */; };
 		823497F02EEB5A4900F82871 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823497EF2EEB5A4900F82871 /* Difficulty.swift */; };
 		823497F22EEB5AB400F82871 /* GameDurationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823497F12EEB5AB400F82871 /* GameDurationType.swift */; };
 		823497F52EEB5C0200F82871 /* LevelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823497F42EEB5C0200F82871 /* LevelManager.swift */; };
@@ -25,6 +25,10 @@
 		823498082EEB729500F82871 /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823498072EEB729500F82871 /* PhysicsCategory.swift */; };
 		8234980A2EEB739F00F82871 /* WeaponNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823498092EEB739F00F82871 /* WeaponNode.swift */; };
 		8234980C2EEB77B900F82871 /* BulletNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8234980B2EEB77B900F82871 /* BulletNode.swift */; };
+		8260E23D2EED37BF002E29C0 /* LevelListSuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E23C2EED37BF002E29C0 /* LevelListSuperViewController.swift */; };
+		8260E23F2EED381A002E29C0 /* LevelsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E23E2EED3819002E29C0 /* LevelsPageViewController.swift */; };
+		8260E2412EED383E002E29C0 /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E2402EED383E002E29C0 /* LevelViewController.swift */; };
+		8260E24E2EED43C5002E29C0 /* LevelsListBuilderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E24D2EED43C5002E29C0 /* LevelsListBuilderModel.swift */; };
 		826A32BA2EECEA6C001D25B7 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32B92EECEA6C001D25B7 /* AlertView.swift */; };
 		826A32BD2EECEA80001D25B7 /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 826A32BC2EECEA80001D25B7 /* AlertView.xib */; };
 		826A32BF2EECEB01001D25B7 /* ButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32BE2EECEB01001D25B7 /* ButtonModel.swift */; };
@@ -43,7 +47,7 @@
 		823497C52EEB1FAA00F82871 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		823497C72EEB1FAA00F82871 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		823497D22EEB210E00F82871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		823497EB2EEB590B00F82871 /* LvlBuilderDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LvlBuilderDataModel.swift; sourceTree = "<group>"; };
+		823497EB2EEB590B00F82871 /* LvlBuilderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LvlBuilderModel.swift; sourceTree = "<group>"; };
 		823497EF2EEB5A4900F82871 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
 		823497F12EEB5AB400F82871 /* GameDurationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDurationType.swift; sourceTree = "<group>"; };
 		823497F42EEB5C0200F82871 /* LevelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelManager.swift; sourceTree = "<group>"; };
@@ -54,6 +58,10 @@
 		823498072EEB729500F82871 /* PhysicsCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
 		823498092EEB739F00F82871 /* WeaponNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponNode.swift; sourceTree = "<group>"; };
 		8234980B2EEB77B900F82871 /* BulletNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletNode.swift; sourceTree = "<group>"; };
+		8260E23C2EED37BF002E29C0 /* LevelListSuperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelListSuperViewController.swift; sourceTree = "<group>"; };
+		8260E23E2EED3819002E29C0 /* LevelsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsPageViewController.swift; sourceTree = "<group>"; };
+		8260E2402EED383E002E29C0 /* LevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
+		8260E24D2EED43C5002E29C0 /* LevelsListBuilderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsListBuilderModel.swift; sourceTree = "<group>"; };
 		826A32B92EECEA6C001D25B7 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		826A32BC2EECEA80001D25B7 /* AlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertView.xib; sourceTree = "<group>"; };
 		826A32BE2EECEB01001D25B7 /* ButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModel.swift; sourceTree = "<group>"; };
@@ -113,7 +121,8 @@
 		823497F32EEB5AC800F82871 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				823497EB2EEB590B00F82871 /* LvlBuilderDataModel.swift */,
+				823497EB2EEB590B00F82871 /* LvlBuilderModel.swift */,
+				8260E24D2EED43C5002E29C0 /* LevelsListBuilderModel.swift */,
 				823497FD2EEB67D200F82871 /* LevelModel.swift */,
 				823497FA2EEB661900F82871 /* WeaponType.swift */,
 				823497EF2EEB5A4900F82871 /* Difficulty.swift */,
@@ -154,6 +163,7 @@
 		823498052EEB6FBD00F82871 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8260E2422EED3846002E29C0 /* LevelsViewController */,
 				826A32C42EED0594001D25B7 /* GameViewController */,
 			);
 			path = ViewController;
@@ -165,6 +175,16 @@
 				823497C82EEB1FAA00F82871 /* Main.storyboard */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		8260E2422EED3846002E29C0 /* LevelsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8260E23C2EED37BF002E29C0 /* LevelListSuperViewController.swift */,
+				8260E23E2EED3819002E29C0 /* LevelsPageViewController.swift */,
+				8260E2402EED383E002E29C0 /* LevelViewController.swift */,
+			);
+			path = LevelsViewController;
 			sourceTree = "<group>";
 		};
 		826A32B52EECEA28001D25B7 /* ComponentView */ = {
@@ -286,7 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				823497FE2EEB67D300F82871 /* LevelModel.swift in Sources */,
-				823497EC2EEB590C00F82871 /* LvlBuilderDataModel.swift in Sources */,
+				823497EC2EEB590C00F82871 /* LvlBuilderModel.swift in Sources */,
 				823497FB2EEB661900F82871 /* WeaponType.swift in Sources */,
 				823498022EEB6B8B00F82871 /* EnemyNode.swift in Sources */,
 				823497CA2EEB1FAA00F82871 /* AppDelegate.swift in Sources */,
@@ -294,9 +314,13 @@
 				823497F72EEB5DBA00F82871 /* EnemyType.swift in Sources */,
 				823497F02EEB5A4900F82871 /* Difficulty.swift in Sources */,
 				8234980C2EEB77B900F82871 /* BulletNode.swift in Sources */,
+				8260E23D2EED37BF002E29C0 /* LevelListSuperViewController.swift in Sources */,
+				8260E24E2EED43C5002E29C0 /* LevelsListBuilderModel.swift in Sources */,
 				823497CB2EEB1FAA00F82871 /* GameScene.swift in Sources */,
+				8260E2412EED383E002E29C0 /* LevelViewController.swift in Sources */,
 				826A32C32EED058A001D25B7 /* WeaponDescriptionCell.swift in Sources */,
 				826A32C12EECEB0E001D25B7 /* MessageModel.swift in Sources */,
+				8260E23F2EED381A002E29C0 /* LevelsPageViewController.swift in Sources */,
 				823497F52EEB5C0200F82871 /* LevelManager.swift in Sources */,
 				826A32C72EED05BF001D25B7 /* UIView.swift in Sources */,
 				823498082EEB729500F82871 /* PhysicsCategory.swift in Sources */,
