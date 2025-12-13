@@ -32,4 +32,10 @@ enum WeaponType: String, CaseIterable {
         }
     }
     //upgradePrice
+    
+    var upgradeStepPrice: Int {
+        switch self {
+        default: 50
+        }
+    }
 }

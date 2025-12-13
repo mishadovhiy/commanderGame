@@ -11,6 +11,13 @@ class WeaponNode: SKSpriteNode {
     
     let type: WeaponType
     let damage: Int
+    var upgrade: Difficulty? = nil
+    var upgradePrice: Int {
+        type.upgradeStepPrice * ((upgrade?.index ?? -1) + 2)
+    }
+    var canUpgrade: Bool {
+        (upgrade?.index ?? 0) < (Difficulty.allCases.count - 1)
+    }
     var isEditing: Bool = false {
         didSet {
             setEditing()
