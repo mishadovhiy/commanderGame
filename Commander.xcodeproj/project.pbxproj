@@ -98,7 +98,6 @@
 				823497C22EEB1FAA00F82871 /* GameScene.sks */,
 				823497F42EEB5C0200F82871 /* LevelManager.swift */,
 				823498072EEB729500F82871 /* PhysicsCategory.swift */,
-				826A32C82EED05C6001D25B7 /* Extensions */,
 				823497FC2EEB664D00F82871 /* DataModel */,
 				823498042EEB6F9700F82871 /* Scene */,
 				823498032EEB6F8400F82871 /* Node */,
@@ -106,6 +105,7 @@
 				826A32B52EECEA28001D25B7 /* ComponentView */,
 				823497C62EEB1FAA00F82871 /* LaunchScreen.storyboard */,
 				823498062EEB6FCA00F82871 /* View */,
+				826A32C82EED05C6001D25B7 /* Extensions */,
 			);
 			path = Commander;
 			sourceTree = "<group>";
@@ -171,16 +171,8 @@
 			isa = PBXGroup;
 			children = (
 				826A32BB2EECEA70001D25B7 /* AlertView */,
-				826A32B62EECEA33001D25B7 /* UITableViewCell */,
 			);
 			path = ComponentView;
-			sourceTree = "<group>";
-		};
-		826A32B62EECEA33001D25B7 /* UITableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UITableViewCell;
 			sourceTree = "<group>";
 		};
 		826A32BB2EECEA70001D25B7 /* AlertView */ = {

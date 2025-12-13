@@ -44,12 +44,19 @@ class GameViewController: UIViewController {
     }
     
     @IBAction private func speedPressed(_ sender: UIButton) {
+        if sender.tag == 3 {
+            sender.tag = 0
+        } else {
+            sender.tag += 1
+        }
+        gameScene?.speed = 1 + CGFloat(sender.tag)
     }
     
     @IBAction private func menuPressed(_ sender: Any) {
     }
     
     @IBAction private func playPausePressed(_ sender: UIButton) {
+        gameScene?.isPaused.toggle()
     }
     
     @IBAction private func hideButtonsPressed(_ sender: UIButton) {
