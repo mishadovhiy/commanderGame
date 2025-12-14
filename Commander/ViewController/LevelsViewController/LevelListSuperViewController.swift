@@ -72,26 +72,43 @@ class LevelListSuperViewController: UIViewController {
 }
 
 extension LevelListSuperViewController: UINavigationControllerDelegate {
+    
+    func rightNavigationChanged(viewControllerCount: Int) {
+        if viewControllerCount == 1 {
+            self.selectedLevel = self.selectedLevel ?? nil
+            
+        }
+        let hide = viewControllerCount > 1
+        UIView.animate(withDuration: 0.3) {
+            if viewControllerCount != 1 {
+                if self.bottomPanelStackView.isHidden != hide {
+                    self.bottomPanelStackView.isHidden = hide
+                }
+                if self.startButton.isHidden != hide {
+                    self.startButton.isHidden = hide
+                }
+            }
+            if self.pageContainerView.isHidden != hide {
+                self.pageContainerView.isHidden = hide
+            }
+            if self.upgradeButton.isHidden != hide {
+                self.upgradeButton.isHidden = hide
+            }
+            
+        }
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        if navigationController == rightPanelNavigation {
+            rightNavigationChanged(viewControllerCount: navigationController.viewControllers.count)
+
+        }
+    }
+    
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         if navigationController == rightPanelNavigation {
-            if navigationController.viewControllers.count == 1 {
-                self.selectedLevel = self.selectedLevel ?? nil
-                
-            }
-            let hide = navigationController.viewControllers.count > 1
-            UIView.animate(withDuration: 0.3) {
-                if navigationController.viewControllers.count != 1 {
-                    if self.bottomPanelStackView.isHidden != hide {
-                        self.bottomPanelStackView.isHidden = hide
-                    }
-                }
-                if self.pageContainerView.isHidden != hide {
-                    self.pageContainerView.isHidden = hide
-                }
-                if self.upgradeButton.isHidden != hide {
-                    self.upgradeButton.isHidden = hide
-                }
-            }
+            rightNavigationChanged(
+                viewControllerCount: navigationController.viewControllers.count)
             
         } else if navigationController == bottomPanelNavigation {
             if navigationController.viewControllers.count == 1 {
