@@ -92,11 +92,11 @@
                                                 <rect key="frame" x="0.0" y="120" width="120" height="0.0"/>
                                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeaponDescriptionCell" translatesAutoresizingMaskIntoConstraints="NO" id="LZk-Y4-ODv" customClass="WeaponDescriptionCell" customModule="Commander" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeaponDescriptionCell" translatesAutoresizingMaskIntoConstraints="NO" id="LZk-Y4-ODv" customClass="WeaponDescriptionCell" customModule="Commander" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="50" width="120" height="129"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="LZk-Y4-ODv" id="N58-e5-mFb">
-                                                            <rect key="frame" x="0.0" y="0.0" width="120" height="129"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="61" height="129"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y8e-6o-AZD">
@@ -179,14 +179,6 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="AZD-Dn-WmJ">
-                                <rect key="frame" x="-16" y="203" width="120" height="51"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AZD-Dn-WmJ" id="1ag-cm-NAC">
-                                    <rect key="frame" x="59" y="0.0" width="61" height="51"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -388,6 +380,9 @@
                             <constraint firstItem="FQX-5l-joY" firstAttribute="leading" secondItem="GND-zz-8wn" secondAttribute="leading" id="Sc1-wy-aj6"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="FQX-5l-joY" id="0p0-cW-bbM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hoE-oD-EY8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

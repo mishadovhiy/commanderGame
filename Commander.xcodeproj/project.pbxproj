@@ -32,11 +32,13 @@
 		8260E26E2EEDB53A002E29C0 /* LevelDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E26D2EEDB53A002E29C0 /* LevelDescriptionViewController.swift */; };
 		8260E2702EEDB54A002E29C0 /* UpgradeWeaponViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E26F2EEDB54A002E29C0 /* UpgradeWeaponViewController.swift */; };
 		8260E2722EEDB5BD002E29C0 /* DifficultyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E2712EEDB5BD002E29C0 /* DifficultyViewController.swift */; };
+		8260E27E2EEE5039002E29C0 /* TableDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E27D2EEE5039002E29C0 /* TableDataModel.swift */; };
+		8260E2812EEE50BD002E29C0 /* TableDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E27F2EEE50BD002E29C0 /* TableDataCell.swift */; };
+		8260E2822EEE50BD002E29C0 /* TableDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8260E2802EEE50BD002E29C0 /* TableDataCell.xib */; };
 		826A32BA2EECEA6C001D25B7 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32B92EECEA6C001D25B7 /* AlertView.swift */; };
 		826A32BD2EECEA80001D25B7 /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 826A32BC2EECEA80001D25B7 /* AlertView.xib */; };
 		826A32BF2EECEB01001D25B7 /* ButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32BE2EECEB01001D25B7 /* ButtonModel.swift */; };
 		826A32C12EECEB0E001D25B7 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32C02EECEB0E001D25B7 /* MessageModel.swift */; };
-		826A32C32EED058A001D25B7 /* WeaponDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32C22EED058A001D25B7 /* WeaponDescriptionCell.swift */; };
 		826A32C72EED05BF001D25B7 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32C62EED05BF001D25B7 /* UIView.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,11 +70,13 @@
 		8260E26D2EEDB53A002E29C0 /* LevelDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDescriptionViewController.swift; sourceTree = "<group>"; };
 		8260E26F2EEDB54A002E29C0 /* UpgradeWeaponViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeWeaponViewController.swift; sourceTree = "<group>"; };
 		8260E2712EEDB5BD002E29C0 /* DifficultyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyViewController.swift; sourceTree = "<group>"; };
+		8260E27D2EEE5039002E29C0 /* TableDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataModel.swift; sourceTree = "<group>"; };
+		8260E27F2EEE50BD002E29C0 /* TableDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataCell.swift; sourceTree = "<group>"; };
+		8260E2802EEE50BD002E29C0 /* TableDataCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableDataCell.xib; sourceTree = "<group>"; };
 		826A32B92EECEA6C001D25B7 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		826A32BC2EECEA80001D25B7 /* AlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertView.xib; sourceTree = "<group>"; };
 		826A32BE2EECEB01001D25B7 /* ButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModel.swift; sourceTree = "<group>"; };
 		826A32C02EECEB0E001D25B7 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
-		826A32C22EED058A001D25B7 /* WeaponDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDescriptionCell.swift; sourceTree = "<group>"; };
 		826A32C62EED05BF001D25B7 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,6 +147,7 @@
 			children = (
 				826A32BE2EECEB01001D25B7 /* ButtonModel.swift */,
 				826A32C02EECEB0E001D25B7 /* MessageModel.swift */,
+				8260E27D2EEE5039002E29C0 /* TableDataModel.swift */,
 				823497F32EEB5AC800F82871 /* Game */,
 			);
 			path = DataModel;
@@ -196,9 +201,19 @@
 			path = LevelsViewController;
 			sourceTree = "<group>";
 		};
+		8260E2832EEE50C7002E29C0 /* TableDataCell */ = {
+			isa = PBXGroup;
+			children = (
+				8260E27F2EEE50BD002E29C0 /* TableDataCell.swift */,
+				8260E2802EEE50BD002E29C0 /* TableDataCell.xib */,
+			);
+			path = TableDataCell;
+			sourceTree = "<group>";
+		};
 		826A32B52EECEA28001D25B7 /* ComponentView */ = {
 			isa = PBXGroup;
 			children = (
+				8260E2832EEE50C7002E29C0 /* TableDataCell */,
 				826A32BB2EECEA70001D25B7 /* AlertView */,
 			);
 			path = ComponentView;
@@ -217,17 +232,8 @@
 			isa = PBXGroup;
 			children = (
 				823497C42EEB1FAA00F82871 /* GameViewController.swift */,
-				826A32C52EED059A001D25B7 /* Cell */,
 			);
 			path = GameViewController;
-			sourceTree = "<group>";
-		};
-		826A32C52EED059A001D25B7 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				826A32C22EED058A001D25B7 /* WeaponDescriptionCell.swift */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		826A32C82EED05C6001D25B7 /* Extensions */ = {
@@ -301,6 +307,7 @@
 			files = (
 				823497CE2EEB1FAA00F82871 /* Assets.xcassets in Resources */,
 				823497CF2EEB1FAA00F82871 /* GameScene.sks in Resources */,
+				8260E2822EEE50BD002E29C0 /* TableDataCell.xib in Resources */,
 				826A32BD2EECEA80001D25B7 /* AlertView.xib in Resources */,
 				823497D02EEB1FAA00F82871 /* LaunchScreen.storyboard in Resources */,
 				823497D12EEB1FAA00F82871 /* Main.storyboard in Resources */,
@@ -326,11 +333,12 @@
 				8260E2702EEDB54A002E29C0 /* UpgradeWeaponViewController.swift in Sources */,
 				823497F02EEB5A4900F82871 /* Difficulty.swift in Sources */,
 				8234980C2EEB77B900F82871 /* BulletNode.swift in Sources */,
+				8260E2812EEE50BD002E29C0 /* TableDataCell.swift in Sources */,
 				8260E23D2EED37BF002E29C0 /* LevelListSuperViewController.swift in Sources */,
 				8260E24E2EED43C5002E29C0 /* LevelsListBuilderModel.swift in Sources */,
+				8260E27E2EEE5039002E29C0 /* TableDataModel.swift in Sources */,
 				823497CB2EEB1FAA00F82871 /* GameScene.swift in Sources */,
 				8260E2412EED383E002E29C0 /* LevelViewController.swift in Sources */,
-				826A32C32EED058A001D25B7 /* WeaponDescriptionCell.swift in Sources */,
 				826A32C12EECEB0E001D25B7 /* MessageModel.swift in Sources */,
 				8260E23F2EED381A002E29C0 /* LevelsPageViewController.swift in Sources */,
 				823497F52EEB5C0200F82871 /* LevelManager.swift in Sources */,

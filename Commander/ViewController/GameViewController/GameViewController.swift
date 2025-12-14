@@ -15,7 +15,7 @@ class GameViewController: UIViewController {
     @IBOutlet private weak var editingWeaponImageView: UIImageView!
     @IBOutlet private weak var weaponTableView: UITableView!
     
-    private var weaponTableData: [WeaponTableData] = []
+    private var weaponTableData: [TableDataModel] = []
     private var weaponHolder: CGPoint?
 
     override func loadView() {
@@ -156,6 +156,7 @@ extension GameViewController {
     func loadUI() {
         loadScene()
         loadWeapons()
+        weaponTableView.register(.init(nibName: .init(describing: TableDataCell.self), bundle: nil), forCellReuseIdentifier: .init(describing: TableDataCell.self))
         weaponTableView.delegate = self
         weaponTableView.dataSource = self
     }
@@ -196,7 +197,7 @@ extension GameViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: .init(describing: WeaponDescriptionCell.self), for: indexPath) as? WeaponDescriptionCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: .init(describing: TableDataCell.self), for: indexPath) as? TableDataCell {
             cell.set(weaponTableData[indexPath.row])
             return cell
         }
@@ -205,13 +206,5 @@ extension GameViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
-    }
-}
-
-extension GameViewController {
-    struct WeaponTableData {
-        let icon: String?
-        let title: String?
-        let text: String?
     }
 }

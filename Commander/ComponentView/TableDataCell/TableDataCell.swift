@@ -1,22 +1,19 @@
 //
-//  WeaponDescriptionCell.swift
+//  TableDataCell.swift
 //  Commander
 //
-//  Created by Mykhailo Dovhyi on 13.12.2025.
+//  Created by Mykhailo Dovhyi on 14.12.2025.
 //
 
 import UIKit
 
-class WeaponDescriptionCell: UITableViewCell {
-    ///total upgrade level
-    ///upgrade difficult name
-    ///item name
-    ///weapon description, usage
+class TableDataCell: UITableViewCell {
+
     @IBOutlet private weak var iconImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
     
-    func set(_ data: GameViewController.WeaponTableData) {
+    func set(_ data: TableDataModel) {
         if let imageName = data.icon,
            let image = UIImage(named: imageName)
         {
