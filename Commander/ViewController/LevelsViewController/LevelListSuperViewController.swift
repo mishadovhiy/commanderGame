@@ -78,19 +78,20 @@ extension LevelListSuperViewController: UINavigationControllerDelegate {
         if navigationController == rightPanelNavigation {
             if navigationController.viewControllers.count == 1 {
                 self.selectedLevel = self.selectedLevel ?? nil
-            } else {
-                let hide = navigationController.viewControllers.count > 1
-                print(hide, " etgrfwedas")
-                UIView.animate(withDuration: 0.3) {
+                
+            }
+            let hide = navigationController.viewControllers.count > 1
+            UIView.animate(withDuration: 0.3) {
+                if navigationController.viewControllers.count != 1 {
                     if self.bottomPanelStackView.isHidden != hide {
                         self.bottomPanelStackView.isHidden = hide
                     }
-                    if self.pageContainerView.isHidden != hide {
-                        self.pageContainerView.isHidden = hide
-                    }
-                    if self.upgradeButton.isHidden != hide {
-                        self.upgradeButton.isHidden = hide
-                    }
+                }
+                if self.pageContainerView.isHidden != hide {
+                    self.pageContainerView.isHidden = hide
+                }
+                if self.upgradeButton.isHidden != hide {
+                    self.upgradeButton.isHidden = hide
                 }
             }
             
