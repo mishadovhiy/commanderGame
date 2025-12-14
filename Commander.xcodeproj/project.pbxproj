@@ -41,6 +41,11 @@
 		826A32C12EECEB0E001D25B7 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32C02EECEB0E001D25B7 /* MessageModel.swift */; };
 		826A32C72EED05BF001D25B7 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32C62EED05BF001D25B7 /* UIView.swift */; };
 		82C637B12EEE57350064F917 /* BuyCoinsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637B02EEE57350064F917 /* BuyCoinsViewController.swift */; };
+		82C637BE2EEF40100064F917 /* WeaponUpgradeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637BD2EEF40100064F917 /* WeaponUpgradeType.swift */; };
+		82C637C02EEF41420064F917 /* UserBalanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637BF2EEF41420064F917 /* UserBalanceCell.swift */; };
+		82C637C52EEF41920064F917 /* WeaponBuyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637C42EEF41920064F917 /* WeaponBuyCell.swift */; };
+		82C637C72EEF41A10064F917 /* UpgradeWeaponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637C62EEF41A10064F917 /* UpgradeWeaponCell.swift */; };
+		82C637C92EEF41AF0064F917 /* WeaponTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637C82EEF41AF0064F917 /* WeaponTypeCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +85,11 @@
 		826A32C02EECEB0E001D25B7 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		826A32C62EED05BF001D25B7 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		82C637B02EEE57350064F917 /* BuyCoinsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyCoinsViewController.swift; sourceTree = "<group>"; };
+		82C637BD2EEF40100064F917 /* WeaponUpgradeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponUpgradeType.swift; sourceTree = "<group>"; };
+		82C637BF2EEF41420064F917 /* UserBalanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBalanceCell.swift; sourceTree = "<group>"; };
+		82C637C42EEF41920064F917 /* WeaponBuyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponBuyCell.swift; sourceTree = "<group>"; };
+		82C637C62EEF41A10064F917 /* UpgradeWeaponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeWeaponCell.swift; sourceTree = "<group>"; };
+		82C637C82EEF41AF0064F917 /* WeaponTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponTypeCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +147,7 @@
 				8260E24D2EED43C5002E29C0 /* LevelsListBuilderModel.swift */,
 				823497FD2EEB67D200F82871 /* LevelModel.swift */,
 				823497FA2EEB661900F82871 /* WeaponType.swift */,
+				82C637BD2EEF40100064F917 /* WeaponUpgradeType.swift */,
 				823497EF2EEB5A4900F82871 /* Difficulty.swift */,
 				823497F62EEB5DBA00F82871 /* EnemyType.swift */,
 				823497F12EEB5AB400F82871 /* GameDurationType.swift */,
@@ -198,7 +209,7 @@
 				8260E2402EED383E002E29C0 /* LevelViewController.swift */,
 				8260E2712EEDB5BD002E29C0 /* DifficultyViewController.swift */,
 				8260E26D2EEDB53A002E29C0 /* LevelDescriptionViewController.swift */,
-				8260E26F2EEDB54A002E29C0 /* UpgradeWeaponViewController.swift */,
+				82C637BC2EEF3FF30064F917 /* UpgradeWeaponViewController */,
 				82C637B02EEE57350064F917 /* BuyCoinsViewController.swift */,
 			);
 			path = LevelsViewController;
@@ -245,6 +256,26 @@
 				826A32C62EED05BF001D25B7 /* UIView.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		82C637BC2EEF3FF30064F917 /* UpgradeWeaponViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8260E26F2EEDB54A002E29C0 /* UpgradeWeaponViewController.swift */,
+				82C637C32EEF41560064F917 /* Cell */,
+			);
+			path = UpgradeWeaponViewController;
+			sourceTree = "<group>";
+		};
+		82C637C32EEF41560064F917 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				82C637BF2EEF41420064F917 /* UserBalanceCell.swift */,
+				82C637C62EEF41A10064F917 /* UpgradeWeaponCell.swift */,
+				82C637C82EEF41AF0064F917 /* WeaponTypeCell.swift */,
+				82C637C42EEF41920064F917 /* WeaponBuyCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,7 +359,9 @@
 				8260E2722EEDB5BD002E29C0 /* DifficultyViewController.swift in Sources */,
 				823497EC2EEB590C00F82871 /* LvlBuilderModel.swift in Sources */,
 				8260E26E2EEDB53A002E29C0 /* LevelDescriptionViewController.swift in Sources */,
+				82C637C72EEF41A10064F917 /* UpgradeWeaponCell.swift in Sources */,
 				823497FB2EEB661900F82871 /* WeaponType.swift in Sources */,
+				82C637C52EEF41920064F917 /* WeaponBuyCell.swift in Sources */,
 				823498022EEB6B8B00F82871 /* EnemyNode.swift in Sources */,
 				823497CA2EEB1FAA00F82871 /* AppDelegate.swift in Sources */,
 				826A32BF2EECEB01001D25B7 /* ButtonModel.swift in Sources */,
@@ -342,10 +375,13 @@
 				8260E27E2EEE5039002E29C0 /* TableDataModel.swift in Sources */,
 				823497CB2EEB1FAA00F82871 /* GameScene.swift in Sources */,
 				8260E2412EED383E002E29C0 /* LevelViewController.swift in Sources */,
+				82C637BE2EEF40100064F917 /* WeaponUpgradeType.swift in Sources */,
 				826A32C12EECEB0E001D25B7 /* MessageModel.swift in Sources */,
+				82C637C92EEF41AF0064F917 /* WeaponTypeCell.swift in Sources */,
 				8260E23F2EED381A002E29C0 /* LevelsPageViewController.swift in Sources */,
 				823497F52EEB5C0200F82871 /* LevelManager.swift in Sources */,
 				826A32C72EED05BF001D25B7 /* UIView.swift in Sources */,
+				82C637C02EEF41420064F917 /* UserBalanceCell.swift in Sources */,
 				82C637B12EEE57350064F917 /* BuyCoinsViewController.swift in Sources */,
 				823498082EEB729500F82871 /* PhysicsCategory.swift in Sources */,
 				823497F22EEB5AB400F82871 /* GameDurationType.swift in Sources */,

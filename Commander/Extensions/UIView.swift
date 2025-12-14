@@ -33,3 +33,27 @@ extension Encodable {
         }
     }
 }
+
+extension String {
+    var addingSpacesBeforeLargeLetters: Self {
+        self.replacingOccurrences(
+                    of: "([a-z])([A-Z])",
+                    with: "$1 $2",
+                    options: .regularExpression
+                )
+    }
+}
+
+extension UITableViewCell {
+    open override func awakeFromNib() {
+        super.awakeFromNib()
+        self.selectedBackgroundView = .init()
+    }
+}
+
+extension UICollectionViewCell {
+    open override func awakeFromNib() {
+        super.awakeFromNib()
+        self.selectedBackgroundView = .init()
+    }
+}
