@@ -57,7 +57,7 @@ class LevelListSuperViewController: UIViewController {
     }
     
     @IBAction func startGameDidPress(_ sender: Any) {
-        print(selectedLevel)
+        self.rightPanelNavigation?.pushViewController(GameViewController.initiateDefault(), animated: true)
     }
     
     @IBAction func upgradeDidPress(_ sender: UIButton) {

@@ -89,3 +89,14 @@ extension UICollectionViewCell {
         self.selectedBackgroundView = .init()
     }
 }
+
+extension UIViewController {
+    static func initiateDefault() -> Self {
+        UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewController(
+                withIdentifier: .init(
+                    describing: Self.self
+                )
+            ) as! Self
+    }
+}

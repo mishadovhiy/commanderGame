@@ -20,7 +20,16 @@ class GameViewController: UIViewController {
 
     override func loadView() {
         super.loadView()
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         loadUI()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        gameScene?.removeAllActions()
+        gameScene?.removeAllChildren()
+        gameScene?.removeFromParent()
+        view.removeFromSuperview()
     }
     
     private var gameScene: GameScene? {
@@ -53,6 +62,7 @@ class GameViewController: UIViewController {
     }
     
     @IBAction private func menuPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction private func playPausePressed(_ sender: UIButton) {
