@@ -41,11 +41,17 @@ class LevelListSuperViewController: UIViewController {
     
     var selectedLevel: LevelModel? {
         didSet {
-            let newValueDict = try? selectedLevel?.dictionary()
-            print(selectedLevel, " tgerfwd")
+            print(selectedLevel, " tgerfwd ")
+            let hide = self.selectedLevel == nil
+            let hideStart = selectedLevel?.hasEmptyValue ?? true
+            print(hideStart, " trgerfwsda ")
             UIView.animate(withDuration: 0.3, animations: {
-                self.bottomPanelStackView?.isHidden = self.selectedLevel == nil
-                self.startButton.isHidden = newValueDict?.values.contains(where: {$0 == nil}) ?? true
+                if hide != self.bottomPanelStackView?.isHidden {
+                    self.bottomPanelStackView?.isHidden = hide
+                }
+                if self.startButton.isHidden != hideStart {
+                    self.startButton.isHidden = hideStart
+                }
             }, completion: { _ in
             })
         }
@@ -72,12 +78,22 @@ extension LevelListSuperViewController: UINavigationControllerDelegate {
         if navigationController == rightPanelNavigation {
             if navigationController.viewControllers.count == 1 {
                 self.selectedLevel = self.selectedLevel ?? nil
+            } else {
+                let hide = navigationController.viewControllers.count > 1
+                print(hide, " etgrfwedas")
+                UIView.animate(withDuration: 0.3) {
+                    if self.bottomPanelStackView.isHidden != hide {
+                        self.bottomPanelStackView.isHidden = hide
+                    }
+                    if self.pageContainerView.isHidden != hide {
+                        self.pageContainerView.isHidden = hide
+                    }
+                    if self.upgradeButton.isHidden != hide {
+                        self.upgradeButton.isHidden = hide
+                    }
+                }
             }
-            UIView.animate(withDuration: 0.3) {
-                self.bottomPanelStackView.isHidden = navigationController.viewControllers.count > 1
-                self.pageContainerView.isHidden = navigationController.viewControllers.count > 1
-                self.upgradeButton.isHidden = navigationController.viewControllers.count > 1
-            }
+            
         } else if navigationController == bottomPanelNavigation {
             if navigationController.viewControllers.count == 1 {
                 selectedLevel?.duration = nil
