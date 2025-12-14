@@ -23,13 +23,13 @@ class LevelListSuperViewController: UIViewController {
         
     var rightPanelNavigation: UINavigationController? {
         children.first(where: {
-            $0 is UINavigationController && $0.view?.layer.name == "rightPanelNavigation"
+            $0 is UINavigationController && $0.view?.layer.name == Constants.Names.rightPanelNavigation.rawValue
         }) as? UINavigationController
     }
     
     var bottomPanelNavigation: UINavigationController? {
         children.first(where: {
-            $0 is UINavigationController && $0.view?.layer.name == "bottomPanelNavigation"
+            $0 is UINavigationController && $0.view?.layer.name == Constants.Names.bottomPanelNavigation.rawValue
         }) as? UINavigationController
     }
     
@@ -41,10 +41,8 @@ class LevelListSuperViewController: UIViewController {
     
     var selectedLevel: LevelModel? {
         didSet {
-            print(selectedLevel, " tgerfwd ")
             let hide = self.selectedLevel == nil
             let hideStart = selectedLevel?.hasEmptyValue ?? true
-            print(hideStart, " trgerfwsda ")
             UIView.animate(withDuration: 0.3, animations: {
                 if hide != self.bottomPanelStackView?.isHidden {
                     self.bottomPanelStackView?.isHidden = hide
@@ -116,7 +114,7 @@ extension LevelListSuperViewController {
         let nav = UINavigationController(
             rootViewController: LevelDescriptionViewController.initiate())
         nav.delegate = self
-        nav.view.layer.name = "rightPanelNavigation"
+        nav.view.layer.name = Constants.Names.rightPanelNavigation.rawValue
         rightPanelStackView.addArrangedSubview(nav.view)
         addChild(nav)
         didMove(toParent: nav)
@@ -134,7 +132,7 @@ extension LevelListSuperViewController {
             rootViewController: rootVC)
         nav.delegate = self
         nav.view.backgroundColor = .red
-        nav.view.layer.name = "bottomPanelNavigation"
+        nav.view.layer.name = Constants.Names.bottomPanelNavigation.rawValue
         bottomPanelStackView.addArrangedSubview(nav.view)
         addChild(nav)
         didMove(toParent: nav)
@@ -158,5 +156,13 @@ extension LevelListSuperViewController {
         ])
         addChild(childVC)
         childVC.didMove(toParent: self)
+    }
+}
+
+extension LevelListSuperViewController {
+    struct Constants {
+        enum Names: String {
+            case rightPanelNavigation, bottomPanelNavigation
+        }
     }
 }
