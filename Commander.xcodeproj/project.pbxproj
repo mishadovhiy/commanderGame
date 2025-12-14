@@ -46,6 +46,10 @@
 		82C637C52EEF41920064F917 /* WeaponBuyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637C42EEF41920064F917 /* WeaponBuyCell.swift */; };
 		82C637C72EEF41A10064F917 /* UpgradeWeaponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637C62EEF41A10064F917 /* UpgradeWeaponCell.swift */; };
 		82C637C92EEF41AF0064F917 /* WeaponTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637C82EEF41AF0064F917 /* WeaponTypeCell.swift */; };
+		82C637CB2EEF4A2D0064F917 /* DataBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637CA2EEF4A2D0064F917 /* DataBaseModel.swift */; };
+		82C637D72EEF4B6C0064F917 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637D62EEF4B6C0064F917 /* KeychainService.swift */; };
+		82C637D92EEF4B980064F917 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637D82EEF4B980064F917 /* Keys.swift */; };
+		82C637DB2EEF4C360064F917 /* DataBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637DA2EEF4C360064F917 /* DataBaseService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +94,10 @@
 		82C637C42EEF41920064F917 /* WeaponBuyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponBuyCell.swift; sourceTree = "<group>"; };
 		82C637C62EEF41A10064F917 /* UpgradeWeaponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeWeaponCell.swift; sourceTree = "<group>"; };
 		82C637C82EEF41AF0064F917 /* WeaponTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponTypeCell.swift; sourceTree = "<group>"; };
+		82C637CA2EEF4A2D0064F917 /* DataBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseModel.swift; sourceTree = "<group>"; };
+		82C637D62EEF4B6C0064F917 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		82C637D82EEF4B980064F917 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		82C637DA2EEF4C360064F917 /* DataBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +136,8 @@
 				823497C22EEB1FAA00F82871 /* GameScene.sks */,
 				823497F42EEB5C0200F82871 /* LevelManager.swift */,
 				823498072EEB729500F82871 /* PhysicsCategory.swift */,
+				82C637D82EEF4B980064F917 /* Keys.swift */,
+				82C637DC2EEF4E090064F917 /* Service */,
 				823497FC2EEB664D00F82871 /* DataModel */,
 				823498042EEB6F9700F82871 /* Scene */,
 				823498032EEB6F8400F82871 /* Node */,
@@ -161,6 +171,7 @@
 				826A32BE2EECEB01001D25B7 /* ButtonModel.swift */,
 				826A32C02EECEB0E001D25B7 /* MessageModel.swift */,
 				8260E27D2EEE5039002E29C0 /* TableDataModel.swift */,
+				82C637CA2EEF4A2D0064F917 /* DataBaseModel.swift */,
 				823497F32EEB5AC800F82871 /* Game */,
 			);
 			path = DataModel;
@@ -278,6 +289,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		82C637DC2EEF4E090064F917 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				82C637D62EEF4B6C0064F917 /* KeychainService.swift */,
+				82C637DA2EEF4C360064F917 /* DataBaseService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -362,6 +382,7 @@
 				82C637C72EEF41A10064F917 /* UpgradeWeaponCell.swift in Sources */,
 				823497FB2EEB661900F82871 /* WeaponType.swift in Sources */,
 				82C637C52EEF41920064F917 /* WeaponBuyCell.swift in Sources */,
+				82C637DB2EEF4C360064F917 /* DataBaseService.swift in Sources */,
 				823498022EEB6B8B00F82871 /* EnemyNode.swift in Sources */,
 				823497CA2EEB1FAA00F82871 /* AppDelegate.swift in Sources */,
 				826A32BF2EECEB01001D25B7 /* ButtonModel.swift in Sources */,
@@ -373,12 +394,15 @@
 				8260E23D2EED37BF002E29C0 /* LevelListSuperViewController.swift in Sources */,
 				8260E24E2EED43C5002E29C0 /* LevelsListBuilderModel.swift in Sources */,
 				8260E27E2EEE5039002E29C0 /* TableDataModel.swift in Sources */,
+				82C637D72EEF4B6C0064F917 /* KeychainService.swift in Sources */,
 				823497CB2EEB1FAA00F82871 /* GameScene.swift in Sources */,
 				8260E2412EED383E002E29C0 /* LevelViewController.swift in Sources */,
 				82C637BE2EEF40100064F917 /* WeaponUpgradeType.swift in Sources */,
 				826A32C12EECEB0E001D25B7 /* MessageModel.swift in Sources */,
 				82C637C92EEF41AF0064F917 /* WeaponTypeCell.swift in Sources */,
 				8260E23F2EED381A002E29C0 /* LevelsPageViewController.swift in Sources */,
+				82C637D92EEF4B980064F917 /* Keys.swift in Sources */,
+				82C637CB2EEF4A2D0064F917 /* DataBaseModel.swift in Sources */,
 				823497F52EEB5C0200F82871 /* LevelManager.swift in Sources */,
 				826A32C72EED05BF001D25B7 /* UIView.swift in Sources */,
 				82C637C02EEF41420064F917 /* UserBalanceCell.swift in Sources */,

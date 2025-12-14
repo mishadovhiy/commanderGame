@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum WeaponType: String, CaseIterable {
+enum WeaponType: String, Codable, CaseIterable {
     case fire
     case basuka
     case flight

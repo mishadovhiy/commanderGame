@@ -21,7 +21,39 @@ extension UIView {
     }
 }
 
+extension Decodable {
+    init(_ data: Data?) throws {
+        guard let data else {
+            throw NSError(domain: "no data", code: -10)
+        }
+        do {
+            let decoder = PropertyListDecoder()
+            let decodedData = try decoder.decode(Self.self, from: data)
+            self = decodedData
+        } catch {
+            do {
+                let decoder = JSONDecoder()
+                self = try decoder.decode(Self.self, from: data)
+            } catch {
+                throw error
+            }
+        }
+    }
+}
+
 extension Encodable {
+    func encode() throws -> Data? {
+
+        do {
+            return try JSONEncoder().encode(self)
+        }
+        catch {
+            let encoder = PropertyListEncoder()
+            encoder.outputFormat = .binary
+            return try encoder.encode(self)
+        }
+    }
+    
     func dictionary() throws -> [String:Any?]? {
         let encoder = JSONEncoder()
         do {

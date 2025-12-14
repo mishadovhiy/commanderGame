@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum WeaponUpgradeType: String, CaseIterable {
+enum WeaponUpgradeType: String, Codable, CaseIterable {
     case attackPower
     case distance
     var title: String {

@@ -21,6 +21,9 @@ class UpgradeWeaponViewController: UIViewController {
         collectionVIew.dataSource = self
         tableView.delegate = self
         tableView.dataSource = self
+        self.view.backgroundColor = .black
+        updateTableData()
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     private func updateTableData() {
@@ -41,6 +44,7 @@ class UpgradeWeaponViewController: UIViewController {
                 price: 200,
                 type: $0)
         }))
+        print(tableData.count, " tgerfwedaw ")
         tableView.reloadData()
     }
     
@@ -62,7 +66,8 @@ extension UpgradeWeaponViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: .init(describing: UpgradeWeaponCell.self),
+            withReuseIdentifier:
+                    .init(describing: UpgradeWeaponCell.self),
             for: indexPath) as! UpgradeWeaponCell
         cell.set(collectionData[indexPath.row])
         return cell
