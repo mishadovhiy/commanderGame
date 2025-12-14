@@ -40,6 +40,7 @@
 		826A32BF2EECEB01001D25B7 /* ButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32BE2EECEB01001D25B7 /* ButtonModel.swift */; };
 		826A32C12EECEB0E001D25B7 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32C02EECEB0E001D25B7 /* MessageModel.swift */; };
 		826A32C72EED05BF001D25B7 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32C62EED05BF001D25B7 /* UIView.swift */; };
+		82C637B12EEE57350064F917 /* BuyCoinsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637B02EEE57350064F917 /* BuyCoinsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		826A32BE2EECEB01001D25B7 /* ButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModel.swift; sourceTree = "<group>"; };
 		826A32C02EECEB0E001D25B7 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		826A32C62EED05BF001D25B7 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		82C637B02EEE57350064F917 /* BuyCoinsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyCoinsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 				8260E2712EEDB5BD002E29C0 /* DifficultyViewController.swift */,
 				8260E26D2EEDB53A002E29C0 /* LevelDescriptionViewController.swift */,
 				8260E26F2EEDB54A002E29C0 /* UpgradeWeaponViewController.swift */,
+				82C637B02EEE57350064F917 /* BuyCoinsViewController.swift */,
 			);
 			path = LevelsViewController;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				8260E23F2EED381A002E29C0 /* LevelsPageViewController.swift in Sources */,
 				823497F52EEB5C0200F82871 /* LevelManager.swift in Sources */,
 				826A32C72EED05BF001D25B7 /* UIView.swift in Sources */,
+				82C637B12EEE57350064F917 /* BuyCoinsViewController.swift in Sources */,
 				823498082EEB729500F82871 /* PhysicsCategory.swift in Sources */,
 				823497F22EEB5AB400F82871 /* GameDurationType.swift in Sources */,
 				8234980A2EEB739F00F82871 /* WeaponNode.swift in Sources */,
