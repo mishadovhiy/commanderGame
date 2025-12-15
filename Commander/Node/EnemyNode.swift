@@ -12,7 +12,7 @@ class EnemyNode: SKSpriteNode {
     var health: Int
     var totalHealth: Int
     
-    init(type: EnemyType, builder: LvlBuilderModel) {
+    init(type: EnemyType, builder: GameBuilderModel) {
         self.type = type
         self.health = (type.health * builder.enemyHealthMult) * 3
         self.totalHealth = health

@@ -9,7 +9,7 @@ import Foundation
 
 struct LevelManager {
     let lvlModel: LevelModel
-    let lvlBuilder: LvlBuilderModel
+    let lvlBuilder: GameBuilderModel
     
     var currentRound: Int = 0
     var passedEnemyCount: Int = 0

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LvlBuilderModel {
+struct GameBuilderModel {
     let enemyGraundPosition: [CGPoint]
     let enemyPerRound: [[EnemyRound]]
     let health: Int
@@ -32,7 +32,7 @@ struct LvlBuilderModel {
 }
 
 fileprivate
-extension LvlBuilderModel {
+extension GameBuilderModel {
     
     static func health(_ lvl: Int) -> Int {
         switch lvl {
