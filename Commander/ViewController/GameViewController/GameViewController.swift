@@ -86,19 +86,32 @@ class GameViewController: UIViewController {
         switch sender.state {
         case .cancelled, .ended, .failed:
             didEndDragging(view: view)
+            view.subviews.first?.removeFromSuperview()
         case .began:
             weaponHolder = view.center
+            view.addSubview(.init())
+            view.layer.masksToBounds = false
+            if let back = view.subviews.first {
+                back.translatesAutoresizingMaskIntoConstraints = false
+                back.layer.zPosition = -1
+                NSLayoutConstraint.activate([
+                    back.leadingAnchor.constraint(equalTo: back.superview!.leadingAnchor, constant: -20),
+                    back.trailingAnchor.constraint(equalTo: back.superview!.trailingAnchor, constant: 20),
+                    back.topAnchor.constraint(equalTo: back.superview!.topAnchor, constant: -20),
+                    back.bottomAnchor.constraint(equalTo: back.superview!.bottomAnchor, constant: 20)
+                ])
+            }
         default: break
         }
         view.frame.origin.x += translation.x
         view.frame.origin.y += translation.y
+        view.subviews.first?.backgroundColor = (gameScene?.canPlace(
+            at: positionPercent(view)) ?? false) ? .green : .red
         sender.setTranslation(.zero, in: view.superview)
         
     }
     
-    private func didEndDragging(view: UIView) {
-        view.isUserInteractionEnabled = false
-        
+    func positionPercent(_ view: UIView) -> CGPoint {
         var position = view.positionInSuperview(s: self.view)
         position.x += view.frame.size.width / 2
         position.y += view.frame.size.height / 2
@@ -110,8 +123,16 @@ class GameViewController: UIViewController {
         let percent = CGPoint(
             x: (position.x + (hosrizontalSafeArea / 2)) / superViewSize.width,
             y: (self.view.frame.height - position.y) / superViewSize.height)
-        print(percent, " ghjbnkmnjbh ", position.x)
-        gameScene?.loadArmour(position: percent)
+        return percent
+    }
+    
+    private func didEndDragging(view: UIView) {
+        view.isUserInteractionEnabled = false
+let percent = positionPercent(view)
+        print(percent, " ghjbnkmnjbh ", view.frame.origin.x)
+        if gameScene?.canPlace(at: percent) ?? false {
+            gameScene?.loadArmour(position: percent)
+        }
         UIView.animate(withDuration: 0.3, delay: 0, animations: {
             view.center = self.weaponHolder ?? .zero
         }, completion: { _ in

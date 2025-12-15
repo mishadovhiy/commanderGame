@@ -14,7 +14,7 @@ class GameScene: SKScene {
     private var gameVC: GameViewController? {
         view?.next as? GameViewController
     }
-    
+
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         physicsWorld.contactDelegate = self
@@ -22,7 +22,9 @@ class GameScene: SKScene {
         updateGraundPosition()
         loadArmour(position: .init(x: 0.186, y: 0.22))
         loadArmour(position: .init(x: 0.271, y: 0.22))
-
+        self.weapons.forEach({
+            print($0.position, " tgerfwdas")
+        })
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
             self.loadRaund()
         })
@@ -50,6 +52,42 @@ class GameScene: SKScene {
         })
     }
     
+    func canPlace(at position: CGPoint) -> Bool {
+        guard let viewSize = self.view?.frame.size else {
+            fatalError()
+        }
+        let position: CGPoint = .init(
+            x: (position.x * viewSize.width) - (viewSize.width / 2),
+            y: (position.y * viewSize.height) - (viewSize.height / 2))
+        
+        if let first = self.weapons.first(where: { node in
+            let x = ((node.position.x - node.size.width / 2)..<node.position.x + node.size.width / 2)
+            let y = ((node.position.y - 60)..<node.position.y + 40)
+            if x.contains(position.x) && y.contains(position.y) {
+                return true
+            }
+            return false
+        }) {
+            print(first.name, " jjsbdjbdsj ")
+            return false
+        }
+
+        
+        
+        let path = enemyGround?.path
+        let strokedPath = path?.copy(
+            strokingWithWidth: 65,
+            lineCap: .round,
+            lineJoin: .round,
+            miterLimit: 10
+        )
+        if strokedPath?.contains(position) ?? true {
+            return false
+        }
+
+        return true
+    }
+        
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         weapons.forEach({
             $0.isEditing = false
@@ -57,9 +95,11 @@ class GameScene: SKScene {
         super.touchesBegan(touches, with: event)
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
-        guard let weapon = atPoint(location) as? WeaponNode else { return }
-        weapon.isEditing.toggle()
-        gameVC?.didSetEditingWeaponNode()
+        if let weapon = atPoint(location) as? WeaponNode {
+            weapon.isEditing.toggle()
+            gameVC?.didSetEditingWeaponNode()
+        }
+        
     }
     
     func loadArmour(position: CGPoint) {
@@ -67,6 +107,34 @@ class GameScene: SKScene {
         self.addChild(node)
         node.updatePosition(position: position)
     }
+    
+    func loadRaund() {
+        print(lvlanager.currentRound, " tefrwdsax ")
+        if lvlanager.lvlBuilder.enemyPerRound.count <= lvlanager.currentRound {
+            print("game completed")
+            return
+        }
+        if enemies.count >= 1 {
+            return
+        }
+        
+        print(lvlanager.currentRound, " tefrwdsax")
+        if lvlanager.lvlBuilder.enemyPerRound.count <= lvlanager.currentRound {
+            print("game completed")
+            return
+        }
+        var i = 0
+        lvlanager.lvlBuilder
+            .enemyPerRound[lvlanager.currentRound]
+            .forEach { type in
+                i += 1
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1100 * i), execute: {
+                    self.loadEnemy(type.type)
+                })
+        }
+        lvlanager.currentRound += 1
+    }
+
 }
 
 fileprivate extension GameScene {
@@ -97,48 +165,23 @@ fileprivate extension GameScene {
     }
     
     func loadEnemy(_ type: EnemyType) {
+        guard let path = enemyGround?.path else {
+            return
+        }
         let node = EnemyNode(type: type, builder: lvlanager.lvlBuilder)
         self.addChild(node)
-        node.run(in: graundPath, completion: {
+        node.run(in: path, completion: {
             node.removeFromParent()
             self.loadRaund()
         })
         print("rfsedaXZ")
     }
-    
-    func loadRaund() {
-        print(lvlanager.currentRound, " tefrwdsax ")
-        if lvlanager.lvlBuilder.enemyPerRound.count <= lvlanager.currentRound {
-            print("game completed")
-            return
-        }
-        if enemies.count >= 1 {
-            return
-        }
         
-        print(lvlanager.currentRound, " tefrwdsax")
-        if lvlanager.lvlBuilder.enemyPerRound.count <= lvlanager.currentRound {
-            print("game completed")
-            return
-        }
-        var i = 0
-        lvlanager.lvlBuilder
-            .enemyPerRound[lvlanager.currentRound]
-            .forEach { type in
-                i += 1
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1100 * i), execute: {
-                    self.loadEnemy(type.type)
-                })
-        }
-        lvlanager.currentRound += 1
-    }
-    
     func loadGraund() {
         let shapeNode = SKShapeNode(path: .init(rect: .zero, transform: nil))
         shapeNode.name = Constants.Names.enemyGround.rawValue
         shapeNode.strokeColor = .white
         shapeNode.lineWidth = Constants.graundWidth
-        shapeNode.path = graundPath
         addChild(shapeNode)
     }
 }

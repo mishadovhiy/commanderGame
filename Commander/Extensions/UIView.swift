@@ -12,7 +12,6 @@ extension UIView {
         var position = position
         position.x += frame.minX
         position.y += frame.minY
-        print(position, " positionpositionposition")
         if self.superview == s {
             return position
         } else {

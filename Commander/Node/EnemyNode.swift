@@ -17,6 +17,7 @@ class EnemyNode: SKSpriteNode {
         self.health = (type.health * builder.enemyHealthMult) * 3
         self.totalHealth = health
         super.init(texture: nil, color: .red, size: CGSize(width: 20, height: 20))
+        self.name = .init(describing: Self.self)
         self.physicsBody = .init(rectangleOf: .init(width: 20, height: 20))
         self.physicsBody?.categoryBitMask = PhysicsCategory.enemy
         self.physicsBody?.contactTestBitMask = PhysicsCategory.weapon | PhysicsCategory.bullet

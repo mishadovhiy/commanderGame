@@ -28,7 +28,8 @@ class WeaponNode: SKSpriteNode {
         self.type = type
         self.damage = type.damage
         super.init(texture: nil, color: .red.withAlphaComponent(0.2), size: CGSize(width: 100, height: 100))
-        
+        self.name = .init(describing: Self.self)
+
         self.physicsBody = .init(rectangleOf: .init(width: 100, height: 100))
         self.physicsBody?.categoryBitMask = PhysicsCategory.weapon
         self.physicsBody?.contactTestBitMask = PhysicsCategory.enemy
