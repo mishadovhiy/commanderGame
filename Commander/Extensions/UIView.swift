@@ -92,11 +92,14 @@ extension UICollectionViewCell {
 
 extension UIViewController {
     static func initiateDefault() -> Self {
-        UIStoryboard(name: "Main", bundle: nil)
+        let vc = UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(
                 withIdentifier: .init(
                     describing: Self.self
                 )
             ) as! Self
+        vc.modalTransitionStyle = .flipHorizontal
+        vc.modalPresentationStyle = .overFullScreen
+        return vc
     }
 }

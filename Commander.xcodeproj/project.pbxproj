@@ -111,6 +111,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		823095372EF03FDA00989895 /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				823497EB2EEB590B00F82871 /* LvlBuilderModel.swift */,
+				8260E24D2EED43C5002E29C0 /* LevelsListBuilderModel.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
 		8234979C2EEB1F9000F82871 = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +146,7 @@
 				823497F42EEB5C0200F82871 /* LevelManager.swift */,
 				823498072EEB729500F82871 /* PhysicsCategory.swift */,
 				82C637D82EEF4B980064F917 /* Keys.swift */,
+				823095372EF03FDA00989895 /* Builder */,
 				82C637DC2EEF4E090064F917 /* Service */,
 				823497FC2EEB664D00F82871 /* DataModel */,
 				823498042EEB6F9700F82871 /* Scene */,
@@ -153,8 +163,6 @@
 		823497F32EEB5AC800F82871 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				823497EB2EEB590B00F82871 /* LvlBuilderModel.swift */,
-				8260E24D2EED43C5002E29C0 /* LevelsListBuilderModel.swift */,
 				823497FD2EEB67D200F82871 /* LevelModel.swift */,
 				823497FA2EEB661900F82871 /* WeaponType.swift */,
 				82C637BD2EEF40100064F917 /* WeaponUpgradeType.swift */,

@@ -62,7 +62,7 @@ class GameViewController: UIViewController {
     }
     
     @IBAction private func menuPressed(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true)
     }
     
     @IBAction private func playPausePressed(_ sender: UIButton) {
@@ -90,10 +90,8 @@ class GameViewController: UIViewController {
             weaponHolder = view.center
         default: break
         }
-        view.frame.origin = CGPoint(
-            x: view.frame.origin.x + translation.x,
-            y: view.frame.origin.y + translation.y
-        )
+        view.frame.origin.x += translation.x
+        view.frame.origin.y += translation.y
         sender.setTranslation(.zero, in: view.superview)
         
     }

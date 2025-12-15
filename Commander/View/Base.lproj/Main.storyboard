@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24127" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="e5f-or-oUs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24127" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
     <device id="retina6_12" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -94,7 +94,7 @@
                                                 <rect key="frame" x="0.0" y="120" width="120" height="0.0"/>
                                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeaponDescriptionCell" translatesAutoresizingMaskIntoConstraints="NO" id="LZk-Y4-ODv" customClass="WeaponDescriptionCell" customModule="Commander" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeaponDescriptionCell" translatesAutoresizingMaskIntoConstraints="NO" id="LZk-Y4-ODv" customClass="WeaponDescriptionCell" customModule="Commander" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="50" width="120" height="129"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="LZk-Y4-ODv" id="N58-e5-mFb">
@@ -521,14 +521,14 @@
                                                         </connections>
                                                     </tableViewCell>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeaponBuyCell" id="5z9-6p-Rr8" customClass="WeaponBuyCell" customModule="Commander" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="161" width="110" height="151"/>
+                                                        <rect key="frame" x="0.0" y="161" width="110" height="151.66667175292969"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5z9-6p-Rr8" id="FPU-g6-kBT">
-                                                            <rect key="frame" x="0.0" y="0.0" width="110" height="151"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="110" height="151.66667175292969"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="e5l-Ld-g7i">
-                                                                    <rect key="frame" x="2" y="2" width="106" height="147"/>
+                                                                    <rect key="frame" x="2" y="2" width="106" height="147.66666666666666"/>
                                                                     <subviews>
                                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ta0-xp-JH3">
                                                                             <rect key="frame" x="0.0" y="0.0" width="106" height="4"/>
@@ -543,7 +543,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Pwa-bu-awo" userLabel="buttons Stack View">
-                                                                            <rect key="frame" x="0.0" y="45" width="106" height="102"/>
+                                                                            <rect key="frame" x="0.0" y="45.000000000000007" width="106" height="102.66666666666669"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f2u-A1-bpw">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="106" height="50"/>
@@ -587,7 +587,7 @@
                                                                                     </constraints>
                                                                                 </view>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ww4-Jo-LmR">
-                                                                                    <rect key="frame" x="0.0" y="50" width="106" height="52"/>
+                                                                                    <rect key="frame" x="0.0" y="50" width="106" height="52.666666666666657"/>
                                                                                     <subviews>
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kvx-KM-t6j">
                                                                                             <rect key="frame" x="15.666666666666671" y="3" width="75" height="10"/>
