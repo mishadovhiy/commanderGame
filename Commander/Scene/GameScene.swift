@@ -20,8 +20,8 @@ class GameScene: SKScene {
         physicsWorld.contactDelegate = self
         loadGraund()
         updateGraundPosition()
-        loadArmour(position: .init(x: 0.186, y: 0.22))
-        loadArmour(position: .init(x: 0.271, y: 0.22))
+        loadArmour(type: .granata, position: .init(x: 0.186, y: 0.22))
+        loadArmour(type: .pistol, position: .init(x: 0.271, y: 0.22))
         self.weapons.forEach({
             print($0.position, " tgerfwdas")
         })
@@ -104,8 +104,8 @@ class GameScene: SKScene {
         
     }
     
-    func loadArmour(position: CGPoint) {
-        let node = WeaponNode(type: .basuka)
+    func loadArmour(type: WeaponType, position: CGPoint) {
+        let node = WeaponNode(type: type)
         self.addChild(node)
         node.updatePosition(position: position)
     }

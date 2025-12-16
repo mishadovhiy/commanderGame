@@ -128,10 +128,9 @@ class GameViewController: UIViewController {
     
     private func didEndDragging(view: UIView) {
         view.isUserInteractionEnabled = false
-let percent = positionPercent(view)
-        print(percent, " ghjbnkmnjbh ", view.frame.origin.x)
+        let percent = positionPercent(view)
         if gameScene?.canPlace(at: percent) ?? false {
-            gameScene?.loadArmour(position: percent)
+            gameScene?.loadArmour(type: .init(rawValue: view.layer.name ?? "") ?? .basuka, position: percent)
         }
         UIView.animate(withDuration: 0.3, delay: 0, animations: {
             view.center = self.weaponHolder ?? .zero
@@ -205,6 +204,7 @@ extension GameViewController {
     func loadWeapons() {
         WeaponType.allCases.forEach {
             let image = UIImageView(image: .init(named: $0.rawValue))
+            image.layer.name = $0.rawValue
             image.contentMode = .scaleAspectFit
             image.translatesAutoresizingMaskIntoConstraints = false
             image.heightAnchor.constraint(equalToConstant: 30).isActive = true

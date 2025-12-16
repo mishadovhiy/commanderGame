@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum EnemyType: String {
     case soldeir
@@ -23,7 +24,10 @@ enum EnemyType: String {
     case flightVehicle
     
     var imageName: String {
-        Component.allCases.first(where: {
+        if let image: UIImage = .init(named: rawValue) {
+            return rawValue
+        }
+        return Component.allCases.first(where: {
             self.rawValue.lowercased().contains($0.rawValue)
         })!.rawValue
     }
