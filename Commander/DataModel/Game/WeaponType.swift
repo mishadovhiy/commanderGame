@@ -8,23 +8,23 @@
 import Foundation
 
 enum WeaponType: String, Codable, CaseIterable {
-    case fire
+//    case fire
     case basuka
-    case flight
-    case stopper
+//    case flight
+//    case stopper
     case pistol
     case granata
     
     var damage: Int {
         switch self {
-        case .fire:
-            5
+//        case .fire:
+//            5
         case .basuka:
             70
-        case .flight:
-            40
-        case .stopper:
-            1
+//        case .flight:
+//            40
+//        case .stopper:
+//            1
         case .pistol:
             15
         case .granata:
