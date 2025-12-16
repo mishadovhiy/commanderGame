@@ -35,7 +35,8 @@ class WeaponNode: SKSpriteNode {
         self.physicsBody?.contactTestBitMask = PhysicsCategory.enemy
         self.physicsBody?.collisionBitMask = 0
         self.physicsBody?.affectedByGravity = false
-        let child = SKSpriteNode(color: .red, size: CGSize(width: 20, height: 20))
+        let child = SKSpriteNode(texture: .init(imageNamed: type.rawValue), color: .clear, size: .init(width: 20, height: 20))
+        //SKSpriteNode(color: .red, size: CGSize(width: 20, height: 20))
         self.addChild(child)
         
     }

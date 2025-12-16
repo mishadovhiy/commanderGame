@@ -28,6 +28,8 @@ class GameScene: SKScene {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
             self.loadRaund()
         })
+        
+        backgroundColor = .init(hex: "E7D4A9")
     }
         
     var enemyGround: SKShapeNode? {
@@ -180,7 +182,8 @@ fileprivate extension GameScene {
     func loadGraund() {
         let shapeNode = SKShapeNode(path: .init(rect: .zero, transform: nil))
         shapeNode.name = Constants.Names.enemyGround.rawValue
-        shapeNode.strokeColor = .white
+        shapeNode.strokeColor = .init(hex: "D0A976")
+        shapeNode.strokeTexture = .init(image: .enemyGround)
         shapeNode.lineWidth = Constants.graundWidth
         addChild(shapeNode)
     }
