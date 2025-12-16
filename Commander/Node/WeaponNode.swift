@@ -58,7 +58,7 @@ class WeaponNode: SKSpriteNode {
             nextEnemyHolder = enemy
             return
         }
-        if enemy.parent == nil {
+        if enemy.parent == nil || enemy.isRemoving {
             print(targetEnemy == nil, " refwda")
             targetEnemy = nil
             if let nextEnemyHolder {
@@ -86,6 +86,12 @@ class WeaponNode: SKSpriteNode {
             return
         }
         parent.addChild(bullet)
+        let fire = SKSpriteNode(texture: .init(image: .fire), size: .init(width: 10, height: 10))
+        addChild(fire)
+        fire.run(.fadeOut(withDuration: 0.3))
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+            fire.removeFromParent()
+        })
 //        if (dx >= 80 || dx <= -80) || (dy >= 80 || dy <= -80) {
 //            print("outside")
 //            self.targetEnemy = nil
