@@ -9,10 +9,10 @@ import Foundation
 
 enum WeaponType: String, Codable, CaseIterable {
 //    case fire
+    case pistol
     case basuka
 //    case flight
 //    case stopper
-    case pistol
     case granata
     
     var damage: Int {
