@@ -39,6 +39,7 @@ class LevelDescriptionViewController: UIViewController {
             let allKeys = Array(DataBaseService.db.completedLevels.keys.filter({
                 ($0.levelPage ?? "0") == selectedLevel.levelPage && $0.level == selectedLevel.level
             }))
+            print(allKeys.count, " gfdvsdcxz ")
             self.tableData = [
                 .init(section: "", tableData: [
                     .init(
@@ -61,24 +62,26 @@ class LevelDescriptionViewController: UIViewController {
                 .init(section: "completed level difficulties", tableData:
                         allKeys.compactMap({
                             let value = db[$0]
-                            return .init(title: $0.level, text: """
-                                duration: \($0.duration?.rawValue ?? ""),
-                                difficulty: \($0.difficulty?.rawValue ?? ""),
-                                score: \(value?.score ?? 0),
-                                $: \(value?.earnedMoney ?? 0)
-                                """)
-                        })
+                            return [
+                                TableDataModel(title: "level:", text: $0.level, higlighted: .accent),
+                                .init(title: "duration:", text: $0.duration?.rawValue),
+                                .init(title: "difficulty:", text: $0.difficulty?.rawValue),
+                                .init(title: "score:", text: "\(value?.score ?? 0)"),
+                                .init(title: "$:", text: "\(value?.earnedMoney ?? 0)")
+                            ]
+                        }).flatMap({$0})
                      ),
                 .init(section: "completed levels for page", tableData:
                         allLevelsForPageKeys.compactMap({
                             let value = db[$0]
-                            return .init(title: $0.level, text: """
-                                duration: \($0.duration?.rawValue ?? ""),
-                                difficulty: \($0.difficulty?.rawValue ?? ""),
-                                score: \(value?.score ?? 0),
-                                $: \(value?.earnedMoney ?? 0)
-                                """)
-                        }))
+                            return [
+                                TableDataModel(title: "level:", text: $0.level, higlighted: .accent),
+                                .init(title: "duration:", text: $0.duration?.rawValue),
+                                .init(title: "difficulty:", text: $0.difficulty?.rawValue),
+                                .init(title: "score:", text: "\(value?.score ?? 0)"),
+                                .init(title: "$:", text: "\(value?.earnedMoney ?? 0)")
+                            ]
+                        }).flatMap({$0}))
             ]
             DispatchQueue.main.async {
                 self.tableView.reloadData()

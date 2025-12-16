@@ -119,7 +119,7 @@ class LevelViewController: UIViewController {
     }
     
     @objc func didSelectLevel(_ sender: UIButton) {
-        (parent?.parent as? LevelListSuperViewController)!.selectedLevel.level = "\(sender.tag)"
+        (parent?.parent as? LevelListSuperViewController)!.selectedLevel.level = data.levels[sender.tag].title
     }
 }
 

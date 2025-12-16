@@ -19,6 +19,14 @@ class TableDataCell: UITableViewCell {
         {
             iconImageView.image = image
         }
+        switch data.higlighted {
+        case .distributed:
+            contentView.backgroundColor = .red
+        case .accent:
+            contentView.backgroundColor = UIColor.blue
+        default:
+            contentView.backgroundColor = UIColor.clear
+        }
         nameLabel.text = data.title
         descriptionLabel.text = data.text
         

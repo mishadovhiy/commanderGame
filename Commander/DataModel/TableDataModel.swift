@@ -11,13 +11,21 @@ struct TableDataModel {
     let icon: String?
     let title: String?
     let text: String?
+    let higlighted: HiglightedType
     
     init(icon: String? = nil,
          title: String? = nil,
-         text: String? = nil) {
+         text: String? = nil,
+         higlighted: HiglightedType = .none
+    ) {
         self.icon = icon
         self.title = title
         self.text = text
+        self.higlighted = higlighted
+    }
+    
+    enum HiglightedType: Codable {
+        case none, distributed, accent
     }
 }
 

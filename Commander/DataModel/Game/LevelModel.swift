@@ -18,7 +18,6 @@ struct LevelModel: Codable, Hashable, Equatable {
         let dict = try? dictionary()
         return !(dict?.count ?? 0 >= 4)
     }
-    
 }
 
 extension LevelModel {
