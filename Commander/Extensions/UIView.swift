@@ -53,6 +53,7 @@ extension Encodable {
         }
     }
     
+    nonisolated
     func dictionary() throws -> [String:Any?]? {
         let encoder = JSONEncoder()
         do {

@@ -31,7 +31,7 @@ class LevelDescriptionViewController: UIViewController {
         tableData = [
             .init(section: "", tableData: [
                 .init(
-                    title: "\(parentLevelListVC?.selectedLevel?.level ?? 0)"
+                    title: "\(parentLevelListVC?.selectedLevel?.level ?? "0")"
                 )
             ]),
             .init(section: "completed levels", tableData: [])

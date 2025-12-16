@@ -7,8 +7,10 @@
 
 import Foundation
 
-struct LevelModel: Codable, Equatable {
-    let level: Int
+nonisolated
+struct LevelModel: Codable, Hashable, Equatable {
+    let level: String
+    var levelPage: String?
     var difficulty: Difficulty?
     var duration: GameDurationType?
     
@@ -16,10 +18,11 @@ struct LevelModel: Codable, Equatable {
         let dict = try? dictionary()
         return !(dict?.count ?? 0 >= 3)
     }
+    
 }
 
 extension LevelModel {
     static var test: Self {
-        .init(level: 0, difficulty: .easy, duration: .normal)
+        .init(level: "0", difficulty: .easy, duration: .normal)
     }
 }

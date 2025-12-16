@@ -110,10 +110,22 @@ class GameScene: SKScene {
         node.updatePosition(position: position)
     }
     
+    func didCompleteLevel() {
+        let levelManager = self.lvlanager ?? .init(.test)
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            DataBaseService.db.completedLevels.updateValue(levelManager.progress, forKey: levelManager.lvlModel)
+            #warning("save new balance to keychain")
+            print("game completed")
+            DispatchQueue.main.async {
+                self.gameVC?.dismiss(animated: true)
+            }
+        }
+    }
+    
     func loadRaund() {
         print(lvlanager.currentRound, " tefrwdsax ")
         if lvlanager.lvlBuilder.enemyPerRound.count <= lvlanager.currentRound {
-            print("game completed")
+            didCompleteLevel()
             return
         }
         if enemies.count >= 1 {
@@ -233,6 +245,7 @@ extension GameScene: SKPhysicsContactDelegate {
                 if let next = bullet.armour?.nextEnemyHolder {
                     bullet.armour?.shoot(enemy: next)
                 }
+                lvlanager.progress.killedEnemies += 1
                 enemy.removeFromParent()
                 self.loadRaund()
             } else {

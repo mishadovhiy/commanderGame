@@ -34,13 +34,13 @@ struct GameBuilderModel {
 fileprivate
 extension GameBuilderModel {
     
-    static func health(_ lvl: Int) -> Int {
+    static func health(_ lvl: String) -> Int {
         switch lvl {
         default: 30
         }
     }
     
-    static func enemyList(_ lvl: Int) -> [[EnemyRound]] {
+    static func enemyList(_ lvl: String) -> [[EnemyRound]] {
         switch lvl {
         default: [
                 [.init(type: .soldeir, count: 10),
@@ -65,7 +65,7 @@ extension GameBuilderModel {
         }
     }
     
-    static func positions(_ lvl: Int) -> [CGPoint] {
+    static func positions(_ lvl: String) -> [CGPoint] {
         switch lvl {
         default:
             [

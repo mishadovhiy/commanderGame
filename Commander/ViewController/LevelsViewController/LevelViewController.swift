@@ -9,7 +9,7 @@ import UIKit
 
 class LevelViewController: UIViewController {
 
-    var data: LevelsListBuilderModel!
+    var data: LevelPagesBuilder!
     
     override func loadView() {
         super.loadView()
@@ -119,12 +119,12 @@ class LevelViewController: UIViewController {
     }
     
     @objc func didSelectLevel(_ sender: UIButton) {
-        (parent?.parent as? LevelListSuperViewController)!.selectedLevel = .init(level: sender.tag)
+        (parent?.parent as? LevelListSuperViewController)!.selectedLevel = .init(level: "\(sender.tag)")
     }
 }
 
 extension LevelViewController {
-    static func initiate(data: LevelsListBuilderModel) -> Self {
+    static func initiate(data: LevelPagesBuilder) -> Self {
         let vc = UIStoryboard(name: "Main", bundle: nil)
             .instantiateViewController(withIdentifier: .init(
                 describing: Self.self)) as! Self

@@ -133,7 +133,7 @@ extension LevelListSuperViewController {
             rootViewController: LevelDescriptionViewController.initiate())
         nav.delegate = self
         nav.view.layer.name = Constants.Names.rightPanelNavigation.rawValue
-        rightPanelStackView.addArrangedSubview(nav.view)
+        rightPanelStackView.insertArrangedSubview(nav.view, at: 1)
         addChild(nav)
         didMove(toParent: nav)
     }

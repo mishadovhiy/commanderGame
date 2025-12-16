@@ -9,7 +9,7 @@ import UIKit
 
 class LevelsPageViewController: UIPageViewController {
 
-    let pageData: [LevelsListBuilderModel] = .allData
+    let pageData: [LevelPagesBuilder] = .allData
     private var index: Int = 0
     private var previousIndex: Int = 0
     
@@ -50,6 +50,7 @@ extension LevelsPageViewController: UIPageViewControllerDataSource, UIPageViewCo
         }
         if finished {
             previousIndex = index
+            (self.parent as? LevelListSuperViewController)?.selectedLevel?.levelPage = "\(index)"
         }
 //        let vc = previousViewControllers.first as? LevelViewController
 //        self.index = vc?.i ?? 0

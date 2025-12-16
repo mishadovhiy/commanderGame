@@ -7,17 +7,17 @@
 
 import Foundation
 
-struct LevelsListBuilderModel: Equatable {
+struct LevelPagesBuilder: Equatable {
     let title: String
-    let levels: [LevelModel]
+    let levels: [LevelListBuilder]
     
-    struct LevelModel: Equatable {
+    struct LevelListBuilder: Equatable {
         let position: CGPoint
         let title: String
     }
 }
 
-extension [LevelsListBuilderModel] {
+extension [LevelPagesBuilder] {
     static var allData: Self {
         [
             .init(title: "1", levels: [
@@ -25,23 +25,29 @@ extension [LevelsListBuilderModel] {
                         .init(x: 0.1, y: 0.8),
                       title: "11"),
                 .init(position:
-                        .init(x: 0.1, y: 0.3),
+                        .init(x: 0.2, y: 0.3),
                       title: "12"),
                 .init(position:
-                        .init(x: 0.14, y: 0.6),
+                        .init(x: 0.34, y: 0.6),
                       title: "13"),
                 .init(position:
-                        .init(x: 0.25, y: 0.8),
+                        .init(x: 0.45, y: 0.8),
                       title: "14"),
                 .init(position:
-                        .init(x: 0.28, y: 0.2),
+                        .init(x: 0.48, y: 0.2),
                       title: "15"),
                 .init(position:
-                        .init(x: 0.08, y: 0.07),
+                        .init(x: 0.28, y: 0.07),
                       title: "16"),
                 .init(position:
-                        .init(x: 0.38, y: 0.7),
-                      title: "17")
+                        .init(x: 0.58, y: 0.7),
+                      title: "17"),
+                .init(position:
+                        .init(x: 0.78, y: 0.4),
+                      title: "18"),
+                .init(position:
+                        .init(x: 0.95, y: 0.8),
+                      title: "19")
             ]),
             .init(title: "2", levels: [
                 .init(position:
