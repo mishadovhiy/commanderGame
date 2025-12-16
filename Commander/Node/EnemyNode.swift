@@ -16,9 +16,9 @@ class EnemyNode: SKSpriteNode {
         self.type = type
         self.health = (type.health * builder.enemyHealthMult) * 3
         self.totalHealth = health
-        super.init(texture: nil, color: .red, size: CGSize(width: 20, height: 20))
+        super.init(texture: .init(imageNamed: "enemy/" + type.imageName), color: .red, size: CGSize(width: 20, height: 20))
         self.name = .init(describing: Self.self)
-        self.physicsBody = .init(rectangleOf: .init(width: 20, height: 20))
+        self.physicsBody = .init(rectangleOf: size)
         self.physicsBody?.categoryBitMask = PhysicsCategory.enemy
         self.physicsBody?.contactTestBitMask = PhysicsCategory.weapon | PhysicsCategory.bullet
         self.physicsBody?.collisionBitMask = 0
@@ -26,6 +26,8 @@ class EnemyNode: SKSpriteNode {
         
         let progress = SKSpriteNode(texture: nil, color: .green, size: .init(width: self.size.width, height: 4))
         progress.name = "progress"
+        progress.position = .init(x: 0, y: self.size.height / -2 - 3)
+        progress.zPosition = 1
         addChild(progress)
     }
     

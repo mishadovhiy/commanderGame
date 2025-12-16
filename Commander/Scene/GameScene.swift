@@ -186,6 +186,22 @@ fileprivate extension GameScene {
         shapeNode.strokeTexture = .init(image: .enemyGround)
         shapeNode.lineWidth = Constants.graundWidth
         addChild(shapeNode)
+        
+        let shapeNode2 = SKShapeNode(path: .init(rect: .zero, transform: nil))
+        shapeNode2.lineWidth = 2
+        shapeNode2.strokeColor = .init(hex: "B89668")
+        shapeNode2.path = self.graundPath
+        shapeNode.addChild(shapeNode2)
+//        let shape = CAShapeLayer()
+//        shape.borderWidth = 2
+//        shape.path = self.graundPath
+//        shape.strokeColor = UIColor.red.cgColor
+//        shape.fillColor = UIColor.clear.cgColor
+//        shape.position = .init(x: (self.view?.frame.width ?? 0) / 2, y: (self.view?.frame.height ?? 0) / 2)
+//        shape.setAffineTransform(
+//            CGAffineTransform(scaleX: 1, y: -1)
+//        )
+//        view?.layer.addSublayer(shape)
     }
 }
 

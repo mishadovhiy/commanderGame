@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum EnemyType {
+enum EnemyType: String {
     case soldeir
     case flight
     case militaryFlightSimple
     case mulutaryFlightComplex
-    case helicopter
+    case helicopterFlight
     case tankLight
     case tankHeavy
     case tankMedium
@@ -21,6 +21,19 @@ enum EnemyType {
     case fastVehicle
     case armouredVehicle
     case flightVehicle
+    
+    var imageName: String {
+        Component.allCases.first(where: {
+            self.rawValue.lowercased().contains($0.rawValue)
+        })!.rawValue
+    }
+    
+    enum Component: String, CaseIterable {
+        case soldeir
+        case flight
+        case tank
+        case vehicle
+    }
     
     var speed: Int {
         switch self {
@@ -32,7 +45,7 @@ enum EnemyType {
             8
         case .mulutaryFlightComplex:
             6
-        case .helicopter:
+        case .helicopterFlight:
             15
         case .tankLight:
             4
@@ -63,7 +76,7 @@ enum EnemyType {
             10
         case .mulutaryFlightComplex:
             25
-        case .helicopter:
+        case .helicopterFlight:
             15
         case .tankLight:
             25
