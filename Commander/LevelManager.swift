@@ -14,7 +14,7 @@ struct GameProgress: Codable {
     var totalEnemies: Int = 0
     
     var score: Int {
-       Int(CGFloat(killedEnemies) / CGFloat(totalEnemies))
+       Int(CGFloat(killedEnemies) / CGFloat(totalEnemies) * 100)
     }
 }
 

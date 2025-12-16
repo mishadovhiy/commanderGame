@@ -41,9 +41,10 @@ class LevelListSuperViewController: UIViewController {
     
     var selectedLevel: LevelModel? {
         didSet {
-            let hide = self.selectedLevel == nil
+            let hide = self.selectedLevel?.level.isEmpty ?? true
             let hideStart = selectedLevel?.hasEmptyValue ?? true
             levelDescriptionVC?.selectedLevelUpdated()
+            print(selectedLevel, " hyrgtfrdsd")
             UIView.animate(withDuration: 0.3, animations: {
                 if hide != self.bottomPanelStackView?.isHidden {
                     self.bottomPanelStackView?.isHidden = hide

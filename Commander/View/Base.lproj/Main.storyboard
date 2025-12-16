@@ -94,11 +94,11 @@
                                                 <rect key="frame" x="0.0" y="120" width="120" height="0.0"/>
                                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeaponDescriptionCell" translatesAutoresizingMaskIntoConstraints="NO" id="LZk-Y4-ODv" customClass="WeaponDescriptionCell" customModule="Commander" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeaponDescriptionCell" translatesAutoresizingMaskIntoConstraints="NO" id="LZk-Y4-ODv" customClass="WeaponDescriptionCell" customModule="Commander" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="50" width="120" height="129"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" tableViewCell="LZk-Y4-ODv" id="N58-e5-mFb">
-                                                            <rect key="frame" x="0.0" y="0.0" width="61" height="129"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="120" height="129"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y8e-6o-AZD">
@@ -230,8 +230,9 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iie-mt-9El">
                                                         <rect key="frame" x="0.0" y="0.0" width="70" height="204"/>
+                                                        <color key="backgroundColor" systemColor="systemRedColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="70" id="zui-kc-rCd"/>
+                                                            <constraint firstAttribute="width" constant="150" id="zui-kc-rCd"/>
                                                         </constraints>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="Upgrade"/>
@@ -248,6 +249,7 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
+                                                <color key="backgroundColor" systemColor="systemRedColor"/>
                                             </stackView>
                                         </subviews>
                                     </stackView>

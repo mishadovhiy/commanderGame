@@ -13,15 +13,21 @@ class LevelsPageViewController: UIPageViewController {
     private var index: Int = 0
     private var previousIndex: Int = 0
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
         delegate = self
         dataSource = self
         setViewControllers([
             LevelViewController.initiate(
                 data: pageData.first!)
         ], direction: .forward, animated: true)
-        print(" grefewdsa ")
+    }
+    
+    override func didMove(toParent parent: UIViewController?) {
+        super.didMove(toParent: parent)
+        if (parent as? LevelListSuperViewController)!.selectedLevel == nil {
+            (parent as? LevelListSuperViewController)!.selectedLevel = .init(level: "", levelPage: "\(index + 1)")
+        }
     }
     
 }
@@ -41,6 +47,7 @@ extension LevelsPageViewController: UIPageViewControllerDataSource, UIPageViewCo
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         (self.parent as? LevelListSuperViewController)?.selectedLevel = nil
+        print("didSetNil")
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
@@ -50,7 +57,7 @@ extension LevelsPageViewController: UIPageViewControllerDataSource, UIPageViewCo
         }
         if finished {
             previousIndex = index
-            (self.parent as? LevelListSuperViewController)?.selectedLevel?.levelPage = "\(index)"
+            (self.parent as? LevelListSuperViewController)!.selectedLevel = .init(level: "", levelPage: "\(index + 1)")
         }
 //        let vc = previousViewControllers.first as? LevelViewController
 //        self.index = vc?.i ?? 0
