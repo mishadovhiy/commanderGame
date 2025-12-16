@@ -40,49 +40,49 @@ class LevelDescriptionViewController: UIViewController {
                 ($0.levelPage ?? "0") == selectedLevel.levelPage && $0.level == selectedLevel.level
             }))
             print(allKeys.count, " gfdvsdcxz ")
+            self.tableData.removeAll()
             self.tableData = [
                 .init(section: "", tableData: [
-                    .init(
-                        title: "level",
-                        text: "\(self.parentLevelListVC?.selectedLevel.level ?? "0")"
-                    ),
                     .init(
                         title: "page",
                         text: "\(self.parentLevelListVC?.selectedLevel.levelPage ?? "0")"
                     ),
                     .init(
-                        title: "page levels",
+                        title: "page completed",
                         text: "\(allLevelsForPageKeys.count)"
-                    ),
+                    )
+                ])
+            ]
+            if !allKeys.isEmpty {
+                self.tableData[0].tableData.append(
                     .init(
                         title: "completed",
                         text: "\(allKeys.count)"
                     )
-                ]),
-                .init(section: "completed level difficulties", tableData:
-                        allKeys.compactMap({
-                            let value = db[$0]
-                            return [
-                                TableDataModel(title: "level:", text: $0.level, higlighted: .accent),
-                                .init(title: "duration:", text: $0.duration?.rawValue),
-                                .init(title: "difficulty:", text: $0.difficulty?.rawValue),
-                                .init(title: "score:", text: "\(value?.score ?? 0)"),
-                                .init(title: "$:", text: "\(value?.earnedMoney ?? 0)")
-                            ]
-                        }).flatMap({$0})
-                     ),
-                .init(section: "completed levels for page", tableData:
-                        allLevelsForPageKeys.compactMap({
-                            let value = db[$0]
-                            return [
-                                TableDataModel(title: "level:", text: $0.level, higlighted: .accent),
-                                .init(title: "duration:", text: $0.duration?.rawValue),
-                                .init(title: "difficulty:", text: $0.difficulty?.rawValue),
-                                .init(title: "score:", text: "\(value?.score ?? 0)"),
-                                .init(title: "$:", text: "\(value?.earnedMoney ?? 0)")
-                            ]
-                        }).flatMap({$0}))
+                )
+            }
+            if self.parentLevelListVC?.selectedLevel.level.isEmpty == false {
+                self.tableData[0].tableData.insert(.init(title: "Level", text: self.parentLevelListVC?.selectedLevel.level), at: 0)
+            }
+            let progress: [String: [LevelModel]] = [
+                "completed level difficulties": allKeys,
+                "completed levels for page": allLevelsForPageKeys
             ]
+            progress.forEach { (key: String, value: [LevelModel]) in
+                if !value.isEmpty {
+                    self.tableData.append(.init(section: key, tableData: value.compactMap({
+                        let value = db[$0]
+                        return [
+                            TableDataModel(title: "level:", text: $0.level, higlighted: .accent),
+                            .init(title: "duration:", text: $0.duration?.rawValue),
+                            .init(title: "difficulty:", text: $0.difficulty?.rawValue),
+                            .init(title: "score:", text: "\(value?.score ?? 0)"),
+                            .init(title: "$:", text: "\(value?.earnedMoney ?? 0)")
+                        ]
+                    }).flatMap({$0})))
+                }
+                
+            }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }

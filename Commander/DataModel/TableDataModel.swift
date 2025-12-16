@@ -31,5 +31,5 @@ struct TableDataModel {
 
 struct SectionTableData {
     let section: String
-    let tableData: [TableDataModel]
+    var tableData: [TableDataModel]
 }

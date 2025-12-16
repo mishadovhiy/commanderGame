@@ -45,6 +45,12 @@ class LevelListSuperViewController: UIViewController {
             let hideStart = selectedLevel.hasEmptyValue
             levelDescriptionVC?.selectedLevelUpdated()
             print(selectedLevel, " hyrgtfrdsd")
+            if selectedLevel.duration == nil && self.bottomPanelNavigation?.viewControllers.count != 1 {
+                bottomPanelNavigation?.popToRootViewController(animated: true)
+            }
+            if selectedLevel.difficulty == nil {
+                (bottomPanelNavigation?.viewControllers.first as? DifficultyViewController)?.selectedAt = nil
+            }
             UIView.animate(withDuration: 0.3, animations: {
                 if hide != self.bottomPanelStackView?.isHidden {
                     self.bottomPanelStackView?.isHidden = hide
