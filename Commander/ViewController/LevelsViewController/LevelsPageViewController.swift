@@ -22,14 +22,6 @@ class LevelsPageViewController: UIPageViewController {
                 data: pageData.first!)
         ], direction: .forward, animated: true)
     }
-    
-    override func didMove(toParent parent: UIViewController?) {
-        super.didMove(toParent: parent)
-        if (parent as? LevelListSuperViewController)!.selectedLevel == nil {
-            (parent as? LevelListSuperViewController)!.selectedLevel = .init(level: "", levelPage: "\(index + 1)")
-        }
-    }
-    
 }
 
 extension LevelsPageViewController {
@@ -46,7 +38,7 @@ extension LevelsPageViewController {
 extension LevelsPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        (self.parent as? LevelListSuperViewController)?.selectedLevel = nil
+        (self.parent as? LevelListSuperViewController)?.selectedLevel = .init()
         print("didSetNil")
     }
     
@@ -57,7 +49,7 @@ extension LevelsPageViewController: UIPageViewControllerDataSource, UIPageViewCo
         }
         if finished {
             previousIndex = index
-            (self.parent as? LevelListSuperViewController)!.selectedLevel = .init(level: "", levelPage: "\(index + 1)")
+            (self.parent as? LevelListSuperViewController)!.selectedLevel = .init(levelPage: "\(index + 1)")
         }
 //        let vc = previousViewControllers.first as? LevelViewController
 //        self.index = vc?.i ?? 0

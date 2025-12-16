@@ -39,10 +39,10 @@ class LevelListSuperViewController: UIViewController {
         }) as? LevelDescriptionViewController
     }
     
-    var selectedLevel: LevelModel? {
+    var selectedLevel: LevelModel = .init(level: "", levelPage: "1") {
         didSet {
-            let hide = self.selectedLevel?.level.isEmpty ?? true
-            let hideStart = selectedLevel?.hasEmptyValue ?? true
+            let hide = self.selectedLevel.level.isEmpty
+            let hideStart = selectedLevel.hasEmptyValue
             levelDescriptionVC?.selectedLevelUpdated()
             print(selectedLevel, " hyrgtfrdsd")
             UIView.animate(withDuration: 0.3, animations: {
@@ -58,7 +58,7 @@ class LevelListSuperViewController: UIViewController {
     }
     
     @IBAction func startGameDidPress(_ sender: Any) {
-        self.present(GameViewController.initiateDefault(), animated: true)
+        self.present(GameViewController.initiate(self.selectedLevel), animated: true)
     }
     
     @IBAction func upgradeDidPress(_ sender: UIButton) {
@@ -68,7 +68,7 @@ class LevelListSuperViewController: UIViewController {
     func toGameDurationPicker() {
         self.bottomPanelNavigation?.pushViewController(
             DifficultyViewController.initiate(data: GameDurationType.allCases, didSelect: { value in
-                self.selectedLevel?.duration = .init(rawValue: value)
+                self.selectedLevel.duration = .init(rawValue: value)
             }), animated: true)
     }
 }
@@ -77,7 +77,8 @@ extension LevelListSuperViewController: UINavigationControllerDelegate {
     
     func rightNavigationChanged(viewControllerCount: Int) {
         if viewControllerCount == 1 {
-            self.selectedLevel = self.selectedLevel ?? nil
+            let value = self.selectedLevel
+            self.selectedLevel = value
             
         }
         let hide = viewControllerCount > 1
@@ -114,7 +115,7 @@ extension LevelListSuperViewController: UINavigationControllerDelegate {
             
         } else if navigationController == bottomPanelNavigation {
             if navigationController.viewControllers.count == 1 {
-                selectedLevel?.duration = nil
+                selectedLevel.duration = nil
             }
         }
     }
@@ -144,7 +145,7 @@ extension LevelListSuperViewController {
             .initiate(
                 data: Difficulty.allCases,
                 didSelect: { value in
-                    self.selectedLevel?.difficulty = .init(rawValue: value)
+                    self.selectedLevel.difficulty = .init(rawValue: value)
                     self.toGameDurationPicker()
                 })
         let nav = UINavigationController(

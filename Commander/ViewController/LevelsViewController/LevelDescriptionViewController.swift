@@ -18,6 +18,7 @@ class LevelDescriptionViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(.init(nibName: .init(describing: TableDataCell.self), bundle: nil), forCellReuseIdentifier: .init(describing: TableDataCell.self))
         selectedLevelUpdated()
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     private var parentLevelListVC: LevelListSuperViewController? {
@@ -29,7 +30,7 @@ class LevelDescriptionViewController: UIViewController {
             return
         }
         DispatchQueue(label: "db", qos: .userInitiated).async {
-            let selectedLevel = self.parentLevelListVC?.selectedLevel ?? .init(level: "-1")
+            let selectedLevel = self.parentLevelListVC?.selectedLevel ?? .init()
             print(selectedLevel, " ytregrfsdx")
             let db = DataBaseService.db.completedLevels
             let allLevelsForPageKeys = Array(DataBaseService.db.completedLevels.keys.filter({
@@ -41,7 +42,12 @@ class LevelDescriptionViewController: UIViewController {
             self.tableData = [
                 .init(section: "", tableData: [
                     .init(
-                        title: "\(self.parentLevelListVC?.selectedLevel?.level ?? "0")"
+                        title: "level",
+                        text: "\(self.parentLevelListVC?.selectedLevel.level ?? "0")"
+                    ),
+                    .init(
+                        title: "page",
+                        text: "\(self.parentLevelListVC?.selectedLevel.levelPage ?? "0")"
                     ),
                     .init(
                         title: "page levels",

@@ -17,7 +17,8 @@ class GameViewController: UIViewController {
     
     private var weaponTableData: [TableDataModel] = []
     private var weaponHolder: CGPoint?
-
+    var selectedLevel: LevelModel!
+    
     override func loadView() {
         super.loadView()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -235,5 +236,13 @@ extension GameViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
+    }
+}
+
+extension GameViewController {
+    static func initiate(_ level: LevelModel) -> Self {
+        let vc = Self.initiateDefault()
+        vc.selectedLevel = level
+        return vc
     }
 }

@@ -9,14 +9,14 @@ import Foundation
 
 nonisolated
 struct LevelModel: Codable, Hashable, Equatable {
-    let level: String
-    var levelPage: String?
+    var level: String = ""
+    var levelPage: String = "1"
     var difficulty: Difficulty?
     var duration: GameDurationType?
     
     var hasEmptyValue: Bool {
         let dict = try? dictionary()
-        return !(dict?.count ?? 0 >= 3)
+        return !(dict?.count ?? 0 >= 4)
     }
     
 }

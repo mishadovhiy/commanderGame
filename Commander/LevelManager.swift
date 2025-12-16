@@ -12,6 +12,7 @@ struct GameProgress: Codable {
     var earnedMoney: Int = 0
     var killedEnemies: Int = 0
     var totalEnemies: Int = 0
+    var health: Int = 0
     
     var score: Int {
        Int(CGFloat(killedEnemies) / CGFloat(totalEnemies) * 100)
@@ -31,6 +32,7 @@ struct LevelManager {
         self.lvlModel = lvl
         self.lvlBuilder = .init(lvlModel: lvl)
         progress.totalEnemies = lvlBuilder.enemyPerRound.flatMap({$0}).count
+        progress.health = lvlBuilder.health
     }
     
     //hits -> damage
