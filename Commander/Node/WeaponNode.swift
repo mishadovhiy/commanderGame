@@ -26,7 +26,7 @@ class WeaponNode: SKSpriteNode {
     
     init(type: WeaponType) {
         self.type = type
-        self.damage = type.damage
+        self.damage = type.damage * 4
         super.init(texture: nil, color: .red.withAlphaComponent(0.2), size: CGSize(width: 100, height: 100))
         self.name = .init(describing: Self.self)
 
@@ -92,17 +92,8 @@ class WeaponNode: SKSpriteNode {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
             fire.removeFromParent()
         })
-//        if (dx >= 80 || dx <= -80) || (dy >= 80 || dy <= -80) {
-//            print("outside")
-//            self.targetEnemy = nil
-//            return
-//        }
         let direction = CGVector(dx: dx, dy: dy)
-
-        bullet.physicsBody?.applyImpulse(
-            CGVector(dx: direction.dx * 0.01, dy: direction.dy * 0.01)
-        )
-        
+        bullet.run(.applyImpulse(direction, duration: 8.3))
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
             self.targetEnemy = nil
             self.shoot(enemy: enemy)

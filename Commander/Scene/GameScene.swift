@@ -25,7 +25,7 @@ class GameScene: SKScene {
         self.weapons.forEach({
             print($0.position, " tgerfwdas")
         })
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
             self.loadRaund()
         })
         
@@ -40,7 +40,7 @@ class GameScene: SKScene {
     
     var enemies: [EnemyNode] {
         self.children.filter({
-            $0 is EnemyNode
+            !(($0 as? EnemyNode)?.isRemoving ?? true)
         }).compactMap({
             $0 as? EnemyNode
         })
@@ -125,16 +125,18 @@ class GameScene: SKScene {
     func loadRaund() {
         print(lvlanager.currentRound, " tefrwdsax ")
         if lvlanager.lvlBuilder.enemyPerRound.count <= lvlanager.currentRound {
-            didCompleteLevel()
+            print("rfsdaefr")
             return
         }
         if enemies.count >= 1 {
+            print("jkhdfsukhsakd ", enemies.count)
             return
         }
         
         print(lvlanager.currentRound, " tefrwdsax")
         if lvlanager.lvlBuilder.enemyPerRound.count <= lvlanager.currentRound {
             print("game completed")
+            didCompleteLevel()
             return
         }
         var i = 0
