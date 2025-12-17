@@ -10,8 +10,6 @@ import UIKit
 class LevelsPageViewController: UIPageViewController {
 
     let pageData: [LevelPagesBuilder] = .allData
-    private var index: Int = 0
-    private var previousIndex: Int = 0
     
     override func loadView() {
         super.loadView()
@@ -38,42 +36,39 @@ extension LevelsPageViewController {
 extension LevelsPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        (self.parent as? LevelListSuperViewController)?.selectedLevel = .init()
-        print("didSetNil")
+        (self.parent as? LevelListSuperViewController)?.selectedLevel = .init(levelPage: "\(pageViewController.viewControllers?.first?.view.tag ?? 1)")
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        let index = pageViewController.viewControllers?.first?.view.tag ?? 0
         if !completed {
-            self.index = previousIndex
             return
         }
         if finished {
-            previousIndex = index
             (self.parent as? LevelListSuperViewController)!.selectedLevel = .init(levelPage: "\(index + 1)")
         }
-//        let vc = previousViewControllers.first as? LevelViewController
-//        self.index = vc?.i ?? 0
-//        print(vc?.i, " gyhukijk ")
     }
         
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        let index = viewController.view.tag
         if index == 0 {
             return nil
         }
-        self.previousIndex = index
-        self.index -= 1
-        return LevelViewController
-            .initiate(data: pageData[index])
+        let vc = LevelViewController
+            .initiate(data: pageData[index - 1])
+        vc.view.tag = index - 1
+        return vc
 
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        let index = viewController.view.tag
+
         if pageData.count - 1 >= index + 1 {
-            print(index, " jvbukhinj")
-            self.previousIndex = index
-            self.index += 1
-            return LevelViewController
-                .initiate(data: pageData[index])
+            let vc = LevelViewController
+                .initiate(data: pageData[index + 1])
+            vc.view.tag = index + 1
+            return vc
         }
         return nil
     }
