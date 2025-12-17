@@ -8,13 +8,10 @@
 import UIKit
 
 class UserBalanceCell: UITableViewCell {
-    @IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak var buyButton: UIButton!
+    @IBOutlet private weak var balanceLabel: UILabel!
     
-    func set(_ balance: Float, buyCoinsDidPress:@escaping()->()) {
-        
+    func set(_ balance: Float) {
+        balanceLabel.text = .init(format: "%.2f", balance)
     }
-    
-    @IBAction func buyCoinsDidPress(_ sender: Any) {
-    }
-    
 }

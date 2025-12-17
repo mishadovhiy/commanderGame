@@ -38,4 +38,11 @@ enum WeaponType: String, Codable, CaseIterable {
         default: 50
         }
     }
+    
+    var maxUpgradeLevel: Int {
+        switch self {
+        case .pistol: 8
+        default: 25
+        }
+    }
 }

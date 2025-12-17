@@ -40,6 +40,7 @@
 		826A32BF2EECEB01001D25B7 /* ButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32BE2EECEB01001D25B7 /* ButtonModel.swift */; };
 		826A32C12EECEB0E001D25B7 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32C02EECEB0E001D25B7 /* MessageModel.swift */; };
 		826A32C72EED05BF001D25B7 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32C62EED05BF001D25B7 /* UIView.swift */; };
+		827A7B1A2EF2297300A080C9 /* BuyCoinsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827A7B192EF2297300A080C9 /* BuyCoinsCell.swift */; };
 		82C637B12EEE57350064F917 /* BuyCoinsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637B02EEE57350064F917 /* BuyCoinsViewController.swift */; };
 		82C637BE2EEF40100064F917 /* WeaponUpgradeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637BD2EEF40100064F917 /* WeaponUpgradeType.swift */; };
 		82C637C02EEF41420064F917 /* UserBalanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637BF2EEF41420064F917 /* UserBalanceCell.swift */; };
@@ -88,6 +89,8 @@
 		826A32BE2EECEB01001D25B7 /* ButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModel.swift; sourceTree = "<group>"; };
 		826A32C02EECEB0E001D25B7 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		826A32C62EED05BF001D25B7 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		827A7B192EF2297300A080C9 /* BuyCoinsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyCoinsCell.swift; sourceTree = "<group>"; };
+		827A7B1C2EF2379A00A080C9 /* Commander.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Commander.entitlements; sourceTree = "<group>"; };
 		82C637B02EEE57350064F917 /* BuyCoinsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyCoinsViewController.swift; sourceTree = "<group>"; };
 		82C637BD2EEF40100064F917 /* WeaponUpgradeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponUpgradeType.swift; sourceTree = "<group>"; };
 		82C637BF2EEF41420064F917 /* UserBalanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBalanceCell.swift; sourceTree = "<group>"; };
@@ -139,6 +142,7 @@
 		823497C92EEB1FAA00F82871 /* Commander */ = {
 			isa = PBXGroup;
 			children = (
+				827A7B1C2EF2379A00A080C9 /* Commander.entitlements */,
 				823497D22EEB210E00F82871 /* Info.plist */,
 				823497C02EEB1FAA00F82871 /* AppDelegate.swift */,
 				823497C12EEB1FAA00F82871 /* Assets.xcassets */,
@@ -229,7 +233,7 @@
 				8260E2712EEDB5BD002E29C0 /* DifficultyViewController.swift */,
 				8260E26D2EEDB53A002E29C0 /* LevelDescriptionViewController.swift */,
 				82C637BC2EEF3FF30064F917 /* UpgradeWeaponViewController */,
-				82C637B02EEE57350064F917 /* BuyCoinsViewController.swift */,
+				827A7B182EF2295800A080C9 /* BuyCoinsViewController */,
 			);
 			path = LevelsViewController;
 			sourceTree = "<group>";
@@ -275,6 +279,23 @@
 				826A32C62EED05BF001D25B7 /* UIView.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		827A7B182EF2295800A080C9 /* BuyCoinsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				82C637B02EEE57350064F917 /* BuyCoinsViewController.swift */,
+				827A7B1B2EF2297B00A080C9 /* Cell */,
+			);
+			path = BuyCoinsViewController;
+			sourceTree = "<group>";
+		};
+		827A7B1B2EF2297B00A080C9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				827A7B192EF2297300A080C9 /* BuyCoinsCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		82C637BC2EEF3FF30064F917 /* UpgradeWeaponViewController */ = {
@@ -402,6 +423,7 @@
 				8260E23D2EED37BF002E29C0 /* LevelListSuperViewController.swift in Sources */,
 				8260E24E2EED43C5002E29C0 /* LevelPagesBuilder.swift in Sources */,
 				8260E27E2EEE5039002E29C0 /* TableDataModel.swift in Sources */,
+				827A7B1A2EF2297300A080C9 /* BuyCoinsCell.swift in Sources */,
 				82C637D72EEF4B6C0064F917 /* KeychainService.swift in Sources */,
 				823497CB2EEB1FAA00F82871 /* GameScene.swift in Sources */,
 				8260E2412EED383E002E29C0 /* LevelViewController.swift in Sources */,
@@ -571,6 +593,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Commander/Commander.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
@@ -606,6 +629,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Commander/Commander.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;

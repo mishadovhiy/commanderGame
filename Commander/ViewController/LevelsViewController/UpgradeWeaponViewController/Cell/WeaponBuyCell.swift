@@ -9,20 +9,20 @@ import UIKit
 
 class WeaponBuyCell: UITableViewCell {
     
-    @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var increesePercentLabel: UILabel!
-    @IBOutlet weak var levelLabel: UILabel!
-    @IBOutlet weak var upgradePriceLabel: UILabel!
+    @IBOutlet weak var buyButton: UIButton!
+    @IBOutlet private weak var progressView: UIProgressView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var increesePercentLabel: UILabel!
+    @IBOutlet private weak var levelLabel: UILabel!
+    @IBOutlet private weak var upgradePriceLabel: UILabel!
     
     func set(
-        _ dataModel: UpgradeWeaponViewController.WeaponBuyModel,
-        buyDidPress: @escaping()->()) {
-        
+        _ dataModel: UpgradeWeaponViewController.WeaponBuyModel) {
+            buyButton.layer.name = dataModel.type.rawValue
+            progressView.progress = dataModel.percent
+            titleLabel.text = dataModel.type.rawValue
+            upgradePriceLabel.text = "\(dataModel.price)"
+            levelLabel.text = "\(dataModel.level)"
+            increesePercentLabel.text = "\(dataModel.increesePercent)"
     }
-    
-    @IBAction func buyDidPress(_ sender: Any) {
-    }
-    
-    
 }

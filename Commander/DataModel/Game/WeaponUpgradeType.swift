@@ -8,9 +8,20 @@
 import Foundation
 
 enum WeaponUpgradeType: String, Codable, CaseIterable {
+    
     case attackPower
     case distance
+    
     var title: String {
         rawValue.addingSpacesBeforeLargeLetters.capitalized
+    }
+    
+    var maxUpgradeDivider: CGFloat {
+        switch self {
+        case .attackPower:
+            1
+        case .distance:
+            0.4
+        }
     }
 }

@@ -10,6 +10,13 @@ import Security
 #warning("todo: calculate storage for all logged users indeed single user")
 enum KeychainKey: String, CaseIterable {
     case balance
+    
+    var defaultValue: String? {
+        switch self {
+        case .balance: "650"
+        default: nil
+        }
+    }
 }
 
 struct KeychainService {
@@ -72,7 +79,7 @@ struct KeychainService {
         print("notios")
 #endif
 #endif
-        return nil
+        return key.defaultValue
     }
 }
 

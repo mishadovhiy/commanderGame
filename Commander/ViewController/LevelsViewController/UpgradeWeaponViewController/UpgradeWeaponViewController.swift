@@ -14,6 +14,7 @@ class UpgradeWeaponViewController: UIViewController {
     private let collectionData: [WeaponType] = WeaponType.allCases
     private var tableData: [WeaponTableCellProtocol] = []
     private var selectedAt: Int? { didSet { updateTableData() }}
+    var error: String? = nil
     
     override func loadView() {
         super.loadView()
@@ -26,39 +27,80 @@ class UpgradeWeaponViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    private func updateTableData() {
-        let selectedWeaponType = collectionData[selectedAt ?? 0]
-        tableData = [
-            UserBalanceCellModel(balance: 200)
-        ]
-        if selectedAt != nil {
-            tableData.append(WeaponTypeModel(
-                title: selectedWeaponType.rawValue))
-        }
-        tableData.append(contentsOf: WeaponUpgradeType
-            .allCases.compactMap({
-            WeaponBuyModel(
-                percent: 23,
-                increesePercent: 15,
-                level: 2,
-                price: 200,
-                type: $0)
-        }))
-        print(tableData.count, " tgerfwedaw ")
-        tableView.reloadData()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateTableData()
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+
     }
     
-    func buyWeaponDidPress() {
-        
+    private func updateTableData(completion: @escaping()->()={}) {
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            let selectedWeapon = self.collectionData[self.selectedAt ?? 0]
+            let db = DataBaseService.db.upgradedWeapons
+            self.tableData = [
+                UserBalanceCellModel(balance: Float(KeychainService.getToken(forKey: .balance) ?? "") ?? 0)
+            ]
+            if self.selectedAt != nil {
+                self.tableData.append(WeaponTypeModel(
+                    title: selectedWeapon.rawValue))
+            }
+            
+            self.tableData.append(contentsOf: WeaponUpgradeType
+                .allCases.compactMap({
+                    let lvl = db[selectedWeapon]?[$0] ?? 0
+                    
+                return WeaponBuyModel(
+                    percent: Float(lvl) / (Float(selectedWeapon.maxUpgradeLevel) * Float($0.maxUpgradeDivider)),
+                    increesePercent: 15,
+                    level: lvl + 1,
+                    price: selectedWeapon.upgradeStepPrice * (lvl + 1),
+                    type: $0)
+            }))
+            print(self.tableData.count, " tgerfwedaw ")
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                completion()
+            }
+        }
     }
     
     @IBAction private func backPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func updateUserBalancePressed(_ sender: UIButton) {
+        self.navigationController?.pushViewController(
+            BuyCoinsViewController.initiate(), animated: true)
+    }
+    
+    @objc func buyWeaponPressed(_ sender: UIButton) {
+        error = nil
+        tableView.reloadData()
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            let type: WeaponUpgradeType = .init(rawValue: sender.layer.name ?? "") ?? .attackPower
+            let selectedWeapon = self.collectionData[self.selectedAt ?? 0]
+            let balance = KeychainService.getToken(forKey: .balance) ?? ""
+            let lvl = DataBaseService.db.upgradedWeapons[selectedWeapon]?[type] ?? 0
+            let price = selectedWeapon.upgradeStepPrice * (lvl + 1)
+            
+            if Int(balance) ?? 0 >= price {
+                let _ = KeychainService.saveToken("\((Int(balance) ?? 0) - price)", forKey: .balance)
+                var updateDict = DataBaseService.db.upgradedWeapons[selectedWeapon] ?? [:]
+                updateDict.updateValue(lvl + 1, forKey: type)
+                DataBaseService.db.upgradedWeapons.updateValue(updateDict, forKey: selectedWeapon)
+                DispatchQueue.main.async {
+                    self.updateTableData()
+                }
+            } else {
+                print("error not enought money")
+            }
+        }
+        
+    }
 }
 
-extension UpgradeWeaponViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension UpgradeWeaponViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         collectionData.count
     }
@@ -76,6 +118,11 @@ extension UpgradeWeaponViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedAt = indexPath.row
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        .init(width: (collectionView.frame.width - 10) / 4,
+              height: (collectionView.frame.width - 10) / 4)
+    }
 }
 
 extension UpgradeWeaponViewController: UITableViewDelegate, UITableViewDataSource {
@@ -89,10 +136,8 @@ extension UpgradeWeaponViewController: UITableViewDelegate, UITableViewDataSourc
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: .init(describing: UserBalanceCell.self),
                 for: indexPath) as! UserBalanceCell
-            cell.set(data.balance, buyCoinsDidPress: { [weak self] in
-                self?.navigationController?.pushViewController(
-                    BuyCoinsViewController.initiate(), animated: true)
-            })
+            cell.buyButton.addTarget(self, action: #selector(updateUserBalancePressed(_:)), for: .touchUpInside)
+            cell.set(data.balance)
             return cell
             
         } else if let data = data as? WeaponTypeModel {
@@ -106,7 +151,8 @@ extension UpgradeWeaponViewController: UITableViewDelegate, UITableViewDataSourc
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: .init(describing: WeaponBuyCell.self),
                 for: indexPath) as! WeaponBuyCell
-            cell.set(data, buyDidPress: self.buyWeaponDidPress)
+            cell.buyButton.addTarget(self, action: #selector(buyWeaponPressed(_:)), for: .touchUpInside)
+            cell.set(data)
             return cell
             
         } else {
