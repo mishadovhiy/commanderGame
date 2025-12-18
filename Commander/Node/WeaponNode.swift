@@ -51,18 +51,22 @@ class WeaponNode: SKSpriteNode {
     }
     
     var targetEnemy: EnemyNode?
-    var nextEnemyHolder: EnemyNode?
+    var nextEnemyHolder: EnemyNode? {
+        (parent as? GameScene)?.enemies.last(where: {
+            self.intersects($0)
+        })
+    }
     
     func shoot(enemy: EnemyNode, force: Bool = false) {
         if targetEnemy != enemy && targetEnemy != nil {
-            nextEnemyHolder = enemy
+//            nextEnemyHolder = enemy
             return
         }
         if enemy.parent == nil || enemy.isRemoving {
             print(targetEnemy == nil, " refwda")
             targetEnemy = nil
             if let nextEnemyHolder {
-                self.nextEnemyHolder = nil
+//                self.nextEnemyHolder = nil
                 self.shoot(enemy: nextEnemyHolder)
             }
             return
@@ -80,7 +84,7 @@ class WeaponNode: SKSpriteNode {
             print("outside")
             self.targetEnemy = nil
             if let nextEnemyHolder {
-                self.nextEnemyHolder = nil
+//                self.nextEnemyHolder = nil
                 self.shoot(enemy: nextEnemyHolder)
             }
             return

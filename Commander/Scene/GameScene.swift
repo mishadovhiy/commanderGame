@@ -244,9 +244,9 @@ extension GameScene: SKPhysicsContactDelegate {
             let killed = enemy.bulletHitted(bullet)
             if killed {
 //                self.loadEnemy()
-                if let next = bullet.armour?.nextEnemyHolder {
-                    bullet.armour?.shoot(enemy: next)
-                }
+//                if let next = bullet.armour?.nextEnemyHolder {
+//                    bullet.armour?.shoot(enemy: next)
+//                }
                 lvlanager.progress.killedEnemies += 1
                 enemy.removeFromParent()
                 self.loadRaund()
