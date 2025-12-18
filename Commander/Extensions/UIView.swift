@@ -18,6 +18,50 @@ extension UIView {
             return self.superview?.positionInSuperview(position, s: s) ?? position
         }
     }
+    @IBInspectable var hasDarkOverlay: Bool {
+        get {
+            layer.name?.contains("DarkOverlay") ?? false
+        }
+        set {
+            print("egrfseads")
+            if layer.name?.contains("DarkOverlay") ?? false {
+                return
+            }
+            layer.name = "\(layer.name ?? "")DarkOverlay"
+            print("rtegrfseda")
+            addDarkOverlay()
+        }
+    }
+    
+    func addDarkOverlay() {
+        addSubview(DestinationOutMaskedView())
+    }
+    
+    func addBlurView() {
+        (0..<3).forEach { _ in
+            addBlurItemView()
+        }
+    }
+    
+    private func addBlurItemView() {
+        var style: UIBlurEffect.Style = .init(rawValue: -1000)!
+        let effect = UIBlurEffect(style: style)
+        let view = UIVisualEffectView(effect: effect)
+        let vibracity = UIVisualEffectView(effect: effect)
+        view.contentView.addSubview(vibracity)
+        addSubview(view)
+
+        [view, vibracity].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                $0.leadingAnchor.constraint(equalTo: $0.superview!.leadingAnchor),
+                $0.trailingAnchor.constraint(equalTo: $0.superview!.trailingAnchor),
+                $0.topAnchor.constraint(equalTo: $0.superview!.topAnchor),
+                $0.bottomAnchor.constraint(equalTo: $0.superview!.bottomAnchor)
+            ])
+        }
+        
+    }
 }
 
 extension Decodable {

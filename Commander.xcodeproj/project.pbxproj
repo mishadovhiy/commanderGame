@@ -41,6 +41,7 @@
 		826A32C12EECEB0E001D25B7 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32C02EECEB0E001D25B7 /* MessageModel.swift */; };
 		826A32C72EED05BF001D25B7 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32C62EED05BF001D25B7 /* UIView.swift */; };
 		827A7B1A2EF2297300A080C9 /* BuyCoinsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827A7B192EF2297300A080C9 /* BuyCoinsCell.swift */; };
+		8289ABB42EF3D60300F78DD0 /* DestinationOutMaskedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8289ABB32EF3D60300F78DD0 /* DestinationOutMaskedView.swift */; };
 		82C637B12EEE57350064F917 /* BuyCoinsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637B02EEE57350064F917 /* BuyCoinsViewController.swift */; };
 		82C637BE2EEF40100064F917 /* WeaponUpgradeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637BD2EEF40100064F917 /* WeaponUpgradeType.swift */; };
 		82C637C02EEF41420064F917 /* UserBalanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637BF2EEF41420064F917 /* UserBalanceCell.swift */; };
@@ -91,6 +92,7 @@
 		826A32C62EED05BF001D25B7 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		827A7B192EF2297300A080C9 /* BuyCoinsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyCoinsCell.swift; sourceTree = "<group>"; };
 		827A7B1C2EF2379A00A080C9 /* Commander.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Commander.entitlements; sourceTree = "<group>"; };
+		8289ABB32EF3D60300F78DD0 /* DestinationOutMaskedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationOutMaskedView.swift; sourceTree = "<group>"; };
 		82C637B02EEE57350064F917 /* BuyCoinsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyCoinsViewController.swift; sourceTree = "<group>"; };
 		82C637BD2EEF40100064F917 /* WeaponUpgradeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponUpgradeType.swift; sourceTree = "<group>"; };
 		82C637BF2EEF41420064F917 /* UserBalanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBalanceCell.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 		826A32B52EECEA28001D25B7 /* ComponentView */ = {
 			isa = PBXGroup;
 			children = (
+				8289ABB32EF3D60300F78DD0 /* DestinationOutMaskedView.swift */,
 				8260E2832EEE50C7002E29C0 /* TableDataCell */,
 				826A32BB2EECEA70001D25B7 /* AlertView */,
 			);
@@ -431,6 +434,7 @@
 				826A32C12EECEB0E001D25B7 /* MessageModel.swift in Sources */,
 				82C637C92EEF41AF0064F917 /* WeaponTypeCell.swift in Sources */,
 				8260E23F2EED381A002E29C0 /* LevelsPageViewController.swift in Sources */,
+				8289ABB42EF3D60300F78DD0 /* DestinationOutMaskedView.swift in Sources */,
 				82C637D92EEF4B980064F917 /* Keys.swift in Sources */,
 				82C637CB2EEF4A2D0064F917 /* DataBaseModel.swift in Sources */,
 				823497F52EEB5C0200F82871 /* LevelManager.swift in Sources */,
