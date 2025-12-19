@@ -13,12 +13,14 @@ class LevelsPageViewController: UIPageViewController {
     
     override func loadView() {
         super.loadView()
+        view.backgroundColor = .clear
         delegate = self
         dataSource = self
         setViewControllers([
             LevelViewController.initiate(
                 data: pageData.first!)
         ], direction: .forward, animated: true)
+        view.addSubview(DestinationOutMaskedView(type: .borders))
     }
 }
 

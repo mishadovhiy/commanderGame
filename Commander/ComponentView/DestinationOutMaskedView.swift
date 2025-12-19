@@ -12,13 +12,27 @@ class DestinationOutMaskedView: UIView {
     private var blackView: UIView? {
         subviews.first(where: {$0.layer.name == "blackView"})
     }
-
+    
+    init(type:Type = .button) {
+        super.init(frame: .zero)
+        self.layer.name = .init(describing: Self.self) + type.rawValue
+    }
+    
+    private var type: Type? {
+        Type.allCases.first(where: {
+            self.layer.name?.contains($0.rawValue) ?? false
+        })
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func didMoveToSuperview() {
-
+        let type = self.type
         let blackView = UIView()
         blackView.backgroundColor = .black
-        blackView.layer.backgroundColor = UIColor.black.withAlphaComponent(0.2).cgColor
+        blackView.layer.backgroundColor = UIColor.black.withAlphaComponent(type != .borders ? 0.2 : 1).cgColor
         blackView.layer.name = "blackView"
         blackView.clipsToBounds = true
         addSubview(blackView)
@@ -33,26 +47,121 @@ class DestinationOutMaskedView: UIView {
                 $0.bottomAnchor.constraint(equalTo: $0.superview!.bottomAnchor)
             ])
         }
-        blackView.addBlurView()
-
+        if type != .borders {
+            blackView.addBlurView()
+        }
+        isUserInteractionEnabled = false
     }
 
     override func draw(_ rect: CGRect) {
-        drawMask(rect)
         super.draw(rect)
+//        drawMask(rect)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        drawMask(frame)
     }
     
     private func drawMask(_ rect: CGRect) {
-        let pathRect = CGRect.init(origin: .init(x: 2, y: 2), size: .init(width: rect.width - 4, height: rect.height / 2))
+        let type = self.type
+        let safeAreaInsets = type != .button ? safeAreaInsets : .init()
+        let height = type == .button ? rect.height / 2 : rect.height - (4 + safeAreaInsets.top + safeAreaInsets.bottom)
+        let pathRect = CGRect.init(origin: .init(x: 2 + safeAreaInsets.left, y: 2 + safeAreaInsets.top), size: .init(width: rect.width - (4 + (safeAreaInsets.left + safeAreaInsets.right)), height: height))
+//        let pathRect = CGRect.init(origin: .init(x: 2, y: 2), size: .init(width: rect.width - 4, height: rect.height / 2))
+
+        blackView?.layer.mask = MaskShape(frame: rect, pathRect)
+    }
+}
+
+extension DestinationOutMaskedView {
+    enum `Type`: String, CaseIterable {
+        case button, borders
+    }
+}
+
+
+class ContainerMaskedView: UIView {
+    
+    private let isHorizontal: Bool
+    
+    init(isHorizontal: Bool = false) {
+        self.isHorizontal = isHorizontal
+        super.init(frame: .zero)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        guard let superview else {
+            return
+        }
+        self.isUserInteractionEnabled = false
+        superview.layer.masksToBounds = true
+        let corners = UIView()
+        corners.layer.name = "corners"
+        addSubview(corners)
+        
+        let corner2 = UIView()
+        corners.addSubview(corner2)
+
+        [
+            corners: (.red, .orange),
+            corner2: (.blue, .white)
+        ].forEach { (key: UIView, value: (UIColor, UIColor)) in
+            key.backgroundColor = value.0
+            key.layer.borderColor = value.1.cgColor
+            key.layer.borderWidth = 2
+        }
+        
+        [
+            corners: (0, 0),
+            corner2: (6, 6),
+            self: ((isHorizontal ? 0 : -1), (isHorizontal ? -2 : 0))
+        ].forEach { (key: UIView, value: (CGFloat, CGFloat)) in
+            key.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                key.leadingAnchor.constraint(equalTo: key.superview!.leadingAnchor, constant: value.0),
+                key.trailingAnchor.constraint(equalTo: key.superview!.trailingAnchor, constant: -value.0),
+                key.topAnchor.constraint(equalTo: key.superview!.topAnchor, constant: value.1),
+                key.bottomAnchor.constraint(equalTo: key.superview!.bottomAnchor, constant: -value.1)
+            ])
+        }
+    }
+    
+    var corners: UIView? {
+        subviews.first(where: {
+            $0.layer.name == "corners"
+        })
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        guard let corners else { return }
+        let pathRect = CGRect.init(origin: .init(x: 10 + safeAreaInsets.left, y: 10 + safeAreaInsets.top), size: .init(width: corners.frame.width - (20 + (safeAreaInsets.left + safeAreaInsets.right)), height: corners.frame.height - (20 + (safeAreaInsets.top + safeAreaInsets.bottom))))
+//        let pathRect = CGRect.init(origin: .init(x: 2, y: 2), size: .init(width: rect.width - 4, height: rect.height / 2))
+
+        corners.layer.mask = MaskShape(frame: corners.frame, pathRect)
+    }
+}
+
+class MaskShape: CAShapeLayer {
+    init(frame: CGRect, _ pathRect: CGRect) {
+        super.init()
         let path = CGMutablePath()
         path.addRoundedRect(in: pathRect, cornerWidth: 0, cornerHeight: 0)
-        path.addRect(rect)
+        path.addRect(frame)
         
-        let shape = CAShapeLayer()
-        shape.backgroundColor = UIColor.red.cgColor
-        shape.path = path
-        shape.cornerRadius = 5
-        shape.fillRule = .evenOdd
-        blackView?.layer.mask = shape
+        self.backgroundColor = UIColor.red.cgColor
+        self.path = path
+        self.cornerRadius = 5
+        self.fillRule = .evenOdd
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

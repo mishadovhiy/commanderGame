@@ -18,25 +18,25 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleAspectFit" layoutMarginsFollowReadableWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="REo-6H-mhe">
-                        <rect key="frame" x="0.0" y="10" width="320" height="24"/>
+                        <rect key="frame" x="20" y="20" width="280" height="4"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jj4-pU-xWv">
-                                <rect key="frame" x="0.0" y="0.0" width="15" height="24"/>
+                                <rect key="frame" x="0.0" y="0.0" width="15" height="4"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="15" id="MRt-hg-NmI"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0ND-Jc-Pbg">
-                                <rect key="frame" x="15" y="0.0" width="305" height="24"/>
+                                <rect key="frame" x="15" y="0.0" width="265" height="4"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSB-cd-WTe">
-                                        <rect key="frame" x="0.0" y="0.0" width="305" height="12"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="265" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="sdfdsfsdfsdf" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qxz-Dw-MdE">
-                                        <rect key="frame" x="0.0" y="12" width="305" height="12"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="265" height="4"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -48,10 +48,10 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="REo-6H-mhe" secondAttribute="trailing" id="FcA-Zz-UUA"/>
-                    <constraint firstItem="REo-6H-mhe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="WOd-Zr-dsf"/>
-                    <constraint firstAttribute="bottom" secondItem="REo-6H-mhe" secondAttribute="bottom" constant="10" id="fs7-lf-JjA"/>
-                    <constraint firstItem="REo-6H-mhe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="sMA-VR-wna"/>
+                    <constraint firstAttribute="trailing" secondItem="REo-6H-mhe" secondAttribute="trailing" constant="20" id="FcA-Zz-UUA"/>
+                    <constraint firstItem="REo-6H-mhe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="WOd-Zr-dsf"/>
+                    <constraint firstAttribute="bottom" secondItem="REo-6H-mhe" secondAttribute="bottom" constant="20" id="fs7-lf-JjA"/>
+                    <constraint firstItem="REo-6H-mhe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="sMA-VR-wna"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

@@ -129,6 +129,7 @@ extension LevelListSuperViewController: UINavigationControllerDelegate {
 
 extension LevelListSuperViewController {
     func loadUI() {
+        view.backgroundColor = .clear
         bottomPanelStackView.isHidden = true
         bottomPanelStackView.layer.zPosition = -1
         loadPageChild()

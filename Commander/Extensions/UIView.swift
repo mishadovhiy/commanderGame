@@ -18,12 +18,16 @@ extension UIView {
             return self.superview?.positionInSuperview(position, s: s) ?? position
         }
     }
+    
     @IBInspectable var hasDarkOverlay: Bool {
         get {
             layer.name?.contains("DarkOverlay") ?? false
         }
         set {
             print("egrfseads")
+            if !newValue {
+                return
+            }
             if layer.name?.contains("DarkOverlay") ?? false {
                 return
             }
@@ -44,7 +48,7 @@ extension UIView {
     }
     
     private func addBlurItemView() {
-        var style: UIBlurEffect.Style = .init(rawValue: -1000)!
+        let style: UIBlurEffect.Style = .init(rawValue: -1000)!
         let effect = UIBlurEffect(style: style)
         let view = UIVisualEffectView(effect: effect)
         let vibracity = UIVisualEffectView(effect: effect)

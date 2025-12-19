@@ -13,6 +13,7 @@ class LevelViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+        view.backgroundColor = .clear
         drawLevelGround()
         loadLevelButtons()
         updateButtonsConstraints()
