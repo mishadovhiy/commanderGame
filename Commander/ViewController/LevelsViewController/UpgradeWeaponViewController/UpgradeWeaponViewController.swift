@@ -120,8 +120,14 @@ extension UpgradeWeaponViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        .init(width: (collectionView.frame.width - 10) / 4,
+        .init(width: (collectionView.frame.width - 50) / 4,
               height: (collectionView.frame.width - 10) / 4)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        0
     }
 }
 
@@ -159,8 +165,54 @@ extension UpgradeWeaponViewController: UITableViewDelegate, UITableViewDataSourc
             fatalError("\(data)")
         }
     }
+}
+
+extension UpgradeWeaponViewController {
+    func cellSeparetorCountH(_ size: CGFloat) -> Int {
+        let countFloat = self.view.frame.height / size
+        let countCalcH = CGFloat((collectionData.count / 4) + 1) * size
+        let minCountH = Int(countFloat + 1)
+        let count = Int(countCalcH) >= minCountH ? Int(countCalcH) : minCountH
+        return count
+    }
     
+    func cellSeparetorHStack(_ size: CGFloat) -> UIStackView {
+        let hstack = UIStackView()
+        hstack.distribution = .fillEqually
+        for _ in 0..<4 {
+            let view = UIView()
+            view.backgroundColor = .clear
+            view.layer.borderColor = UIColor.red.cgColor
+            view.layer.borderWidth = 1
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.heightAnchor.constraint(equalToConstant: size).isActive = true
+            view.widthAnchor.constraint(equalToConstant: size).isActive = true
+
+            hstack.addArrangedSubview(view)
+        }
+        return hstack
+    }
     
+    func loadCellsSeparetor() {
+        let size = collectionVIew.frame.width / 4
+        let count = cellSeparetorCountH(size)
+
+        let vStack = UIStackView()
+        vStack.axis = .vertical
+        vStack.distribution = .fillEqually
+        (0..<count).forEach { i in
+            vStack.addArrangedSubview(
+                cellSeparetorHStack(size)
+            )
+        }
+        collectionVIew.addSubview(vStack)
+        vStack.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            vStack.leadingAnchor.constraint(equalTo: vStack.superview!.leadingAnchor),
+            vStack.topAnchor.constraint(equalTo: vStack.superview!.topAnchor)
+        ])
+    }
 }
 
 extension UpgradeWeaponViewController {

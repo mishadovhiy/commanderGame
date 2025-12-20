@@ -11,6 +11,11 @@ class WeaponTypeCell: UITableViewCell {
     
     @IBOutlet private weak var titleLabel: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        contentView.addSubview(ContainerMaskedView(isHorizontal: true))
+    }
+    
     func set(_ data: UpgradeWeaponViewController.WeaponTypeModel) {
         titleLabel.text = data.title
     }

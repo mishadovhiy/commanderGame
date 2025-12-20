@@ -16,6 +16,11 @@ class WeaponBuyCell: UITableViewCell {
     @IBOutlet private weak var levelLabel: UILabel!
     @IBOutlet private weak var upgradePriceLabel: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        contentView.addSubview(ContainerMaskedView(isHorizontal: true))
+    }
+    
     func set(
         _ dataModel: UpgradeWeaponViewController.WeaponBuyModel) {
             buyButton.layer.name = dataModel.type.rawValue

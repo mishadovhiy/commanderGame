@@ -176,3 +176,16 @@ extension UIColor {
         )
     }
 }
+
+extension UINavigationController: @retroactive UIGestureRecognizerDelegate {
+
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        self.interactivePopGestureRecognizer?.delegate = self
+        self.interactivePopGestureRecognizer?.isEnabled = true
+    }
+        
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
