@@ -104,7 +104,7 @@ class LevelViewController: UIViewController {
             let button = UIButton(type: .system)
             button.tag = view.subviews.count
             button.setTitle($0.title, for: .init())
-            button.backgroundColor = .red
+            button.backgroundColor = .red.withAlphaComponent(0.4)
             button.addTarget(self, action: #selector(didSelectLevel(_:)), for: .touchUpInside)
 //            button.isEnabled = $0 == data.levels.first
             view.addSubview(button)

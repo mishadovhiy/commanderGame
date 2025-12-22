@@ -53,7 +53,7 @@ extension LevelsPageViewController: UIPageViewControllerDataSource, UIPageViewCo
         }
         if finished {
             parentVC?.selectedLevel = .init(levelPage: "\(index + 1)")
-            parentVC?.homeParentVC?.setMap(for: pageData[index + 1])
+            parentVC?.homeParentVC?.setMap(for: pageData[index])
         }
     }
         

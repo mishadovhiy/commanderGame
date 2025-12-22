@@ -139,6 +139,10 @@ extension String {
                     options: .regularExpression
                 )
     }
+    
+    var numbers: Int? {
+        Int(self.filter({$0.isNumber}))
+    }
 }
 
 extension UITableViewCell {

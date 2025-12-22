@@ -111,7 +111,13 @@ extension LevelListSuperViewController: UINavigationControllerDelegate {
             if self.upgradeButton.isHidden != hide {
                 self.upgradeButton.isHidden = hide
             }
-            
+            self.rightPanelStackView.arrangedSubviews.forEach {
+                if $0 is UIButton && $0 != self.startButton {
+                    if $0.isHidden != hide {
+                        $0.isHidden = hide
+                    }
+                }
+            }
         }
     }
     

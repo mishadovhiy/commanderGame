@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
                        completion:@escaping()->() = {}) {
         let page = self.startView.isHidden ? page : nil
         print(page?.zoom, " rtegrf", page?.title, " yhtgrf", mapImageView.frame.origin)
-        if mapImageView.frame.origin != .zero {
+        if mapImageView.frame.origin != .zero && page != nil {
             self.performSetMap(for: nil, completion: {
                 self.performSetMap(for: page, completion: completion)
             })

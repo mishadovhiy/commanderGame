@@ -24,97 +24,153 @@ extension [LevelPagesBuilder] {
         [
             .init(title: "1", zoom: 3.5, mapPosition: .init(x: -0.4, y: -0.8), levels: [
                 .init(position:
-                        .init(x: 0.1, y: 0.8),
+                        .init(x: 0.08, y: 0.2),
                       title: "11"),
                 .init(position:
-                        .init(x: 0.2, y: 0.3),
+                        .init(x: 0.25, y: 0.16),
                       title: "12"),
                 .init(position:
-                        .init(x: 0.34, y: 0.6),
+                        .init(x: 0.41, y: 0.17),
                       title: "13"),
                 .init(position:
-                        .init(x: 0.45, y: 0.8),
+                        .init(x: 0.63, y: 0.13),
                       title: "14"),
                 .init(position:
-                        .init(x: 0.48, y: 0.2),
+                        .init(x: 0.59, y: 0.42),
                       title: "15"),
                 .init(position:
-                        .init(x: 0.28, y: 0.07),
+                        .init(x: 0.69, y: 0.26),
                       title: "16"),
                 .init(position:
-                        .init(x: 0.58, y: 0.7),
+                        .init(x: 0.85, y: 0.42),
                       title: "17"),
                 .init(position:
-                        .init(x: 0.78, y: 0.4),
+                        .init(x: 0.93, y: 0.165),
                       title: "18"),
                 .init(position:
-                        .init(x: 0.95, y: 0.8),
-                      title: "19")
+                        .init(x: 0.95, y: 0.6),
+                      title: "19"),
+                .init(position:
+                        .init(x: 0.84, y: 0.75),
+                      title: "20"),
+                .init(position:
+                        .init(x: 0.36, y: 0.62),
+                      title: "21")
             ]),
-            .init(title: "2", zoom: 3.5, mapPosition: .init(x: -0.4, y: -0.8), levels: [
+            .init(title: "2", zoom: 2.5, mapPosition: .init(x: -1.2, y: -0.5), levels: [
                 .init(position:
-                        .init(x: 0.1, y: 0.8),
-                      title: "11"),
+                        .init(x: 0.12, y: 0.15),
+                      title: "201"),
                 .init(position:
-                        .init(x: 0.11, y: 0.75),
-                      title: "11"),
+                        .init(x: 0.08, y: 0.361),
+                      title: "202"),
                 .init(position:
-                        .init(x: 0.08, y: 0.72),
-                      title: "11"),
+                        .init(x: 0.24, y: 0.363),
+                      title: "203"),
                 .init(position:
-                        .init(x: 0.086, y: 0.65),
-                      title: "11"),
+                        .init(x: 0.09, y: 0.63),
+                      title: "204"),
                 .init(position:
-                        .init(x: 0.1, y: 0.6),
-                      title: "11"),
+                        .init(x: 0.4, y: 0.54),
+                      title: "205"),
                 .init(position:
-                        .init(x: 0.1, y: 0.4),
-                      title: "11"),
+                        .init(x: 0.5, y: 0.08),
+                      title: "206"),
                 .init(position:
-                        .init(x: 0.1, y: 0.2),
-                      title: "11"),
+                        .init(x: 0.66, y: 0.18),
+                      title: "207"),
                 .init(position:
-                        .init(x: 0.07, y: 0.05),
-                      title: "11"),
+                        .init(x: 0.83, y: 0.167),
+                      title: "208"),
                 .init(position:
-                        .init(x: 0.21, y: 0.03),
-                      title: "11"),
+                        .init(x: 0.824, y: 0.47),
+                      title: "209"),
                 .init(position:
-                        .init(x: 0.23, y: 0.1),
-                      title: "11")
+                        .init(x: 0.9, y: 0.73),
+                      title: "210"),
+                .init(position:
+                        .init(x: 0.65, y: 0.74),
+                      title: "211"),
+                .init(position:
+                        .init(x: 0.3, y: 0.85),
+                      title: "212")
             ]),
-            .init(title: "3", zoom: 0.5, mapPosition: .init(x: 0.2, y: 0.2), levels: [
+            .init(title: "3", zoom: 4.5, mapPosition: .init(x: -3.2, y: -3.4), levels: [
                 .init(position:
-                        .init(x: 0.1, y: 0.8),
-                      title: "11"),
+                        .init(x: 0.2, y: 0.6),
+                      title: "301"),
                 .init(position:
-                        .init(x: 0.11, y: 0.75),
-                      title: "11"),
+                        .init(x: 0.23, y: 0.3),
+                      title: "302"),
                 .init(position:
-                        .init(x: 0.08, y: 0.72),
-                      title: "11"),
+                        .init(x: 0.46, y: 0.61),
+                      title: "303"),
                 .init(position:
-                        .init(x: 0.086, y: 0.65),
-                      title: "11"),
+                        .init(x: 0.4, y: 0.3),
+                      title: "304"),
                 .init(position:
-                        .init(x: 0.1, y: 0.6),
-                      title: "11"),
+                        .init(x: 0.5, y: 0.05),
+                      title: "305"),
                 .init(position:
-                        .init(x: 0.1, y: 0.4),
-                      title: "11"),
+                        .init(x: 0.6, y: 0.25),
+                      title: "306"),
                 .init(position:
-                        .init(x: 0.1, y: 0.2),
-                      title: "11"),
+                        .init(x: 0.86, y: 0.4),
+                      title: "307"),
                 .init(position:
-                        .init(x: 0.07, y: 0.05),
-                      title: "11"),
+                        .init(x: 0.84, y: 0.65),
+                      title: "308"),
                 .init(position:
-                        .init(x: 0.21, y: 0.03),
-                      title: "11"),
+                        .init(x: 0.67, y: 0.8),
+                      title: "309"),
                 .init(position:
-                        .init(x: 0.23, y: 0.1),
-                      title: "11")
+                        .init(x: 0.59, y: 0.66),
+                      title: "310"),
+                .init(position:
+                        .init(x: 0.67, y: 0.455),
+                      title: "311")
             ])
         ]
+    }
+}
+
+enum LevelName: String {
+    case one1
+    case one2
+    case one3
+    case one4
+    case one5
+    case one6
+    case one7
+    case one8
+    case one9
+    case one10
+    case one11
+    case two1
+    case two2
+    case two3
+    case two4
+    case two5
+    case two6
+    case two7
+    case two8
+    case two9
+    case two10
+    case two11
+    case two12
+    case three1
+    case three2
+    case three3
+    case three4
+    case three5
+    case three6
+    case three7
+    case three8
+    case three9
+    case three10
+    case three11
+    
+    var title: String {
+        "\(rawValue.numbers ?? 0)"
     }
 }
