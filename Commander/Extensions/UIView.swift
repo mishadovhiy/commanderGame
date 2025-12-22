@@ -37,6 +37,23 @@ extension UIView {
         }
     }
     
+    @IBInspectable var hasContainer: Bool {
+        get {
+            layer.name?.contains("hasContainer") ?? false
+        }
+        set {
+            print("egrfseads")
+            if !newValue {
+                return
+            }
+            if layer.name?.contains("hasContainer") ?? false {
+                return
+            }
+            layer.name = "\(layer.name ?? "")hasContainer"
+            addSubview(ContainerMaskedView(isHorizontal: nil))
+        }
+    }
+    
     func addDarkOverlay() {
         addSubview(DestinationOutMaskedView())
     }

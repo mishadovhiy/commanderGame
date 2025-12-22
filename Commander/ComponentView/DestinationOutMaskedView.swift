@@ -29,6 +29,10 @@ class DestinationOutMaskedView: UIView {
     }
     
     override func didMoveToSuperview() {
+        guard let _ = superview else {
+            super.didMoveToSuperview()
+            return
+        }
         let type = self.type
         let blackView = UIView()
         blackView.backgroundColor = .black
@@ -51,11 +55,6 @@ class DestinationOutMaskedView: UIView {
             blackView.addBlurView()
         }
         isUserInteractionEnabled = false
-    }
-
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-//        drawMask(rect)
     }
     
     override func layoutSubviews() {
@@ -83,10 +82,22 @@ extension DestinationOutMaskedView {
 
 class ContainerMaskedView: UIView {
     
-    private let isHorizontal: Bool
+    private let isHorizontal: Bool?
+    let type: Type
+    enum `Type` {
+        case multiple
+        case signle
+    }
     
-    init(isHorizontal: Bool = false) {
+    struct Constants {
+        static let largeBorderColor: UIColor = .red
+        static let borderColor: UIColor = .white
+        static let secondaryBorderColor: UIColor = .blue
+        static let primaryBorderColor: UIColor = .orange
+    }
+    init(isHorizontal: Bool? = false, type: Type = .multiple) {
         self.isHorizontal = isHorizontal
+        self.type = type
         super.init(frame: .zero)
     }
     
@@ -106,22 +117,34 @@ class ContainerMaskedView: UIView {
         addSubview(corners)
         
         let corner2 = UIView()
-        corners.addSubview(corner2)
+        if type != .signle {
+            corners.addSubview(corner2)
+        }
 
         [
-            corners: (.red, .orange),
-            corner2: (.blue, .white)
+            corners: (Constants.largeBorderColor, Constants.primaryBorderColor),
+            corner2: (Constants.secondaryBorderColor, Constants.borderColor)
         ].forEach { (key: UIView, value: (UIColor, UIColor)) in
             key.backgroundColor = value.0
             key.layer.borderColor = value.1.cgColor
             key.layer.borderWidth = 2
         }
         
-        [
-            corners: (0, 0),
-            corner2: (6, 6),
-            self: ((isHorizontal ? 0 : -1), (isHorizontal ? -2 : 0))
-        ].forEach { (key: UIView, value: (CGFloat, CGFloat)) in
+        
+        let dict: [UIView: (CGFloat, CGFloat)]
+        if type == .signle {
+            dict = [
+                corners: (0, 0),
+                self: ((isHorizontal ?? false ? 0 : -1), (isHorizontal ?? false ? -2 : 0))
+            ]
+        } else {
+            dict = [
+                corners: (0, 0),
+                corner2: (6, 6),
+                self: ((isHorizontal ?? false ? 0 : -1), (isHorizontal ?? false ? -2 : 0))
+            ]
+        }
+        dict.forEach { (key: UIView, value: (CGFloat, CGFloat)) in
             key.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
                 key.leadingAnchor.constraint(equalTo: key.superview!.leadingAnchor, constant: value.0),

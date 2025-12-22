@@ -14,6 +14,8 @@ struct GameBuilderModel {
     
     let enemyHealthMult: Int
     
+    let startingMoney: Int
+    
     var rounds: Int {
         enemyPerRound.count
     }
@@ -28,6 +30,7 @@ struct GameBuilderModel {
         enemyPerRound = Self.enemyList(lvlModel.level)
         health = 10
         enemyHealthMult = 100
+        self.startingMoney = 100
     }
 }
 

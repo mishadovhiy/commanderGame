@@ -62,22 +62,27 @@ class LevelDescriptionViewController: UIViewController {
                 )
             }
             if self.parentLevelListVC?.selectedLevel.level.isEmpty == false {
-                self.tableData[0].tableData.insert(.init(title: "Level", text: self.parentLevelListVC?.selectedLevel.level), at: 0)
+                let builder = GameBuilderModel(lvlModel: selectedLevel)
+                self.tableData[0].tableData.insert(.init(title: "Level \(self.parentLevelListVC?.selectedLevel.level ?? "")", text: """
+                        starting money: \(builder.startingMoney)
+                        rounds: \(builder.rounds)
+                        """), at: 0)
             }
             let progress: [String: [LevelModel]] = [
                 "completed level difficulties": allKeys,
-                "completed levels for page": allLevelsForPageKeys
+                "completed levels for page": (self.parentLevelListVC?.selectedLevel.level.isEmpty ?? true) ? allLevelsForPageKeys : []
             ]
             progress.forEach { (key: String, value: [LevelModel]) in
                 if !value.isEmpty {
                     self.tableData.append(.init(section: key, tableData: value.compactMap({
                         let value = db[$0]
                         return [
-                            TableDataModel(title: "level:", text: $0.level, higlighted: .accent),
-                            .init(title: "duration:", text: $0.duration?.rawValue),
-                            .init(title: "difficulty:", text: $0.difficulty?.rawValue),
-                            .init(title: "score:", text: "\(value?.score ?? 0)"),
-                            .init(title: "$:", text: "\(value?.earnedMoney ?? 0)")
+                            TableDataModel(title: "level: \($0.level)", text: """
+                                duration: \($0.duration?.rawValue ?? "")
+                                difficulty: \($0.difficulty?.rawValue ?? "")
+                                score: \(value?.score ?? 0)
+                                earned: $\(value?.earnedMoney ?? 0)
+                                """, higlighted: .accent)
                         ]
                     }).flatMap({$0})))
                 }
@@ -105,9 +110,23 @@ extension LevelDescriptionViewController: UITableViewDelegate, UITableViewDataSo
         return cell ?? .init()
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        tableData[section].section
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if tableData[section].section.isEmpty {
+            return nil
+        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: .init(describing: TableDataCell.self)) as! TableDataCell
+        cell.set(.init(title: tableData[section].section))
+        return cell.contentView
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if tableData[section].section.isEmpty {
+            return 0
+        }
+        return UITableView.automaticDimension
+    }
+    
+    
 }
 
 

@@ -22,6 +22,10 @@ class LevelsPageViewController: UIPageViewController {
         ], direction: .forward, animated: true)
         view.addSubview(DestinationOutMaskedView(type: .borders))
     }
+    
+    var parentVC: LevelListSuperViewController? {
+        parent as? LevelListSuperViewController
+    }
 }
 
 extension LevelsPageViewController {
@@ -38,7 +42,8 @@ extension LevelsPageViewController {
 extension LevelsPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        (self.parent as? LevelListSuperViewController)?.selectedLevel = .init(levelPage: "\(pageViewController.viewControllers?.first?.view.tag ?? 1)")
+        let page = pageViewController.viewControllers?.first?.view.tag ?? 1
+        parentVC?.selectedLevel = .init(levelPage: "\(page)")
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
@@ -47,7 +52,8 @@ extension LevelsPageViewController: UIPageViewControllerDataSource, UIPageViewCo
             return
         }
         if finished {
-            (self.parent as? LevelListSuperViewController)!.selectedLevel = .init(levelPage: "\(index + 1)")
+            parentVC?.selectedLevel = .init(levelPage: "\(index + 1)")
+            parentVC?.homeParentVC?.setMap(for: pageData[index + 1])
         }
     }
         

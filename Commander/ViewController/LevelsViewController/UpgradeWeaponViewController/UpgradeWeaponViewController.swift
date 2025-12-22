@@ -22,9 +22,11 @@ class UpgradeWeaponViewController: UIViewController {
         collectionVIew.dataSource = self
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = ContainerMaskedView.Constants.primaryBorderColor
         self.view.backgroundColor = .black
         updateTableData()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        loadCellsSeparetor()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -207,7 +209,7 @@ extension UpgradeWeaponViewController {
         }
         collectionVIew.addSubview(vStack)
         vStack.translatesAutoresizingMaskIntoConstraints = false
-
+        vStack.isUserInteractionEnabled = false
         NSLayoutConstraint.activate([
             vStack.leadingAnchor.constraint(equalTo: vStack.superview!.leadingAnchor),
             vStack.topAnchor.constraint(equalTo: vStack.superview!.topAnchor)
@@ -232,12 +234,5 @@ extension UpgradeWeaponViewController {
         let level: Int
         let price: Int
         let type: WeaponUpgradeType
-    }
-    
-    static func initiate() -> Self {
-        let vc = UIStoryboard(name: "Main", bundle: nil)
-            .instantiateViewController(withIdentifier: .init(
-                describing: Self.self)) as! Self
-        return vc
     }
 }

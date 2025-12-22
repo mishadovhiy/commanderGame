@@ -9,12 +9,12 @@ import UIKit
 
 class LevelListSuperViewController: UIViewController {
     
-    @IBOutlet weak var bottomBarConstraint: NSLayoutConstraint!
-    @IBOutlet weak var startButton: UIButton!
-    @IBOutlet weak var rightPanelStackView: UIStackView!
-    @IBOutlet weak var upgradeButton: UIButton!
-    @IBOutlet weak var bottomPanelStackView: UIStackView!
-    @IBOutlet weak private var pageContainerView: UIView!
+    @IBOutlet private weak var bottomBarConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var startButton: UIButton!
+    @IBOutlet private weak var rightPanelStackView: UIStackView!
+    @IBOutlet private weak var upgradeButton: UIButton!
+    @IBOutlet private weak var bottomPanelStackView: UIStackView!
+    @IBOutlet private weak var pageContainerView: UIView!
     
     override func loadView() {
         super.loadView()
@@ -37,6 +37,10 @@ class LevelListSuperViewController: UIViewController {
         rightPanelNavigation?.viewControllers.first(where: {
             $0 is LevelDescriptionViewController
         }) as? LevelDescriptionViewController
+    }
+    
+    var homeParentVC: HomeViewController? {
+        parent as? HomeViewController
     }
     
     var selectedLevel: LevelModel = .init(level: "", levelPage: "1") {
@@ -63,12 +67,16 @@ class LevelListSuperViewController: UIViewController {
         }
     }
     
-    @IBAction func startGameDidPress(_ sender: Any) {
+    @IBAction private func startGameDidPress(_ sender: Any) {
         self.present(GameViewController.initiate(self.selectedLevel), animated: true)
     }
     
-    @IBAction func upgradeDidPress(_ sender: UIButton) {
-        rightPanelNavigation?.pushViewController(UpgradeWeaponViewController.initiate(), animated: true)
+    @IBAction private func upgradeDidPress(_ sender: UIButton) {
+        rightPanelNavigation?.pushViewController(UpgradeWeaponViewController.initiateDefault(), animated: true)
+    }
+    
+    @IBAction private func backDidiPress(_ sender: Any) {
+        homeParentVC?.setStartPressed(false)
     }
     
     func toGameDurationPicker() {
@@ -80,7 +88,7 @@ class LevelListSuperViewController: UIViewController {
 }
 
 extension LevelListSuperViewController: UINavigationControllerDelegate {
-    
+    private
     func rightNavigationChanged(viewControllerCount: Int) {
         if viewControllerCount == 1 {
             let value = self.selectedLevel
@@ -127,6 +135,7 @@ extension LevelListSuperViewController: UINavigationControllerDelegate {
     }
 }
 
+fileprivate
 extension LevelListSuperViewController {
     func loadUI() {
         view.backgroundColor = .clear

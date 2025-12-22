@@ -17,7 +17,7 @@ struct LevelModel: Codable, Hashable, Equatable {
     var hasEmptyValue: Bool {
         let dict = try? dictionary()
         return !(dict?.count ?? 0 >= 4)
-    }
+    }    
 }
 
 extension LevelModel {

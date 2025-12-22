@@ -9,16 +9,22 @@ import UIKit
 
 class WeaponBuyCell: UITableViewCell {
     
+    @IBOutlet private weak var buyButtonTitle: UILabel!
+    @IBOutlet weak var containerCell: UIView!
     @IBOutlet weak var buyButton: UIButton!
     @IBOutlet private weak var progressView: UIProgressView!
     @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var increesePercentLabel: UILabel!
     @IBOutlet private weak var levelLabel: UILabel!
     @IBOutlet private weak var upgradePriceLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.addSubview(ContainerMaskedView(isHorizontal: true))
+        contentView.addSubview(ContainerMaskedView(isHorizontal: true, type: .signle))
+        contentView.backgroundColor = ContainerMaskedView.Constants.largeBorderColor
+        containerCell.layer.borderColor = ContainerMaskedView.Constants.borderColor.cgColor
+        containerCell.layer.borderWidth = 2
+        containerCell.backgroundColor = ContainerMaskedView.Constants.secondaryBorderColor
+        buyButtonTitle.transform = CGAffineTransform(rotationAngle: CGFloat.pi / -2)
     }
     
     func set(
@@ -28,6 +34,5 @@ class WeaponBuyCell: UITableViewCell {
             titleLabel.text = dataModel.type.rawValue
             upgradePriceLabel.text = "\(dataModel.price)"
             levelLabel.text = "\(dataModel.level)"
-            increesePercentLabel.text = "\(dataModel.increesePercent)"
     }
 }

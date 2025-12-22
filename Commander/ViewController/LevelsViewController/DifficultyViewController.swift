@@ -38,6 +38,8 @@ class DifficultyViewController: UIViewController {
             button.addTarget(self, action: #selector(difficultyPressed(_:)), for: .touchUpInside)
             difficultyStackView.addArrangedSubview(button)
             button.addSubview(ContainerMaskedView(isHorizontal: false))
+            button.addSubview(DestinationOutMaskedView())
+
         }
         print(difficultyStackView.arrangedSubviews.count, " egrfwdas")
         difficultyStackView.backgroundColor = .orange

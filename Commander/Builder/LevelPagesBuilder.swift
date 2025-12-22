@@ -9,6 +9,8 @@ import Foundation
 
 struct LevelPagesBuilder: Equatable {
     let title: String
+    let zoom: CGFloat
+    let mapPosition: CGPoint
     let levels: [LevelListBuilder]
     
     struct LevelListBuilder: Equatable {
@@ -20,7 +22,7 @@ struct LevelPagesBuilder: Equatable {
 extension [LevelPagesBuilder] {
     static var allData: Self {
         [
-            .init(title: "1", levels: [
+            .init(title: "1", zoom: 3.5, mapPosition: .init(x: -0.4, y: -0.8), levels: [
                 .init(position:
                         .init(x: 0.1, y: 0.8),
                       title: "11"),
@@ -49,7 +51,7 @@ extension [LevelPagesBuilder] {
                         .init(x: 0.95, y: 0.8),
                       title: "19")
             ]),
-            .init(title: "2", levels: [
+            .init(title: "2", zoom: 3.5, mapPosition: .init(x: -0.4, y: -0.8), levels: [
                 .init(position:
                         .init(x: 0.1, y: 0.8),
                       title: "11"),
@@ -81,7 +83,7 @@ extension [LevelPagesBuilder] {
                         .init(x: 0.23, y: 0.1),
                       title: "11")
             ]),
-            .init(title: "3", levels: [
+            .init(title: "3", zoom: 0.5, mapPosition: .init(x: 0.2, y: 0.2), levels: [
                 .init(position:
                         .init(x: 0.1, y: 0.8),
                       title: "11"),

@@ -16,10 +16,8 @@ class TableDataCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectedBackgroundView = .init()
-
-        
         backgroundColor = .black
-        addSubview(ContainerMaskedView(isHorizontal: true))
+        contentView.addSubview(ContainerMaskedView(isHorizontal: true))
     }
     
     func set(_ data: TableDataModel) {
@@ -42,5 +40,6 @@ class TableDataCell: UITableViewCell {
         nameLabel.isHidden = nameLabel.text?.isEmpty ?? true
         descriptionLabel.isHidden = descriptionLabel.text?.isEmpty ?? true
         iconImageView.isHidden = iconImageView.image == nil
+
     }
 }
