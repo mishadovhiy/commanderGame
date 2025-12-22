@@ -35,8 +35,8 @@ class DestinationOutMaskedView: UIView {
         }
         let type = self.type
         let blackView = UIView()
-        blackView.backgroundColor = .black
-        blackView.layer.backgroundColor = UIColor.black.withAlphaComponent(type != .borders ? 0.2 : 1).cgColor
+        blackView.backgroundColor = .init(hex: "2C2615")
+        blackView.layer.backgroundColor = UIColor.init(hex: "2C2615").withAlphaComponent(type != .borders ? 0.2 : 1).cgColor
         blackView.layer.name = "blackView"
         blackView.clipsToBounds = true
         addSubview(blackView)
@@ -90,10 +90,10 @@ class ContainerMaskedView: UIView {
     }
     
     struct Constants {
-        static let largeBorderColor: UIColor = .red
-        static let borderColor: UIColor = .white
-        static let secondaryBorderColor: UIColor = .blue
-        static let primaryBorderColor: UIColor = .orange
+        static let largeBorderColor: UIColor = .init(hex: "39311D")
+        static let borderColor: UIColor = .init(hex: "2B2515")
+        static let secondaryBorderColor: UIColor = .init(hex: "7A5E14")
+        static let primaryBorderColor: UIColor = .init(hex: "594C29")
     }
     init(isHorizontal: Bool? = false, type: Type = .multiple) {
         self.isHorizontal = isHorizontal

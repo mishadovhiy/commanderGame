@@ -17,6 +17,7 @@ class LevelDescriptionViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(.init(nibName: .init(describing: TableDataCell.self), bundle: nil), forCellReuseIdentifier: .init(describing: TableDataCell.self))
+        tableView.backgroundColor = ContainerMaskedView.Constants.primaryBorderColor
         selectedLevelUpdated()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }

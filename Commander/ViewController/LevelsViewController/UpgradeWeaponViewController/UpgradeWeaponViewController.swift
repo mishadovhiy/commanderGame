@@ -23,10 +23,19 @@ class UpgradeWeaponViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = ContainerMaskedView.Constants.primaryBorderColor
-        self.view.backgroundColor = .black
+        tableView.superview?.backgroundColor = ContainerMaskedView.Constants.primaryBorderColor
+        self.view.backgroundColor = .init(hex: "2C2615")
         updateTableData()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         loadCellsSeparetor()
+        collectionVIew.layer.borderWidth = 2
+        collectionVIew.layer.borderColor = ContainerMaskedView.Constants.primaryBorderColor.cgColor
+        collectionVIew.superview?.backgroundColor = ContainerMaskedView.Constants.largeBorderColor
+        //ContainerMaskedView.Constants.largeBorderColor
+        collectionVIew.superview?.layer.borderWidth = 2
+        collectionVIew.superview?.layer.borderColor = UIColor.init(hex: "2C2615").cgColor
+        //ContainerMaskedView.Constants.primaryBorderColor.cgColor
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -183,8 +192,8 @@ extension UpgradeWeaponViewController {
         hstack.distribution = .fillEqually
         for _ in 0..<4 {
             let view = UIView()
-            view.backgroundColor = .clear
-            view.layer.borderColor = UIColor.red.cgColor
+            view.backgroundColor = .init(hex: "181715")
+            view.layer.borderColor = ContainerMaskedView.Constants.primaryBorderColor.cgColor
             view.layer.borderWidth = 1
             view.translatesAutoresizingMaskIntoConstraints = false
             view.heightAnchor.constraint(equalToConstant: size).isActive = true
@@ -207,9 +216,10 @@ extension UpgradeWeaponViewController {
                 cellSeparetorHStack(size)
             )
         }
-        collectionVIew.addSubview(vStack)
+        collectionVIew.insertSubview(vStack, at: 0)
         vStack.translatesAutoresizingMaskIntoConstraints = false
         vStack.isUserInteractionEnabled = false
+        vStack.layer.zPosition = -1
         NSLayoutConstraint.activate([
             vStack.leadingAnchor.constraint(equalTo: vStack.superview!.leadingAnchor),
             vStack.topAnchor.constraint(equalTo: vStack.superview!.topAnchor)

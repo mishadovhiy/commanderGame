@@ -55,7 +55,9 @@ extension UIView {
     }
     
     func addDarkOverlay() {
-        addSubview(DestinationOutMaskedView())
+        let view = DestinationOutMaskedView()
+        view.layer.zPosition = 999
+        addSubview(view)
     }
     
     func addBlurView() {

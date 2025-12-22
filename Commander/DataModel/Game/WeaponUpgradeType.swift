@@ -16,6 +16,15 @@ enum WeaponUpgradeType: String, Codable, CaseIterable {
         rawValue.addingSpacesBeforeLargeLetters.capitalized
     }
     
+    var iconName: String {
+        switch self {
+        case .attackPower:
+                "weight"
+        case .distance:
+            "fire"
+        }
+    }
+    
     var maxUpgradeDivider: CGFloat {
         switch self {
         case .attackPower:

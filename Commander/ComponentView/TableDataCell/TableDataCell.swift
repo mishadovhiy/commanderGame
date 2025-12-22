@@ -16,7 +16,7 @@ class TableDataCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectedBackgroundView = .init()
-        backgroundColor = .black
+        backgroundColor = .init(hex: "2C2615")
         contentView.addSubview(ContainerMaskedView(isHorizontal: true))
     }
     

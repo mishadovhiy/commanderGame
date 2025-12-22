@@ -14,6 +14,7 @@ class WeaponTypeCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         contentView.addSubview(ContainerMaskedView(isHorizontal: true))
+        backgroundColor = .init(hex: "2C2615")
     }
     
     func set(_ data: UpgradeWeaponViewController.WeaponTypeModel) {

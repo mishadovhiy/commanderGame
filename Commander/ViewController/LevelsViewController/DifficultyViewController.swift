@@ -16,8 +16,11 @@ class DifficultyViewController: UIViewController {
     var selectedAt: Int? {
         didSet {
             difficultyStackView.arrangedSubviews.forEach { view in
-                UIView.animate(withDuration: 0.3) {
-                    view.backgroundColor = view.tag != self.selectedAt ? .green : .red
+                if view.tag >= 1 {
+                    UIView.animate(withDuration: 0.3) {
+                        view.backgroundColor = view.tag != self.selectedAt ? .init(hex: "2C2615") : ContainerMaskedView.Constants.secondaryBorderColor
+                        view.tintColor = view.tag != self.selectedAt ? .init(hex: "E3E2DF") : .init(hex: "2C2615")
+                    }
                 }
             }
         }
@@ -27,22 +30,22 @@ class DifficultyViewController: UIViewController {
         super.loadView()
         backNavigationButton.isHidden = navigationController?.viewControllers.count == 1
         navigationController?.setNavigationBarHidden(true, animated: true)
-        self.view.backgroundColor = .red
+        self.view.backgroundColor = ContainerMaskedView.Constants.primaryBorderColor
         data.forEach { item in
             let button = UIButton(type: .system)
             button.tag = difficultyStackView.arrangedSubviews.count
             print(item.rawValue as? String, " gterfwdas")
             button.setTitle(item.rawValue as? String, for: .init())
-            button.backgroundColor = .green
+            button.backgroundColor = .init(hex: "2C2615")
+            button.tintColor = .init(hex: "E3E2DF")
             button.layer.name = item.rawValue as? String
             button.addTarget(self, action: #selector(difficultyPressed(_:)), for: .touchUpInside)
             difficultyStackView.addArrangedSubview(button)
             button.addSubview(ContainerMaskedView(isHorizontal: false))
-            button.addSubview(DestinationOutMaskedView())
 
         }
         print(difficultyStackView.arrangedSubviews.count, " egrfwdas")
-        difficultyStackView.backgroundColor = .orange
+        difficultyStackView.backgroundColor = ContainerMaskedView.Constants.primaryBorderColor
     }
     
     @objc private func difficultyPressed(_ sender: UIButton) {
