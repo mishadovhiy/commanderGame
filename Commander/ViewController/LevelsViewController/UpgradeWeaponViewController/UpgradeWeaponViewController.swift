@@ -24,7 +24,7 @@ class UpgradeWeaponViewController: UIViewController {
         tableView.dataSource = self
         tableView.backgroundColor = ContainerMaskedView.Constants.primaryBorderColor
         tableView.superview?.backgroundColor = ContainerMaskedView.Constants.primaryBorderColor
-        self.view.backgroundColor = .init(hex: "2C2615")
+        self.view.backgroundColor = .dark
         updateTableData()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         loadCellsSeparetor()
@@ -33,7 +33,7 @@ class UpgradeWeaponViewController: UIViewController {
         collectionVIew.superview?.backgroundColor = ContainerMaskedView.Constants.largeBorderColor
         //ContainerMaskedView.Constants.largeBorderColor
         collectionVIew.superview?.layer.borderWidth = 2
-        collectionVIew.superview?.layer.borderColor = UIColor.init(hex: "2C2615").cgColor
+        collectionVIew.superview?.layer.borderColor = UIColor.dark.cgColor
         //ContainerMaskedView.Constants.primaryBorderColor.cgColor
         
     }

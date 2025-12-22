@@ -18,8 +18,8 @@ class DifficultyViewController: UIViewController {
             difficultyStackView.arrangedSubviews.forEach { view in
                 if view.tag >= 1 {
                     UIView.animate(withDuration: 0.3) {
-                        view.backgroundColor = view.tag != self.selectedAt ? .init(hex: "2C2615") : ContainerMaskedView.Constants.secondaryBorderColor
-                        view.tintColor = view.tag != self.selectedAt ? .init(hex: "E3E2DF") : .init(hex: "2C2615")
+                        view.backgroundColor = view.tag != self.selectedAt ? .dark : ContainerMaskedView.Constants.secondaryBorderColor
+                        view.tintColor = view.tag != self.selectedAt ? .init(hex: "E3E2DF") : .dark
                     }
                 }
             }
@@ -36,7 +36,7 @@ class DifficultyViewController: UIViewController {
             button.tag = difficultyStackView.arrangedSubviews.count
             print(item.rawValue as? String, " gterfwdas")
             button.setTitle(item.rawValue as? String, for: .init())
-            button.backgroundColor = .init(hex: "2C2615")
+            button.backgroundColor = .dark
             button.tintColor = .init(hex: "E3E2DF")
             button.layer.name = item.rawValue as? String
             button.addTarget(self, action: #selector(difficultyPressed(_:)), for: .touchUpInside)
