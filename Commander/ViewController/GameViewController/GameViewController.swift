@@ -22,7 +22,12 @@ class GameViewController: UIViewController {
     override func loadView() {
         super.loadView()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        loadUI()
+        loadScene()
+        loadWeapons()
+        weaponTableView.register(.init(nibName: .init(describing: TableDataCell.self), bundle: nil), forCellReuseIdentifier: .init(describing: TableDataCell.self))
+        weaponTableView.delegate = self
+        weaponTableView.dataSource = self
+        didSetEditingWeaponNode()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -54,12 +59,23 @@ class GameViewController: UIViewController {
     }
     
     @IBAction private func speedPressed(_ sender: UIButton) {
-        if sender.tag == 3 {
+        if sender.tag == 2 {
             sender.tag = 0
         } else {
             sender.tag += 1
         }
         gameScene?.speed = 1 + CGFloat(sender.tag)
+        switch sender.tag {
+        case 1:
+            sender.setImage(.speed2, for: .init())
+            sender.tintColor = .dark
+        case 2:
+            sender.setImage(.speed, for: .init())
+            sender.tintColor = .dark
+        default:
+            sender.setImage(.speed, for: .init())
+            sender.tintColor = .dark.withAlphaComponent(0.35)
+        }
     }
     
     @IBAction private func menuPressed(_ sender: Any) {
@@ -68,6 +84,7 @@ class GameViewController: UIViewController {
     
     @IBAction private func playPausePressed(_ sender: UIButton) {
         gameScene?.isPaused.toggle()
+        sender.setImage((gameScene?.isPaused ?? false) ? .play : .pause, for: .init())
     }
     
     @IBAction private func hideButtonsPressed(_ sender: UIButton) {
@@ -149,6 +166,8 @@ class GameViewController: UIViewController {
     @IBAction private func upgradeWeaponPressed(_ sender: Any) {
         print((editingWeapon?.upgrade?.index ?? -1) + 1, " yh5rtegfd")
         editingWeapon?.upgrade = .allCases[(editingWeapon?.upgrade?.index ?? -1) + 1]
+        editingWeapon?.isEditing = false
+        didSetEditingWeaponNode()
     }
 
     @IBAction private func deleteWeaponPressed(_ sender: Any) {
@@ -159,7 +178,7 @@ class GameViewController: UIViewController {
     public func didSetEditingWeaponNode() {
         self.view.isUserInteractionEnabled = false
         UIView.animate(withDuration: 0.3, animations: {
-            self.editingWeaponImageView.superview?.isHidden = self.editingWeapon == nil
+            self.editingWeaponImageView.superview?.superview?.isHidden = self.editingWeapon == nil
             if let type = self.editingWeapon?.type {
                 self.editingWeaponImageView.image = .init(named: type.rawValue)
                 let canUpgrade = self.editingWeapon?.canUpgrade ?? true
@@ -182,14 +201,6 @@ class GameViewController: UIViewController {
 
 fileprivate
 extension GameViewController {
-    func loadUI() {
-        loadScene()
-        loadWeapons()
-        weaponTableView.register(.init(nibName: .init(describing: TableDataCell.self), bundle: nil), forCellReuseIdentifier: .init(describing: TableDataCell.self))
-        weaponTableView.delegate = self
-        weaponTableView.dataSource = self
-    }
-    
     func loadScene() {
         if let view = view as! SKView? {
             let scene = GameScene.configure(lvl: .init(.test))

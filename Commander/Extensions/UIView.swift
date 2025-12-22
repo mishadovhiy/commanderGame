@@ -37,6 +37,15 @@ extension UIView {
         }
     }
     
+    @IBInspectable var cornerRaious: CGFloat {
+        get {
+            layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
+        }
+    }
+    
     @IBInspectable var hasContainer: Bool {
         get {
             layer.name?.contains("hasContainer") ?? false
