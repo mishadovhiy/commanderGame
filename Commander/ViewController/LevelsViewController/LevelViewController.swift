@@ -54,6 +54,7 @@ class LevelViewController: UIViewController {
         print("ferwdasx ", view.frame.size)
         updateButtonsConstraints()
         drawLevelGround()
+
     }
     #warning("refactor")
     func updateButtonsConstraints() {
@@ -71,10 +72,11 @@ class LevelViewController: UIViewController {
                 }
                 
             }
-            view.setNeedsLayout()
-            view.layoutSubviews()
-            self.updateViewConstraints()
-            view.updateConstraints()
+            UIView.animate(withDuration: 0.2, animations: {
+                self.view.setNeedsLayout()
+            }, completion: { _ in
+
+            })
             return
         }
         view.subviews.forEach { view in
@@ -90,10 +92,11 @@ class LevelViewController: UIViewController {
             view.layoutSubviews()
             view.updateConstraints()
         }
-        view.setNeedsLayout()
-        view.layoutSubviews()
-        self.updateViewConstraints()
-        view.updateConstraints()
+        UIView.animate(withDuration: 0.2, animations: {
+            self.view.setNeedsLayout()
+        }, completion: { _ in
+
+        })
     }
     
     func loadLevelButtons() {
@@ -119,8 +122,16 @@ class LevelViewController: UIViewController {
         }
     }
     
+    private var parentVC: LevelListSuperViewController? {
+        parent?.parent as? LevelListSuperViewController
+    }
+    
     @objc func didSelectLevel(_ sender: UIButton) {
-        (parent?.parent as? LevelListSuperViewController)!.selectedLevel = .init(level: data.levels[sender.tag].title, levelPage: (parent?.parent as? LevelListSuperViewController)!.selectedLevel.levelPage)
+        let selectedHolder = parentVC?.selectedLevel
+        parentVC?.selectedLevel = .init(
+            level: data.levels[sender.tag].title,
+            levelPage: parentVC!.selectedLevel.levelPage)
+        parentVC?.homeParentVC?.setMap(for: parentVC?.homeParentVC?.currentPage, animated: false)
     }
 }
 

@@ -171,6 +171,7 @@ extension LevelListSuperViewController {
                 didSelect: { value in
                     self.selectedLevel.difficulty = .init(rawValue: value)
                     self.toGameDurationPicker()
+
                 })
         let nav = UINavigationController(
             rootViewController: rootVC)

@@ -25,20 +25,34 @@ class HomeViewController: UIViewController {
         self.view.addSubview(DestinationOutMaskedView(type: .borders))
         blackSafeAreaMaskOverlayView?.alpha = 0
     }
+    private var levelAnimating: Bool = false
     var currentPage: LevelPagesBuilder?
     public func setMap(for page: LevelPagesBuilder?, animated: Bool = true,
                        completion:@escaping()->() = {}) {
-        self.currentPage = page
+        if page != nil {
+            self.currentPage = page
+        }
+        if levelAnimating {
+            return
+        }
         let page = self.startView.isHidden ? page : nil
         print(page?.zoom, " hfgdfsfgd", page?.title, " yhtgrf", mapImageView.frame.origin)
+        self.levelAnimating = true
+
         if mapImageView.frame.origin != .zero,
             page != nil,
             animated {
             self.performSetMap(for: nil, animated: animated, completion: {
-                self.performSetMap(for: page, animated: animated, completion: completion)
+                self.performSetMap(for: page, animated: animated, completion: {
+                    completion()
+                    self.levelAnimating = false
+                })
             })
         } else {
-            self.performSetMap(for: page, animated: animated, completion: completion)
+            self.performSetMap(for: page, animated: animated, completion: {
+                completion()
+                self.levelAnimating = false
+            })
         }
         
     }

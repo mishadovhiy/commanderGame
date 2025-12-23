@@ -43,18 +43,20 @@ extension LevelsPageViewController: UIPageViewControllerDataSource, UIPageViewCo
     
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         let page = pageViewController.viewControllers?.first?.view.tag ?? 1
+        print("willTransitionTowillTransitionTo ", page)
         parentVC?.selectedLevel = .init(levelPage: "\(page)")
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         let index = pageViewController.viewControllers?.first?.view.tag ?? 0
-        if !completed {
-            return
-        }
+        print("dfsdasdfd completed", completed, " finished ", finished, "indexx", index)
         if finished {
             parentVC?.selectedLevel = .init(levelPage: "\(index + 1)")
             parentVC?.homeParentVC?.setMap(for: pageData[index])
         }
+//        if !completed {
+//            return
+//        }
     }
         
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
