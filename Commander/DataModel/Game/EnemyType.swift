@@ -23,13 +23,30 @@ enum EnemyType: String {
     case armouredVehicle
     case flightVehicle
     
-    var imageName: String {
-        if let image: UIImage = .init(named: rawValue) {
-            return rawValue
-        }
+    var component: Component {
         return Component.allCases.first(where: {
             self.rawValue.lowercased().contains($0.rawValue)
-        })!.rawValue
+        })!
+    }
+    
+    var assetAnimations: AssetAnimation {
+        switch component {
+        case .soldeir:
+                .init(run: 7, die: 5, damaged: 0)
+        case .flight:
+                .init(run: 1, die: 0, damaged: 1)
+        case .tank:
+                .init(run: 1, die: 0, damaged: 2)
+        case .vehicle:
+                .init(run: 1, die: 0, damaged: 4)
+        }
+    }
+    
+    struct AssetAnimation {
+        /// maximum number of assets during run
+        let run: Int
+        let die: Int
+        let damaged: Int
     }
     
     enum Component: String, CaseIterable {

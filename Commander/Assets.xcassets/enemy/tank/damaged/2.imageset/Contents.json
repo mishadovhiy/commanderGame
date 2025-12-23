@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "tankDamaged2.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

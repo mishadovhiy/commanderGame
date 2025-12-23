@@ -16,14 +16,23 @@ class EnemyNode: SKSpriteNode {
         self.type = type
         self.health = (type.health * builder.enemyHealthMult) * 3
         self.totalHealth = health
-        super.init(texture: .init(imageNamed: "enemy/" + type.imageName), color: .clear, size: CGSize(width: 20, height: 20))
+        super.init(texture: .init(imageNamed: "enemy/" + type.component.rawValue + "/1"), color: .clear, size: CGSize(width: 20, height: 20))
         self.name = .init(describing: Self.self)
         self.physicsBody = .init(rectangleOf: size)
         self.physicsBody?.categoryBitMask = PhysicsCategory.enemy
         self.physicsBody?.contactTestBitMask = PhysicsCategory.weapon | PhysicsCategory.bullet
         self.physicsBody?.collisionBitMask = 0
         self.physicsBody?.affectedByGravity = false
-        
+        let assets = type.assetAnimations
+        if assets.run > 1 {
+            let textures: [SKTexture] = Array(1..<assets.run)
+                .compactMap({
+                    let name = "enemy/" + type.component.rawValue
+                    return .init(imageNamed: name + "/\($0)")
+            })
+            let action = SKAction.animate(with: textures, timePerFrame: 0.1)
+            self.run(.repeatForever(action))
+        }
         let progress = SKSpriteNode(texture: nil, color: .green, size: .init(width: self.size.width, height: 4))
         progress.name = "progress"
         progress.position = .init(x: 0, y: self.size.height / -2 - 3)
@@ -45,10 +54,14 @@ class EnemyNode: SKSpriteNode {
         print(bullet.damage, " ", health)
 
         health -= bullet.damage
-        let new = CGFloat(health) / CGFloat(totalHealth)
-        if new > 0 {
-            progress.size = .init(width: self.size.width * new, height: 4)
-            
+        let newPercent = CGFloat(health) / CGFloat(totalHealth)
+        if newPercent > 0 {
+            progress.size = .init(width: self.size.width * newPercent, height: 4)
+            let assets = type.assetAnimations
+            if assets.damaged >= 1 {
+                let newAssetIndex = CGFloat(assets.damaged) * newPercent
+                print(newAssetIndex.rounded(.toNearestOrEven), " vhyjbuknj ")
+            }
             let explosure = SKSpriteNode(texture: .init(image: .hit), size: .init(width: 15, height: 15))
             explosure.alpha = 0.5
             addChild(explosure)
