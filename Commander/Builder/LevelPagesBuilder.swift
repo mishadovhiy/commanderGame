@@ -22,7 +22,7 @@ struct LevelPagesBuilder: Equatable {
 extension [LevelPagesBuilder] {
     static var allData: Self {
         [
-            .init(title: "1", zoom: 3.5, mapPosition: .init(x: -0.4, y: -0.8), levels: [
+            .init(title: "1", zoom: 4.5, mapPosition: .init(x: -0.5, y: -0.1), levels: [
                 .init(position:
                         .init(x: 0.08, y: 0.2),
                       title: "11"),
@@ -51,15 +51,15 @@ extension [LevelPagesBuilder] {
                         .init(x: 0.95, y: 0.6),
                       title: "19"),
                 .init(position:
-                        .init(x: 0.84, y: 0.75),
+                        .init(x: 0.7, y: 0.75),
                       title: "20"),
                 .init(position:
                         .init(x: 0.36, y: 0.62),
                       title: "21")
             ]),
-            .init(title: "2", zoom: 2.5, mapPosition: .init(x: -1.2, y: -0.5), levels: [
+            .init(title: "2", zoom: 2.4, mapPosition: .init(x: -1.1, y: 0.1), levels: [
                 .init(position:
-                        .init(x: 0.12, y: 0.15),
+                        .init(x: 0.12, y: 0.16),
                       title: "201"),
                 .init(position:
                         .init(x: 0.08, y: 0.361),
@@ -68,16 +68,16 @@ extension [LevelPagesBuilder] {
                         .init(x: 0.24, y: 0.363),
                       title: "203"),
                 .init(position:
-                        .init(x: 0.09, y: 0.63),
+                        .init(x: 0.15, y: 0.63),
                       title: "204"),
                 .init(position:
-                        .init(x: 0.4, y: 0.54),
+                        .init(x: 0.46, y: 0.54),
                       title: "205"),
                 .init(position:
-                        .init(x: 0.5, y: 0.08),
+                        .init(x: 0.4, y: 0.2),
                       title: "206"),
                 .init(position:
-                        .init(x: 0.66, y: 0.18),
+                        .init(x: 0.66, y: 0.33),
                       title: "207"),
                 .init(position:
                         .init(x: 0.83, y: 0.167),
@@ -95,7 +95,7 @@ extension [LevelPagesBuilder] {
                         .init(x: 0.3, y: 0.85),
                       title: "212")
             ]),
-            .init(title: "3", zoom: 4.5, mapPosition: .init(x: -3.2, y: -3.4), levels: [
+            .init(title: "3", zoom: 5.5, mapPosition: .init(x: -4.2, y: -3.2), levels: [
                 .init(position:
                         .init(x: 0.2, y: 0.6),
                       title: "301"),

@@ -55,6 +55,7 @@ class LevelListSuperViewController: UIViewController {
             if selectedLevel.difficulty == nil {
                 (bottomPanelNavigation?.viewControllers.first as? DifficultyViewController)?.selectedAt = nil
             }
+
             UIView.animate(withDuration: 0.3, animations: {
                 if hide != self.bottomPanelStackView?.isHidden {
                     self.bottomPanelStackView?.isHidden = hide
@@ -63,6 +64,7 @@ class LevelListSuperViewController: UIViewController {
                     self.startButton.isHidden = hideStart
                 }
             }, completion: { _ in
+                self.homeParentVC?.setMap(for: self.homeParentVC?.currentPage, animated: false)
             })
         }
     }

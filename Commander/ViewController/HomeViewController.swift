@@ -25,25 +25,31 @@ class HomeViewController: UIViewController {
         self.view.addSubview(DestinationOutMaskedView(type: .borders))
         blackSafeAreaMaskOverlayView?.alpha = 0
     }
-    
-    public func setMap(for page: LevelPagesBuilder?,
+    var currentPage: LevelPagesBuilder?
+    public func setMap(for page: LevelPagesBuilder?, animated: Bool = true,
                        completion:@escaping()->() = {}) {
+        self.currentPage = page
         let page = self.startView.isHidden ? page : nil
-        print(page?.zoom, " rtegrf", page?.title, " yhtgrf", mapImageView.frame.origin)
-        if mapImageView.frame.origin != .zero && page != nil {
-            self.performSetMap(for: nil, completion: {
-                self.performSetMap(for: page, completion: completion)
+        print(page?.zoom, " hfgdfsfgd", page?.title, " yhtgrf", mapImageView.frame.origin)
+        if mapImageView.frame.origin != .zero,
+            page != nil,
+            animated {
+            self.performSetMap(for: nil, animated: animated, completion: {
+                self.performSetMap(for: page, animated: animated, completion: completion)
             })
         } else {
-            self.performSetMap(for: page, completion: completion)
+            self.performSetMap(for: page, animated: animated, completion: completion)
         }
         
     }
     
     private func performSetMap(for page: LevelPagesBuilder?,
+                               animated: Bool,
                                completion:@escaping()->() = {}) {
         let viewSize = view.frame.size
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
+            self.view.backgroundColor = page == nil ? .dark : .container
+            self.view.tintColor = page == nil ? .accent : .white
             print(self.mapImageView.frame.origin, " htref")
             self.mapImageView.transform = CGAffineTransform(scaleX: page?.zoom ?? 1, y: page?.zoom ?? 1)
             print(self.mapImageView.frame.origin, " trefdw")
@@ -64,7 +70,7 @@ class HomeViewController: UIViewController {
             self.startView.isHidden = startPressed
             self.blackSafeAreaMaskOverlayView?.alpha = startPressed ? 1 : 0
         }, completion: { _ in
-            self.setMap(for: [LevelPagesBuilder].allData.first)
+            self.setMap(for: self.currentPage ?? [LevelPagesBuilder].allData.first)
         })
     }
     
