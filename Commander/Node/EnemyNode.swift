@@ -11,7 +11,11 @@ class EnemyNode: SKSpriteNode {
     let type: EnemyType
     var health: Int
     var totalHealth: Int
-    
+    struct Constants {
+        enum ActionNames: String {
+            case run
+        }
+    }
     init(type: EnemyType, builder: GameBuilderModel) {
         self.type = type
         self.health = (type.health * builder.enemyHealthMult) * 3
@@ -31,7 +35,7 @@ class EnemyNode: SKSpriteNode {
                     return .init(imageNamed: name + "/\($0)")
             })
             let action = SKAction.animate(with: textures, timePerFrame: 0.1)
-            self.run(.repeatForever(action))
+            self.run(.repeatForever(action), withKey: Constants.ActionNames.run.rawValue)
         }
         let progress = SKSpriteNode(texture: nil, color: .green, size: .init(width: self.size.width, height: 4))
         progress.name = "progress"
@@ -60,7 +64,10 @@ class EnemyNode: SKSpriteNode {
             let assets = type.assetAnimations
             if assets.damaged >= 1 {
                 let newAssetIndex = CGFloat(assets.damaged) * newPercent
-                print(newAssetIndex.rounded(.toNearestOrEven), " vhyjbuknj ")
+                let newIndex = newAssetIndex.rounded(.toNearestOrEven)
+                self.texture = .init(
+                    imageNamed: "enemy/" + type.component.rawValue + "/damaged/" + "\(newIndex)"
+                )
             }
             let explosure = SKSpriteNode(texture: .init(image: .hit), size: .init(width: 15, height: 15))
             explosure.alpha = 0.5
@@ -91,13 +98,35 @@ class EnemyNode: SKSpriteNode {
         addChild(explosure)
         explosure.run(.scale(to: 10, duration: 0.2))
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
-            self.texture = nil
-            explosure.run(.fadeOut(withDuration: 0.3))
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
-                explosure.removeFromParent()
-                super.removeFromParent()
-            })
+            self.performDieAnimation {
+                self.texture = nil
+                explosure.run(.fadeOut(withDuration: 0.3))
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+                    explosure.removeFromParent()
+                    super.removeFromParent()
+                })
+            }
         })
+    }
+    
+    private func performDieAnimation(
+        completion: @escaping()->()) {
+            let assets = type.assetAnimations
+            if assets.die >= 1 {
+                self.removeAction(
+                    forKey: Constants.ActionNames.run.rawValue)
+                let textures: [SKTexture] = Array(1..<assets.die)
+                    .compactMap({
+                        let name = "enemy/" + type.component.rawValue
+                        return .init(imageNamed: name + "/die" + "/\($0)")
+                })
+                let action = SKAction.animate(with: textures, timePerFrame: 0.2)
+                self.run(action) {
+                    completion()
+                }
+            } else {
+                completion()
+            }
     }
     
     required init?(coder aDecoder: NSCoder) {
