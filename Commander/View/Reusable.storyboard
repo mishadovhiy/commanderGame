@@ -14,28 +14,44 @@
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="AlertViewController" id="Y6W-OH-hqX" customClass="AlertViewController" customModule="Commander" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="852" height="393"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXy-Wz-U5i">
-                                <rect key="frame" x="59" y="59" width="734" height="334"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JXy-Wz-U5i">
+                                <rect key="frame" x="201" y="96.666666666666686" width="450" height="200"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aeW-uj-Hhd">
-                                        <rect key="frame" x="0.0" y="0.0" width="734" height="334"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aeW-uj-Hhd">
+                                        <rect key="frame" x="0.0" y="0.0" width="650" height="350"/>
                                         <subviews>
                                             <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EAb-0Y-VcY">
-                                                <rect key="frame" x="0.0" y="0.0" width="734" height="284"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="650" height="300"/>
                                             </containerView>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="23M-ip-mbf">
-                                                <rect key="frame" x="0.0" y="284" width="734" height="50"/>
+                                                <rect key="frame" x="0.0" y="300" width="650" height="50"/>
                                             </stackView>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mla-dR-n8S">
+                                        <rect key="frame" x="375" y="0.0" width="75" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="JUa-kH-CX6"/>
+                                            <constraint firstAttribute="width" constant="75" id="gqk-dn-ZQi"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Close"/>
+                                        <connections>
+                                            <action selector="dismissDidPress:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="euS-QW-gLo"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="aeW-uj-Hhd" firstAttribute="top" secondItem="JXy-Wz-U5i" secondAttribute="top" id="2xh-Xw-3f5"/>
+                                    <constraint firstItem="mla-dR-n8S" firstAttribute="top" secondItem="aeW-uj-Hhd" secondAttribute="top" id="Zbd-rM-TT4"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="350" id="hMd-5q-4b3"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="350" id="hfv-m6-kSP"/>
+                                    <constraint firstItem="mla-dR-n8S" firstAttribute="trailing" secondItem="aeW-uj-Hhd" secondAttribute="trailing" id="iSr-sl-Sx6"/>
                                     <constraint firstItem="aeW-uj-Hhd" firstAttribute="leading" secondItem="JXy-Wz-U5i" secondAttribute="leading" id="pyO-ND-WTY"/>
                                     <constraint firstAttribute="trailing" secondItem="aeW-uj-Hhd" secondAttribute="trailing" id="rQo-32-SVB"/>
                                     <constraint firstAttribute="bottom" secondItem="aeW-uj-Hhd" secondAttribute="bottom" id="yzW-Ld-98w"/>
@@ -45,14 +61,17 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="JXy-Wz-U5i" secondAttribute="bottom" id="2Yn-pW-nwk"/>
-                            <constraint firstItem="JXy-Wz-U5i" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="M6h-8M-UeH"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="JXy-Wz-U5i" secondAttribute="trailing" id="jRw-p5-EES"/>
-                            <constraint firstItem="JXy-Wz-U5i" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="vsi-sx-Sxx"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="JXy-Wz-U5i" secondAttribute="bottom" constant="10" id="1Fe-hP-VEo"/>
+                            <constraint firstItem="JXy-Wz-U5i" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="leading" id="M6h-8M-UeH"/>
+                            <constraint firstItem="JXy-Wz-U5i" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="Z6W-bY-qaH"/>
+                            <constraint firstItem="JXy-Wz-U5i" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="cfD-Uj-AI9"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JXy-Wz-U5i" secondAttribute="trailing" id="jRw-p5-EES"/>
+                            <constraint firstItem="JXy-Wz-U5i" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="vsi-sx-Sxx"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="buttonsStackView" destination="23M-ip-mbf" id="AYF-iC-dy8"/>
+                        <outlet property="closeButton" destination="mla-dR-n8S" id="wuM-ng-WHI"/>
                         <outlet property="containerView" destination="EAb-0Y-VcY" id="yev-lh-edO"/>
                     </connections>
                 </viewController>

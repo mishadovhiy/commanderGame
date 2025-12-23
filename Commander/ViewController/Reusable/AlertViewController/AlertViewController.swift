@@ -9,6 +9,7 @@ import UIKit
 
 class AlertViewController: UIViewController {
     
+    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var buttonsStackView: UIStackView!
     
@@ -46,6 +47,10 @@ class AlertViewController: UIViewController {
         } else if let dataModel = action?.toAlert {
             childNav?.pushViewController(containerVC(dataModel()), animated: true)
         }
+    }
+    
+    @IBAction func dismissDidPress(_ sender: UIButton) {
+        self.dismiss(animated: true)
     }
 }
 
