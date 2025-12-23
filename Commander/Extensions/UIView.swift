@@ -171,8 +171,8 @@ extension UICollectionViewCell {
 }
 
 extension UIViewController {
-    static func initiateDefault() -> Self {
-        let vc = UIStoryboard(name: "Main", bundle: nil)
+    static func initiateDefault(_ storyboardName: String = "Main") -> Self {
+        let vc = UIStoryboard(name: storyboardName, bundle: nil)
             .instantiateViewController(
                 withIdentifier: .init(
                     describing: Self.self
@@ -181,6 +181,34 @@ extension UIViewController {
         vc.modalTransitionStyle = .flipHorizontal
         vc.modalPresentationStyle = .overFullScreen
         return vc
+    }
+    
+    func present(vc: UIViewController,
+                 completion: @escaping()->() = {}) {
+        if let presentedVC = self.presentedViewController {
+            presentedVC.present(vc: vc, completion: completion)
+        } else {
+            self.present(vc, animated: true, completion: completion)
+        }
+    }
+}
+
+extension UIApplication {
+    var activeWindow: UIWindow? {
+        if #available(iOS 13.0, *) {
+            if let windowScene = self.connectedScenes
+                .first(where: {
+                    $0.activationState == .foregroundActive
+                }) as? UIWindowScene {
+                
+                if let keyWindow = windowScene.windows.first(where: {
+                    $0.isKeyWindow
+                }) {
+                    return keyWindow
+                }
+            }
+        }
+        return UIApplication.shared.keyWindow
     }
 }
 
