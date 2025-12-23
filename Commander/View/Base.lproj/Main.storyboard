@@ -70,7 +70,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qfa-jB-3Uj"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="darkColor"/>
                         <constraints>
                             <constraint firstItem="qfa-jB-3Uj" firstAttribute="trailing" secondItem="v6F-8V-Zuz" secondAttribute="trailing" id="1cX-Lr-bDB"/>
                             <constraint firstAttribute="bottom" secondItem="edp-AQ-Hal" secondAttribute="bottom" id="Pog-1C-HWc"/>
@@ -1097,7 +1097,7 @@
         <image name="arrowshape.right.fill" catalog="system" width="128" height="104"/>
         <image name="coin" width="512" height="512"/>
         <image name="fire" width="50" height="50"/>
-        <image name="map" width="4167" height="2605"/>
+        <image name="map" width="2714" height="1374"/>
         <image name="menu" width="512" height="512"/>
         <image name="pause" width="512" height="512"/>
         <image name="speed" width="86" height="71"/>
