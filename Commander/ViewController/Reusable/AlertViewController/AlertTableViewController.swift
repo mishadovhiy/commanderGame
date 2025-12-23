@@ -22,8 +22,10 @@ class AlertTableViewController: UIViewController, AlertChildProtocol {
     }
     
     @objc func sliderDidChange(_ sender: UISlider) {
-        let array = dataModel?.type.data as? [AlertModel.SegmentedCellModel]
+        var array = dataModel?.type.data as? [AlertModel.SegmentedCellModel]
         array?[sender.tag].segmentedChanged(CGFloat(sender.value))
+        array?[sender.tag].segmentValue = CGFloat(sender.value)
+        dataModel?.type = .tableView(array!)
     }
 }
 

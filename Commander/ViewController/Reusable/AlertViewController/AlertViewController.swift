@@ -44,7 +44,7 @@ class AlertViewController: UIViewController {
         if let action = action?.didPress {
             action()
         } else if let dataModel = action?.toAlert {
-            childNav?.pushViewController(containerVC(dataModel), animated: true)
+            childNav?.pushViewController(containerVC(dataModel()), animated: true)
         }
     }
 }

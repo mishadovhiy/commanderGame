@@ -89,7 +89,9 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func settingsDidPress(_ sender: Any) {
-        UIApplication.shared.activeWindow?.rootViewController?.present(vc: AlertViewController.initiate(data: .settings))
+        UIApplication.shared.activeWindow?.rootViewController?.present(vc: AlertViewController.initiate(
+            data: .settings)
+        )
     }
     
     @IBAction private func startDidPress(_ sender: Any) {

@@ -14,9 +14,19 @@ class AlertSegmentedTableCell: UITableViewCell {
     
     @IBOutlet weak var segmentedView: UISlider!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        segmentedView.addTarget(self, action: #selector(sliderChanged(_:)), for: .valueChanged)
+    }
+    
+    @objc private func sliderChanged(_ sender: UISlider) {
+        valueLabel.text = "\(sender.value * 100)"
+    }
+    
     func set(data: AlertModel.SegmentedCellModel) {
-        valueLabel.text = "\(data.segmentValue * 100)"
         titleLabel.text = data.title
+        segmentedView.value = Float(data.segmentValue)
+        sliderChanged(segmentedView)
     }
 
 }

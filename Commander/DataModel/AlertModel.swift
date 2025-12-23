@@ -10,7 +10,7 @@ import Foundation
 struct AlertModel {
     let title: String
     
-    let type: ViewControllerType
+    var type: ViewControllerType
     let buttons: [ButtonModel]
     
     enum ViewControllerType {
@@ -29,11 +29,12 @@ struct AlertModel {
     
     struct SegmentedCellModel: AlertCellModel {
         let title: String
-        let segmentValue: CGFloat
+        var segmentValue: CGFloat
         let segmentedChanged: (_ newValue: CGFloat)->()
     }
     
     struct TitleCellModel: AlertCellModel {
+        
         let button: ButtonModel?
         private let unselectableTitle: String?
         
@@ -50,11 +51,11 @@ struct AlertModel {
     struct ButtonModel {
         let title: String
         let didPress: (()->())?
-        let toAlert: AlertModel?
+        let toAlert: (()->(AlertModel))?
         
         init(title: String,
              didPress: (() -> Void)? = nil,
-             toAlert: AlertModel? = nil) {
+             toAlert: (()->(AlertModel))? = nil) {
             self.title = title
             self.didPress = didPress
             self.toAlert = toAlert
@@ -71,28 +72,37 @@ protocol AlertCellModel {
 }
 
 extension AlertModel {
-    
-    #warning("refactor: ini [SegmentedCellModel] from dictionary")
-    static var soundSettings: Self {
-        var dict = try? DataBaseService.db.settings.sound.voluem.dictionary() ?? [:]
-        
-        return .init(title: "Sound", type: .tableView(
-            dict?.keys.compactMap({ key in
-                Self.SegmentedCellModel(
-                    title: key,
-                    segmentValue: dict?[key] as? CGFloat ?? 0) { newValue in
-                        dict?.updateValue(newValue, forKey: key)
-                        DispatchQueue(label: "db", qos: .userInitiated).async {
-                            DataBaseService.db.settings.sound.voluem = try! .init(JSONSerialization.data(withJSONObject: dict ?? [:], options: []))
-                        }
-                    }
-            }) ?? []
-        ), buttons: [])
-    }
-    
     static var settings: Self {
         return .init(title: "Settings", type: .collectionView([
-            Self.TitleCellModel.init(button: .init(title: "Sound", toAlert: soundSettings))
+            AlertModel.TitleCellModel(button: .init(title: "Sound", toAlert: {
+                .init(title: "Sound", type: .soundSettingsData, buttons: [])
+            }))
         ]), buttons: [])
+    }
+}
+
+extension AlertModel.ViewControllerType {
+    static var soundSettingsData: Self {
+        var dict = try! DataBaseService.db.settings.sound.voluem.dictionary()
+        return .dict(dict: dict, didUpdate: { newValue in
+            DispatchQueue(label: "db", qos: .userInitiated).async {
+                DataBaseService.db.settings.sound.voluem = try! .init(JSONSerialization.data(withJSONObject: newValue ?? [:], options: []))
+            }
+        })
+    }
+    
+    static func dict(dict: [String:Any?]?, didUpdate:@escaping([String:Any?]?)->()) -> Self {
+        var dict = dict
+        return .tableView(
+            dict?.keys.compactMap({ key in
+                AlertModel.SegmentedCellModel(title: key, segmentValue: dict?[key] as? CGFloat ?? 0) { newValue in
+                    dict?.updateValue(newValue, forKey: key)
+                    didUpdate(dict)
+//                    DispatchQueue(label: "db", qos: .userInitiated).async {
+//                        DataBaseService.db.settings.sound.voluem = try! .init(JSONSerialization.data(withJSONObject: dict ?? [:], options: []))
+//                    }
+                }
+            }) ?? []
+        )
     }
 }
