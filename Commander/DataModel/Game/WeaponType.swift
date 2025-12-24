@@ -31,6 +31,13 @@ enum WeaponType: String, Codable, CaseIterable {
             15
         }
     }
+    
+    var hasBullet: Bool {
+        switch self {
+        case .granata: true
+        default: false
+        }
+    }
     //upgradePrice
     
     var upgradeStepPrice: Int {

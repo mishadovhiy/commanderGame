@@ -14,7 +14,14 @@ class BulletNode: SKSpriteNode {
     init(armour: WeaponNode) {
         self.damage = armour.damage
         self.armour = armour
-        super.init(texture: nil, color: .blue, size: .init(width: 10, height: 10))
+        let texture: SKTexture?
+        if armour.type.hasBullet {
+            print("hasasasd")
+            texture = .init(imageNamed: "bullet/" + armour.type.rawValue)
+        } else {
+            texture = nil
+        }
+        super.init(texture: texture, color: .blue, size: .init(width: 10, height: 10))
         self.physicsBody = .init(rectangleOf: .init(width: 10, height: 10))
         self.physicsBody?.categoryBitMask = PhysicsCategory.bullet
         self.physicsBody?.contactTestBitMask = PhysicsCategory.enemy
