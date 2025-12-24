@@ -21,6 +21,7 @@ class HomeViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+        mapImageView.translatesAutoresizingMaskIntoConstraints = false
         loadLevelListChild()
         self.view.addSubview(DestinationOutMaskedView(type: .borders))
         blackSafeAreaMaskOverlayView?.alpha = 0
@@ -64,9 +65,7 @@ class HomeViewController: UIViewController {
         UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
             self.view.backgroundColor = page == nil ? .dark : .container
             self.view.tintColor = page == nil ? .accent : .white
-            print(self.mapImageView.frame.origin, " htref")
             self.mapImageView.transform = CGAffineTransform(scaleX: page?.zoom ?? 1, y: page?.zoom ?? 1)
-            print(self.mapImageView.frame.origin, " trefdw")
             self.mapImageView.frame.origin.x = (page?.mapPosition.x ?? 0) * viewSize.width
             self.mapImageView.frame.origin.y = (page?.mapPosition.y ?? 0) * viewSize.height
 

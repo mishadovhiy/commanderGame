@@ -10,6 +10,9 @@ import SpriteKit
 
 class GameViewController: UIViewController {
     
+    @IBOutlet weak var healthLabel: UILabel!
+    @IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak var roundLabel: UILabel!
     @IBOutlet private weak var upgradeWeaponButton: UIButton!
     @IBOutlet private weak var weaponsStackView: UIStackView!
     @IBOutlet private weak var editingWeaponImageView: UIImageView!
@@ -96,8 +99,13 @@ class GameViewController: UIViewController {
             }
             self.weaponsStackView.isHidden = !self.weaponsStackView.isHidden
             self.view.subviews.forEach {
-                if $0.tag != 1 {
-                    $0.isHidden = self.weaponsStackView.isHidden
+                if $0.tag != 1, let stack = $0 as? UIStackView {
+                    stack.arrangedSubviews.forEach {
+                        if $0 is UIButton {
+                            $0.isHidden = self.weaponsStackView.isHidden
+
+                        }
+                    }
                 }
             }
         }
@@ -206,9 +214,23 @@ class GameViewController: UIViewController {
 
 fileprivate
 extension GameViewController {
+    func prepareView() {
+        self.view.subviews.forEach {
+            if let stack = $0 as? UIStackView {
+                if stack.tag == 1 {
+                    stack.addBlurView()
+                } else {
+                    stack.arrangedSubviews.forEach {
+                        $0.addBlurView()
+                    }
+                }
+            }
+        }
+    }
+    
     func loadScene() {
         if let view = view as! SKView? {
-            let scene = GameScene.configure(lvl: .init(.test))
+            let scene = GameScene.configure(lvl: .init(self.selectedLevel))
             scene.scaleMode = .aspectFill
             
             view.presentScene(scene, transition: .doorsCloseHorizontal(withDuration: 0.6))

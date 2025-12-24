@@ -37,8 +37,7 @@ class WeaponNode: SKSpriteNode {
         self.damage = type.damage * 4
         super.init(texture: nil, color: .clear, size: CGSize(width: 100, height: 100))
         self.name = .init(describing: Self.self)
-
-        self.physicsBody = .init(rectangleOf: .init(width: 100, height: 100))
+        self.physicsBody = .init(circleOfRadius: 100)
         self.physicsBody?.categoryBitMask = PhysicsCategory.weapon
         self.physicsBody?.contactTestBitMask = PhysicsCategory.enemy
         self.physicsBody?.collisionBitMask = 0
@@ -61,7 +60,7 @@ class WeaponNode: SKSpriteNode {
     }
       
     func setEditing() {
-        self.color = (!isEditing ? UIColor.clear : UIColor.green).withAlphaComponent(0.2)
+        self.color = !isEditing ? UIColor.clear : UIColor.green.withAlphaComponent(0.2)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -19,6 +19,36 @@ class LevelViewController: UIViewController {
         updateButtonsConstraints()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            let db = DataBaseService.db.completedLevels
+            let keys = Array(db.keys)
+            DispatchQueue.main.async {
+                self.view.subviews.forEach { button in
+                    if button.layer.name == "levelButton",
+                       let stack = button.subviews.first(where: {
+                           $0 is UIStackView
+                       }) as? UIStackView
+                    {
+                        
+                        stack.arrangedSubviews.forEach { label in
+                            let completed = keys.contains(where: {
+                                ![
+                                    $0.level == self.data.levels[button.tag].title,
+                                    $0.levelPage == self.parentVC!.selectedLevel.levelPage,
+                                    $0.difficulty == .allCases[label.tag]
+                                ].contains(false)
+                                
+                            })
+                            label.alpha = completed ? 1 : 0.2
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     func drawLevelGround() {
         guard let view else {
             return
@@ -106,19 +136,34 @@ class LevelViewController: UIViewController {
         data.levels.forEach {
             let button = UIButton(type: .system)
             button.tag = view.subviews.count
+            button.layer.name = "levelButton"
             button.setTitle($0.title, for: .init())
             button.backgroundColor = .red.withAlphaComponent(0.4)
             button.addTarget(self, action: #selector(didSelectLevel(_:)), for: .touchUpInside)
-//            button.isEnabled = $0 == data.levels.first
             view.addSubview(button)
-
+            button.layer.cornerRadius = 25
+            button.layer.masksToBounds = true
             button.translatesAutoresizingMaskIntoConstraints = false
-//            button.widthAnchor.constraint(equalToConstant: 50).isActive = true
-//            button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-//            let position = $0.position
-//            button.frame.origin = .init(
-//                x: view.frame.width * position.x,
-//                y: view.frame.height * position.y)
+            let stack = UIStackView()
+            stack.axis = .horizontal
+            stack.distribution = .fillEqually
+            Array(0..<3).forEach { i in
+                let label = UILabel()
+                label.text = "\(i)"
+                label.font = .systemFont(ofSize: 9)
+                label.textAlignment = .center
+                label.tag = stack.arrangedSubviews.count
+                label.textColor = .white
+                stack.addArrangedSubview(label)
+            }
+            stack.translatesAutoresizingMaskIntoConstraints = false
+            button.addSubview(stack)
+            NSLayoutConstraint.activate([
+                stack.leadingAnchor.constraint(equalTo: stack.superview!.leadingAnchor),
+                stack.trailingAnchor.constraint(equalTo: stack.superview!.trailingAnchor),
+                stack.bottomAnchor.constraint(equalTo: stack.superview!.bottomAnchor),
+                stack.heightAnchor.constraint(equalToConstant: 20)
+            ])
         }
     }
     
@@ -132,6 +177,11 @@ class LevelViewController: UIViewController {
             level: data.levels[sender.tag].title,
             levelPage: parentVC!.selectedLevel.levelPage)
         parentVC?.homeParentVC?.setMap(for: parentVC?.homeParentVC?.currentPage, animated: false)
+        view.subviews.forEach({
+            if $0.layer.name == "levelButton" {
+                $0.backgroundColor = (sender.tag == $0.tag ? UIColor.green : .red).withAlphaComponent(0.4)
+            }
+        })
     }
 }
 

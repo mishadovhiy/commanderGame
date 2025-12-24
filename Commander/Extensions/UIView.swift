@@ -81,7 +81,7 @@ extension UIView {
         let view = UIVisualEffectView(effect: effect)
         let vibracity = UIVisualEffectView(effect: effect)
         view.contentView.addSubview(vibracity)
-        addSubview(view)
+        insertSubview(view, at: 0)
 
         [view, vibracity].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false

@@ -9,7 +9,13 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
-    var lvlanager: LevelManager!
+    var lvlanager: LevelManager! {
+        didSet {
+            gameVC?.roundLabel.text = "\(lvlanager.currentRound)/\(lvlanager.lvlBuilder.rounds)"
+            gameVC?.healthLabel.text = "\(lvlanager.progress.health)"
+            gameVC?.balanceLabel.text = "\(lvlanager.progress.earnedMoney)"
+        }
+    }
     
     private var gameVC: GameViewController? {
         view?.next as? GameViewController
@@ -115,39 +121,42 @@ class GameScene: SKScene {
         DispatchQueue(label: "db", qos: .userInitiated).async {
             DataBaseService.db.completedLevels.updateValue(levelManager.progress, forKey: levelManager.lvlModel)
             #warning("save new balance to keychain")
-            print("game completed")
+            print("game completed ", levelManager.lvlModel)
             DispatchQueue.main.async {
-                self.gameVC?.dismiss(animated: true)
+                self.gameVC?.dismiss(animated: true) {
+                    UIApplication.shared.activeWindow?.rootViewController?.present(vc: AlertViewController.initiate(data: AlertModel.init(title: "", type: .tableView([
+                        AlertModel.TitleCellModel.init(title: "you have wone")
+                    ]), buttons: [])))
+                }
             }
         }
     }
     
     func loadRaund() {
-        print(lvlanager.currentRound, " tefrwdsax ")
-        if lvlanager.lvlBuilder.enemyPerRound.count <= lvlanager.currentRound {
-            print("rfsdaefr")
+        if lvlanager.lvlBuilder.rounds <= lvlanager.currentRound {
+            print("game completed")
+            if enemies.isEmpty {
+                didCompleteLevel()
+            }
             return
         }
+        print(lvlanager.currentRound, " tefrwdsax ")
+//        if lvlanager.lvlBuilder.enemyPerRound.count <= lvlanager.currentRound {
+//            print("rfsdaefr")
+//            return
+//        }
         if enemies.count >= 1 {
             print("jkhdfsukhsakd ", enemies.count)
             return
         }
         
         print(lvlanager.currentRound, " tefrwdsax")
-        if lvlanager.lvlBuilder.enemyPerRound.count <= lvlanager.currentRound {
-            print("game completed")
-            didCompleteLevel()
-            return
-        }
         var i = 0
         lvlanager.lvlBuilder
             .enemyPerRound[lvlanager.currentRound]
             .forEach { type in
-//                i += 1
-//                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1100 * i), execute: {
                 self.loadEnemy(type.type, i: i)
                 i += 1
-//                })
         }
         lvlanager.currentRound += 1
     }
@@ -188,8 +197,16 @@ fileprivate extension GameScene {
         let node = EnemyNode(type: type, builder: lvlanager.lvlBuilder)
         self.addChild(node)
         node.run(in: path, i: CGFloat(i), completion: {
+            self.lvlanager.progress.health -= 1
             node.removeFromParent()
             self.loadRaund()
+            if self.lvlanager.progress.health <= 0 {
+                self.gameVC?.dismiss(animated: true) {
+                    UIApplication.shared.activeWindow?.rootViewController?.present(vc: AlertViewController.initiate(data: AlertModel.init(title: "", type: .tableView([
+                        AlertModel.TitleCellModel.init(title: "you have lost")
+                    ]), buttons: [])))
+                }
+            }
         })
         print("rfsedaXZ")
     }
@@ -207,16 +224,6 @@ fileprivate extension GameScene {
         shapeNode2.strokeColor = .init(hex: "B89668")
         shapeNode2.path = self.graundPath
         shapeNode.addChild(shapeNode2)
-//        let shape = CAShapeLayer()
-//        shape.borderWidth = 2
-//        shape.path = self.graundPath
-//        shape.strokeColor = UIColor.red.cgColor
-//        shape.fillColor = UIColor.clear.cgColor
-//        shape.position = .init(x: (self.view?.frame.width ?? 0) / 2, y: (self.view?.frame.height ?? 0) / 2)
-//        shape.setAffineTransform(
-//            CGAffineTransform(scaleX: 1, y: -1)
-//        )
-//        view?.layer.addSublayer(shape)
     }
 }
 
@@ -244,10 +251,7 @@ extension GameScene: SKPhysicsContactDelegate {
             let bullet = a as? BulletNode ?? b as! BulletNode
             let killed = enemy.bulletHitted(bullet)
             if killed {
-//                self.loadEnemy()
-//                if let next = bullet.armour?.nextEnemyHolder {
-//                    bullet.armour?.shoot(enemy: next)
-//                }
+                lvlanager.progress.earnedMoney += enemy.totalHealth
                 lvlanager.progress.killedEnemies += 1
                 enemy.removeFromParent()
                 self.loadRaund()
