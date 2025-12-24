@@ -103,7 +103,9 @@ extension WeaponNode {
         if !canShoot(enemy, force: force) {
             return
         }
-        self.performShoot(enemy)
+        if self.parent?.isPaused ?? true == false {
+            self.performShoot(enemy)
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
             self.addBullet()
 

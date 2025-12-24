@@ -95,6 +95,11 @@ class GameViewController: UIViewController {
                 sender.setImage(.init(systemName: icon), for: .init())
             }
             self.weaponsStackView.isHidden = !self.weaponsStackView.isHidden
+            self.view.subviews.forEach {
+                if $0.tag != 1 {
+                    $0.isHidden = self.weaponsStackView.isHidden
+                }
+            }
         }
     }
     

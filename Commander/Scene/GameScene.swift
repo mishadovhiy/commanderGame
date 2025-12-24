@@ -143,10 +143,11 @@ class GameScene: SKScene {
         lvlanager.lvlBuilder
             .enemyPerRound[lvlanager.currentRound]
             .forEach { type in
+//                i += 1
+//                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1100 * i), execute: {
+                self.loadEnemy(type.type, i: i)
                 i += 1
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1100 * i), execute: {
-                    self.loadEnemy(type.type)
-                })
+//                })
         }
         lvlanager.currentRound += 1
     }
@@ -180,13 +181,13 @@ fileprivate extension GameScene {
         enemyGround?.path = graundPath
     }
     
-    func loadEnemy(_ type: EnemyType) {
+    func loadEnemy(_ type: EnemyType, i: Int) {
         guard let path = enemyGround?.path else {
             return
         }
         let node = EnemyNode(type: type, builder: lvlanager.lvlBuilder)
         self.addChild(node)
-        node.run(in: path, completion: {
+        node.run(in: path, i: CGFloat(i), completion: {
             node.removeFromParent()
             self.loadRaund()
         })

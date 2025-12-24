@@ -11,11 +11,7 @@ class EnemyNode: SKSpriteNode {
     let type: EnemyType
     var health: Int
     var totalHealth: Int
-    struct Constants {
-        enum ActionNames: String {
-            case run
-        }
-    }
+
     init(type: EnemyType, builder: GameBuilderModel) {
         self.type = type
         self.health = (type.health * builder.enemyHealthMult) * 3
@@ -42,11 +38,18 @@ class EnemyNode: SKSpriteNode {
         progress.position = .init(x: 0, y: self.size.height / -2 - 3)
         progress.zPosition = 1
         addChild(progress)
+        self.alpha = 0
     }
     
-    func run(in shape: CGPath, completion: @escaping()->()) {
+    func run(in shape: CGPath, i: CGFloat, completion: @escaping()->()) {
+        self.position.x = (parent?.frame.size.width ?? 0) * -4
+        
+        let delay = SKAction.wait(forDuration: i * 2.0)
+        let fade = SKAction.fadeAlpha(to: 1, duration: 0.5)
         let followPath = SKAction.follow(shape, asOffset: false, orientToPath: true, duration: 70)
-        self.run(followPath, completion: completion)
+        self.run(.sequence([delay, followPath]), completion: completion)
+        self.run(.sequence([delay, SKAction.wait(forDuration: 2.0), fade]))
+
     }
     
     func bulletHitted(_ bullet: BulletNode) -> Bool {
@@ -131,5 +134,13 @@ class EnemyNode: SKSpriteNode {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension EnemyNode {
+    struct Constants {
+        enum ActionNames: String {
+            case run
+        }
     }
 }
