@@ -94,9 +94,9 @@ extension WeaponNode {
         let fire = SKSpriteNode(texture: .init(image: .fire), size: .init(width: 10, height: 10))
         addChild(fire)
         fire.run(.fadeOut(withDuration: 0.3))
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+        self.run(.wait(forDuration: 0.3)) {
             fire.removeFromParent()
-        })
+        }
     }
     
     func shoot(enemy: EnemyNode, force: Bool = false) {
@@ -106,12 +106,12 @@ extension WeaponNode {
         if self.parent?.isPaused ?? true == false {
             self.performShoot(enemy)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+        self.run(SKAction.wait(forDuration: 0.5)) {
             self.addBullet()
 
             self.targetEnemy = nil
             self.shoot(enemy: enemy)
-        })
+        }
     }
     
     private func canShoot(_ enemy: EnemyNode, force: Bool) -> Bool {

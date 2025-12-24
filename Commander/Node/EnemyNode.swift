@@ -76,12 +76,12 @@ class EnemyNode: SKSpriteNode {
             explosure.alpha = 0.5
             addChild(explosure)
             explosure.run(.scale(to: 1, duration: 0.17))
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(170), execute: {
+            self.run(.wait(forDuration: 0.17)) {
                 explosure.run(.fadeOut(withDuration: 0.2))
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+                self.run(.wait(forDuration: 0.2)) {
                     explosure.removeFromParent()
-                })
-            })
+                }
+            }
             
             return false
         } else {
@@ -100,16 +100,16 @@ class EnemyNode: SKSpriteNode {
         explosure.name = "explosure"
         addChild(explosure)
         explosure.run(.scale(to: 10, duration: 0.2))
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+        self.run(.wait(forDuration: 0.2)) {
             self.performDieAnimation {
                 self.texture = nil
                 explosure.run(.fadeOut(withDuration: 0.3))
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+                self.run(.wait(forDuration: 0.3)) {
                     explosure.removeFromParent()
                     super.removeFromParent()
-                })
+                }
             }
-        })
+        }
     }
     
     private func performDieAnimation(
