@@ -51,6 +51,8 @@
 		829CADC92EFA8E5600548DB1 /* AlertTitleTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CADC82EFA8E5600548DB1 /* AlertTitleTableCell.swift */; };
 		829CADCB2EFA8E6800548DB1 /* AlertSegmentedTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CADCA2EFA8E6800548DB1 /* AlertSegmentedTableCell.swift */; };
 		829CADCE2EFA901E00548DB1 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CADCD2EFA901D00548DB1 /* AlertModel.swift */; };
+		82A2EEF92EFC38F900437B4E /* CompletedLevelTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A2EEF82EFC38F900437B4E /* CompletedLevelTableCell.swift */; };
+		82A2EEFC2EFCEB1900437B4E /* PageLevelTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A2EEFB2EFCEB1900437B4E /* PageLevelTableCell.swift */; };
 		82C637B12EEE57350064F917 /* BuyCoinsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637B02EEE57350064F917 /* BuyCoinsViewController.swift */; };
 		82C637BE2EEF40100064F917 /* WeaponUpgradeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637BD2EEF40100064F917 /* WeaponUpgradeType.swift */; };
 		82C637C02EEF41420064F917 /* UserBalanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637BF2EEF41420064F917 /* UserBalanceCell.swift */; };
@@ -111,6 +113,8 @@
 		829CADC82EFA8E5600548DB1 /* AlertTitleTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTitleTableCell.swift; sourceTree = "<group>"; };
 		829CADCA2EFA8E6800548DB1 /* AlertSegmentedTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSegmentedTableCell.swift; sourceTree = "<group>"; };
 		829CADCD2EFA901D00548DB1 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
+		82A2EEF82EFC38F900437B4E /* CompletedLevelTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedLevelTableCell.swift; sourceTree = "<group>"; };
+		82A2EEFB2EFCEB1900437B4E /* PageLevelTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageLevelTableCell.swift; sourceTree = "<group>"; };
 		82C637B02EEE57350064F917 /* BuyCoinsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyCoinsViewController.swift; sourceTree = "<group>"; };
 		82C637BD2EEF40100064F917 /* WeaponUpgradeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponUpgradeType.swift; sourceTree = "<group>"; };
 		82C637BF2EEF41420064F917 /* UserBalanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBalanceCell.swift; sourceTree = "<group>"; };
@@ -255,7 +259,7 @@
 				8260E23E2EED3819002E29C0 /* LevelsPageViewController.swift */,
 				8260E2402EED383E002E29C0 /* LevelViewController.swift */,
 				8260E2712EEDB5BD002E29C0 /* DifficultyViewController.swift */,
-				8260E26D2EEDB53A002E29C0 /* LevelDescriptionViewController.swift */,
+				82A2EEF72EFC38DE00437B4E /* LevelDescriptionViewController */,
 				82C637BC2EEF3FF30064F917 /* UpgradeWeaponViewController */,
 				827A7B182EF2295800A080C9 /* BuyCoinsViewController */,
 			);
@@ -348,6 +352,24 @@
 				829CADC62EFA8E3E00548DB1 /* AlertTitleCollectionCell.swift */,
 				829CADC82EFA8E5600548DB1 /* AlertTitleTableCell.swift */,
 				829CADCA2EFA8E6800548DB1 /* AlertSegmentedTableCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		82A2EEF72EFC38DE00437B4E /* LevelDescriptionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8260E26D2EEDB53A002E29C0 /* LevelDescriptionViewController.swift */,
+				82A2EEFA2EFC38FF00437B4E /* Cell */,
+			);
+			path = LevelDescriptionViewController;
+			sourceTree = "<group>";
+		};
+		82A2EEFA2EFC38FF00437B4E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				82A2EEF82EFC38F900437B4E /* CompletedLevelTableCell.swift */,
+				82A2EEFB2EFCEB1900437B4E /* PageLevelTableCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -459,6 +481,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82A2EEF92EFC38F900437B4E /* CompletedLevelTableCell.swift in Sources */,
 				829CADC92EFA8E5600548DB1 /* AlertTitleTableCell.swift in Sources */,
 				823497FE2EEB67D300F82871 /* LevelModel.swift in Sources */,
 				8260E2722EEDB5BD002E29C0 /* DifficultyViewController.swift in Sources */,
@@ -499,6 +522,7 @@
 				829CADC12EFA8DF500548DB1 /* AlertViewController.swift in Sources */,
 				82C637C02EEF41420064F917 /* UserBalanceCell.swift in Sources */,
 				82C637B12EEE57350064F917 /* BuyCoinsViewController.swift in Sources */,
+				82A2EEFC2EFCEB1900437B4E /* PageLevelTableCell.swift in Sources */,
 				823498082EEB729500F82871 /* PhysicsCategory.swift in Sources */,
 				8289ABB62EF4F38700F78DD0 /* HomeViewController.swift in Sources */,
 				823497F22EEB5AB400F82871 /* GameDurationType.swift in Sources */,
