@@ -149,9 +149,9 @@ extension CompletedLevelTableCell {
     }
     
     func loadViewsIfNeeded(for dataCount: Int) {
-        var difference = (dataCount + 1) - contentStackView.arrangedSubviews.count
+        let difference = (dataCount + 1) - contentStackView.arrangedSubviews.count
         if difference <= 0 {
-            difference *= -1
+            return
         }
         Array(0..<difference).forEach { _ in
             loadRowCell()

@@ -30,14 +30,21 @@ class LevelDescriptionViewController: UIViewController {
     
     private func singleLevel(
         db: DataBaseModel,
-        allKeys: [LevelModel],
+        allKeys: [LevelModel]
     ) -> CompletedLevelTableCell.ContentDataModel? {
         guard let selectedLevel = parentLevelListVC?.selectedLevel else {
             return nil
         }
-        return .init(section: selectedLevel.level, data:
-                .init(topTitles: .init(left: .init(GameDurationType.normal.rawValue), middle: .init(GameDurationType.infinityHealth.rawValue), right: .init(GameDurationType.singleLife.rawValue)), tableData:
-                        Difficulty.allCases.compactMap({ difficulty in
+        //todo: return list, for each level name
+        return .init(section: selectedLevel.level,
+                     data:
+                .init(topTitles: .init(
+                    left: .init(GameDurationType.normal.rawValue),
+                    middle: .init(GameDurationType.infinityHealth.rawValue),
+                    right: .init(GameDurationType.singleLife.rawValue)),
+                      tableData:
+                        Difficulty.allCases
+                    .compactMap({ difficulty in
                             let keys = allKeys.filter({
                                 $0.difficulty == difficulty
                             })
@@ -62,6 +69,44 @@ class LevelDescriptionViewController: UIViewController {
                         
     }
     
+    private func multipleLevels(db: DataBaseModel, allKeys: [LevelModel]) -> [CompletedLevelTableCell.ContentDataModel] {
+        guard let selectedLevel = parentLevelListVC?.selectedLevel else {
+            return []
+        }
+        var result: [CompletedLevelTableCell.ContentDataModel] = []
+        GameDurationType.allCases.forEach { duration in
+            let keys = allKeys.filter({
+                $0.duration == duration
+            })
+            var progress: [Difficulty: GameProgress] = [:]
+            Difficulty.allCases.forEach { difficulty in
+                if let key = keys.first(where: {
+                    $0.difficulty == difficulty
+                }), let value = db.completedLevels[key] {
+                    progress.updateValue(value, forKey: difficulty)
+                }
+            }
+            if progress.isEmpty {
+                return
+            }
+            result.append(.init(
+                section: duration.rawValue,
+                data: .init(
+                    topTitles: .init(left: .init("earned"),
+                                     middle: .init("enemy killed/passed"),
+                                     right: .init("score")),
+                    tableData: progress.compactMap({ (key: Difficulty,
+                                                      value: GameProgress?) in
+                            .init(section: .init(key.rawValue),
+                                  content: .init(
+                                    left: .init("\(value?.earnedMoney ?? 0)"),
+                                    middle: .init("\(value?.killedEnemies ?? 0)/\(value?.passedEnemyCount ?? 0)"),
+                                    right: .init("\(value?.score ?? 0)")))
+                    }))))
+        }
+        return result
+    }
+    
     public func selectedLevelUpdated() {
         if self.view == nil {
             return
@@ -69,24 +114,25 @@ class LevelDescriptionViewController: UIViewController {
         DispatchQueue(label: "db", qos: .userInitiated).async {
             let selectedLevel = self.parentLevelListVC?.selectedLevel ?? .init()
             print(selectedLevel, " ytregrfsdx")
-            let db = DataBaseService.db.completedLevels
-            let allLevelsForPageKeys = Array(DataBaseService.db.completedLevels.keys.filter({
-                ($0.levelPage ?? "0") == selectedLevel.levelPage
+            let dataBase = DataBaseService.db
+            let db = dataBase.completedLevels
+            let allLevelsForPageKeys = Array(dataBase.completedLevels.keys.filter({
+                ($0.levelPage) == selectedLevel.levelPage
             }))
-            let allKeys = Array(DataBaseService.db.completedLevels.keys.filter({
-                ($0.levelPage ?? "0") == selectedLevel.levelPage && $0.level == selectedLevel.level
+            let allKeys = Array(dataBase.completedLevels.keys.filter({
+                ($0.levelPage) == selectedLevel.levelPage && $0.level == selectedLevel.level
             }))
             print(allKeys.count, " gfdvsdcxz ")
             self.levelsSectionData.removeAll()
             if !selectedLevel.level.isEmpty {
-                let builder = GameBuilderModel(lvlModel: selectedLevel)
-                if let table = self.singleLevel(db: DataBaseService.db, allKeys: allKeys) {
+//                let builder = GameBuilderModel(lvlModel: selectedLevel)
+                self.levelsSectionData = self.multipleLevels(db: dataBase, allKeys: allKeys)
+
+            } else {
+                if let table = self.singleLevel(db: dataBase, allKeys: allLevelsForPageKeys) {
                     self.levelsSectionData = [table]
 
                 }
-                
-            } else {
-                //load from db durations
             }
 //            self.tableData.removeAll()
 //            self.tableData = [
