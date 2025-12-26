@@ -34,6 +34,23 @@ struct GameBuilderModel {
     }
 }
 
+struct GameBuilderMiniModel {
+    let health: Int
+    
+    let enemyHealthMult: Int
+    
+    let startingMoney: Int
+    
+    var rounds: Int
+    
+    init(data: GameBuilderModel) {
+        health = data.health
+        enemyHealthMult = data.enemyHealthMult
+        startingMoney = data.startingMoney
+        rounds = data.rounds
+    }
+}
+
 fileprivate
 extension GameBuilderModel {
     

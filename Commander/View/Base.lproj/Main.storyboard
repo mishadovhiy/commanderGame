@@ -267,13 +267,13 @@
                                                 <rect key="frame" x="5" y="2" width="40" height="25"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Round" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDC-Rq-fqH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="13"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="14.333333333333334"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                         <color key="textColor" name="darkColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h4e-wt-idC">
-                                                        <rect key="frame" x="0.0" y="13" width="40" height="12"/>
+                                                        <rect key="frame" x="0.0" y="14.333333333333336" width="40" height="10.666666666666664"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <color key="textColor" name="darkColor"/>
                                                         <nil key="highlightedColor"/>
@@ -1334,6 +1334,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
+                                            <outlet property="levelLabel" destination="2zN-4H-iPR" id="X9h-J1-QXT"/>
                                             <outlet property="livesLabel" destination="VJZ-TD-cWx" id="dqc-Od-Gmk"/>
                                             <outlet property="pageLabel" destination="cx9-OC-eKL" id="sei-md-EEY"/>
                                             <outlet property="progressLabel" destination="Kra-BX-HlK" id="Yxr-2T-Z6g"/>

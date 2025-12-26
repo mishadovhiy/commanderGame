@@ -39,6 +39,12 @@ class LevelListSuperViewController: UIViewController {
         }) as? LevelDescriptionViewController
     }
     
+    var levelPageVC: LevelsPageViewController? {
+        children.first(where: {
+            $0 is LevelsPageViewController
+        }) as? LevelsPageViewController
+    }
+    
     var homeParentVC: HomeViewController? {
         parent as? HomeViewController
     }

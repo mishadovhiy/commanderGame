@@ -23,6 +23,14 @@ class LevelsPageViewController: UIPageViewController {
         view.addSubview(DestinationOutMaskedView(type: .borders))
     }
     
+    var index: Int {
+        viewControllers?.first?.view.tag ?? 0
+    }
+    
+    var currentPageData: LevelPagesBuilder {
+        pageData[index]
+    }
+    
     var parentVC: LevelListSuperViewController? {
         parent as? LevelListSuperViewController
     }
