@@ -61,7 +61,7 @@ class LevelListSuperViewController: UIViewController {
             if selectedLevel.difficulty == nil {
                 (bottomPanelNavigation?.viewControllers.first as? DifficultyViewController)?.selectedAt = nil
             }
-
+            updateBottomNavigationDifficulties(animated: true)
             UIView.animate(withDuration: 0.3, animations: {
                 if hide != self.bottomPanelStackView?.isHidden {
                     self.bottomPanelStackView?.isHidden = hide
@@ -88,10 +88,26 @@ class LevelListSuperViewController: UIViewController {
     }
     
     func toGameDurationPicker() {
-        self.bottomPanelNavigation?.pushViewController(
-            DifficultyViewController.initiate(data: GameDurationType.allCases, didSelect: { value in
-                self.selectedLevel.duration = .init(rawValue: value)
-            }), animated: true)
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            let db = DataBaseService.db.completedLevels
+            let completedKeys = db.keys.filter({
+                ![
+                    $0.levelPage == self.selectedLevel.levelPage,
+                    $0.level == self.selectedLevel.level
+                ].contains(false)
+            })
+            DispatchQueue.main.async {
+                self.bottomPanelNavigation?.pushViewController(
+                    DifficultyViewController.initiate(data: GameDurationType.allCases.compactMap({ duration in
+                        let contains = completedKeys.contains(where: {
+                            $0.duration == duration
+                        })
+                        return .init(title: duration.rawValue, checkmarkCount: contains ? 1 : 0)
+                    }), didSelect: { value in
+                        self.selectedLevel.duration = .init(rawValue: value)
+                    }), animated: true)
+            }
+        }
     }
 }
 
@@ -170,10 +186,33 @@ extension LevelListSuperViewController {
         didMove(toParent: nav)
     }
     
+    func updateBottomNavigationDifficulties(animated: Bool = false) {
+        DispatchQueue.init(label: "db", qos: .userInitiated).async {
+            let db = DataBaseService.db.completedLevels
+            let completedKeys = db.keys.filter({
+                ![
+                    $0.levelPage == self.selectedLevel.levelPage,
+                    $0.level == self.selectedLevel.level
+                ].contains(false)
+            })
+            DispatchQueue.main.async {
+                let vc = self.bottomPanelNavigation?.viewControllers.first as? DifficultyViewController
+                vc?.updateData(Difficulty.allCases.compactMap({ difficulty in
+                    let keys = completedKeys.filter({
+                        $0.difficulty == difficulty
+                    })
+                    return .init(title: difficulty.rawValue, checkmarkCount: keys.count)
+                }), animated: animated)
+            }
+        }
+    }
+    
     func loadBottomNavigationChild() {
         let rootVC = DifficultyViewController
             .initiate(
-                data: Difficulty.allCases,
+                data: Difficulty.allCases.compactMap({
+                    .init(title: $0.rawValue, checkmarkCount: 0)
+                }),
                 didSelect: { value in
                     self.selectedLevel.difficulty = .init(rawValue: value)
                     self.toGameDurationPicker()
@@ -187,6 +226,7 @@ extension LevelListSuperViewController {
         bottomPanelStackView.addArrangedSubview(nav.view)
         addChild(nav)
         didMove(toParent: nav)
+        updateBottomNavigationDifficulties()
     }
     
     
