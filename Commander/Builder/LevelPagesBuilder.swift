@@ -95,7 +95,7 @@ extension [LevelPagesBuilder] {
                         .init(x: 0.3, y: 0.85),
                       title: "212")
             ]),//fix dots
-            .init(title: "3", zoom: 1, mapPosition: .init(x: -0.46, y: -0.015), levels: [
+            .init(title: "3", zoom: 0.7, mapPosition: .init(x: -0.44, y: -0.03), levels: [
                 .init(position:
                         .init(x: 0.2, y: 0.6),
                       title: "301"),
