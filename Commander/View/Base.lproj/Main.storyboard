@@ -19,8 +19,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="852" height="393"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" translatesAutoresizingMaskIntoConstraints="NO" id="edp-AQ-Hal">
-                                <rect key="frame" x="0.0" y="0.0" width="852" height="393"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" translatesAutoresizingMaskIntoConstraints="NO" id="edp-AQ-Hal">
+                                <rect key="frame" x="0.0" y="0.0" width="2714" height="1374"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="v6F-8V-Zuz">
                                 <rect key="frame" x="59" y="59" width="734" height="279"/>
@@ -87,8 +87,6 @@
                         <color key="backgroundColor" name="darkColor"/>
                         <constraints>
                             <constraint firstItem="qfa-jB-3Uj" firstAttribute="trailing" secondItem="v6F-8V-Zuz" secondAttribute="trailing" id="1cX-Lr-bDB"/>
-                            <constraint firstAttribute="bottom" secondItem="edp-AQ-Hal" secondAttribute="bottom" id="Pog-1C-HWc"/>
-                            <constraint firstAttribute="trailing" secondItem="edp-AQ-Hal" secondAttribute="trailing" id="TTq-F0-kOk"/>
                             <constraint firstItem="edp-AQ-Hal" firstAttribute="leading" secondItem="yBe-xQ-5cQ" secondAttribute="leading" id="X6B-Ik-etZ"/>
                             <constraint firstItem="v6F-8V-Zuz" firstAttribute="top" secondItem="qfa-jB-3Uj" secondAttribute="top" id="ZOI-LM-y9N"/>
                             <constraint firstItem="v6F-8V-Zuz" firstAttribute="leading" secondItem="qfa-jB-3Uj" secondAttribute="leading" id="a7w-ax-mfz"/>

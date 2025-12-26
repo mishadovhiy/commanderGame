@@ -22,7 +22,7 @@ struct LevelPagesBuilder: Equatable {
 extension [LevelPagesBuilder] {
     static var allData: Self {
         [
-            .init(title: "1", zoom: 4.5, mapPosition: .init(x: -0.5, y: -0.1), levels: [
+            .init(title: "1", zoom: 4.5, mapPosition: .init(x: -0.08, y: -0.05), levels: [
                 .init(position:
                         .init(x: 0.08, y: 0.2),
                       title: "11"),

@@ -12,6 +12,16 @@ class HomeViewController: UIViewController {
     @IBOutlet private weak var mapImageView: UIImageView!
     @IBOutlet private weak var contentStackView: UIStackView!
     @IBOutlet private weak var startView: UIView!
+    private var levelAnimating: Bool = false
+    var currentPage: LevelPagesBuilder?
+    
+    override func loadView() {
+        super.loadView()
+        self.mapImageView.translatesAutoresizingMaskIntoConstraints = true
+        loadLevelListChild()
+        self.view.addSubview(DestinationOutMaskedView(type: .borders))
+        blackSafeAreaMaskOverlayView?.alpha = 0
+    }
     
     var blackSafeAreaMaskOverlayView: UIView? {
         self.view.subviews.first(where: {
@@ -19,15 +29,6 @@ class HomeViewController: UIViewController {
         })
     }
     
-    override func loadView() {
-        super.loadView()
-        mapImageView.translatesAutoresizingMaskIntoConstraints = false
-        loadLevelListChild()
-        self.view.addSubview(DestinationOutMaskedView(type: .borders))
-        blackSafeAreaMaskOverlayView?.alpha = 0
-    }
-    private var levelAnimating: Bool = false
-    var currentPage: LevelPagesBuilder?
     public func setMap(for page: LevelPagesBuilder?, animated: Bool = true,
                        completion:@escaping()->() = {}) {
         if page != nil {
@@ -40,21 +41,21 @@ class HomeViewController: UIViewController {
         print(page?.zoom, " hfgdfsfgd", page?.title, " yhtgrf", mapImageView.frame.origin)
         self.levelAnimating = true
 
-        if mapImageView.frame.origin != .zero,
-            page != nil,
-            animated {
-            self.performSetMap(for: nil, animated: animated, completion: {
-                self.performSetMap(for: page, animated: animated, completion: {
-                    completion()
-                    self.levelAnimating = false
-                })
-            })
-        } else {
+//        if mapImageView.frame.origin != .zero,
+//            page != nil,
+//            animated {
+//            self.performSetMap(for: nil, animated: animated, completion: {
+//                self.performSetMap(for: page, animated: animated, completion: {
+//                    completion()
+//                    self.levelAnimating = false
+//                })
+//            })
+//        } else {
             self.performSetMap(for: page, animated: animated, completion: {
                 completion()
                 self.levelAnimating = false
             })
-        }
+//        }
         
     }
     
@@ -62,12 +63,18 @@ class HomeViewController: UIViewController {
                                animated: Bool,
                                completion:@escaping()->() = {}) {
         let viewSize = view.frame.size
+        let imageSize: CGSize = self.mapImageView.image?.size ?? .zero
+        print("sfdasd ", self.mapImageView.image?.size, " gefrdsa ", viewSize)
+        print(page == nil, " tgerfwadfsvfdg")
         UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
             self.view.backgroundColor = page == nil ? .dark : .container
             self.view.tintColor = page == nil ? .accent : .white
-            self.mapImageView.transform = CGAffineTransform(scaleX: page?.zoom ?? 1, y: page?.zoom ?? 1)
-            self.mapImageView.frame.origin.x = (page?.mapPosition.x ?? 0) * viewSize.width
-            self.mapImageView.frame.origin.y = (page?.mapPosition.y ?? 0) * viewSize.height
+            let frame: CGRect = .init(origin: .init(
+                x: (page?.mapPosition.x ?? 0) * imageSize.width,
+                y: (page?.mapPosition.y ?? 0) * imageSize.height),
+                                      size: page == nil ? viewSize : imageSize)
+            self.mapImageView.frame = frame
+            print(self.mapImageView.frame.origin, " rgerfwreg ")
 
         }, completion: {_ in
             completion()
