@@ -64,18 +64,19 @@ class HomeViewController: UIViewController {
                                completion:@escaping()->() = {}) {
         let viewSize = view.frame.size
         let imageSize: CGSize = self.mapImageView.image?.size ?? .zero
-        print("sfdasd ", self.mapImageView.image?.size, " gefrdsa ", viewSize)
-        print(page == nil, " tgerfwadfsvfdg")
         UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
             self.view.backgroundColor = page == nil ? .dark : .container
             self.view.tintColor = page == nil ? .accent : .white
-            let frame: CGRect = .init(origin: .init(
-                x: (page?.mapPosition.x ?? 0) * imageSize.width,
-                y: (page?.mapPosition.y ?? 0) * imageSize.height),
-                                      size: page == nil ? viewSize : imageSize)
+            let multiplier = page?.zoom ?? 1
+            print(multiplier, " gebfjsbd")
+            let size: CGSize = page == nil ? viewSize : imageSize
+            let resultSize: CGSize = .init(width: size.width * multiplier, height: size.height * multiplier)
+            let origin: CGPoint = .init(
+                x: (page?.mapPosition.x ?? 0) * resultSize.width,
+                y: (page?.mapPosition.y ?? 0) * resultSize.height)
+            let frame: CGRect = .init(origin: origin,
+                                      size: resultSize)
             self.mapImageView.frame = frame
-            print(self.mapImageView.frame.origin, " rgerfwreg ")
-
         }, completion: {_ in
             completion()
         })

@@ -22,7 +22,7 @@ struct LevelPagesBuilder: Equatable {
 extension [LevelPagesBuilder] {
     static var allData: Self {
         [
-            .init(title: "1", zoom: 4.5, mapPosition: .init(x: -0.08, y: -0.05), levels: [
+            .init(title: "1", zoom: 1, mapPosition: .init(x: -0.08, y: -0.05), levels: [
                 .init(position:
                         .init(x: 0.08, y: 0.2),
                       title: "11"),
@@ -57,7 +57,80 @@ extension [LevelPagesBuilder] {
                         .init(x: 0.36, y: 0.62),
                       title: "21")
             ]),
-            .init(title: "2", zoom: 2.4, mapPosition: .init(x: -1.1, y: 0.1), levels: [
+            .init(title: "2", zoom: 1, mapPosition: .init(x: -0.4, y: -0.3), levels: [
+                .init(position:
+                        .init(x: 0.12, y: 0.16),
+                      title: "201"),
+                .init(position:
+                        .init(x: 0.08, y: 0.361),
+                      title: "202"),
+                .init(position:
+                        .init(x: 0.24, y: 0.363),
+                      title: "203"),
+                .init(position:
+                        .init(x: 0.15, y: 0.63),
+                      title: "204"),
+                .init(position:
+                        .init(x: 0.46, y: 0.54),
+                      title: "205"),
+                .init(position:
+                        .init(x: 0.4, y: 0.2),
+                      title: "206"),
+                .init(position:
+                        .init(x: 0.66, y: 0.33),
+                      title: "207"),
+                .init(position:
+                        .init(x: 0.83, y: 0.167),
+                      title: "208"),
+                .init(position:
+                        .init(x: 0.824, y: 0.47),
+                      title: "209"),
+                .init(position:
+                        .init(x: 0.9, y: 0.73),
+                      title: "210"),
+                .init(position:
+                        .init(x: 0.65, y: 0.74),
+                      title: "211"),
+                .init(position:
+                        .init(x: 0.3, y: 0.85),
+                      title: "212")
+            ]),//fix dots
+            .init(title: "3", zoom: 1, mapPosition: .init(x: -0.46, y: -0.015), levels: [
+                .init(position:
+                        .init(x: 0.2, y: 0.6),
+                      title: "301"),
+                .init(position:
+                        .init(x: 0.23, y: 0.3),
+                      title: "302"),
+                .init(position:
+                        .init(x: 0.46, y: 0.61),
+                      title: "303"),
+                .init(position:
+                        .init(x: 0.4, y: 0.3),
+                      title: "304"),
+                .init(position:
+                        .init(x: 0.5, y: 0.05),
+                      title: "305"),
+                .init(position:
+                        .init(x: 0.6, y: 0.25),
+                      title: "306"),
+                .init(position:
+                        .init(x: 0.86, y: 0.4),
+                      title: "307"),
+                .init(position:
+                        .init(x: 0.84, y: 0.65),
+                      title: "308"),
+                .init(position:
+                        .init(x: 0.67, y: 0.8),
+                      title: "309"),
+                .init(position:
+                        .init(x: 0.59, y: 0.66),
+                      title: "310"),
+                .init(position:
+                        .init(x: 0.67, y: 0.455),
+                      title: "311")
+            ]),
+            .init(title: "4", zoom: 1.6, mapPosition: .init(x: -0.76, y: -0.56), levels: [//new dots
                 .init(position:
                         .init(x: 0.12, y: 0.16),
                       title: "201"),
@@ -95,41 +168,7 @@ extension [LevelPagesBuilder] {
                         .init(x: 0.3, y: 0.85),
                       title: "212")
             ]),
-            .init(title: "3", zoom: 5.5, mapPosition: .init(x: -4.2, y: -3.2), levels: [
-                .init(position:
-                        .init(x: 0.2, y: 0.6),
-                      title: "301"),
-                .init(position:
-                        .init(x: 0.23, y: 0.3),
-                      title: "302"),
-                .init(position:
-                        .init(x: 0.46, y: 0.61),
-                      title: "303"),
-                .init(position:
-                        .init(x: 0.4, y: 0.3),
-                      title: "304"),
-                .init(position:
-                        .init(x: 0.5, y: 0.05),
-                      title: "305"),
-                .init(position:
-                        .init(x: 0.6, y: 0.25),
-                      title: "306"),
-                .init(position:
-                        .init(x: 0.86, y: 0.4),
-                      title: "307"),
-                .init(position:
-                        .init(x: 0.84, y: 0.65),
-                      title: "308"),
-                .init(position:
-                        .init(x: 0.67, y: 0.8),
-                      title: "309"),
-                .init(position:
-                        .init(x: 0.59, y: 0.66),
-                      title: "310"),
-                .init(position:
-                        .init(x: 0.67, y: 0.455),
-                      title: "311")
-            ])
+
         ]
     }
 }
