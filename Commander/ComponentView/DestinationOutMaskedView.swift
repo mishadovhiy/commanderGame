@@ -12,8 +12,10 @@ class DestinationOutMaskedView: UIView {
     private var blackView: UIView? {
         subviews.first(where: {$0.layer.name == "blackView"})
     }
+    let color: UIColor
     
-    init(type:Type = .button) {
+    init(type:Type = .button, color: UIColor? = nil) {
+        self.color = color ?? (type == .button ? .black : .dark)
         super.init(frame: .zero)
         self.layer.name = .init(describing: Self.self) + type.rawValue
     }
@@ -35,8 +37,8 @@ class DestinationOutMaskedView: UIView {
         }
         let type = self.type
         let blackView = UIView()
-        blackView.backgroundColor = .dark
-        blackView.layer.backgroundColor = UIColor.dark.withAlphaComponent(type != .borders ? 0.2 : 1).cgColor
+        blackView.backgroundColor = color
+        blackView.layer.backgroundColor = blackView.backgroundColor?.withAlphaComponent(type != .borders ? 0.1 : 1).cgColor
         blackView.layer.name = "blackView"
         blackView.clipsToBounds = true
         addSubview(blackView)
@@ -51,9 +53,9 @@ class DestinationOutMaskedView: UIView {
                 $0.bottomAnchor.constraint(equalTo: $0.superview!.bottomAnchor)
             ])
         }
-        if type != .borders {
-            blackView.addBlurView()
-        }
+//        if type != .borders {
+//            blackView.addBlurView()
+//        }
         isUserInteractionEnabled = false
     }
     
@@ -65,7 +67,7 @@ class DestinationOutMaskedView: UIView {
     private func drawMask(_ rect: CGRect) {
         let type = self.type
         let safeAreaInsets = type != .button ? safeAreaInsets : .init()
-        let height = type == .button ? rect.height / 2 : rect.height - (4 + safeAreaInsets.top + safeAreaInsets.bottom)
+        let height = type == .button ? (rect.height / 2) - 2 : rect.height - (4 + safeAreaInsets.top + safeAreaInsets.bottom)
         let pathRect = CGRect.init(origin: .init(x: 2 + safeAreaInsets.left, y: 2 + safeAreaInsets.top), size: .init(width: rect.width - (4 + (safeAreaInsets.left + safeAreaInsets.right)), height: height))
 //        let pathRect = CGRect.init(origin: .init(x: 2, y: 2), size: .init(width: rect.width - 4, height: rect.height / 2))
 

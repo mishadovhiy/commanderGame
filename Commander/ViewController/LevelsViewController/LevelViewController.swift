@@ -94,10 +94,10 @@ class LevelViewController: UIViewController {
                 if let button = ($0.firstItem as? UIButton ?? $0.secondItem as? UIButton) {
                     let position = self.data.levels[button.tag].position
                     if $0.firstAttribute == .leading {
-                        $0.constant = view.frame.width * position.x
+                        $0.constant = (view.frame.width * position.x) - (50 / 2)
                     }
                     if $0.firstAttribute == .top {
-                        $0.constant = view.frame.height * position.y
+                        $0.constant = (view.frame.height * position.y) - (50 / 2)
                     }
                 }
                 

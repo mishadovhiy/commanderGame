@@ -97,7 +97,8 @@ class LevelListSuperViewController: UIViewController {
             let completedKeys = db.keys.filter({
                 ![
                     $0.levelPage == self.selectedLevel.levelPage,
-                    $0.level == self.selectedLevel.level
+                    $0.level == self.selectedLevel.level,
+                    $0.difficulty == self.selectedLevel.difficulty
                 ].contains(false)
             })
             DispatchQueue.main.async {

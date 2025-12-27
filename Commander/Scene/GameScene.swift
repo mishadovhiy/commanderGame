@@ -208,7 +208,6 @@ fileprivate extension GameScene {
                 }
             }
         })
-        print("rfsedaXZ")
     }
         
     func loadGraund() {

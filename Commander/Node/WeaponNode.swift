@@ -112,7 +112,7 @@ extension WeaponNode {
             self.shoot(enemy: enemy)
         }
     }
-    
+    #warning("todo: test when enemy not killed and not in the range, if ok, test when two wepons interracting with enemy that is not killed and passed")
     private func canShoot(_ enemy: EnemyNode, force: Bool) -> Bool {
         if targetEnemy != enemy && targetEnemy != nil && self.parent != nil {
             return false

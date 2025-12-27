@@ -10,15 +10,18 @@ import UIKit
 class CompletedLevelTableCell: UITableViewCell {
 
     
+    @IBOutlet weak var topTitleLabelsStackView: UIStackView!
     @IBOutlet private weak var rightTitleLabel: UILabel!
     
     @IBOutlet private weak var contentStackView: UIStackView!
     @IBOutlet private weak var sectionNameLabel: UILabel!
     
-
+    @IBOutlet weak var containerBackgroundView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentStackView.addSubview(ContainerMaskedView(isHorizontal: nil))
+        containerBackgroundView.addSubview(ContainerMaskedView(isHorizontal: nil))
+        sectionNameLabel.superview?.insertSubview(ContainerMaskedView(isHorizontal: nil), at: 0)
     }
     
     func set(data: ContentDataModel) {
@@ -28,11 +31,15 @@ class CompletedLevelTableCell: UITableViewCell {
         data.data.tableData.forEach { model in
             sectionI += 1
             var i = 0
-            [model.content.left, model.content.middle, model.content.right].forEach { data in
+            model.content.forEach { data in
                 self.setValue(for: .init(row: i, section: sectionI), value: data, section: model.section)
                 i += 1
 
             }
+        }
+        topTitleLabelsStackView.arrangedSubviews.forEach {
+            guard let label = $0 as? UILabel else { return }
+            label.text = data.data.topTitles[label.tag]
         }
     }
     
@@ -52,14 +59,14 @@ extension CompletedLevelTableCell {
         let data: CellTableModel
     }
     struct CellTableModel {
-        let topTitles: HStackModel
+        let topTitles: [String]
         let tableData: [
             TableDataModel
         ]
         
         struct TableDataModel {
             let section: LeftSectionModel
-            let content: HStackModel
+            let content: [HStackModel.ValueModel]
         }
         
         struct LeftSectionModel {

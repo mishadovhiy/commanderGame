@@ -45,10 +45,9 @@ class LevelDescriptionViewController: UIViewController {
             result.append(
                 .init(section: levelName,
                              data:
-                        .init(topTitles: .init(
-                            left: .init(GameDurationType.normal.rawValue),
-                            middle: .init(GameDurationType.infinityHealth.rawValue),
-                            right: .init(GameDurationType.singleLife.rawValue)),
+                        .init(topTitles: GameDurationType.allCases.compactMap({
+                            $0.rawValue
+                        }),
                               tableData:
                                 Difficulty.allCases
                             .compactMap({ difficulty in
@@ -56,7 +55,7 @@ class LevelDescriptionViewController: UIViewController {
                                         $0.difficulty == difficulty && $0.level == levelName
                                     })
                                     if keys.isEmpty {
-                                        return .init(section: .init("-"), content: .init(left: .init("-"), middle: .init("-"), right: .init("-")))
+                                        return .init(section: .init("-"), content: [.init("-"), .init("-"), .init("-")])
                                     }
                                     var progress:[GameDurationType: GameProgress?] = [:]
                                     GameDurationType.allCases.forEach({ duration in
@@ -68,7 +67,7 @@ class LevelDescriptionViewController: UIViewController {
                                     })
                                                               
                     return .init(section: .init(difficulty.rawValue),
-                                 content: .init(left: .init("\(progress[.normal]??.score ?? 0)"), middle: .init("\(progress[.infinityHealth]??.score ?? 0)"), right: .init("\(progress[.singleLife]??.score ?? 0)")))
+                                 content:[ .init("\(progress[.normal]??.score ?? 0)"), .init("\(progress[.infinityHealth]??.score ?? 0)"), .init("\(progress[.singleLife]??.score ?? 0)")])
                                                                        
                                                                       
                                 })
@@ -99,16 +98,11 @@ class LevelDescriptionViewController: UIViewController {
             result.append(.init(
                 section: duration.rawValue,
                 data: .init(
-                    topTitles: .init(left: .init("earned"),
-                                     middle: .init("enemy killed/passed"),
-                                     right: .init("score")),
+                    topTitles: ["earned", "killed / passed", "score"],
                     tableData: progress.compactMap({ (key: Difficulty,
                                                       value: GameProgress?) in
                             .init(section: .init(key.rawValue),
-                                  content: .init(
-                                    left: .init("\(value?.earnedMoney ?? 0)"),
-                                    middle: .init("\(value?.killedEnemies ?? 0)/\(value?.passedEnemyCount ?? 0)"),
-                                    right: .init("\(value?.score ?? 0)")))
+                                  content:[.init("\(value?.earnedMoney ?? 0)"), .init("\(value?.killedEnemies ?? 0)/\(value?.passedEnemyCount ?? 0)"), .init("\(value?.score ?? 0)")] )
                     }))))
         }
         return result

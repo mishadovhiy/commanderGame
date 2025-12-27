@@ -17,6 +17,11 @@ class PageLevelTableCell: UITableViewCell {
     @IBOutlet private weak var pageLabel: UILabel!
     @IBOutlet private weak var levelLabel: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.contentView.addSubview(ContainerMaskedView(isHorizontal: nil))
+    }
+    
     func set(data: ContentDataModel) {
         let pageTitle = NSMutableAttributedString(string: data.pageModel.levelPage)
 

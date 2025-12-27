@@ -32,7 +32,7 @@ enum AudioFileNameType: String, CaseIterable {
         case .music:
             0.2
         case .gameSound:
-            0.3
+            0.05
         }
     }
     
