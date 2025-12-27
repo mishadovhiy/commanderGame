@@ -11,12 +11,14 @@ class EnemyNode: SKSpriteNode {
     let type: EnemyType
     var health: Int
     var totalHealth: Int
-
+    
     init(type: EnemyType, builder: GameBuilderModel) {
         self.type = type
+        
         self.health = (type.health * builder.enemyHealthMult) * 3
         self.totalHealth = health
         super.init(texture: .init(imageNamed: "enemy/" + type.component.rawValue + "/1"), color: .clear, size: CGSize(width: 20, height: 20))
+        addChild(AudioContainerNode(audioNames: [.explosure1]))
         self.name = .init(describing: Self.self)
         self.physicsBody = .init(rectangleOf: size)
         self.physicsBody?.categoryBitMask = PhysicsCategory.enemy
@@ -39,6 +41,12 @@ class EnemyNode: SKSpriteNode {
         progress.zPosition = 1
         addChild(progress)
         self.alpha = 0
+    }
+    
+    var audioContainer: AudioContainerNode? {
+        children.first(where:  {
+            $0 is AudioContainerNode
+        }) as? AudioContainerNode
     }
     
     func run(in shape: CGPath, i: CGFloat, completion: @escaping()->()) {
@@ -96,6 +104,7 @@ class EnemyNode: SKSpriteNode {
     }
     
     override func removeFromParent() {
+        audioContainer?.play(.explosure1)
         let explosure = SKSpriteNode(texture: .init(image: .exposure), size: .init(width: 5, height: 5))
         explosure.name = "explosure"
         addChild(explosure)

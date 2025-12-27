@@ -18,6 +18,9 @@ class HomeViewController: UIViewController {
     override func loadView() {
         super.loadView()
         self.mapImageView.translatesAutoresizingMaskIntoConstraints = true
+        mapImageView.layer.shadowColor = UIColor.black.cgColor
+        mapImageView.layer.shadowOpacity = 0.5
+        mapImageView.layer.shadowRadius = 10
         loadLevelListChild()
         self.view.addSubview(DestinationOutMaskedView(type: .borders))
         blackSafeAreaMaskOverlayView?.alpha = 0
@@ -38,24 +41,12 @@ class HomeViewController: UIViewController {
             return
         }
         let page = self.startView.isHidden ? page : nil
-        print(page?.zoom, " hfgdfsfgd", page?.title, " yhtgrf", mapImageView.frame.origin)
         self.levelAnimating = true
 
-//        if mapImageView.frame.origin != .zero,
-//            page != nil,
-//            animated {
-//            self.performSetMap(for: nil, animated: animated, completion: {
-//                self.performSetMap(for: page, animated: animated, completion: {
-//                    completion()
-//                    self.levelAnimating = false
-//                })
-//            })
-//        } else {
-            self.performSetMap(for: page, animated: animated, completion: {
-                completion()
-                self.levelAnimating = false
-            })
-//        }
+        self.performSetMap(for: page, animated: animated, completion: {
+            completion()
+            self.levelAnimating = false
+        })
         
     }
     
@@ -68,7 +59,6 @@ class HomeViewController: UIViewController {
             self.view.backgroundColor = page == nil ? .dark : .container
             self.view.tintColor = page == nil ? .accent : .white
             let multiplier = page?.zoom ?? 1
-            print(multiplier, " gebfjsbd")
             let size: CGSize = page == nil ? viewSize : imageSize
             let resultSize: CGSize = .init(width: size.width * multiplier, height: size.height * multiplier)
             let origin: CGPoint = .init(

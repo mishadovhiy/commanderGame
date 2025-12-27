@@ -249,3 +249,20 @@ extension UINavigationController: @retroactive UIGestureRecognizerDelegate {
         return true
     }
 }
+
+extension UILabel {
+    open override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        guard let _ = superview else {
+            return
+        }
+        
+        self.font = font.customFont()
+    }
+}
+
+extension UIFont {
+    func customFont() -> Self {
+        return .init(name: "Tiny5-Regular", size: self.pointSize)!
+    }
+}

@@ -30,6 +30,13 @@ extension DataBaseModel {
                 var gameSound: CGFloat = 0.2
                 var music: CGFloat = 0.2
                 var menu: CGFloat = 0.2
+                
+                
+                enum CodingKeys: String, CodingKey {
+                    case gameSound
+                    case music
+                    case menu
+                }
             }
         }
     }

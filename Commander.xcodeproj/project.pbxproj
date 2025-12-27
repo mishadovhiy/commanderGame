@@ -25,6 +25,9 @@
 		823498082EEB729500F82871 /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823498072EEB729500F82871 /* PhysicsCategory.swift */; };
 		8234980A2EEB739F00F82871 /* WeaponNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823498092EEB739F00F82871 /* WeaponNode.swift */; };
 		8234980C2EEB77B900F82871 /* BulletNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8234980B2EEB77B900F82871 /* BulletNode.swift */; };
+		8235D16C2EFFA40A00D48EB0 /* explosure1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8235D16B2EFFA40A00D48EB0 /* explosure1.m4a */; };
+		8235D1702EFFA8D000D48EB0 /* AudioFileNameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8235D16F2EFFA8D000D48EB0 /* AudioFileNameType.swift */; };
+		8235D1732EFFCED400D48EB0 /* AudioNodeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8235D1722EFFCED400D48EB0 /* AudioNodeContainer.swift */; };
 		8260E23D2EED37BF002E29C0 /* LevelListSuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E23C2EED37BF002E29C0 /* LevelListSuperViewController.swift */; };
 		8260E23F2EED381A002E29C0 /* LevelsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E23E2EED3819002E29C0 /* LevelsPageViewController.swift */; };
 		8260E2412EED383E002E29C0 /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E2402EED383E002E29C0 /* LevelViewController.swift */; };
@@ -53,6 +56,7 @@
 		829CADCE2EFA901E00548DB1 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CADCD2EFA901D00548DB1 /* AlertModel.swift */; };
 		82A2EEF92EFC38F900437B4E /* CompletedLevelTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A2EEF82EFC38F900437B4E /* CompletedLevelTableCell.swift */; };
 		82A2EEFC2EFCEB1900437B4E /* PageLevelTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A2EEFB2EFCEB1900437B4E /* PageLevelTableCell.swift */; };
+		82B65DA62EFEF61A007EC20D /* Tiny5-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 82B65DA52EFEF61A007EC20D /* Tiny5-Regular.otf */; };
 		82C637B12EEE57350064F917 /* BuyCoinsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637B02EEE57350064F917 /* BuyCoinsViewController.swift */; };
 		82C637BE2EEF40100064F917 /* WeaponUpgradeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637BD2EEF40100064F917 /* WeaponUpgradeType.swift */; };
 		82C637C02EEF41420064F917 /* UserBalanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637BF2EEF41420064F917 /* UserBalanceCell.swift */; };
@@ -86,6 +90,9 @@
 		823498072EEB729500F82871 /* PhysicsCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
 		823498092EEB739F00F82871 /* WeaponNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponNode.swift; sourceTree = "<group>"; };
 		8234980B2EEB77B900F82871 /* BulletNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletNode.swift; sourceTree = "<group>"; };
+		8235D16B2EFFA40A00D48EB0 /* explosure1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosure1.m4a; sourceTree = "<group>"; };
+		8235D16F2EFFA8D000D48EB0 /* AudioFileNameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFileNameType.swift; sourceTree = "<group>"; };
+		8235D1722EFFCED400D48EB0 /* AudioNodeContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioNodeContainer.swift; sourceTree = "<group>"; };
 		8260E23C2EED37BF002E29C0 /* LevelListSuperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelListSuperViewController.swift; sourceTree = "<group>"; };
 		8260E23E2EED3819002E29C0 /* LevelsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsPageViewController.swift; sourceTree = "<group>"; };
 		8260E2402EED383E002E29C0 /* LevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +122,7 @@
 		829CADCD2EFA901D00548DB1 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
 		82A2EEF82EFC38F900437B4E /* CompletedLevelTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedLevelTableCell.swift; sourceTree = "<group>"; };
 		82A2EEFB2EFCEB1900437B4E /* PageLevelTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageLevelTableCell.swift; sourceTree = "<group>"; };
+		82B65DA52EFEF61A007EC20D /* Tiny5-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tiny5-Regular.otf"; sourceTree = "<group>"; };
 		82C637B02EEE57350064F917 /* BuyCoinsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyCoinsViewController.swift; sourceTree = "<group>"; };
 		82C637BD2EEF40100064F917 /* WeaponUpgradeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponUpgradeType.swift; sourceTree = "<group>"; };
 		82C637BF2EEF41420064F917 /* UserBalanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBalanceCell.swift; sourceTree = "<group>"; };
@@ -169,20 +177,19 @@
 				827A7B1C2EF2379A00A080C9 /* Commander.entitlements */,
 				823497D22EEB210E00F82871 /* Info.plist */,
 				823497C02EEB1FAA00F82871 /* AppDelegate.swift */,
-				823497C12EEB1FAA00F82871 /* Assets.xcassets */,
 				823497C22EEB1FAA00F82871 /* GameScene.sks */,
-				823497F42EEB5C0200F82871 /* LevelManager.swift */,
-				823498072EEB729500F82871 /* PhysicsCategory.swift */,
-				82C637D82EEF4B980064F917 /* Keys.swift */,
+				8235D16E2EFFA8BF00D48EB0 /* Cofig */,
 				823095372EF03FDA00989895 /* Builder */,
 				82C637DC2EEF4E090064F917 /* Service */,
 				823497FC2EEB664D00F82871 /* DataModel */,
-				823498042EEB6F9700F82871 /* Scene */,
 				823498032EEB6F8400F82871 /* Node */,
+				823498042EEB6F9700F82871 /* Scene */,
 				823498052EEB6FBD00F82871 /* ViewController */,
 				826A32B52EECEA28001D25B7 /* ComponentView */,
-				823497C62EEB1FAA00F82871 /* LaunchScreen.storyboard */,
 				823498062EEB6FCA00F82871 /* View */,
+				823497C12EEB1FAA00F82871 /* Assets.xcassets */,
+				823497C62EEB1FAA00F82871 /* LaunchScreen.storyboard */,
+				8235D1712EFFA8EA00D48EB0 /* Files */,
 				826A32C82EED05C6001D25B7 /* Extensions */,
 			);
 			path = Commander;
@@ -250,6 +257,34 @@
 				829CADB92EFA8A7200548DB1 /* Reusable.storyboard */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		8235D16D2EFFA41C00D48EB0 /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				8235D16B2EFFA40A00D48EB0 /* explosure1.m4a */,
+			);
+			path = audio;
+			sourceTree = "<group>";
+		};
+		8235D16E2EFFA8BF00D48EB0 /* Cofig */ = {
+			isa = PBXGroup;
+			children = (
+				823497F42EEB5C0200F82871 /* LevelManager.swift */,
+				823498072EEB729500F82871 /* PhysicsCategory.swift */,
+				8235D16F2EFFA8D000D48EB0 /* AudioFileNameType.swift */,
+				82C637D82EEF4B980064F917 /* Keys.swift */,
+			);
+			path = Cofig;
+			sourceTree = "<group>";
+		};
+		8235D1712EFFA8EA00D48EB0 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				82B65DA52EFEF61A007EC20D /* Tiny5-Regular.otf */,
+				8235D16D2EFFA41C00D48EB0 /* audio */,
+			);
+			path = Files;
 			sourceTree = "<group>";
 		};
 		8260E2422EED3846002E29C0 /* LevelsViewController */ = {
@@ -399,6 +434,7 @@
 			children = (
 				82C637D62EEF4B6C0064F917 /* KeychainService.swift */,
 				82C637DA2EEF4C360064F917 /* DataBaseService.swift */,
+				8235D1722EFFCED400D48EB0 /* AudioNodeContainer.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -464,11 +500,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82B65DA62EFEF61A007EC20D /* Tiny5-Regular.otf in Resources */,
 				823497CE2EEB1FAA00F82871 /* Assets.xcassets in Resources */,
 				823497CF2EEB1FAA00F82871 /* GameScene.sks in Resources */,
 				8260E2822EEE50BD002E29C0 /* TableDataCell.xib in Resources */,
 				826A32BD2EECEA80001D25B7 /* AlertView.xib in Resources */,
 				823497D02EEB1FAA00F82871 /* LaunchScreen.storyboard in Resources */,
+				8235D16C2EFFA40A00D48EB0 /* explosure1.m4a in Resources */,
 				829CADBA2EFA8A7200548DB1 /* Reusable.storyboard in Resources */,
 				823497D12EEB1FAA00F82871 /* Main.storyboard in Resources */,
 			);
@@ -523,9 +561,11 @@
 				82C637C02EEF41420064F917 /* UserBalanceCell.swift in Sources */,
 				82C637B12EEE57350064F917 /* BuyCoinsViewController.swift in Sources */,
 				82A2EEFC2EFCEB1900437B4E /* PageLevelTableCell.swift in Sources */,
+				8235D1732EFFCED400D48EB0 /* AudioNodeContainer.swift in Sources */,
 				823498082EEB729500F82871 /* PhysicsCategory.swift in Sources */,
 				8289ABB62EF4F38700F78DD0 /* HomeViewController.swift in Sources */,
 				823497F22EEB5AB400F82871 /* GameDurationType.swift in Sources */,
+				8235D1702EFFA8D000D48EB0 /* AudioFileNameType.swift in Sources */,
 				8234980A2EEB739F00F82871 /* WeaponNode.swift in Sources */,
 				823497CC2EEB1FAA00F82871 /* GameViewController.swift in Sources */,
 				826A32BA2EECEA6C001D25B7 /* AlertView.swift in Sources */,
@@ -703,12 +743,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dovhiy.Commander;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -739,12 +781,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dovhiy.Commander;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
