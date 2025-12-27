@@ -38,7 +38,7 @@ class WeaponNode: SKSpriteNode {
         audioNode = .init(audioNames: [.shoot1, .shoot2])
         super.init(texture: nil, color: .clear, size: CGSize(width: 100, height: 100))
         self.name = .init(describing: Self.self)
-        self.physicsBody = .init(circleOfRadius: 100)
+        self.physicsBody = .init(rectangleOf: self.size)
         self.physicsBody?.categoryBitMask = PhysicsCategory.weapon
         self.physicsBody?.contactTestBitMask = PhysicsCategory.enemy
         self.physicsBody?.collisionBitMask = 0
@@ -110,7 +110,7 @@ extension WeaponNode {
         self.run(SKAction.wait(forDuration: 0.5)) {
             self.addBullet()
 
-            self.targetEnemy = nil
+//            self.targetEnemy = nil
             self.shoot(enemy: enemy)
         }
     }

@@ -21,10 +21,10 @@ class AudioContainerNode: SKNode {
         })
         super.init()
         //set from db
-        self.updateVolume(canPlay: true)
         audioNodes.forEach {
             self.addChild($0)
         }
+        self.updateVolume(canPlay: true)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -34,7 +34,6 @@ class AudioContainerNode: SKNode {
     func updateVolume(canPlay: Bool) {
         audioNodes.forEach { node in
             let volume = (AudioFileNameType.init(rawValue: node.name ?? "") ?? .coins).volume
-            node.avAudioNode?.engine?.mainMixerNode.volume = canPlay ? volume : 0
             node.avAudioNode?.engine?.mainMixerNode.outputVolume = canPlay ? volume : 0
 
         }
