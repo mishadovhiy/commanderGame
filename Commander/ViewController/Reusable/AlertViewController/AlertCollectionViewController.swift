@@ -14,10 +14,9 @@ class AlertCollectionViewController: UIViewController, AlertChildProtocol {
     
     override func loadView() {
         super.loadView()
+        view.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = .green
-        print(dataModel?.type.data, " tg4erfwd ")
     }
 
     var parentVC: AlertViewController? {

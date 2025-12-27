@@ -18,7 +18,7 @@ class EnemyNode: SKSpriteNode {
         self.health = (type.health * builder.enemyHealthMult) * 3
         self.totalHealth = health
         super.init(texture: .init(imageNamed: "enemy/" + type.component.rawValue + "/1"), color: .clear, size: CGSize(width: 20, height: 20))
-        addChild(AudioContainerNode(audioNames: [.explosure1]))
+        addChild(AudioContainerNode(audioNames: [.explosure1, .explosure3, .explosure4, .explosure, .hit1, .hit2, .coins]))
         self.name = .init(describing: Self.self)
         self.physicsBody = .init(rectangleOf: size)
         self.physicsBody?.categoryBitMask = PhysicsCategory.enemy
@@ -67,7 +67,7 @@ class EnemyNode: SKSpriteNode {
             return false
         }
         print(bullet.damage, " ", health)
-
+        audioContainer?.play(.hit1)
         health -= bullet.damage
         let newPercent = CGFloat(health) / CGFloat(totalHealth)
         if newPercent > 0 {
@@ -115,6 +115,10 @@ class EnemyNode: SKSpriteNode {
                 explosure.run(.fadeOut(withDuration: 0.3))
                 self.run(.wait(forDuration: 0.3)) {
                     explosure.removeFromParent()
+                    self.audioContainer?.play(.coins)
+                    self.children.forEach {
+                        $0.removeFromParent()
+                    }
                     super.removeFromParent()
                 }
             }

@@ -13,6 +13,7 @@ class AlertTableViewController: UIViewController, AlertChildProtocol {
 
     override func loadView() {
         super.loadView()
+        view.backgroundColor = .clear
         tableView.delegate = self
         tableView.dataSource = self
     }

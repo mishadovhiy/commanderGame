@@ -11,14 +11,14 @@ enum AudioFileNameType: String, CaseIterable {
     case explosure1, explosure, explosure3, explosure4
     case shoot1, shoot2, hit1, hit2
     case menu1, menu2, menu3
-    case weaponUpgrade, success1, success2, coins
+    case weaponUpgrade, success1, success2, coins, loose
     
     typealias SoundType = DataBaseModel.Settings.Sound.Voluem.CodingKeys
     
     var type: SoundType {
         switch self {
         case .menu1, .menu2, .menu3, .weaponUpgrade,
-                .success1, .success2, .coins:
+                .success1, .success2, .coins, .loose:
                 .menu
         default:
                 .gameSound

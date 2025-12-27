@@ -8,7 +8,7 @@
 import UIKit
 import SpriteKit
 
-class GameViewController: UIViewController {
+class GameViewController: AudioViewController {
     
     @IBOutlet weak var healthLabel: UILabel!
     @IBOutlet weak var balanceLabel: UILabel!
@@ -21,7 +21,11 @@ class GameViewController: UIViewController {
     private var weaponTableData: [TableDataModel] = []
     private var weaponHolder: CGPoint?
     var selectedLevel: LevelModel!
-    
+    override var audioFiles: [AudioFileNameType] {
+        AudioFileNameType.allCases.filter({
+            $0.type == .menu
+        })
+    }
     override func loadView() {
         super.loadView()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -62,6 +66,7 @@ class GameViewController: UIViewController {
     }
     
     @IBAction private func speedPressed(_ sender: UIButton) {
+        play(.menu1)
         if sender.tag == 2 {
             sender.tag = 0
         } else {
@@ -82,15 +87,38 @@ class GameViewController: UIViewController {
     }
     
     @IBAction private func menuPressed(_ sender: Any) {
-        self.dismiss(animated: true)
+        play(.menu1)
+        gameScene?.isPaused = true
+let vc = AlertViewController.initiate(data: .init(title: "Menu", type: .collectionView([
+    AlertModel.TitleCellModel(title: """
+level: \(self.selectedLevel.level)
+page: \(self.selectedLevel.levelPage)
+difficulty: \(self.selectedLevel.difficulty?.rawValue ?? "-") durations: \(self.selectedLevel.duration?.rawValue ?? "-")
+"""),
+    AlertModel.TitleCellModel(button: .init(title: "Sound", toAlert: {
+.init(title: "Sound", type: .soundSettingsData, buttons: [])
+})),
+    AlertModel.TitleCellModel(button: .init(title: "Close", didPress: {
+        self.dismiss(animated: true) {
+            self.dismiss(animated: true)
+        }
+    }))
+]), buttons: []))
+        vc.didDismiss = { [weak self] in
+            self?.gameScene?.isPaused = false
+        }
+        self.present(vc: vc)
     }
     
     @IBAction private func playPausePressed(_ sender: UIButton) {
+        play(.menu1)
+
         gameScene?.isPaused.toggle()
         sender.setImage((gameScene?.isPaused ?? false) ? .play : .pause, for: .init())
     }
     
     @IBAction private func hideButtonsPressed(_ sender: UIButton) {
+        play(.menu2)
         let icon = sender.tag == 1 ? "arrowshape.right.fill" : "arrowshape.left.fill"
         sender.tag = sender.tag == 1 ? 0 : 1
         UIView.animate(withDuration: 0.3, delay: 0, options: [.transitionFlipFromRight, .allowUserInteraction]) {
@@ -172,11 +200,13 @@ class GameViewController: UIViewController {
     }
     
     @IBAction private func hideEditingPressed(_ sender: Any) {
+        play(.menu1)
         editingWeapon?.isEditing = false
         didSetEditingWeaponNode()
     }
     
     @IBAction private func upgradeWeaponPressed(_ sender: Any) {
+        play(.coins)
         print((editingWeapon?.upgrade?.index ?? -1) + 1, " yh5rtegfd")
         editingWeapon?.upgrade = .allCases[(editingWeapon?.upgrade?.index ?? -1) + 1]
         editingWeapon?.isEditing = false
@@ -184,11 +214,13 @@ class GameViewController: UIViewController {
     }
 
     @IBAction private func deleteWeaponPressed(_ sender: Any) {
+        play(.menu3)
         editingWeapon?.removeFromParent()
         didSetEditingWeaponNode()
     }
     
     public func didSetEditingWeaponNode() {
+        play(.menu1)
         self.view.isUserInteractionEnabled = false
         UIView.animate(withDuration: 0.3, animations: {
             self.editingWeaponImageView.superview?.superview?.isHidden = self.editingWeapon == nil

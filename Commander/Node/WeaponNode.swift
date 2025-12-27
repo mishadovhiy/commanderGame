@@ -23,7 +23,7 @@ class WeaponNode: SKSpriteNode {
             setEditing()
         }
     }
-    
+    private let audioNode: AudioContainerNode
     var targetEnemy: EnemyNode?
     var nextEnemyHolder: EnemyNode? {
         (parent as? GameScene)?.enemies.last(where: {
@@ -35,6 +35,7 @@ class WeaponNode: SKSpriteNode {
     init(type: WeaponType) {
         self.type = type
         self.damage = type.damage * 4
+        audioNode = .init(audioNames: [.shoot1, .shoot2])
         super.init(texture: nil, color: .clear, size: CGSize(width: 100, height: 100))
         self.name = .init(describing: Self.self)
         self.physicsBody = .init(circleOfRadius: 100)
@@ -103,6 +104,7 @@ extension WeaponNode {
             return
         }
         if self.parent?.isPaused ?? true == false {
+            audioNode.play(.shoot1)
             self.performShoot(enemy)
         }
         self.run(SKAction.wait(forDuration: 0.5)) {

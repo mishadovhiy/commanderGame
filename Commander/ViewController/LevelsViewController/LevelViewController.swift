@@ -172,7 +172,7 @@ class LevelViewController: UIViewController {
     }
     
     @objc func didSelectLevel(_ sender: UIButton) {
-        let selectedHolder = parentVC?.selectedLevel
+        parentVC?.homeParentVC?.play(.menu2)
         parentVC?.selectedLevel = .init(
             level: data.levels[sender.tag].title,
             levelPage: parentVC!.selectedLevel.levelPage)

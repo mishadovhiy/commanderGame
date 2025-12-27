@@ -9,6 +9,7 @@ import UIKit
 
 class AlertViewController: AudioViewController {
     
+    @IBOutlet weak var blurView: UIView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var buttonsStackView: UIStackView!
@@ -18,10 +19,30 @@ class AlertViewController: AudioViewController {
         [.menu1]
     }
     override func loadView() {
-        
         super.loadView()
+        blurView.alpha = 0
+        blurView.addBlurView()
         loadChildVC()
-        self.view.backgroundColor = .clear
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        animateAppearence(show: true)
+    }
+    
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        animateAppearence(show: false) {
+            super.dismiss(animated: flag, completion: completion)
+        }
+    }
+    
+    private func animateAppearence(show: Bool, completion: @escaping()->() = {}) {
+        UIView.animate(withDuration: 0.3) {
+            self.blurView.alpha = show ? 1 : 0
+            self.view.backgroundColor = show ? .extraDark.withAlphaComponent(0.2) : .clear
+        } completion: { _ in
+            completion()
+        }
     }
     
     func containerVC(_ data: AlertModel) -> AlertChildProtocol {
@@ -62,6 +83,7 @@ class AlertViewController: AudioViewController {
 extension AlertViewController {
     func loadChildVC() {
         let nav = UINavigationController(rootViewController: containerVC(data))
+        nav.view.backgroundColor = .clear
         containerView.addSubview(nav.view)
         nav.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

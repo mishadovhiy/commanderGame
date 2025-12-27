@@ -123,6 +123,8 @@ class GameScene: SKScene {
             #warning("save new balance to keychain")
             print("game completed ", levelManager.lvlModel)
             DispatchQueue.main.async {
+                self.gameVC?.play(.success2)
+
                 self.gameVC?.dismiss(animated: true) {
                     UIApplication.shared.activeWindow?.rootViewController?.present(vc: AlertViewController.initiate(data: AlertModel.init(title: "", type: .tableView([
                         AlertModel.TitleCellModel.init(title: "you have wone")
@@ -198,9 +200,11 @@ fileprivate extension GameScene {
         self.addChild(node)
         node.run(in: path, i: CGFloat(i), completion: {
             self.lvlanager.progress.health -= 1
+            self.lvlanager.progress.passedEnemyCount += 1
             node.removeFromParent()
             self.loadRaund()
             if self.lvlanager.progress.health <= 0 {
+                self.gameVC?.play(.loose)
                 self.gameVC?.dismiss(animated: true) {
                     UIApplication.shared.activeWindow?.rootViewController?.present(vc: AlertViewController.initiate(data: AlertModel.init(title: "", type: .tableView([
                         AlertModel.TitleCellModel.init(title: "you have lost")

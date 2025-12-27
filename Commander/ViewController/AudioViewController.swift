@@ -8,7 +8,7 @@
 import UIKit
 import AVFAudio
 
-class AudioViewController: UIViewController {
+class AudioViewController: BaseVC {
         
     private var audioPlayers: [AVAudioPlayer] = []
     var audioFiles: [AudioFileNameType] {[]}
@@ -25,6 +25,18 @@ class AudioViewController: UIViewController {
         setSoundEnabled(true, type: .music)
         setSoundEnabled(true, type: .gameSound)
 
+    }
+    
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        super.dismiss(animated: flag, completion: {
+            self.audioPlayers.removeAll()
+            completion?()
+        })
+        
+    }
+    
+    deinit {
+        self.audioPlayers.removeAll()
     }
     
     func play(_ name: AudioFileNameType) {
@@ -59,3 +71,20 @@ class AudioViewController: UIViewController {
         }
     }
 }
+
+class BaseVC: UIViewController {
+    var didDismiss:(()->())?
+    
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        super.dismiss(animated: flag, completion: {
+            self.didDismiss?()
+            self.didDismiss = nil
+            completion?()
+        })
+    }
+    
+    deinit {
+        didDismiss = nil
+    }
+}
+

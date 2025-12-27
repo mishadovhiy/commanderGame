@@ -43,6 +43,7 @@
 		8235D1932F002D7700D48EB0 /* coins.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8235D17A2F002D7700D48EB0 /* coins.m4a */; };
 		8235D1942F002D7700D48EB0 /* weaponUpgrade.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8235D1872F002D7700D48EB0 /* weaponUpgrade.m4a */; };
 		8235D1952F002D7700D48EB0 /* success1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8235D1852F002D7700D48EB0 /* success1.m4a */; };
+		8235D1972F007C1600D48EB0 /* loose.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8235D1962F007C1600D48EB0 /* loose.m4a */; };
 		8260E23D2EED37BF002E29C0 /* LevelListSuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E23C2EED37BF002E29C0 /* LevelListSuperViewController.swift */; };
 		8260E23F2EED381A002E29C0 /* LevelsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E23E2EED3819002E29C0 /* LevelsPageViewController.swift */; };
 		8260E2412EED383E002E29C0 /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E2402EED383E002E29C0 /* LevelViewController.swift */; };
@@ -53,8 +54,6 @@
 		8260E27E2EEE5039002E29C0 /* TableDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E27D2EEE5039002E29C0 /* TableDataModel.swift */; };
 		8260E2812EEE50BD002E29C0 /* TableDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E27F2EEE50BD002E29C0 /* TableDataCell.swift */; };
 		8260E2822EEE50BD002E29C0 /* TableDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8260E2802EEE50BD002E29C0 /* TableDataCell.xib */; };
-		826A32BA2EECEA6C001D25B7 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32B92EECEA6C001D25B7 /* AlertView.swift */; };
-		826A32BD2EECEA80001D25B7 /* AlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 826A32BC2EECEA80001D25B7 /* AlertView.xib */; };
 		826A32BF2EECEB01001D25B7 /* ButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32BE2EECEB01001D25B7 /* ButtonModel.swift */; };
 		826A32C12EECEB0E001D25B7 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32C02EECEB0E001D25B7 /* MessageModel.swift */; };
 		826A32C72EED05BF001D25B7 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32C62EED05BF001D25B7 /* UIView.swift */; };
@@ -123,6 +122,7 @@
 		8235D1852F002D7700D48EB0 /* success1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = success1.m4a; sourceTree = "<group>"; };
 		8235D1862F002D7700D48EB0 /* success2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = success2.m4a; sourceTree = "<group>"; };
 		8235D1872F002D7700D48EB0 /* weaponUpgrade.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = weaponUpgrade.m4a; sourceTree = "<group>"; };
+		8235D1962F007C1600D48EB0 /* loose.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = loose.m4a; sourceTree = "<group>"; };
 		8260E23C2EED37BF002E29C0 /* LevelListSuperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelListSuperViewController.swift; sourceTree = "<group>"; };
 		8260E23E2EED3819002E29C0 /* LevelsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsPageViewController.swift; sourceTree = "<group>"; };
 		8260E2402EED383E002E29C0 /* LevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
@@ -133,8 +133,6 @@
 		8260E27D2EEE5039002E29C0 /* TableDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataModel.swift; sourceTree = "<group>"; };
 		8260E27F2EEE50BD002E29C0 /* TableDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataCell.swift; sourceTree = "<group>"; };
 		8260E2802EEE50BD002E29C0 /* TableDataCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableDataCell.xib; sourceTree = "<group>"; };
-		826A32B92EECEA6C001D25B7 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
-		826A32BC2EECEA80001D25B7 /* AlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertView.xib; sourceTree = "<group>"; };
 		826A32BE2EECEB01001D25B7 /* ButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModel.swift; sourceTree = "<group>"; };
 		826A32C02EECEB0E001D25B7 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		826A32C62EED05BF001D25B7 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -300,6 +298,7 @@
 				8235D17B2F002D7700D48EB0 /* explosure.m4a */,
 				8235D16B2EFFA40A00D48EB0 /* explosure1.m4a */,
 				8235D17C2F002D7700D48EB0 /* explosure3.m4a */,
+				8235D1962F007C1600D48EB0 /* loose.m4a */,
 				8235D17D2F002D7700D48EB0 /* explosure4.m4a */,
 				8235D17E2F002D7700D48EB0 /* hit1.m4a */,
 				8235D1802F002D7700D48EB0 /* hit2.m4a */,
@@ -361,18 +360,8 @@
 			children = (
 				8289ABB32EF3D60300F78DD0 /* DestinationOutMaskedView.swift */,
 				8260E2832EEE50C7002E29C0 /* TableDataCell */,
-				826A32BB2EECEA70001D25B7 /* AlertView */,
 			);
 			path = ComponentView;
-			sourceTree = "<group>";
-		};
-		826A32BB2EECEA70001D25B7 /* AlertView */ = {
-			isa = PBXGroup;
-			children = (
-				826A32B92EECEA6C001D25B7 /* AlertView.swift */,
-				826A32BC2EECEA80001D25B7 /* AlertView.xib */,
-			);
-			path = AlertView;
 			sourceTree = "<group>";
 		};
 		826A32C42EED0594001D25B7 /* GameViewController */ = {
@@ -551,7 +540,7 @@
 				823497CF2EEB1FAA00F82871 /* GameScene.sks in Resources */,
 				8260E2822EEE50BD002E29C0 /* TableDataCell.xib in Resources */,
 				8235D1772EFFF59F00D48EB0 /* menu1.m4a in Resources */,
-				826A32BD2EECEA80001D25B7 /* AlertView.xib in Resources */,
+				8235D1972F007C1600D48EB0 /* loose.m4a in Resources */,
 				823497D02EEB1FAA00F82871 /* LaunchScreen.storyboard in Resources */,
 				8235D16C2EFFA40A00D48EB0 /* explosure1.m4a in Resources */,
 				829CADBA2EFA8A7200548DB1 /* Reusable.storyboard in Resources */,
@@ -628,7 +617,6 @@
 				8235D1702EFFA8D000D48EB0 /* AudioFileNameType.swift in Sources */,
 				8234980A2EEB739F00F82871 /* WeaponNode.swift in Sources */,
 				823497CC2EEB1FAA00F82871 /* GameViewController.swift in Sources */,
-				826A32BA2EECEA6C001D25B7 /* AlertView.swift in Sources */,
 				829CADC52EFA8E1800548DB1 /* AlertCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
