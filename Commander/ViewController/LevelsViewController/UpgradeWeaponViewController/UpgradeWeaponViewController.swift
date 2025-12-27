@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UpgradeWeaponViewController: UIViewController {
+class UpgradeWeaponViewController: AudioViewController {
 
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var collectionVIew: UICollectionView!
@@ -15,7 +15,9 @@ class UpgradeWeaponViewController: UIViewController {
     private var tableData: [WeaponTableCellProtocol] = []
     private var selectedAt: Int? { didSet { updateTableData() }}
     var error: String? = nil
-    
+    override var audioFiles: [AudioFileNameType] {
+        [.weaponUpgrade, .menu1, .menu2, .menu3, .coins, .success1, .success2]
+    }
     override func loadView() {
         super.loadView()
         collectionVIew.delegate = self
@@ -101,6 +103,7 @@ class UpgradeWeaponViewController: UIViewController {
                 updateDict.updateValue(lvl + 1, forKey: type)
                 DataBaseService.db.upgradedWeapons.updateValue(updateDict, forKey: selectedWeapon)
                 DispatchQueue.main.async {
+                   //here paren
                     self.updateTableData()
                 }
             } else {

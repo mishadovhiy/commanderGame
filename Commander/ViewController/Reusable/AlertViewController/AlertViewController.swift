@@ -7,14 +7,16 @@
 
 import UIKit
 
-class AlertViewController: UIViewController {
+class AlertViewController: AudioViewController {
     
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var buttonsStackView: UIStackView!
     
     private var data: AlertModel!
-    
+    override var audioFiles: [AudioFileNameType] {
+        [.menu1]
+    }
     override func loadView() {
         
         super.loadView()
@@ -32,6 +34,7 @@ class AlertViewController: UIViewController {
     }
     
     private func buttonDidPress(_ sender: UIButton) {
+        play(.menu1)
         buttonModelPressed(tag: sender.tag)
     }
     
@@ -50,6 +53,7 @@ class AlertViewController: UIViewController {
     }
     
     @IBAction func dismissDidPress(_ sender: UIButton) {
+        play(.menu1)
         self.dismiss(animated: true)
     }
 }

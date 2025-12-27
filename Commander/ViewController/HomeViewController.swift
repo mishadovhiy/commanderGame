@@ -7,14 +7,16 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: AudioViewController {
 
     @IBOutlet private weak var mapImageView: UIImageView!
     @IBOutlet private weak var contentStackView: UIStackView!
     @IBOutlet private weak var startView: UIView!
     private var levelAnimating: Bool = false
     var currentPage: LevelPagesBuilder?
-    
+    override var audioFiles: [AudioFileNameType] {
+        AudioFileNameType.allCases.filter({$0.type == .menu})
+    }
     override func loadView() {
         super.loadView()
         self.mapImageView.translatesAutoresizingMaskIntoConstraints = true
@@ -73,6 +75,7 @@ class HomeViewController: UIViewController {
     }
     
     public func setStartPressed(_ startPressed: Bool) {
+        self.play(.menu1)
         let vc = children.first(where: {
             $0 is LevelListSuperViewController
         })
@@ -86,6 +89,7 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func settingsDidPress(_ sender: Any) {
+        play(.menu1)
         UIApplication.shared.activeWindow?.rootViewController?.present(vc: AlertViewController.initiate(
             data: .settings)
         )

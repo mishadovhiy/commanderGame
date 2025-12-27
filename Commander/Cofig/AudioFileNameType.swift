@@ -7,15 +7,32 @@
 
 import Foundation
 
-enum AudioFileNameType: String {
-    case explosure1
+enum AudioFileNameType: String, CaseIterable {
+    case explosure1, explosure, explosure3, explosure4
+    case shoot1, shoot2, hit1, hit2
+    case menu1, menu2, menu3
+    case weaponUpgrade, success1, success2, coins
     
     typealias SoundType = DataBaseModel.Settings.Sound.Voluem.CodingKeys
     
     var type: SoundType {
         switch self {
-        case .explosure1:
+        case .menu1, .menu2, .menu3, .weaponUpgrade,
+                .success1, .success2, .coins:
+                .menu
+        default:
                 .gameSound
+        }
+    }
+    
+    var volume: Float {
+        switch self.type {
+        case .menu:
+            0.1
+        case .music:
+            0.2
+        case .gameSound:
+            0.3
         }
     }
     
@@ -25,7 +42,7 @@ enum AudioFileNameType: String {
     
     var format: Format {
         switch self {
-        case .explosure1:
+        default:
                 .m4a
         }
     }

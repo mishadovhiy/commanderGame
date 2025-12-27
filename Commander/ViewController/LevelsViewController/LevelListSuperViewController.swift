@@ -76,18 +76,22 @@ class LevelListSuperViewController: UIViewController {
     }
     
     @IBAction private func startGameDidPress(_ sender: Any) {
+        homeParentVC?.play(.success1)
         self.present(GameViewController.initiate(self.selectedLevel), animated: true)
     }
     
     @IBAction private func upgradeDidPress(_ sender: UIButton) {
+        homeParentVC?.play(.menu2)
         rightPanelNavigation?.pushViewController(UpgradeWeaponViewController.initiateDefault(), animated: true)
     }
     
     @IBAction private func backDidiPress(_ sender: Any) {
+        homeParentVC?.play(.menu1)
         homeParentVC?.setStartPressed(false)
     }
     
     func toGameDurationPicker() {
+        homeParentVC?.play(.menu1)
         DispatchQueue(label: "db", qos: .userInitiated).async {
             let db = DataBaseService.db.completedLevels
             let completedKeys = db.keys.filter({

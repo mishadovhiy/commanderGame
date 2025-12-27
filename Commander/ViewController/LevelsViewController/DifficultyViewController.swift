@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DifficultyViewController: UIViewController {
+class DifficultyViewController: AudioViewController {
 
     @IBOutlet weak var backNavigationButton: UIButton!
     @IBOutlet private weak var difficultyStackView: UIStackView!
@@ -23,6 +23,12 @@ class DifficultyViewController: UIViewController {
         }
     }
     
+    override var audioFiles: [AudioFileNameType] {
+        AudioFileNameType.allCases.filter({
+            $0.type == .menu
+        })
+    }
+    
     override func loadView() {
         super.loadView()
         backNavigationButton.isHidden = navigationController?.viewControllers.count == 1
@@ -31,7 +37,6 @@ class DifficultyViewController: UIViewController {
         data.forEach { item in
             let button = UIButton(type: .system)
             button.tag = difficultyStackView.arrangedSubviews.count
-            print(button.tag, " rgefwdsfv ")
             button.layer.name = item.title
             button.addTarget(self, action: #selector(difficultyPressed(_:)), for: .touchUpInside)
             difficultyStackView.addArrangedSubview(button)
@@ -44,7 +49,6 @@ class DifficultyViewController: UIViewController {
     
     public func updateData(_ newData: [DifficultyDataModel], animated: Bool = false) {
         self.data = newData
-        print(difficultyStackView.arrangedSubviews.count, " vjhbnjvg")
         difficultyStackView.arrangedSubviews.forEach {
             let button = $0 as? UIButton
             let i = button?.tag ?? 0
@@ -65,6 +69,7 @@ class DifficultyViewController: UIViewController {
     }
     
     @objc private func difficultyPressed(_ sender: UIButton) {
+        play(.menu2)
         didSelect(sender.layer.name ?? "")
         self.selectedAt = sender.tag
     }
