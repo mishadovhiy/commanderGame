@@ -129,9 +129,8 @@
                                         <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" image="arrowshape.right.fill" catalog="system"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hasDarkOverlay" value="YES"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRaious">
-                                                <real key="value" value="25"/>
+                                                <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -146,11 +145,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="v6K-c4-jv9"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRaious">
-                                        <real key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="cBY-Ld-vXe">
                                 <rect key="frame" x="61" y="1" width="382.66666666666669" height="44"/>

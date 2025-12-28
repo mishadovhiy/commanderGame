@@ -56,6 +56,7 @@ class CompletedLevelTableCell: UITableViewCell {
 extension CompletedLevelTableCell {
     struct ContentDataModel {
         let section: String
+        let sortIndex: Int
         let data: CellTableModel
     }
     struct CellTableModel {

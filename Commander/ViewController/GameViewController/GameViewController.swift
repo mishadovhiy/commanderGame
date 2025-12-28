@@ -289,6 +289,16 @@ extension GameViewController {
                 action: #selector(weaponDragging(_:))
             ))
         }
+        let backgroundView = UIView()
+        backgroundView.addSubview(ContainerMaskedView(isHorizontal: nil))
+        weaponsStackView.superview?.insertSubview(backgroundView, at: 0)
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.leadingAnchor.constraint(equalTo: backgroundView.superview!.leadingAnchor, constant: -10).isActive = true
+        backgroundView.trailingAnchor.constraint(equalTo: backgroundView.superview!.trailingAnchor, constant: 10).isActive = true
+        backgroundView.topAnchor.constraint(equalTo: backgroundView.superview!.topAnchor, constant: -10).isActive = true
+        backgroundView.bottomAnchor.constraint(equalTo: backgroundView.superview!.bottomAnchor, constant: 10).isActive = true
+        backgroundView.backgroundColor = .dark.withAlphaComponent(0.4)
+        backgroundView.addBlurView()
     }
 }
 

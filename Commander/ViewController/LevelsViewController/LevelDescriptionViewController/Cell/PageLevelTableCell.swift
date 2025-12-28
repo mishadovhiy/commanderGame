@@ -37,17 +37,21 @@ class PageLevelTableCell: UITableViewCell {
             ]))
         }
         levelLabel.attributedText = levelTitle
+        levelLabel.isHidden = data.pageModel.level.isEmpty
         pageLabel.attributedText = pageTitle
-        
+        pageLabel.textAlignment = data.pageModel.level.isEmpty ? .left : .right
         progressView.progress = data.progress
-        let progressText: NSMutableAttributedString = .init(string: "\(Int(data.progress * 100))")
+        let progressText: NSMutableAttributedString = .init(string: " \(Int(data.progress * 100))%")
         progressText.insert(.init(string: "\(data.completedLevelCount)/\(data.totalLevelCount)" + " ", attributes: [
-            .font: UIFont.systemFont(ofSize: 9, weight: .semibold)
+            .font: UIFont.systemFont(ofSize: 9, weight: .semibold),
+            .foregroundColor: UIColor.white.withAlphaComponent(0.15).cgColor
         ]), at: 0)
         progressLabel.attributedText = progressText
         livesLabel.text = "\(data.builder?.health ?? 0)"
         rangesLabel.text = "\(data.builder?.rounds ?? 0)"
         startingMoneyLabel.text = "\(data.builder?.startingMoney ?? 0)"
+        livesLabel.superview?.superview?.isHidden = data.builder == nil
+        progressView.superview?.isHidden = data.builder != nil
     }
 }
 

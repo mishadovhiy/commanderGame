@@ -43,10 +43,10 @@ class LevelDescriptionViewController: UIViewController {
         var result: [CompletedLevelTableCell.ContentDataModel] = []
         completedLevels.forEach { levelName in
             result.append(
-                .init(section: levelName,
+                .init(section: levelName, sortIndex: levelName.numbers ?? 0,
                              data:
                         .init(topTitles: GameDurationType.allCases.compactMap({
-                            $0.rawValue
+                            $0.rawValue.addingSpacesBeforeLargeLetters.capitalized
                         }),
                               tableData:
                                 Difficulty.allCases
@@ -55,7 +55,7 @@ class LevelDescriptionViewController: UIViewController {
                                         $0.difficulty == difficulty && $0.level == levelName
                                     })
                                     if keys.isEmpty {
-                                        return .init(section: .init("-"), content: [.init("-"), .init("-"), .init("-")])
+                                        return nil
                                     }
                                     var progress:[GameDurationType: GameProgress?] = [:]
                                     GameDurationType.allCases.forEach({ duration in
@@ -96,7 +96,7 @@ class LevelDescriptionViewController: UIViewController {
                 return
             }
             result.append(.init(
-                section: duration.rawValue,
+                section: duration.rawValue.addingSpacesBeforeLargeLetters.capitalized, sortIndex: 0,
                 data: .init(
                     topTitles: ["earned", "killed / passed", "score"],
                     tableData: progress.compactMap({ (key: Difficulty,
@@ -127,12 +127,12 @@ class LevelDescriptionViewController: UIViewController {
             let completedLevels = Set(allLevelsForPageKeys.compactMap({
                 $0.level
             }))
-            self.pageOverviewTableData = .init(pageModel: selectedLevel, builder: .init(data: builder), totalLevelCount: levelBuilder?.levels.count ?? 0, completedLevelCount: completedLevels.count)
+            self.pageOverviewTableData = .init(pageModel: selectedLevel, builder: selectedLevel.level.isEmpty ? nil : .init(data: builder), totalLevelCount: levelBuilder?.levels.count ?? 0, completedLevelCount: completedLevels.count)
             if !selectedLevel.level.isEmpty {
                 self.levelsTableData = self.multipleLevels(db: dataBase, allKeys: allKeys)
 
             } else {
-                self.levelsTableData = self.singleLevel(db: dataBase, allKeys: allLevelsForPageKeys)
+                self.levelsTableData = self.singleLevel(db: dataBase, allKeys: allLevelsForPageKeys).sorted(by: {$0.sortIndex >= $1.sortIndex})
             }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -148,9 +148,13 @@ extension LevelDescriptionViewController: UITableViewDelegate, UITableViewDataSo
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: 1
-        case 1: self.levelsTableData.count
-        default: 0
+        case 0:
+            return 1
+        case 1:
+            let count = levelsTableData.count
+            return count == 0 ? 1 : count
+        default:
+            return 0
         }
     }
     
@@ -164,6 +168,11 @@ extension LevelDescriptionViewController: UITableViewDelegate, UITableViewDataSo
             cell.set(data: data)
             return cell
         case 1:
+            if levelsTableData.isEmpty {
+                let cell = tableView.dequeueReusableCell(withIdentifier: .init(describing: TableDataCell.self), for: indexPath) as! TableDataCell
+                cell.set(.init(title: "No Completed Levels", text: "Your progress would be displayed here"))
+                return cell
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: .init(describing: CompletedLevelTableCell.self), for: indexPath) as! CompletedLevelTableCell
             cell.set(data: levelsTableData[indexPath.row])
             return cell
