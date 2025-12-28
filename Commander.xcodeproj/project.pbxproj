@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		820675AD2F012DBC00A14FCF /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820675AC2F012DBC00A14FCF /* BaseViewController.swift */; };
 		823497CA2EEB1FAA00F82871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823497C02EEB1FAA00F82871 /* AppDelegate.swift */; };
 		823497CB2EEB1FAA00F82871 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823497C32EEB1FAA00F82871 /* GameScene.swift */; };
 		823497CC2EEB1FAA00F82871 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823497C42EEB1FAA00F82871 /* GameViewController.swift */; };
@@ -84,6 +85,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		820675AC2F012DBC00A14FCF /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		823497A52EEB1F9000F82871 /* Commander.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Commander.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		823497C02EEB1FAA00F82871 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		823497C12EEB1FAA00F82871 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -174,6 +176,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		820675A92F012C2400A14FCF /* LevelsPageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8260E23E2EED3819002E29C0 /* LevelsPageViewController.swift */,
+				8260E2402EED383E002E29C0 /* LevelViewController.swift */,
+			);
+			path = LevelsPageViewController;
+			sourceTree = "<group>";
+		};
+		820675AA2F012D5100A14FCF /* BaseDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				826A32BE2EECEB01001D25B7 /* ButtonModel.swift */,
+				826A32C02EECEB0E001D25B7 /* MessageModel.swift */,
+				8260E27D2EEE5039002E29C0 /* TableDataModel.swift */,
+			);
+			path = BaseDataModel;
+			sourceTree = "<group>";
+		};
+		820675AB2F012DA500A14FCF /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8235D1782EFFF62800D48EB0 /* AudioViewController.swift */,
+				820675AC2F012DBC00A14FCF /* BaseViewController.swift */,
+			);
+			path = BaseViewController;
+			sourceTree = "<group>";
+		};
 		823095372EF03FDA00989895 /* Builder */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +256,7 @@
 		823497F32EEB5AC800F82871 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				823497F42EEB5C0200F82871 /* LevelManager.swift */,
 				823497FD2EEB67D200F82871 /* LevelModel.swift */,
 				823497FA2EEB661900F82871 /* WeaponType.swift */,
 				82C637BD2EEF40100064F917 /* WeaponUpgradeType.swift */,
@@ -239,12 +270,9 @@
 		823497FC2EEB664D00F82871 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				823497F42EEB5C0200F82871 /* LevelManager.swift */,
-				826A32BE2EECEB01001D25B7 /* ButtonModel.swift */,
-				826A32C02EECEB0E001D25B7 /* MessageModel.swift */,
-				8260E27D2EEE5039002E29C0 /* TableDataModel.swift */,
 				829CADCD2EFA901D00548DB1 /* AlertModel.swift */,
 				82C637CA2EEF4A2D0064F917 /* DataBaseModel.swift */,
+				820675AA2F012D5100A14FCF /* BaseDataModel */,
 				823497F32EEB5AC800F82871 /* Game */,
 			);
 			path = DataModel;
@@ -273,10 +301,12 @@
 			isa = PBXGroup;
 			children = (
 				8289ABB52EF4F38700F78DD0 /* HomeViewController.swift */,
-				8235D1782EFFF62800D48EB0 /* AudioViewController.swift */,
-				829CADBD2EFA8DD900548DB1 /* Reusable */,
 				8260E2422EED3846002E29C0 /* LevelsViewController */,
+				82C637BC2EEF3FF30064F917 /* UpgradeWeaponViewController */,
+				827A7B182EF2295800A080C9 /* BuyCoinsViewController */,
 				826A32C42EED0594001D25B7 /* GameViewController */,
+				820675AB2F012DA500A14FCF /* BaseViewController */,
+				829CADBD2EFA8DD900548DB1 /* Reusable */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -336,12 +366,9 @@
 			isa = PBXGroup;
 			children = (
 				8260E23C2EED37BF002E29C0 /* LevelListSuperViewController.swift */,
-				8260E23E2EED3819002E29C0 /* LevelsPageViewController.swift */,
-				8260E2402EED383E002E29C0 /* LevelViewController.swift */,
 				8260E2712EEDB5BD002E29C0 /* DifficultyViewController.swift */,
 				82A2EEF72EFC38DE00437B4E /* LevelDescriptionViewController */,
-				82C637BC2EEF3FF30064F917 /* UpgradeWeaponViewController */,
-				827A7B182EF2295800A080C9 /* BuyCoinsViewController */,
+				820675A92F012C2400A14FCF /* LevelsPageViewController */,
 			);
 			path = LevelsViewController;
 			sourceTree = "<group>";
@@ -580,6 +607,7 @@
 				823498022EEB6B8B00F82871 /* EnemyNode.swift in Sources */,
 				823497CA2EEB1FAA00F82871 /* AppDelegate.swift in Sources */,
 				829CADC32EFA8E0D00548DB1 /* AlertTableViewController.swift in Sources */,
+				820675AD2F012DBC00A14FCF /* BaseViewController.swift in Sources */,
 				826A32BF2EECEB01001D25B7 /* ButtonModel.swift in Sources */,
 				823497F72EEB5DBA00F82871 /* EnemyType.swift in Sources */,
 				8260E2702EEDB54A002E29C0 /* UpgradeWeaponViewController.swift in Sources */,
@@ -775,7 +803,7 @@
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Commander/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.word-games";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.strategy-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -813,7 +841,7 @@
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Commander/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.word-games";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.strategy-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

@@ -129,6 +129,44 @@ class LevelViewController: UIViewController {
         })
     }
     
+    func loadLevelButtonBackground(_ button: UIView) {
+        let view = UIView()
+        view.layer.name = "backgroundView"
+        view.backgroundColor = .dark.withAlphaComponent(0.15)
+        button.insertSubview(view, at: 0)
+        view.insertSubview(ContainerMaskedView(isHorizontal: nil), at: 0)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            view.leadingAnchor.constraint(equalTo: view.superview!.leadingAnchor, constant: 5),
+            view.trailingAnchor.constraint(equalTo: view.superview!.trailingAnchor, constant: -5),
+            view.bottomAnchor.constraint(equalTo: view.superview!.bottomAnchor, constant: -5),
+            view.topAnchor.constraint(equalTo: view.superview!.topAnchor, constant: 5)
+        ])
+        view.isUserInteractionEnabled = false
+    }
+    
+    func loadLevelProgress(_ button: UIView) {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        Array(0..<3).forEach { i in
+            let label = UIImageView(image: .star)
+            label.contentMode = .scaleAspectFit
+            label.tag = stack.arrangedSubviews.count
+            stack.addArrangedSubview(label)
+            label.widthAnchor.constraint(equalToConstant: 10).isActive = true
+        }
+        stack.spacing = 3
+        stack.isUserInteractionEnabled = false
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        button.addSubview(stack)
+        NSLayoutConstraint.activate([
+            stack.centerXAnchor.constraint(equalTo: stack.superview!.centerXAnchor),
+            stack.bottomAnchor.constraint(equalTo: stack.superview!.bottomAnchor, constant: 0),
+            stack.heightAnchor.constraint(equalToConstant: 20)
+        ])
+    }
+    
     func loadLevelButtons() {
         guard let view else {
             return
@@ -138,32 +176,18 @@ class LevelViewController: UIViewController {
             button.tag = view.subviews.count
             button.layer.name = "levelButton"
             button.setTitle($0.title, for: .init())
-            button.backgroundColor = .red.withAlphaComponent(0.4)
+            button.tintColor = .extraDark
+//            button.layer.shadowColor = UIColor.black.cgColor
+//            button.layer.shadowOffset = .init(width: 2, height: 2)
+//            button.layer.shadowRadius = 4
+//            button.layer.shadowOpacity = 0.3
+//            button.backgroundColor = .red.withAlphaComponent(0.4)
             button.addTarget(self, action: #selector(didSelectLevel(_:)), for: .touchUpInside)
             view.addSubview(button)
-            button.layer.cornerRadius = 25
-            button.layer.masksToBounds = true
             button.translatesAutoresizingMaskIntoConstraints = false
-            let stack = UIStackView()
-            stack.axis = .horizontal
-            stack.distribution = .fillEqually
-            Array(0..<3).forEach { i in
-                let label = UILabel()
-                label.text = "\(i)"
-                label.font = .systemFont(ofSize: 9)
-                label.textAlignment = .center
-                label.tag = stack.arrangedSubviews.count
-                label.textColor = .white
-                stack.addArrangedSubview(label)
-            }
-            stack.translatesAutoresizingMaskIntoConstraints = false
-            button.addSubview(stack)
-            NSLayoutConstraint.activate([
-                stack.leadingAnchor.constraint(equalTo: stack.superview!.leadingAnchor),
-                stack.trailingAnchor.constraint(equalTo: stack.superview!.trailingAnchor),
-                stack.bottomAnchor.constraint(equalTo: stack.superview!.bottomAnchor),
-                stack.heightAnchor.constraint(equalToConstant: 20)
-            ])
+            loadLevelButtonBackground(button)
+
+            loadLevelProgress(button)
         }
     }
     
@@ -179,7 +203,10 @@ class LevelViewController: UIViewController {
         parentVC?.homeParentVC?.setMap(for: parentVC?.homeParentVC?.currentPage, animated: false)
         view.subviews.forEach({
             if $0.layer.name == "levelButton" {
-                $0.backgroundColor = (sender.tag == $0.tag ? UIColor.green : .red).withAlphaComponent(0.4)
+                let background = $0.subviews.first(where: {
+                    $0.layer.name == "backgroundView"
+                })
+                background?.backgroundColor = sender.tag == $0.tag ? UIColor.accent.withAlphaComponent(0.4) : .dark.withAlphaComponent(0.15)
             }
         })
     }

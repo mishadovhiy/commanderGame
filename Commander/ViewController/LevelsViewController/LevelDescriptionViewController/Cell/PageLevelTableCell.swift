@@ -40,7 +40,11 @@ class PageLevelTableCell: UITableViewCell {
         pageLabel.attributedText = pageTitle
         
         progressView.progress = data.progress
-        progressLabel.text = "\(Int(data.progress * 100))"
+        let progressText: NSMutableAttributedString = .init(string: "\(Int(data.progress * 100))")
+        progressText.insert(.init(string: "\(data.completedLevelCount)/\(data.totalLevelCount)" + " ", attributes: [
+            .font: UIFont.systemFont(ofSize: 9, weight: .semibold)
+        ]), at: 0)
+        progressLabel.attributedText = progressText
         livesLabel.text = "\(data.builder?.health ?? 0)"
         rangesLabel.text = "\(data.builder?.rounds ?? 0)"
         startingMoneyLabel.text = "\(data.builder?.startingMoney ?? 0)"
@@ -54,7 +58,7 @@ extension PageLevelTableCell {
         let totalLevelCount: Int
         let completedLevelCount: Int
         var progress: Float {
-            .init(completedLevelCount / totalLevelCount)
+            Float(completedLevelCount) / Float(totalLevelCount)
         }
     }
     

@@ -8,7 +8,7 @@
 import UIKit
 import AVFAudio
 
-class AudioViewController: BaseVC {
+class AudioViewController: BaseViewController {
         
     private var audioPlayers: [AVAudioPlayer] = []
     var audioFiles: [AudioFileNameType] {[]}
@@ -69,22 +69,6 @@ class AudioViewController: BaseVC {
         audioPlayers.forEach {
             $0.stop()
         }
-    }
-}
-
-class BaseVC: UIViewController {
-    var didDismiss:(()->())?
-    
-    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
-        super.dismiss(animated: flag, completion: {
-            self.didDismiss?()
-            self.didDismiss = nil
-            completion?()
-        })
-    }
-    
-    deinit {
-        didDismiss = nil
     }
 }
 

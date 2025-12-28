@@ -98,8 +98,10 @@ difficulty: \(self.selectedLevel.difficulty?.rawValue ?? "-") durations: \(self.
     AlertModel.TitleCellModel(button: .init(title: "Sound", toAlert: {
 .init(title: "Sound", type: .soundSettingsData, buttons: [])
 })),
-    AlertModel.TitleCellModel(button: .init(title: "Close", didPress: {
-        self.dismiss(animated: true) {
+    AlertModel.TitleCellModel(button: .init(title: "Close", didPress: { [weak self] in
+        guard let self else { return }
+        let vc = self.presentedViewController ?? self
+        vc.dismiss(animated: true) {
             self.dismiss(animated: true)
         }
     }))

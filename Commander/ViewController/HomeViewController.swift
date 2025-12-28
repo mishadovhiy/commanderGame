@@ -9,6 +9,7 @@ import UIKit
 
 class HomeViewController: AudioViewController {
 
+    @IBOutlet weak var startButton: UIButton!
     @IBOutlet private weak var mapImageView: UIImageView!
     @IBOutlet private weak var contentStackView: UIStackView!
     @IBOutlet private weak var startView: UIView!
@@ -23,9 +24,23 @@ class HomeViewController: AudioViewController {
         mapImageView.layer.shadowColor = UIColor.black.cgColor
         mapImageView.layer.shadowOpacity = 0.5
         mapImageView.layer.shadowRadius = 10
+        startButton.layer.shadowOpacity = 0.8
+        startButton.layer.shadowRadius = 4
+        startButton.layer.shadowOffset = .init(width: 2, height: 2)
+        startButton.layer.shadowColor = UIColor.black.cgColor
+        contentStackView.layer.shadowOpacity = 0
+        contentStackView.layer.shadowColor = UIColor.black.cgColor
+        contentStackView.layer.shadowOffset = .init(width: 2, height: 2)
+        contentStackView.layer.shadowRadius = 0
         loadLevelListChild()
         self.view.addSubview(DestinationOutMaskedView(type: .borders))
         blackSafeAreaMaskOverlayView?.alpha = 0
+    }
+    
+    private var levelChild: LevelListSuperViewController? {
+        children.first(where: {
+            $0 is LevelListSuperViewController
+        }) as? LevelListSuperViewController
     }
     
     var blackSafeAreaMaskOverlayView: UIView? {
@@ -83,6 +98,10 @@ class HomeViewController: AudioViewController {
             vc?.view.isHidden = !startPressed
             self.startView.isHidden = startPressed
             self.blackSafeAreaMaskOverlayView?.alpha = startPressed ? 1 : 0
+            self.levelChild?.view.layer.shadowRadius = startPressed ? 7 : 0
+            self.contentStackView.layer.shadowRadius = startPressed ? 7 : 0
+            self.contentStackView.layer.shadowOpacity = startPressed ? 0.3 : 0
+
         }, completion: { _ in
             self.setMap(for: self.currentPage ?? [LevelPagesBuilder].allData.first)
         })
@@ -105,6 +124,10 @@ extension HomeViewController {
     func loadLevelListChild() {
         let vc = LevelListSuperViewController.initiateDefault()
         vc.view.isHidden = true
+        vc.view.layer.shadowColor = UIColor.black.cgColor
+        vc.view.layer.shadowRadius = 0
+        vc.view.layer.shadowOpacity = 0.3
+        vc.view.layer.shadowOffset = .init(width: 2, height: 2)
         contentStackView.addArrangedSubview(vc.view)
         vc.didMove(toParent: self)
         addChild(vc)
