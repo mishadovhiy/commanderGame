@@ -22,9 +22,7 @@ class GameViewController: AudioViewController {
     private var weaponHolder: CGPoint?
     var selectedLevel: LevelModel!
     override var audioFiles: [AudioFileNameType] {
-        AudioFileNameType.allCases.filter({
-            $0.type == .menu
-        })
+        AudioFileNameType.allCases
     }
     override func loadView() {
         super.loadView()
@@ -167,7 +165,7 @@ difficulty: \(self.selectedLevel.difficulty?.rawValue ?? "-") durations: \(self.
         view.frame.origin.x += translation.x
         view.frame.origin.y += translation.y
         view.subviews.first?.backgroundColor = (gameScene?.canPlace(
-            at: positionPercent(view)) ?? false) ? .green : .red
+            at: positionPercent(view)) ?? false) ? .clear : .red
         sender.setTranslation(.zero, in: view.superview)
         
     }
@@ -269,8 +267,8 @@ extension GameViewController {
             
             view.presentScene(scene, transition: .doorsCloseHorizontal(withDuration: 0.6))
             view.ignoresSiblingOrder = true
-            view.showsFPS = true
-            view.showsNodeCount = true
+            view.showsFPS = false
+            view.showsNodeCount = false
         }
     }
     
@@ -281,7 +279,7 @@ extension GameViewController {
             image.contentMode = .scaleAspectFit
             image.translatesAutoresizingMaskIntoConstraints = false
             image.heightAnchor.constraint(equalToConstant: 30).isActive = true
-            image.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            image.widthAnchor.constraint(equalToConstant: 35).isActive = true
             weaponsStackView.addArrangedSubview(image)
             image.isUserInteractionEnabled = true
             image.addGestureRecognizer(UIPanGestureRecognizer(
@@ -290,15 +288,20 @@ extension GameViewController {
             ))
         }
         let backgroundView = UIView()
-        backgroundView.addSubview(ContainerMaskedView(isHorizontal: nil))
         weaponsStackView.superview?.insertSubview(backgroundView, at: 0)
+        backgroundView.layer.cornerRadius = 10
+        backgroundView.layer.masksToBounds = true
+        backgroundView.layer.borderColor = UIColor.extraDark.cgColor
+        backgroundView.layer.borderWidth = 1
+        
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        backgroundView.leadingAnchor.constraint(equalTo: backgroundView.superview!.leadingAnchor, constant: -10).isActive = true
-        backgroundView.trailingAnchor.constraint(equalTo: backgroundView.superview!.trailingAnchor, constant: 10).isActive = true
-        backgroundView.topAnchor.constraint(equalTo: backgroundView.superview!.topAnchor, constant: -10).isActive = true
-        backgroundView.bottomAnchor.constraint(equalTo: backgroundView.superview!.bottomAnchor, constant: 10).isActive = true
+        backgroundView.leadingAnchor.constraint(equalTo: backgroundView.superview!.leadingAnchor, constant: -3).isActive = true
+        backgroundView.trailingAnchor.constraint(equalTo: backgroundView.superview!.trailingAnchor, constant: 3).isActive = true
+        backgroundView.topAnchor.constraint(equalTo: backgroundView.superview!.topAnchor, constant: -3).isActive = true
+        backgroundView.bottomAnchor.constraint(equalTo: backgroundView.superview!.bottomAnchor, constant: 3).isActive = true
         backgroundView.backgroundColor = .dark.withAlphaComponent(0.4)
         backgroundView.addBlurView()
+        
     }
 }
 

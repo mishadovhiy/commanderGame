@@ -39,10 +39,11 @@ class EnemyNode: SKSpriteNode {
         progress.name = "progress"
         progress.position = .init(x: 0, y: self.size.height / -2 - 3)
         progress.zPosition = 1
+//        self.isRemoving = true
         addChild(progress)
         self.alpha = 0
     }
-    
+//    private var isAdded: Bool = false
     var audioContainer: AudioContainerNode? {
         children.first(where:  {
             $0 is AudioContainerNode
@@ -56,7 +57,9 @@ class EnemyNode: SKSpriteNode {
         let fade = SKAction.fadeAlpha(to: 1, duration: 0.5)
         let followPath = SKAction.follow(shape, asOffset: false, orientToPath: true, duration: 70)
         self.run(.sequence([delay, followPath]), completion: completion)
-        self.run(.sequence([delay, SKAction.wait(forDuration: 2.0), fade]))
+        self.run(.sequence([delay, SKAction.wait(forDuration: 2.0), fade])) {
+//            self.isRemoving = false
+        }
 
     }
     
@@ -75,10 +78,11 @@ class EnemyNode: SKSpriteNode {
             let assets = type.assetAnimations
             if assets.damaged >= 1 {
                 let newAssetIndex = CGFloat(assets.damaged) * newPercent
-                let newIndex = newAssetIndex.rounded(.toNearestOrEven)
-                self.texture = .init(
-                    imageNamed: "enemy/" + type.component.rawValue + "/damaged/" + "\(newIndex)"
-                )
+                if let image = UIImage(named: "enemy/" + type.component.rawValue + "/damaged/" + "\(Int(newAssetIndex))") {
+                    self.texture = .init(image: image)
+                } else {
+                    print("noimageforasset ", Int(newAssetIndex))
+                }
             }
             let explosure = SKSpriteNode(texture: .init(image: .hit), size: .init(width: 15, height: 15))
             explosure.alpha = 0.5
@@ -98,12 +102,15 @@ class EnemyNode: SKSpriteNode {
     }
     
     var isRemoving: Bool {
-        children.contains(where: {
+        alpha == 0 || children.contains(where: {
             $0.name == "explosure"
         })
     }
     
     override func removeFromParent() {
+        if isRemoving {
+            return
+        }
         audioContainer?.play(.explosure1)
         let explosure = SKSpriteNode(texture: .init(image: .exposure), size: .init(width: 5, height: 5))
         explosure.name = "explosure"
@@ -111,17 +118,34 @@ class EnemyNode: SKSpriteNode {
         explosure.run(.scale(to: 10, duration: 0.2))
         self.run(.wait(forDuration: 0.2)) {
             self.performDieAnimation {
+                self.addCoin()
                 self.texture = nil
                 explosure.run(.fadeOut(withDuration: 0.3))
                 self.run(.wait(forDuration: 0.3)) {
                     explosure.removeFromParent()
-                    self.audioContainer?.play(.coins)
                     self.children.forEach {
                         $0.removeFromParent()
                     }
                     super.removeFromParent()
                 }
             }
+        }
+    }
+    
+    func addCoin() {
+        self.audioContainer?.play(.coins)
+        let node = SKSpriteNode(texture: .init(image: .coin), color: .clear, size: .init(width: 10, height: 10))
+        node.position = position
+        parent?.addChild(node)
+        node.run(.sequence([
+            .wait(forDuration: 0.12),
+            .fadeOut(withDuration: 0.18)
+        ]))
+        node.run(.sequence([
+            .moveBy(x: 0, y: 50, duration: 0.3),
+            .wait(forDuration: 0.3)
+        ])) {
+            node.removeFromParent()
         }
     }
     

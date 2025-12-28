@@ -27,6 +27,16 @@ class AudioContainerNode: SKNode {
         self.updateVolume(canPlay: true)
     }
     
+    override func removeFromParent() {
+        self.children.forEach {
+            $0.removeFromParent()
+        }
+        self.removeAllActions()
+        self.removeAllChildren()
+        
+        super.removeFromParent()
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -34,8 +44,8 @@ class AudioContainerNode: SKNode {
     func updateVolume(canPlay: Bool) {
         audioNodes.forEach { node in
             let volume = (AudioFileNameType.init(rawValue: node.name ?? "") ?? .coins).volume
-            node.avAudioNode?.engine?.mainMixerNode.outputVolume = canPlay ? volume : 0
-
+            node.avAudioNode?.engine?.mainMixerNode.outputVolume = canPlay ? volume : .zero
+            node.run(.changeVolume(to: canPlay ? volume : 0, duration: 0))
         }
     }
     
@@ -46,7 +56,8 @@ class AudioContainerNode: SKNode {
             print("AudioFileNameType named: ", file.rawValue, " has not been added into initializer")
             return
         }
-        if audioNode.avAudioNode?.engine?.mainMixerNode.volume == 0 {
+        
+        if audioNode.avAudioNode?.engine?.mainMixerNode.outputVolume == .zero || audioNode.hasActions() {
             return
         }
         audioNode.run(.play())

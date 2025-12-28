@@ -157,8 +157,11 @@ class GameScene: SKScene {
         lvlanager.lvlBuilder
             .enemyPerRound[lvlanager.currentRound]
             .forEach { type in
-                self.loadEnemy(type.type, i: i)
-                i += 1
+                (0..<type.count).forEach { _ in
+                    self.loadEnemy(type.type, i: i)
+                    i += 1
+                }
+               
         }
         lvlanager.currentRound += 1
     }

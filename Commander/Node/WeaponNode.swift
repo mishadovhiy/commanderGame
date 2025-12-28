@@ -8,7 +8,7 @@
 import SpriteKit
 
 class WeaponNode: SKSpriteNode {
-    
+    #warning("todo: upgrade distance")
     let type: WeaponType
     let damage: Int
     var upgrade: Difficulty? = nil
@@ -23,7 +23,11 @@ class WeaponNode: SKSpriteNode {
             setEditing()
         }
     }
-    private let audioNode: AudioContainerNode
+    var audioNode: AudioContainerNode? {
+        children.first(where:  {
+            $0 is AudioContainerNode
+        }) as? AudioContainerNode
+    }
     var targetEnemy: EnemyNode?
     var nextEnemyHolder: EnemyNode? {
         (parent as? GameScene)?.enemies.last(where: {
@@ -35,7 +39,6 @@ class WeaponNode: SKSpriteNode {
     init(type: WeaponType) {
         self.type = type
         self.damage = type.damage * 4
-        audioNode = .init(audioNames: [.shoot1, .shoot2])
         super.init(texture: nil, color: .clear, size: CGSize(width: 100, height: 100))
         self.name = .init(describing: Self.self)
         self.physicsBody = .init(rectangleOf: self.size)
@@ -45,6 +48,7 @@ class WeaponNode: SKSpriteNode {
         self.physicsBody?.affectedByGravity = false
         let child = SKSpriteNode(texture: .init(imageNamed: type.rawValue), color: .clear, size: .init(width: 20, height: 20))
         self.addChild(child)
+        addChild(AudioContainerNode(audioNames: [.shoot1, .shoot2]))
     }
     
     func updatePosition(position: CGPoint) {
@@ -104,7 +108,6 @@ extension WeaponNode {
             return
         }
         if self.parent?.isPaused ?? true == false {
-            audioNode.play(.shoot1)
             self.performShoot(enemy)
         }
         self.run(SKAction.wait(forDuration: 0.5)) {
@@ -144,6 +147,7 @@ extension WeaponNode {
             let direction = CGVector(dx: dx, dy: dy)
             addFireNode()
             bullets.forEach { bullet in
+                audioNode?.play(.shoot1)
                 bullet?.run(.applyImpulse(direction, duration: 8.3))
             }
         }

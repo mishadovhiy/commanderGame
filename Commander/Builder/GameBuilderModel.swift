@@ -63,36 +63,15 @@ extension GameBuilderModel {
     static func enemyList(_ lvl: String) -> [[EnemyRound]] {
         switch lvl {
         default: [
-                [.init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10),
-                  .init(type: .soldeir, count: 10),
-                  .init(type: .soldeir, count: 10),
-                  .init(type: .soldeir, count: 10),
-                  .init(type: .soldeir, count: 10),
-                  .init(type: .soldeir, count: 10)],
-                [.init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10)],
-                [.init(type: .vehicle, count: 10),
-                 .init(type: .flight, count: 10),
-                 .init(type: .tankMBT, count: 10),
-                 .init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10),
-                 .init(type: .soldeir, count: 10)]
+                [.init(type: .soldeir, count: 15),
+                 .init(type: .soldeir, count: 20)],
+                [.init(type: .soldeir, count: 20),
+                    .init(type: .vehicle, count: 10),
+                ],
+                [.init(type: .soldeir, count: 2),
+                 .init(type: .flight, count: 5),
+                 .init(type: .tankMBT, count: 2),
+                 .init(type: .vehicle, count: 10)]
             ]
         }
     }

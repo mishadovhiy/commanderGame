@@ -118,10 +118,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eLg-75-pWc">
-                                <rect key="frame" x="603" y="286" width="135" height="50"/>
+                                <rect key="frame" x="603" y="296" width="135" height="40"/>
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMy-Wy-p97">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="o0Z-02-nw6"/>
                                         </constraints>
@@ -137,13 +137,13 @@
                                             <action selector="hideButtonsPressed:" destination="BV1-FR-VrT" eventType="touchUpInside" id="Gjj-WQ-X6z"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FZA-ly-ZCS">
-                                        <rect key="frame" x="60" y="0.0" width="75" height="50"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="FZA-ly-ZCS">
+                                        <rect key="frame" x="60" y="0.0" width="75" height="40"/>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.17299999296665192" green="0.14900000393390656" blue="0.082000002264976501" alpha="0.14999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="v6K-c4-jv9"/>
+                                    <constraint firstAttribute="height" constant="40" id="v6K-c4-jv9"/>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="cBY-Ld-vXe">
@@ -176,7 +176,7 @@
                                             <constraint firstAttribute="width" secondItem="AEK-Wp-Hf4" secondAttribute="height" multiplier="1:1" id="oJb-FB-mgs"/>
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                                        <state key="normal" title="Button" image="menu"/>
+                                        <state key="normal" image="menu"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="hasDarkOverlay" value="YES"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRaious">
