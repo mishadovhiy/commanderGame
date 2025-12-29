@@ -51,6 +51,12 @@ struct GameBuilderMiniModel {
     }
 }
 
+extension GameBuilderModel {
+    enum BlockerType {
+        case tree1
+    }
+}
+
 fileprivate
 extension GameBuilderModel {
     
