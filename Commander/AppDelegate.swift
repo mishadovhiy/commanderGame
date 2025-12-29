@@ -72,7 +72,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
-        let initialVC = storyboard.instantiateInitialViewController()!
+        let initialVC = GameViewController.initiate(.test)
+        //storyboard.instantiateInitialViewController()!
         //GameViewController.initiate(.test)
 
         window.rootViewController = initialVC

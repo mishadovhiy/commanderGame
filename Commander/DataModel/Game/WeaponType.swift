@@ -30,6 +30,21 @@ enum WeaponType: String, Codable, CaseIterable {
         }
     }
     
+    var textureSize: CGSize {
+        switch self {
+        case .pistol:
+                .init(width: 45, height: 45)
+        case .basuka:
+                .init(width: 20, height: 20)
+        case .granata:
+                .init(width: 18, height: 30)
+        }
+    }
+    
+    var bulletSize: CGSize {
+        .init(width: 8, height: 14)
+    }
+    
     var damage: Int {
         switch self {
 //        case .fire:
@@ -49,8 +64,7 @@ enum WeaponType: String, Codable, CaseIterable {
     
     var hasBullet: Bool {
         switch self {
-        case .granata: true
-        default: false
+        default: true
         }
     }
     //upgradePrice
@@ -70,7 +84,7 @@ enum WeaponType: String, Codable, CaseIterable {
     var maxIconsUpgrades: Int {
         switch self {
         case .pistol:
-            1
+            2
         case .basuka:
             3
         case .granata:

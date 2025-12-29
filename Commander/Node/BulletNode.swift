@@ -21,7 +21,7 @@ class BulletNode: SKSpriteNode {
         } else {
             texture = nil
         }
-        super.init(texture: texture, color: .blue, size: .init(width: 10, height: 10))
+        super.init(texture: texture, color: .blue, size: armour.type.bulletSize)
         self.physicsBody = .init(rectangleOf: .init(width: 10, height: 10))
         self.physicsBody?.categoryBitMask = PhysicsCategory.bullet
         self.physicsBody?.contactTestBitMask = PhysicsCategory.enemy

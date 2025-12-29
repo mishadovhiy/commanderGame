@@ -12,7 +12,7 @@ class WeaponNode: SKSpriteNode {
     let type: WeaponType
     private let initialDamage: Int
     private let initialDistance: Int
-    let totalUpgrade: Int
+    let totalUpgrade: [WeaponUpgradeType: Int]
     var damage: Int {
         initialDamage * ((upgrade?.index ?? 0) + 1)
     }
@@ -49,12 +49,12 @@ class WeaponNode: SKSpriteNode {
     }
       
     
-    init(type: WeaponType, dbUpgrade: Int) {
+    init(type: WeaponType, db: DataBaseModel) {
         self.type = type
         self.initialDamage = type.damage * 4
         self.initialDistance = type.distance
-        self.totalUpgrade = dbUpgrade
-        super.init(texture: nil, color: .red, size: .zero)
+        self.totalUpgrade = db.upgradedWeapons[type] ?? [:]
+        super.init(texture: nil, color: .clear, size: .zero)
         self.size = .init(width: distance, height: distance)
         self.upgrade = nil
         self.name = .init(describing: Self.self)
@@ -63,9 +63,12 @@ class WeaponNode: SKSpriteNode {
         self.physicsBody?.contactTestBitMask = PhysicsCategory.enemy
         self.physicsBody?.collisionBitMask = 0
         self.physicsBody?.affectedByGravity = false
-        let child = SKSpriteNode(texture: .init(imageNamed: type.rawValue + "/\(type.upgradedIconComponent(db: dbUpgrade))"), color: .clear, size: .init(width: 20, height: 20))
+        let componentName = db.upgradedWeapons[type]?[.attackPower]
+        let imageSize = type.textureSize
+        let child = SKSpriteNode(texture: .init(imageNamed: type.rawValue + "/\(type.upgradedIconComponent(db: componentName ?? 0))"), color: .clear, size: .init(width: imageSize.width, height: imageSize.height))
         self.addChild(child)
         addChild(AudioContainerNode(audioNames: [.shoot1, .shoot2]))
+        self.zPosition = 50
     }
     
     func updatePosition(position: CGPoint) {
@@ -100,9 +103,17 @@ extension WeaponNode {
     
     private func performAddSingleBullet(i: Int, total: Int) {
         let bullet = BulletNode(armour: self)
-        bullet.position = .init(x: position.x + CGFloat(i * 5) - ((CGFloat(total) / 2) * 5), y: position.y)
         (parent as? SKScene)?.addChild(bullet)
-        bullet.zPosition = 999
+        bullet.zRotation = self.zRotation
+        switch self.type {
+        case .basuka:
+            bullet.zPosition = 51
+            bullet.position = .init(x: position.x + CGFloat(i * 5) - ((CGFloat(total) / 2) * 5), y: position.y - 5)
+
+        default:
+            bullet.position = .init(x: position.x, y: position.y + (CGFloat(i * 5)))
+            bullet.zPosition = 49
+        }
     }
     
     private var bullets: [BulletNode?]? {
@@ -127,7 +138,7 @@ extension WeaponNode {
         if self.parent?.isPaused ?? true == false {
             self.performShoot(enemy)
         }
-        let delay = type.shootingDelay / TimeInterval(upgrade?.index ?? -1) + 2
+        let delay = type.shootingDelay// / TimeInterval(upgrade?.index ?? -1) + 2
         self.run(SKAction.wait(forDuration: delay)) {
             self.addBullet()
 

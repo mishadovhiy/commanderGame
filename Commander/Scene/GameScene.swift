@@ -111,9 +111,9 @@ class GameScene: SKScene {
     
     func loadArmour(type: WeaponType, position: CGPoint) {
         DispatchQueue(label: "db", qos: .userInitiated).async {
-            let db = DataBaseService.db.upgradedWeapons[type]?[.attackPower]
+            let db = DataBaseService.db
             DispatchQueue.main.async {
-                let node = WeaponNode(type: type, dbUpgrade: db ?? 0)
+                let node = WeaponNode(type: type, db: db)
                 self.addChild(node)
                 node.updatePosition(position: position)
             }
@@ -141,7 +141,7 @@ class GameScene: SKScene {
     
     func loadRaund() {
         if lvlanager.lvlBuilder.rounds <= lvlanager.currentRound {
-            print("game completed")
+            print(lvlanager.currentRound, "game completed ", lvlanager.lvlBuilder.rounds)
             if enemies.isEmpty {
                 didCompleteLevel()
             }
@@ -169,6 +169,7 @@ class GameScene: SKScene {
                
         }
         lvlanager.currentRound += 1
+        print(lvlanager.currentRound, " yh5gt4erfwda ")
     }
 
 }
