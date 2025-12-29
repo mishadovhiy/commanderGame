@@ -28,7 +28,12 @@ class GameViewController: AudioViewController {
         super.loadView()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         loadScene()
-        loadWeapons()
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            let db = DataBaseService.db
+            DispatchQueue.main.async {
+                self.loadWeapons(db: db)
+            }
+        }
         weaponTableView.register(.init(nibName: .init(describing: TableDataCell.self), bundle: nil), forCellReuseIdentifier: .init(describing: TableDataCell.self))
         weaponTableView.delegate = self
         weaponTableView.dataSource = self
@@ -275,9 +280,10 @@ extension GameViewController {
         }
     }
     
-    func loadWeapons() {
+    func loadWeapons(db: DataBaseModel) {
         WeaponType.allCases.forEach {
-            let image = UIImageView(image: .init(named: $0.rawValue))
+            let i = db.upgradedWeapons[$0]?[.attackPower] ?? 0
+            let image = UIImageView(image: .init(named: $0.rawValue + "/\($0.upgradedIconComponent(db: i))"))
             image.layer.name = $0.rawValue
             image.contentMode = .scaleAspectFit
             image.translatesAutoresizingMaskIntoConstraints = false

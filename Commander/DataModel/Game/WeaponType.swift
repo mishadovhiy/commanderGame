@@ -67,4 +67,33 @@ enum WeaponType: String, Codable, CaseIterable {
         default: 25
         }
     }
+    var maxIconsUpgrades: Int {
+        switch self {
+        case .pistol:
+            1
+        case .basuka:
+            3
+        case .granata:
+            1
+        }
+    }
+    func upgradedIconComponent(db upgrade: Int) -> Int {
+        let max = maxIconsUpgrades
+        let upgradePercent = CGFloat(upgrade) / CGFloat(maxUpgradeLevel)
+        if self == .basuka {
+            print(upgradePercent, " yhrtgefds ")
+        }
+        let percent = Int(upgradePercent * CGFloat(max))
+        if percent == 0 {
+            return 1
+        }
+        if percent >= maxIconsUpgrades {
+            return maxIconsUpgrades
+        }
+        if self == .basuka {
+            print(percent, " rtegrfwdasx")
+
+        }
+        return percent
+    }
 }

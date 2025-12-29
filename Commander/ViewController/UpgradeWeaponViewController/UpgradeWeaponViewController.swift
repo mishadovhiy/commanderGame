@@ -18,6 +18,7 @@ class UpgradeWeaponViewController: AudioViewController {
     override var audioFiles: [AudioFileNameType] {
         [.weaponUpgrade, .menu1, .menu2, .menu3, .coins, .success1, .success2]
     }
+    var db: DataBaseModel?
     override func loadView() {
         super.loadView()
         collectionVIew.delegate = self
@@ -50,6 +51,7 @@ class UpgradeWeaponViewController: AudioViewController {
     private func updateTableData(completion: @escaping()->()={}) {
         DispatchQueue(label: "db", qos: .userInitiated).async {
             let selectedWeapon = self.collectionData[self.selectedAt ?? 0]
+            self.db = DataBaseService.db
             let db = DataBaseService.db.upgradedWeapons
             self.tableData = [
                 UserBalanceCellModel(balance: Float(KeychainService.getToken(forKey: .balance) ?? "") ?? 0)
@@ -73,6 +75,7 @@ class UpgradeWeaponViewController: AudioViewController {
             print(self.tableData.count, " tgerfwedaw ")
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.collectionVIew.reloadData()
                 completion()
             }
         }
@@ -125,7 +128,8 @@ extension UpgradeWeaponViewController: UICollectionViewDelegate, UICollectionVie
             withReuseIdentifier:
                     .init(describing: UpgradeWeaponCell.self),
             for: indexPath) as! UpgradeWeaponCell
-        cell.set(collectionData[indexPath.row])
+        let i = self.db?.upgradedWeapons[collectionData[indexPath.row]]?[.attackPower]
+        cell.set(collectionData[indexPath.row], db: i ?? 0)
         return cell
     }
     

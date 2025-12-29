@@ -110,9 +110,15 @@ class GameScene: SKScene {
     }
     
     func loadArmour(type: WeaponType, position: CGPoint) {
-        let node = WeaponNode(type: type)
-        self.addChild(node)
-        node.updatePosition(position: position)
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            let db = DataBaseService.db.upgradedWeapons[type]?[.attackPower]
+            DispatchQueue.main.async {
+                let node = WeaponNode(type: type, dbUpgrade: db ?? 0)
+                self.addChild(node)
+                node.updatePosition(position: position)
+            }
+        }
+        
     }
     
     func didCompleteLevel() {

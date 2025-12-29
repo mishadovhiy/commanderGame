@@ -12,6 +12,7 @@ class WeaponNode: SKSpriteNode {
     let type: WeaponType
     private let initialDamage: Int
     private let initialDistance: Int
+    let totalUpgrade: Int
     var damage: Int {
         initialDamage * ((upgrade?.index ?? 0) + 1)
     }
@@ -48,11 +49,12 @@ class WeaponNode: SKSpriteNode {
     }
       
     
-    init(type: WeaponType) {
+    init(type: WeaponType, dbUpgrade: Int) {
         self.type = type
         self.initialDamage = type.damage * 4
         self.initialDistance = type.distance
-        super.init(texture: nil, color: .clear, size: .zero)
+        self.totalUpgrade = dbUpgrade
+        super.init(texture: nil, color: .red, size: .zero)
         self.size = .init(width: distance, height: distance)
         self.upgrade = nil
         self.name = .init(describing: Self.self)
@@ -61,7 +63,7 @@ class WeaponNode: SKSpriteNode {
         self.physicsBody?.contactTestBitMask = PhysicsCategory.enemy
         self.physicsBody?.collisionBitMask = 0
         self.physicsBody?.affectedByGravity = false
-        let child = SKSpriteNode(texture: .init(imageNamed: type.rawValue), color: .clear, size: .init(width: 20, height: 20))
+        let child = SKSpriteNode(texture: .init(imageNamed: type.rawValue + "/\(type.upgradedIconComponent(db: dbUpgrade))"), color: .clear, size: .init(width: 20, height: 20))
         self.addChild(child)
         addChild(AudioContainerNode(audioNames: [.shoot1, .shoot2]))
     }

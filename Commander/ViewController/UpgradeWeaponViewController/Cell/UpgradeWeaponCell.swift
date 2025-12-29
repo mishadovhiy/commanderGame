@@ -10,8 +10,9 @@ import UIKit
 class UpgradeWeaponCell: UICollectionViewCell {
     @IBOutlet private weak var weaponImageView: UIImageView!
     
-    func set(_ type: WeaponType) {
-        weaponImageView.image = .init(named: type.rawValue)
+    func set(_ type: WeaponType, db: Int) {
+        let i = type.upgradedIconComponent(db: db)
+        weaponImageView.image = .init(named: type.rawValue + "/\(i)")
          
     }
 }
