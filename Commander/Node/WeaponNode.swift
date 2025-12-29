@@ -181,6 +181,7 @@ extension WeaponNode {
             }
             self.zRotation = atan2(dy, dx) + 1.4
             bullets.forEach { bullet in
+                bullet?.startShootAnimation()
                 audioNode?.play(.shoot1)
                 bullet?.run(.applyImpulse(direction, duration: 8.3))
             }
