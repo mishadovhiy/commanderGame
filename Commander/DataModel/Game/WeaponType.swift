@@ -15,6 +15,21 @@ enum WeaponType: String, Codable, CaseIterable {
 //    case stopper
     case granata
     
+    var distance: Int {
+        100
+    }
+    
+    var shootingDelay: TimeInterval {
+        switch self {
+        case .basuka:
+            1.2
+        case .pistol:
+            0.2
+        case .granata:
+            0.5
+        }
+    }
+    
     var damage: Int {
         switch self {
 //        case .fire:
@@ -28,7 +43,7 @@ enum WeaponType: String, Codable, CaseIterable {
         case .pistol:
             15
         case .granata:
-            15
+            40
         }
     }
     

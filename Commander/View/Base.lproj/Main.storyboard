@@ -274,13 +274,13 @@
                                                 <rect key="frame" x="5" y="2" width="40" height="25"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Round" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDC-Rq-fqH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="13"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="14.333333333333334"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                         <color key="textColor" name="darkColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h4e-wt-idC">
-                                                        <rect key="frame" x="0.0" y="13" width="40" height="12"/>
+                                                        <rect key="frame" x="0.0" y="14.333333333333336" width="40" height="10.666666666666664"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <color key="textColor" name="darkColor"/>
                                                         <nil key="highlightedColor"/>
@@ -490,6 +490,7 @@
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRaious">
                                                 <real key="value" value="6"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hasContainer" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </stackView>
                                 </subviews>

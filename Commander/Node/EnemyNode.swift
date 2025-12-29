@@ -19,6 +19,7 @@ class EnemyNode: SKSpriteNode {
         self.totalHealth = health
         super.init(texture: .init(imageNamed: "enemy/" + type.component.rawValue + "/1"), color: .clear, size: CGSize(width: 20, height: 20))
         addChild(AudioContainerNode(audioNames: [.explosure1, .explosure3, .explosure4, .explosure, .hit1, .hit2, .coins]))
+        self.zRotation = .pi
         self.name = .init(describing: Self.self)
         self.physicsBody = .init(rectangleOf: size)
         self.physicsBody?.categoryBitMask = PhysicsCategory.enemy
@@ -111,6 +112,7 @@ class EnemyNode: SKSpriteNode {
         if isRemoving {
             return
         }
+        self.removeAllActions()
         audioContainer?.play(.explosure1)
         let explosure = SKSpriteNode(texture: .init(image: .exposure), size: .init(width: 5, height: 5))
         explosure.name = "explosure"

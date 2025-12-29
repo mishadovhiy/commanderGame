@@ -55,9 +55,12 @@ class GameViewController: AudioViewController {
     
     private func setWeaponTableData() {
         weaponTableData = [
-            .init(icon: nil, title: "name", text: nil),
-            .init(icon: nil, title: "dif", text: editingWeapon?.upgrade?.rawValue ?? ""),
-            .init(icon: nil, title: nil, text: "some long text in a multiple lines to test ui")
+            .init(icon: nil, title: editingWeapon?.name ?? "", text: "Price: $\(editingWeapon?.upgradePrice ?? 0)"),
+            .init(icon: nil, title: "Upgrade", text: """
+                Level: \(editingWeapon?.upgrade?.rawValue ?? "-")
+                Damage: \(editingWeapon?.damage ?? 0)
+                Distance: \(editingWeapon?.distance ?? 0)
+                """)
 
         ]
         weaponTableView.reloadData()

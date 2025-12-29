@@ -31,10 +31,9 @@ class GameScene: SKScene {
         self.weapons.forEach({
             print($0.position, " tgerfwdas")
         })
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
             self.loadRaund()
         })
-        
         backgroundColor = .init(hex: "E7D4A9")
     }
         

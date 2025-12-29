@@ -10,10 +10,22 @@ import SpriteKit
 class WeaponNode: SKSpriteNode {
     #warning("todo: upgrade distance")
     let type: WeaponType
-    let damage: Int
-    var upgrade: Difficulty? = nil
+    private let initialDamage: Int
+    private let initialDistance: Int
+    var damage: Int {
+        initialDamage * ((upgrade?.index ?? 0) + 1)
+    }
+    var upgrade: Difficulty? = nil {
+        didSet {
+            print("upgradeChanged ", upgrade)
+            self.size = .init(width: distance, height: distance)
+        }
+    }
     var upgradePrice: Int {
         type.upgradeStepPrice * ((upgrade?.index ?? -1) + 2)
+    }
+    var distance: Int {
+        initialDistance +  (20 * (upgrade?.index ?? 0) + 1)
     }
     var canUpgrade: Bool {
         (upgrade?.index ?? 0) < (Difficulty.allCases.count - 1)
@@ -38,8 +50,11 @@ class WeaponNode: SKSpriteNode {
     
     init(type: WeaponType) {
         self.type = type
-        self.damage = type.damage * 4
-        super.init(texture: nil, color: .clear, size: CGSize(width: 100, height: 100))
+        self.initialDamage = type.damage * 4
+        self.initialDistance = type.distance
+        super.init(texture: nil, color: .clear, size: .zero)
+        self.size = .init(width: distance, height: distance)
+        self.upgrade = nil
         self.name = .init(describing: Self.self)
         self.physicsBody = .init(rectangleOf: self.size)
         self.physicsBody?.categoryBitMask = PhysicsCategory.weapon
@@ -110,7 +125,8 @@ extension WeaponNode {
         if self.parent?.isPaused ?? true == false {
             self.performShoot(enemy)
         }
-        self.run(SKAction.wait(forDuration: 0.5)) {
+        let delay = type.shootingDelay / TimeInterval(upgrade?.index ?? -1) + 2
+        self.run(SKAction.wait(forDuration: delay)) {
             self.addBullet()
 
 //            self.targetEnemy = nil
@@ -146,6 +162,11 @@ extension WeaponNode {
             let dy = enemy.position.y - self.position.y
             let direction = CGVector(dx: dx, dy: dy)
             addFireNode()
+            self.run(.rotate(toAngle: atan2(dy, dx) + 1.52, duration: 0.09))
+            bullets.forEach {
+                $0?.zRotation = atan2(dy, dx) + 1.52
+            }
+            self.zRotation = atan2(dy, dx) + 1.4
             bullets.forEach { bullet in
                 audioNode?.play(.shoot1)
                 bullet?.run(.applyImpulse(direction, duration: 8.3))
