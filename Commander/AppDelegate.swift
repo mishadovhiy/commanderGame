@@ -72,7 +72,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
-        let initialVC = GameViewController.initiate(.test)
+        let initialVC = GameViewController.initiate(.test, page: [LevelPagesBuilder].allData.first!)
         //storyboard.instantiateInitialViewController()!
         //GameViewController.initiate(.test)
 

@@ -5,12 +5,15 @@
 //  Created by Mykhailo Dovhyi on 13.12.2025.
 //
 
-import Foundation
+import UIKit
 
 struct LevelPagesBuilder: Equatable {
     let title: String
+    let name: String
     let zoom: CGFloat
     let mapPosition: CGPoint
+    let backgroundColor: UIColor
+    let secondaryColor: UIColor
     let levels: [LevelListBuilder]
     
     struct LevelListBuilder: Equatable {
@@ -22,7 +25,7 @@ struct LevelPagesBuilder: Equatable {
 extension [LevelPagesBuilder] {
     static var allData: Self {
         [
-            .init(title: "1", zoom: 1, mapPosition: .init(x: -0.08, y: -0.05), levels: [
+            .init(title: "1", name: "America", zoom: 1, mapPosition: .init(x: -0.08, y: -0.05), backgroundColor: .dark, secondaryColor: .container, levels: [
                 .init(position:
                         .init(x: 0.08, y: 0.2),
                       title: "11"),
@@ -57,7 +60,7 @@ extension [LevelPagesBuilder] {
                         .init(x: 0.36, y: 0.62),
                       title: "21")
             ]),
-            .init(title: "2", zoom: 1, mapPosition: .init(x: -0.4, y: -0.3), levels: [
+            .init(title: "2", name: "Africa", zoom: 1, mapPosition: .init(x: -0.4, y: -0.3), backgroundColor: .white, secondaryColor: .blue, levels: [
                 .init(position:
                         .init(x: 0.12, y: 0.16),
                       title: "201"),
@@ -95,7 +98,7 @@ extension [LevelPagesBuilder] {
                         .init(x: 0.3, y: 0.85),
                       title: "212")
             ]),//fix dots
-            .init(title: "3", zoom: 0.7, mapPosition: .init(x: -0.44, y: -0.03), levels: [
+            .init(title: "3", name: "Europe", zoom: 0.7, mapPosition: .init(x: -0.44, y: -0.03), backgroundColor: .accent, secondaryColor: .dark, levels: [
                 .init(position:
                         .init(x: 0.2, y: 0.6),
                       title: "301"),
@@ -130,7 +133,7 @@ extension [LevelPagesBuilder] {
                         .init(x: 0.67, y: 0.455),
                       title: "311")
             ]),
-            .init(title: "4", zoom: 1.6, mapPosition: .init(x: -0.76, y: -0.56), levels: [//new dots
+            .init(title: "4", name: "Australia", zoom: 1.6, mapPosition: .init(x: -0.76, y: -0.56), backgroundColor: .red, secondaryColor: .orange, levels: [//new dots
                 .init(position:
                         .init(x: 0.12, y: 0.16),
                       title: "201"),

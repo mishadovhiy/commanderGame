@@ -23,7 +23,7 @@ class PageLevelTableCell: UITableViewCell {
     }
     
     func set(data: ContentDataModel) {
-        let pageTitle = NSMutableAttributedString(string: data.pageModel.levelPage)
+        let pageTitle = NSMutableAttributedString(string: data.levelTitle)
 
         let levelTitle = NSMutableAttributedString(string: data.pageModel.level)
         let attributedComponents = [
@@ -59,6 +59,7 @@ extension PageLevelTableCell {
     struct ContentDataModel {
         let pageModel: LevelModel
         let builder: GameBuilderMiniModel?
+        let levelTitle: String
         let totalLevelCount: Int
         let completedLevelCount: Int
         var progress: Float {

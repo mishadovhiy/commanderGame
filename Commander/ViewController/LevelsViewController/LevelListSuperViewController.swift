@@ -77,7 +77,7 @@ class LevelListSuperViewController: UIViewController {
     
     @IBAction private func startGameDidPress(_ sender: Any) {
         homeParentVC?.play(.success1)
-        self.present(GameViewController.initiate(self.selectedLevel), animated: true)
+        self.present(GameViewController.initiate(self.selectedLevel, page: levelPageVC!.currentPageData), animated: true)
     }
     
     @IBAction private func upgradeDidPress(_ sender: UIButton) {

@@ -21,12 +21,17 @@ class GameViewController: AudioViewController {
     private var weaponTableData: [TableDataModel] = []
     private var weaponHolder: CGPoint?
     var selectedLevel: LevelModel!
+    var page: LevelPagesBuilder!
     override var audioFiles: [AudioFileNameType] {
         AudioFileNameType.allCases
+    }
+    var gameBackgroundColor: UIColor {
+        LevelManager(selectedLevel).lvlBuilder.backgroundColor ?? page.backgroundColor
     }
     override func loadView() {
         super.loadView()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.setupLabels()
         loadScene()
         DispatchQueue(label: "db", qos: .userInitiated).async {
             let db = DataBaseService.db
@@ -268,9 +273,25 @@ extension GameViewController {
         }
     }
     
+    func setupLabels() {
+        let isLightBackground = self.gameBackgroundColor.isLight
+        [healthLabel, balanceLabel, roundLabel].forEach {
+            let labels = ($0?.superview as? UIStackView)?.arrangedSubviews as? [UILabel] ?? []
+            if labels.isEmpty {
+                $0?.textColor = isLightBackground ? .extraDark : .white
+
+            } else {
+                labels.forEach({
+                    $0.textColor = isLightBackground ? .extraDark : .white
+
+                })
+            }
+        }
+    }
+    
     func loadScene() {
         if let view = view as! SKView? {
-            let scene = GameScene.configure(lvl: .init(self.selectedLevel))
+            let scene = GameScene.configure(lvl: .init(self.selectedLevel), page: self.page)
             scene.scaleMode = .aspectFill
             
             view.presentScene(scene, transition: .doorsCloseHorizontal(withDuration: 0.6))
@@ -334,9 +355,10 @@ extension GameViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension GameViewController {
-    static func initiate(_ level: LevelModel) -> Self {
+    static func initiate(_ level: LevelModel, page: LevelPagesBuilder) -> Self {
         let vc = Self.initiateDefault()
         vc.selectedLevel = level
+        vc.page = page
         return vc
     }
 }

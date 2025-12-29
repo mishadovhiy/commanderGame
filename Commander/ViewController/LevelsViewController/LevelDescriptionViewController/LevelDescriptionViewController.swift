@@ -127,7 +127,7 @@ class LevelDescriptionViewController: UIViewController {
             let completedLevels = Set(allLevelsForPageKeys.compactMap({
                 $0.level
             }))
-            self.pageOverviewTableData = .init(pageModel: selectedLevel, builder: selectedLevel.level.isEmpty ? nil : .init(data: builder), totalLevelCount: levelBuilder?.levels.count ?? 0, completedLevelCount: completedLevels.count)
+            self.pageOverviewTableData = .init(pageModel: selectedLevel, builder: selectedLevel.level.isEmpty ? nil : .init(data: builder), levelTitle: levelBuilder?.name ?? "", totalLevelCount: levelBuilder?.levels.count ?? 0, completedLevelCount: completedLevels.count)
             if !selectedLevel.level.isEmpty {
                 self.levelsTableData = self.multipleLevels(db: dataBase, allKeys: allKeys)
 

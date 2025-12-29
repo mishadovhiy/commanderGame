@@ -9,6 +9,7 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
+    var page: LevelPagesBuilder!
     var lvlanager: LevelManager! {
         didSet {
             gameVC?.roundLabel.text = "\(lvlanager.currentRound)/\(lvlanager.lvlBuilder.rounds)"
@@ -31,10 +32,11 @@ class GameScene: SKScene {
         self.weapons.forEach({
             print($0.position, " tgerfwdas")
         })
+        loadBlockers()
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
             self.loadRaund()
         })
-        backgroundColor = .init(hex: "E7D4A9")
+        backgroundColor = lvlanager.lvlBuilder.backgroundColor ?? page.backgroundColor
     }
         
     var enemyGround: SKShapeNode? {
@@ -223,17 +225,48 @@ fileprivate extension GameScene {
         })
     }
         
+    func loadBlockers() {
+        lvlanager.lvlBuilder.blockers.forEach { blocker in
+            let node = SKSpriteNode(
+                texture: .init(imageNamed: blocker.type.assetName),
+                size: .init(
+                    width: blocker.type.size.width * blocker.sizeMultiplier,
+                    height: blocker.type.size.height * blocker.sizeMultiplier))
+            node.name = "blockerNode"
+            addChild(node)
+        }
+        updateBlockerPositions()
+    }
+    
+    func updateBlockerPositions() {
+        
+        var i = 0
+        let nodes = blockers
+        lvlanager.lvlBuilder.blockers.forEach { blocker in
+            nodes[i].position = .init(
+                x: size.width * blocker.position.x,
+                y: size.height * blocker.position.y)
+            i += 1
+        }
+    }
+    
+    var blockers: [SKNode] {
+        children.filter({
+            $0.name == "blockerNode"
+        })
+    }
+    
     func loadGraund() {
         let shapeNode = SKShapeNode(path: .init(rect: .zero, transform: nil))
         shapeNode.name = Constants.Names.enemyGround.rawValue
-        shapeNode.strokeColor = .init(hex: "D0A976")
+        shapeNode.strokeColor = self.lvlanager.lvlBuilder.secondaryColor ?? page.secondaryColor
         shapeNode.strokeTexture = .init(image: .enemyGround)
         shapeNode.lineWidth = Constants.graundWidth
         addChild(shapeNode)
         
         let shapeNode2 = SKShapeNode(path: .init(rect: .zero, transform: nil))
         shapeNode2.lineWidth = 2
-        shapeNode2.strokeColor = .init(hex: "B89668")
+        shapeNode2.strokeColor = .black.withAlphaComponent(0.15)
         shapeNode2.path = self.graundPath
         shapeNode.addChild(shapeNode2)
     }
@@ -275,9 +308,13 @@ extension GameScene: SKPhysicsContactDelegate {
 }
 
 extension GameScene {
-    static func configure(lvl: LevelManager) -> Self {
+    static func configure(
+        lvl: LevelManager,
+        page: LevelPagesBuilder
+    ) -> Self {
         let scene: Self = .init(fileNamed: Constants.Names.sceneName.rawValue)!
         scene.lvlanager = lvl
+        scene.page = page
         return scene
     }
 }
