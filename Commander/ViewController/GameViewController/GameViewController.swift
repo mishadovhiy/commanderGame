@@ -5,7 +5,6 @@
 //  Created by Mykhailo Dovhyi on 11.12.2025.
 //
 
-import UIKit
 import SpriteKit
 
 class GameViewController: AudioViewController {
@@ -26,23 +25,27 @@ class GameViewController: AudioViewController {
         AudioFileNameType.allCases
     }
     var gameBackgroundColor: UIColor {
-        LevelManager(selectedLevel).lvlBuilder.backgroundColor ?? page.backgroundColor
+        LevelManager(selectedLevel).lvlBuilder.appearence.backgroundColor ?? page.appearence.backgroundColor!
     }
     override func loadView() {
         super.loadView()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.setupLabels()
         loadScene()
+        weaponTableView.register(.init(nibName: .init(describing: TableDataCell.self), bundle: nil), forCellReuseIdentifier: .init(describing: TableDataCell.self))
+        weaponTableView.delegate = self
+        weaponTableView.dataSource = self
+        didSetEditingWeaponNode()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         DispatchQueue(label: "db", qos: .userInitiated).async {
             let db = DataBaseService.db
             DispatchQueue.main.async {
                 self.loadWeapons(db: db)
             }
         }
-        weaponTableView.register(.init(nibName: .init(describing: TableDataCell.self), bundle: nil), forCellReuseIdentifier: .init(describing: TableDataCell.self))
-        weaponTableView.delegate = self
-        weaponTableView.dataSource = self
-        didSetEditingWeaponNode()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

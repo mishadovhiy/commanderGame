@@ -51,7 +51,7 @@ class EnemyNode: SKSpriteNode {
         }) as? AudioContainerNode
     }
     
-    func run(in shape: CGPath, i: CGFloat, completion: @escaping()->()) {
+    func run(in shape: CGPath, i: CGFloat, appeared: @escaping()->(), completion: @escaping()->()) {
         self.position.x = (parent?.frame.size.width ?? 0) * -4
         
         let delay = SKAction.wait(forDuration: i * 2.0)
@@ -59,6 +59,7 @@ class EnemyNode: SKSpriteNode {
         let followPath = SKAction.follow(shape, asOffset: false, orientToPath: true, duration: 70)
         self.run(.sequence([delay, followPath]), completion: completion)
         self.run(.sequence([delay, SKAction.wait(forDuration: 2.0), fade])) {
+            appeared()
 //            self.isRemoving = false
         }
 

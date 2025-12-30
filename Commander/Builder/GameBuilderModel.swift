@@ -13,8 +13,7 @@ struct GameBuilderModel {
     let health: Int
     
     let enemyHealthMult: Int
-    let backgroundColor: UIColor?
-    let secondaryColor: UIColor?
+    let appearence: AppearenceGameBuilderModel
     let startingMoney: Int
     let blockers: [BlockerModel]
     
@@ -30,13 +29,11 @@ struct GameBuilderModel {
     init(lvlModel: LevelModel) {
         enemyGraundPosition = Self.positions(lvlModel.level)
         enemyPerRound = Self.enemyList(lvlModel.level)
-        health = 10
+        health = Self.health(lvlModel.level)
         enemyHealthMult = 100
         self.startingMoney = 100
         self.blockers = Self.blockers(lvlModel.level)
-        let colors = Self.colors(lvlModel.level)
-        self.backgroundColor = colors?.background
-        self.secondaryColor = colors?.secondary
+        appearence = Self.colors(lvlModel.level) ?? .init()
     }
 }
 
@@ -74,7 +71,12 @@ extension GameBuilderModel {
     }
     
     enum BlockerType: String {
-        case tree1
+        case tree1, tree2, tree3, tree4, tree5
+        case tree6, tree7, tree8, tree9, tree10
+        case bags, oil, helicopter
+        case rock1, rock2, rock3
+        case box1, box2
+        case house1, house2, house3
         
         var assetName: String {
             let folder = "decorations/"
@@ -101,10 +103,10 @@ extension GameBuilderModel {
 fileprivate
 extension GameBuilderModel {
     
-    static func colors(_ lvl: String) -> (background: UIColor, secondary: UIColor)? {
+    static func colors(_ lvl: String) -> AppearenceGameBuilderModel? {
         switch lvl {
         case "13":
-            (.red, .orange)
+            .init(backgroundColor: .red, secondaryColor: .orange)
         default: nil
         }
     }
@@ -118,7 +120,8 @@ extension GameBuilderModel {
     static func blockers(_ lvl: String) -> [BlockerModel] {
         switch lvl {
         default: [
-            .init(type: .tree1, position: .init(x: 0.2, y: 0.1))
+            .init(type: .tree1, position: .init(x: 0.2, y: 0.1)),
+            .init(type: .tree1, position: .init(x: 0.5, y: 0.3))
         ]
         }
     }

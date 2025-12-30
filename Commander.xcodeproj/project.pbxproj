@@ -55,6 +55,7 @@
 		8260E27E2EEE5039002E29C0 /* TableDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E27D2EEE5039002E29C0 /* TableDataModel.swift */; };
 		8260E2812EEE50BD002E29C0 /* TableDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E27F2EEE50BD002E29C0 /* TableDataCell.swift */; };
 		8260E2822EEE50BD002E29C0 /* TableDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8260E2802EEE50BD002E29C0 /* TableDataCell.xib */; };
+		8265846C2F03D22E003EC450 /* AppearenceGameBuilderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8265846B2F03D22E003EC450 /* AppearenceGameBuilderModel.swift */; };
 		826A32BF2EECEB01001D25B7 /* ButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32BE2EECEB01001D25B7 /* ButtonModel.swift */; };
 		826A32C12EECEB0E001D25B7 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32C02EECEB0E001D25B7 /* MessageModel.swift */; };
 		826A32C72EED05BF001D25B7 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32C62EED05BF001D25B7 /* UIView.swift */; };
@@ -135,6 +136,7 @@
 		8260E27D2EEE5039002E29C0 /* TableDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataModel.swift; sourceTree = "<group>"; };
 		8260E27F2EEE50BD002E29C0 /* TableDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataCell.swift; sourceTree = "<group>"; };
 		8260E2802EEE50BD002E29C0 /* TableDataCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableDataCell.xib; sourceTree = "<group>"; };
+		8265846B2F03D22E003EC450 /* AppearenceGameBuilderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearenceGameBuilderModel.swift; sourceTree = "<group>"; };
 		826A32BE2EECEB01001D25B7 /* ButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModel.swift; sourceTree = "<group>"; };
 		826A32C02EECEB0E001D25B7 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		826A32C62EED05BF001D25B7 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 			children = (
 				823497F42EEB5C0200F82871 /* LevelManager.swift */,
 				823497FD2EEB67D200F82871 /* LevelModel.swift */,
+				8265846B2F03D22E003EC450 /* AppearenceGameBuilderModel.swift */,
 				823497FA2EEB661900F82871 /* WeaponType.swift */,
 				82C637BD2EEF40100064F917 /* WeaponUpgradeType.swift */,
 				823497EF2EEB5A4900F82871 /* Difficulty.swift */,
@@ -637,6 +640,7 @@
 				829CADC12EFA8DF500548DB1 /* AlertViewController.swift in Sources */,
 				82C637C02EEF41420064F917 /* UserBalanceCell.swift in Sources */,
 				82C637B12EEE57350064F917 /* BuyCoinsViewController.swift in Sources */,
+				8265846C2F03D22E003EC450 /* AppearenceGameBuilderModel.swift in Sources */,
 				82A2EEFC2EFCEB1900437B4E /* PageLevelTableCell.swift in Sources */,
 				8235D1732EFFCED400D48EB0 /* AudioNodeContainer.swift in Sources */,
 				823498082EEB729500F82871 /* PhysicsCategory.swift in Sources */,

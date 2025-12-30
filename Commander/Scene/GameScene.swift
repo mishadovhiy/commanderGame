@@ -17,7 +17,7 @@ class GameScene: SKScene {
             gameVC?.balanceLabel.text = "\(lvlanager.progress.earnedMoney)"
         }
     }
-    
+    private var canLoadRound = true
     private var gameVC: GameViewController? {
         view?.next as? GameViewController
     }
@@ -33,10 +33,10 @@ class GameScene: SKScene {
             print($0.position, " tgerfwdas")
         })
         loadBlockers()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2), execute: {
             self.loadRaund()
         })
-        backgroundColor = lvlanager.lvlBuilder.backgroundColor ?? page.backgroundColor
+        backgroundColor = lvlanager.lvlBuilder.appearence.backgroundColor ?? page.appearence.backgroundColor!
     }
         
     var enemyGround: SKShapeNode? {
@@ -158,14 +158,24 @@ class GameScene: SKScene {
             print("jkhdfsukhsakd ", enemies.count)
             return
         }
+        if !canLoadRound {
+            return
+        }
         
         print(lvlanager.currentRound, " tefrwdsax")
         var i = 0
+        let totalCount = lvlanager.lvlBuilder
+            .enemyPerRound[lvlanager.currentRound].reduce(0) { partialResult, round in
+                return round.count + partialResult
+            }
+        if totalCount >= 1 {
+            self.canLoadRound = false
+        }
         lvlanager.lvlBuilder
             .enemyPerRound[lvlanager.currentRound]
             .forEach { type in
                 (0..<type.count).forEach { _ in
-                    self.loadEnemy(type.type, i: i)
+                    self.loadEnemy(type.type, i: i, totalInRound: totalCount)
                     i += 1
                 }
                
@@ -203,13 +213,17 @@ fileprivate extension GameScene {
         enemyGround?.path = graundPath
     }
     
-    func loadEnemy(_ type: EnemyType, i: Int) {
+    func loadEnemy(_ type: EnemyType, i: Int, totalInRound: Int) {
         guard let path = enemyGround?.path else {
             return
         }
         let node = EnemyNode(type: type, builder: lvlanager.lvlBuilder)
         self.addChild(node)
-        node.run(in: path, i: CGFloat(i), completion: {
+        node.run(in: path, i: CGFloat(i), appeared: {
+            if i + 1 >= totalInRound {
+                self.canLoadRound = true
+            }
+        }, completion: {
             self.lvlanager.progress.health -= 1
             self.lvlanager.progress.passedEnemyCount += 1
             node.removeFromParent()
@@ -239,13 +253,22 @@ fileprivate extension GameScene {
     }
     
     func updateBlockerPositions() {
+        guard let viewSize: CGSize = self.view?.frame.size else {
+
+            return
+        }
         
+        let viewPos: CGPoint = .init(
+            x: viewSize.width / -2 + 50,
+            y: viewSize.height / -2 + 50)
+
         var i = 0
         let nodes = blockers
+        
         lvlanager.lvlBuilder.blockers.forEach { blocker in
             nodes[i].position = .init(
-                x: size.width * blocker.position.x,
-                y: size.height * blocker.position.y)
+                x: (blocker.position.x * viewSize.width) + viewPos.x,
+                y: (blocker.position.y * viewSize.height) + viewPos.y)
             i += 1
         }
     }
@@ -259,7 +282,7 @@ fileprivate extension GameScene {
     func loadGraund() {
         let shapeNode = SKShapeNode(path: .init(rect: .zero, transform: nil))
         shapeNode.name = Constants.Names.enemyGround.rawValue
-        shapeNode.strokeColor = self.lvlanager.lvlBuilder.secondaryColor ?? page.secondaryColor
+        shapeNode.strokeColor = self.lvlanager.lvlBuilder.appearence.secondaryColor ?? page.appearence.secondaryColor!
         shapeNode.strokeTexture = .init(image: .enemyGround)
         shapeNode.lineWidth = Constants.graundWidth
         addChild(shapeNode)
