@@ -30,7 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
-        let initialVC = storyboard.instantiateInitialViewController()!
+        let initialVC = GameViewController.initiate(.test, page: [LevelPagesBuilder].allData.first!)
+        //storyboard.instantiateInitialViewController()!
 
         window.rootViewController = initialVC
         window.makeKeyAndVisible()

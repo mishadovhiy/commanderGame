@@ -73,7 +73,7 @@ class LevelViewController: UIViewController {
         let shape = CAShapeLayer()
         shape.path = path
         shape.name = "CAShapeLayer"
-        shape.strokeColor = UIColor.red.cgColor
+        shape.strokeColor = UIColor.container.cgColor
         shape.fillColor = UIColor.clear.cgColor
         shape.lineWidth = 2
         view.layer.addSublayer(shape)

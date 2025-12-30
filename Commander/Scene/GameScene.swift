@@ -242,34 +242,61 @@ fileprivate extension GameScene {
         
     func loadBlockers() {
         lvlanager.lvlBuilder.blockers.forEach { blocker in
+            let image = UIImage(named: blocker.type.assetName)
+            var imageSize = image?.size ?? .zero
+            if imageSize.width >= 150 || imageSize.height >= 150 {
+                if imageSize.width > imageSize.height {
+                    let percent = imageSize.height / imageSize.width
+                    imageSize = .init(width: 150, height: 150 * percent)
+                } else if imageSize.width < imageSize.height {
+                    let percent = imageSize.height / imageSize.width
+                    imageSize = .init(width: 150 * percent, height: 150)
+                }
+            }
+            if imageSize == .zero {
+                imageSize = .init(width: 20, height: 20)
+            }
+            print(imageSize, " hygfgdh")
             let node = SKSpriteNode(
                 texture: .init(imageNamed: blocker.type.assetName),
                 size: .init(
-                    width: blocker.type.size.width * blocker.sizeMultiplier,
-                    height: blocker.type.size.height * blocker.sizeMultiplier))
+                    width: imageSize.width * blocker.sizeMultiplier,
+                    height: imageSize.height * blocker.sizeMultiplier))
             node.name = "blockerNode"
             addChild(node)
         }
         updateBlockerPositions()
     }
     
-    func updateBlockerPositions() {
-        guard let viewSize: CGSize = self.view?.frame.size else {
-
-            return
+    var viewSize: CGSize {
+        guard var viewSize: CGSize = self.view?.frame.size else {
+            return .zero
         }
-        
-        let viewPos: CGPoint = .init(
-            x: viewSize.width / -2 + 50,
-            y: viewSize.height / -2 + 50)
+        viewSize.width -= (self.view?.safeAreaInsets.left ?? 0) + (self.view?.safeAreaInsets.right ?? 0)
+        viewSize.height -= (self.view?.safeAreaInsets.top ?? 0) + (self.view?.safeAreaInsets.bottom ?? 0)
+        return viewSize
+    }
+    
+    var viewPositionHelper: CGPoint {
+        .init(
+            x: viewSize.width / -2,
+            y: viewSize.height / -2)
+    }
+    
+    func updateBlockerPositions() {
+        let viewSize = viewSize
+        let viewPos = viewPositionHelper
 
         var i = 0
         let nodes = blockers
         
         lvlanager.lvlBuilder.blockers.forEach { blocker in
+            var size = nodes[i].frame.size
+            size.width *= blocker.sizeMultiplier
+            size.height *= blocker.sizeMultiplier
             nodes[i].position = .init(
-                x: (blocker.position.x * viewSize.width) + viewPos.x,
-                y: (blocker.position.y * viewSize.height) + viewPos.y)
+                x: (blocker.position.x * viewSize.width) + (viewPos.x),
+                y: (blocker.position.y * viewSize.height) + (viewPos.y))
             i += 1
         }
     }

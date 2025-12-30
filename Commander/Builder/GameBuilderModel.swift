@@ -70,13 +70,18 @@ extension GameBuilderModel {
         }
     }
     
-    enum BlockerType: String {
+    enum BlockerType: String, CaseIterable {
         case tree1, tree2, tree3, tree4, tree5
         case tree6, tree7, tree8, tree9, tree10
         case bags, oil, helicopter
         case rock1, rock2, rock3
         case box1, box2
         case house1, house2, house3
+        
+        var mainComponentName: String {
+            let number = rawValue.numbers
+            return rawValue.replacingOccurrences(of: "\(number ?? 0)", with: "")
+        }
         
         var assetName: String {
             let folder = "decorations/"
@@ -87,15 +92,6 @@ extension GameBuilderModel {
             let numberStr = "\(number)"
             return folder + rawValue
                 .replacingOccurrences(of: numberStr, with: "") + "/" + numberStr
-        }
-        
-        var size: CGSize {
-            switch self {
-            case .tree1:
-                    .init(width: 20, height: 20)
-            default:
-                    .init(width: 20, height: 5.4)
-            }
         }
     }
 }
@@ -120,10 +116,16 @@ extension GameBuilderModel {
     static func blockers(_ lvl: String) -> [BlockerModel] {
         switch lvl {
         default: [
-            .init(type: .tree1, position: .init(x: 0.2, y: 0.1)),
-            .init(type: .tree1, position: .init(x: 0.5, y: 0.3))
+//            .init(type: .helicopter, position: .init(x: 0.2, y: 0.76)),
+            .init(type: .tree6, position: .init(x: 0.2, y: 0.76)),
+            .init(type: .tree7, position: .init(x: 0.8, y: 0.76)),
+            .init(type: .tree8, position: .init(x: 0.4, y: 0.16)),
+            .init(type: .tree9, position: .init(x: 0.25, y: 0.66)),
+
+            .init(type: .tree10, position: .init(x: 0.5, y: 0.55))
         ]
         }
+        //house, treese > 5 - multipliwers
     }
     
     static func enemyList(_ lvl: String) -> [[EnemyRound]] {
