@@ -25,6 +25,7 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         physicsWorld.contactDelegate = self
+        loadSceneBackground()
         loadGraund()
         updateGraundPosition()
         loadArmour(type: .granata, position: .init(x: 0.186, y: 0.22))
@@ -36,7 +37,6 @@ class GameScene: SKScene {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2), execute: {
             self.loadRaund()
         })
-        backgroundColor = lvlanager.lvlBuilder.appearence.backgroundColor ?? page.appearence.backgroundColor!
     }
         
     var enemyGround: SKShapeNode? {
@@ -104,6 +104,7 @@ class GameScene: SKScene {
         super.touchesBegan(touches, with: event)
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
+        #warning("todo: weapon child pressed")
         if let weapon = atPoint(location) as? WeaponNode {
             weapon.isEditing.toggle()
             gameVC?.didSetEditingWeaponNode()
@@ -283,7 +284,7 @@ fileprivate extension GameScene {
         let shapeNode = SKShapeNode(path: .init(rect: .zero, transform: nil))
         shapeNode.name = Constants.Names.enemyGround.rawValue
         shapeNode.strokeColor = self.lvlanager.lvlBuilder.appearence.secondaryColor ?? page.appearence.secondaryColor!
-        shapeNode.strokeTexture = .init(image: .enemyGround)
+        shapeNode.strokeTexture = .init(imageNamed: self.lvlanager.lvlBuilder.appearence.enemyGroundTextureName ?? page.appearence.enemyGroundTextureName!)
         shapeNode.lineWidth = Constants.graundWidth
         addChild(shapeNode)
         
@@ -292,6 +293,16 @@ fileprivate extension GameScene {
         shapeNode2.strokeColor = .black.withAlphaComponent(0.15)
         shapeNode2.path = self.graundPath
         shapeNode.addChild(shapeNode2)
+    }
+    
+    func loadSceneBackground() {
+        if let name = self.lvlanager.lvlBuilder.appearence.backgroundTextureName ?? self.page.appearence.backgroundTextureName, !name.isEmpty {
+            let sceneBackgroundNode = SKSpriteNode(texture: nil, size: size)
+            sceneBackgroundNode.texture = .init(imageNamed: name)
+            sceneBackgroundNode.zPosition = -1
+            addChild(sceneBackgroundNode)
+        }
+        backgroundColor = lvlanager.lvlBuilder.appearence.backgroundColor ?? page.appearence.backgroundColor!
     }
 }
 
@@ -347,6 +358,7 @@ extension GameScene {
         static let graundWidth: CGFloat = 50
         
         enum Names: String {
+            #warning("todo: remove scene from project, load empty scene")
             case sceneName = "GameScene"
             case enemyGround
         }
