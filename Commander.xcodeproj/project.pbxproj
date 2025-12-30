@@ -56,6 +56,8 @@
 		8260E2812EEE50BD002E29C0 /* TableDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E27F2EEE50BD002E29C0 /* TableDataCell.swift */; };
 		8260E2822EEE50BD002E29C0 /* TableDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8260E2802EEE50BD002E29C0 /* TableDataCell.xib */; };
 		8265846C2F03D22E003EC450 /* AppearenceGameBuilderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8265846B2F03D22E003EC450 /* AppearenceGameBuilderModel.swift */; };
+		8265846E2F045366003EC450 /* EnemyRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8265846D2F045366003EC450 /* EnemyRound.swift */; };
+		826584702F0454EF003EC450 /* BlockerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8265846F2F0454EF003EC450 /* BlockerModel.swift */; };
 		826A32BF2EECEB01001D25B7 /* ButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32BE2EECEB01001D25B7 /* ButtonModel.swift */; };
 		826A32C12EECEB0E001D25B7 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32C02EECEB0E001D25B7 /* MessageModel.swift */; };
 		826A32C72EED05BF001D25B7 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826A32C62EED05BF001D25B7 /* UIView.swift */; };
@@ -137,6 +139,8 @@
 		8260E27F2EEE50BD002E29C0 /* TableDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataCell.swift; sourceTree = "<group>"; };
 		8260E2802EEE50BD002E29C0 /* TableDataCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableDataCell.xib; sourceTree = "<group>"; };
 		8265846B2F03D22E003EC450 /* AppearenceGameBuilderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearenceGameBuilderModel.swift; sourceTree = "<group>"; };
+		8265846D2F045366003EC450 /* EnemyRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyRound.swift; sourceTree = "<group>"; };
+		8265846F2F0454EF003EC450 /* BlockerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerModel.swift; sourceTree = "<group>"; };
 		826A32BE2EECEB01001D25B7 /* ButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModel.swift; sourceTree = "<group>"; };
 		826A32C02EECEB0E001D25B7 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		826A32C62EED05BF001D25B7 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -210,6 +214,9 @@
 			isa = PBXGroup;
 			children = (
 				823497EB2EEB590B00F82871 /* GameBuilderModel.swift */,
+				8265846F2F0454EF003EC450 /* BlockerModel.swift */,
+				8265846D2F045366003EC450 /* EnemyRound.swift */,
+				8265846B2F03D22E003EC450 /* AppearenceGameBuilderModel.swift */,
 				8260E24D2EED43C5002E29C0 /* LevelPagesBuilder.swift */,
 			);
 			path = Builder;
@@ -260,7 +267,6 @@
 			children = (
 				823497F42EEB5C0200F82871 /* LevelManager.swift */,
 				823497FD2EEB67D200F82871 /* LevelModel.swift */,
-				8265846B2F03D22E003EC450 /* AppearenceGameBuilderModel.swift */,
 				823497FA2EEB661900F82871 /* WeaponType.swift */,
 				82C637BD2EEF40100064F917 /* WeaponUpgradeType.swift */,
 				823497EF2EEB5A4900F82871 /* Difficulty.swift */,
@@ -615,6 +621,7 @@
 				823497F72EEB5DBA00F82871 /* EnemyType.swift in Sources */,
 				8260E2702EEDB54A002E29C0 /* UpgradeWeaponViewController.swift in Sources */,
 				823497F02EEB5A4900F82871 /* Difficulty.swift in Sources */,
+				826584702F0454EF003EC450 /* BlockerModel.swift in Sources */,
 				829CADCE2EFA901E00548DB1 /* AlertModel.swift in Sources */,
 				829CADC72EFA8E3E00548DB1 /* AlertTitleCollectionCell.swift in Sources */,
 				8234980C2EEB77B900F82871 /* BulletNode.swift in Sources */,
@@ -636,6 +643,7 @@
 				82C637CB2EEF4A2D0064F917 /* DataBaseModel.swift in Sources */,
 				823497F52EEB5C0200F82871 /* LevelManager.swift in Sources */,
 				829CADCB2EFA8E6800548DB1 /* AlertSegmentedTableCell.swift in Sources */,
+				8265846E2F045366003EC450 /* EnemyRound.swift in Sources */,
 				826A32C72EED05BF001D25B7 /* UIView.swift in Sources */,
 				829CADC12EFA8DF500548DB1 /* AlertViewController.swift in Sources */,
 				82C637C02EEF41420064F917 /* UserBalanceCell.swift in Sources */,

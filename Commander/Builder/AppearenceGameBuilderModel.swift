@@ -24,3 +24,13 @@ struct AppearenceGameBuilderModel: Equatable {
         self.enemyGroundTextureName = enemyGroundTextureName
     }
 }
+
+extension AppearenceGameBuilderModel {
+    static func gameLevel(_ lvl: String) -> AppearenceGameBuilderModel? {
+        switch lvl {
+        case "13":
+            .init(backgroundColor: .red, secondaryColor: .orange)
+        default: nil
+        }
+    }
+}

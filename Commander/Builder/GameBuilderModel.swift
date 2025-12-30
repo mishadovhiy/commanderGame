@@ -21,19 +21,14 @@ struct GameBuilderModel {
         enemyPerRound.count
     }
     
-    struct EnemyRound {
-        let type: EnemyType
-        let count: Int
-    }
-    
     init(lvlModel: LevelModel) {
         enemyGraundPosition = Self.positions(lvlModel.level)
-        enemyPerRound = Self.enemyList(lvlModel.level)
+        enemyPerRound = .enemyList(lvlModel.level)
         health = Self.health(lvlModel.level)
         enemyHealthMult = 100
         self.startingMoney = 100
-        self.blockers = Self.blockers(lvlModel.level)
-        appearence = Self.colors(lvlModel.level) ?? .init()
+        self.blockers = .allData(lvlModel.level)
+        appearence = .gameLevel(lvlModel.level) ?? .init()
     }
 }
 
@@ -54,124 +49,15 @@ struct GameBuilderMiniModel {
     }
 }
 
-extension GameBuilderModel {
-    
-    struct BlockerModel {
-        let type: BlockerType
-        let position: CGPoint
-        let sizeMultiplier: CGFloat
-        
-        init(type: BlockerType,
-             position: CGPoint,
-             sizeMultiplier: CGFloat = 1) {
-            self.type = type
-            self.position = position
-            self.sizeMultiplier = sizeMultiplier
-        }
-    }
-    
-    enum BlockerType: String, CaseIterable {
-        case tree1, tree2, tree3, tree4, tree5
-        case tree6, tree7, tree8, tree9, tree10
-        case bags, oil, helicopter
-        case rock1, rock2, rock3
-        case box1, box2
-        case house1, house2, house3
-        
-        var mainComponentName: String {
-            let number = rawValue.numbers
-            return rawValue.replacingOccurrences(of: "\(number ?? 0)", with: "")
-        }
-        
-        var assetName: String {
-            let folder = "decorations/"
-            guard let number = rawValue.numbers,
-                    number >= 1 else {
-                return folder + rawValue
-            }
-            let numberStr = "\(number)"
-            return folder + rawValue
-                .replacingOccurrences(of: numberStr, with: "") + "/" + numberStr
-        }
-    }
-}
-
 fileprivate
 extension GameBuilderModel {
-    
-    static func colors(_ lvl: String) -> AppearenceGameBuilderModel? {
-        switch lvl {
-        case "13":
-            .init(backgroundColor: .red, secondaryColor: .orange)
-        default: nil
-        }
-    }
     
     static func health(_ lvl: String) -> Int {
         switch lvl {
         default: 30
         }
     }
-    
-    static func blockers(_ lvl: String) -> [BlockerModel] {
-        switch lvl {
-        default: [
-//            .init(type: .helicopter, position: .init(x: 0.2, y: 0.76)),
-            .init(type: .tree6, position: .init(x: 0.2, y: 0.76)),
-            .init(type: .tree7, position: .init(x: 0.8, y: 0.76)),
-            .init(type: .tree8, position: .init(x: 0.4, y: 0.16)),
-            .init(type: .tree9, position: .init(x: 0.25, y: 0.66)),
-
-            .init(type: .tree10, position: .init(x: 0.5, y: 0.55))
-        ]
-        }
-        //house, treese > 5 - multipliwers
-    }
-    
-    static func enemyList(_ lvl: String) -> [[EnemyRound]] {
-        switch lvl {
-        case "11":
-            [
-                    [.init(type: .soldeir, count: 15),
-                     .init(type: .soldeir, count: 20)],
-                    [.init(type: .soldeir, count: 20),
-                        .init(type: .vehicle, count: 10),
-                    ],
-                    [.init(type: .soldeir, count: 2),
-                     .init(type: .flight, count: 5),
-                     .init(type: .tankMBT, count: 2),
-                     .init(type: .vehicle, count: 10)]
-                ]
-        case "15":
-            [
-                    [.init(type: .soldeir, count: 15),
-                     .init(type: .vehicle, count: 20)],
-                    [.init(type: .soldeir, count: 20),
-                        .init(type: .vehicle, count: 10),
-                    ],
-                    [.init(type: .tankMBT, count: 5),
-                     .init(type: .flight, count: 10),
-                     .init(type: .tankMBT, count: 15),
-                     .init(type: .vehicle, count: 10)],
-                    [.init(type: .soldeir, count: 5),
-                     .init(type: .vehicle, count: 10),
-                     .init(type: .soldeir, count: 15),
-                     .init(type: .vehicle, count: 10)]
-                ]
-        default: [
-                [.init(type: .soldeir, count: 15),
-                 .init(type: .soldeir, count: 20)],
-                [.init(type: .soldeir, count: 20),
-                    .init(type: .vehicle, count: 10),
-                ],
-                [.init(type: .soldeir, count: 2),
-                 .init(type: .flight, count: 5),
-                 .init(type: .tankMBT, count: 2),
-                 .init(type: .vehicle, count: 10)]
-            ]
-        }
-    }
-    
+        
     static func positions(_ lvl: String) -> [CGPoint] {
         switch lvl {
         default:
