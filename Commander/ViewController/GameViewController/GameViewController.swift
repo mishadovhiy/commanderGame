@@ -278,16 +278,46 @@ extension GameViewController {
     
     func setupLabels() {
         let isLightBackground = self.gameBackgroundColor.isLight
-        [healthLabel, balanceLabel, roundLabel].forEach {
-            let labels = ($0?.superview as? UIStackView)?.arrangedSubviews as? [UILabel] ?? []
+//        self.view.subviews.forEach {
+//            if $0.tag != 1, let stack = $0 as? UIStackView {
+//                stack.arrangedSubviews.forEach {
+//                    if $0 is UIButton {
+        var array = (view.subviews.compactMap({
+            ($0 as? UIStackView)?.arrangedSubviews ?? []
+        }).flatMap({$0}))
+        array.append(contentsOf: [healthLabel, balanceLabel, roundLabel])
+        let textColor: UIColor = isLightBackground ? .dark : .white.withAlphaComponent(0.7)
+        array.forEach {
+            let labels = ($0.superview as? UIStackView)?.arrangedSubviews ?? []
             if labels.isEmpty {
-                $0?.textColor = isLightBackground ? .extraDark : .white
+                if let label = $0 as? UILabel {
+                    label.textColor = textColor
+
+                } else if let button = $0 as? UIButton {
+                    button.tintColor = textColor
+                }
 
             } else {
                 labels.forEach({
-                    $0.textColor = isLightBackground ? .extraDark : .white
+                    if let label = $0 as? UILabel {
+                        label.textColor = textColor
 
+                    } else if let imageView = $0 as? UIImageView {
+                        imageView.tintColor = textColor
+
+                    } else if let button = $0 as? UIButton {
+                        button.tintColor = textColor
+                    }
                 })
+            }
+        }
+        let backgroundColor = (isLightBackground ? UIColor.dark : UIColor(hex: "A88934")).withAlphaComponent(0.15)
+        array.forEach {
+            if let label = $0 as? UILabel {
+                label.superview?.superview?.backgroundColor = backgroundColor
+
+            } else if let button = $0 as? UIButton {
+                button.backgroundColor = backgroundColor
             }
         }
     }

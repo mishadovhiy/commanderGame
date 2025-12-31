@@ -19,6 +19,24 @@ extension UIView {
         }
     }
     
+    @IBInspectable var borderWidth: CGFloat {
+        get {
+            layer.borderWidth
+        }
+        set {
+            layer.borderWidth = newValue
+        }
+    }
+    
+    @IBInspectable var borderColor: UIColor {
+        get {
+            .init(cgColor: layer.borderColor ?? UIColor.clear.cgColor)
+        }
+        set {
+            layer.borderColor = newValue.cgColor
+        }
+    }
+    
     @IBInspectable var hasDarkOverlay: Bool {
         get {
             layer.name?.contains("DarkOverlay") ?? false
@@ -239,7 +257,7 @@ extension UIColor {
     var isLight: Bool {
         let (r, g, b) = self.rgbInSRGB()
         let brightness = (r * 299 + g * 587 + b * 114) / 1000
-        return brightness >= 0.4
+        return brightness >= 0.5
     }
 
     private func rgbInSRGB() -> (CGFloat, CGFloat, CGFloat) {
