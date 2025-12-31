@@ -46,8 +46,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //21
-        let initialVC = storyboard.instantiateInitialViewController()
-        //GameViewController.initiate(.init(level: "12", levelPage: "1", difficulty: .easy, duration: .normal), page: [LevelPagesBuilder].allData[0])
+        let initialVC = GameViewController.initiate(.init(level: "412", levelPage: "4", difficulty: .easy, duration: .normal), page: [LevelPagesBuilder].allData[3])
+        //storyboard.instantiateInitialViewController()//
 
         window.rootViewController = initialVC
         window.makeKeyAndVisible()

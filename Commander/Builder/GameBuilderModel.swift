@@ -114,12 +114,20 @@ extension GameBuilderModel {
                 .init(x: 0.3, y: 0.45), .init(x: 0.5, y: 0.45),
                 .init(x: 0.5, y: 0.75), .init(x: 1, y: 0.75)
             ]
-        case "20", "402":
+        case "20":
             [
                 .init(x: 0.25, y: 0), .init(x: 0.25, y: 0.2),
                 .init(x: 0.4, y: 0.2), .init(x: 0.8, y: 0.2),
                 .init(x: 0.8, y: 0.5), .init(x: 0.6, y: 0.5),
                 .init(x: 0.6, y: 1)
+            ]
+        case "402":
+            [
+                .init(x: 0.25, y: 0), .init(x: 0.25, y: 0.2),
+                .init(x: 0.4, y: 0.2), .init(x: 0.8, y: 0.2),
+                .init(x: 0.8, y: 0.5), .init(x: 0.6, y: 0.5),
+                .init(x: 0.6, y: 0.76), .init(x: 0.4, y: 0.76),
+                .init(x: 0.4, y: 0.5), .init(x: 0, y: 0.5)
             ]
         case "21", "404", "305":
             [
@@ -128,13 +136,20 @@ extension GameBuilderModel {
                 .init(x: 0.8, y: 0.6), .init(x: 0.6, y: 0.6),
                 .init(x: 0.6, y: 1)
             ]
-        case "201", "410", "304":
+        case "201":
+            [
+                .init(x: 0, y: 0.2), .init(x: 0.2, y: 0.2),
+                .init(x: 0.2, y: 0.6), .init(x: 0.5, y: 0.6),
+                .init(x: 0.5, y: 0.2), .init(x: 0.8, y: 0.2),
+                .init(x: 0.8, y: 1)
+            ]
+        case "410", "304":
             [
                 .init(x: 0, y: 0.2), .init(x: 0.2, y: 0.2),
                 .init(x: 0.2, y: 0.6), .init(x: 0.6, y: 0.6),
                 .init(x: 0.6, y: 0.2), .init(x: 1, y: 0.2)
             ]
-        case "202", "302", "306":
+        case "202", "306", "302":
             [
                 .init(x: 0.2, y:0), .init(x:0.2, y:0.55),
                 .init(x: 0.2, y: 0.55), .init(x: 0.4, y: 0.55),

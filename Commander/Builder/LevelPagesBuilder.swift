@@ -133,7 +133,7 @@ extension [LevelPagesBuilder] {
                         .init(x: 0.67, y: 0.455),
                       title: "311")
             ]),
-            .init(title: "4", name: "Australia", zoom: 1.6, mapPosition: .init(x: -0.76, y: -0.56), appearence: .init(backgroundColor: .dark, secondaryColor: .orange, backgroundTextureName: "darkGround", enemyGroundTextureName: "enemyGroundBrawn"), levels: [//new dots
+            .init(title: "4", name: "Australia", zoom: 1.6, mapPosition: .init(x: -0.76, y: -0.56), appearence: .init(backgroundColor: .dark, secondaryColor: .white, backgroundTextureName: "darkGround", enemyGroundTextureName: "enemyGroundBrawn"), levels: [//new dots
                 .init(position:
                         .init(x: 0.12, y: 0.16),
                       title: "401"),
