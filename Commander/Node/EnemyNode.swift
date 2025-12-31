@@ -14,8 +14,8 @@ class EnemyNode: SKSpriteNode {
     
     init(type: EnemyType, builder: GameBuilderModel) {
         self.type = type
-        
-        self.health = (type.health * builder.enemyHealthMult) * 3
+        let level = Float(builder.enemyHealthMult)
+        self.health = (type.health * Int(level))
         self.totalHealth = health
         super.init(texture: .init(imageNamed: "enemy/" + type.component.rawValue + "/1"), color: .clear, size: CGSize(width: 20, height: 20))
         addChild(AudioContainerNode(audioNames: [.explosure1, .explosure3, .explosure4, .explosure, .hit1, .hit2, .coins]))

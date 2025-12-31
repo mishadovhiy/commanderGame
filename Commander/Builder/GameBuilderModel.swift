@@ -16,7 +16,6 @@ struct GameBuilderModel {
     let appearence: AppearenceGameBuilderModel
     let startingMoney: Int
     let blockers: [BlockerModel]
-    
     var rounds: Int {
         enemyPerRound.count
     }
@@ -25,7 +24,7 @@ struct GameBuilderModel {
         enemyGraundPosition = Self.enemyGraund(lvlModel.level)
         enemyPerRound = .enemyList(lvlModel.level)
         health = Self.health(lvlModel.level)
-        enemyHealthMult = 100
+        enemyHealthMult = Int(lvlModel.level) ?? 1
         self.startingMoney = 100
         self.blockers = .allData(lvlModel.level)
         appearence = .gameLevel(lvlModel.level) ?? .init()
