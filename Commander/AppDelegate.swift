@@ -11,33 +11,6 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
-    func presentRootVC() {
-        let window: UIWindow?
-        if #available(iOS 13.0, *) {
-            guard let windowScene = self.window?.windowScene as? UIWindowScene else { return }
-            window = UIWindow(windowScene: windowScene)
-
-        } else {
-            window = UIApplication.shared.windows.first(where: {
-                $0.isKeyWindow
-            }) ?? self.window
-        }
-
-        guard let window else {
-            return
-        }
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-
-        let initialVC = GameViewController.initiate(.test, page: [LevelPagesBuilder].allData.first!)
-        //storyboard.instantiateInitialViewController()!
-
-        window.rootViewController = initialVC
-        window.makeKeyAndVisible()
-
-        self.window = window
-    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -72,11 +45,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene as! UIWindowScene)
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-
-        let initialVC = storyboard.instantiateInitialViewController()!
-        //GameViewController.initiate(.test, page: [LevelPagesBuilder].allData.first!)
-        //storyboard.instantiateInitialViewController()!
-        //GameViewController.initiate(.test)
+//21
+        let initialVC = GameViewController.initiate(.init(level: "301", levelPage: "3", difficulty: .easy, duration: .normal), page: [LevelPagesBuilder].allData.first!)
 
         window.rootViewController = initialVC
         window.makeKeyAndVisible()

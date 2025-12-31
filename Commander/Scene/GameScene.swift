@@ -28,8 +28,8 @@ class GameScene: SKScene {
         loadSceneBackground()
         loadGraund()
         updateGraundPosition()
-        loadArmour(type: .granata, position: .init(x: 0.186, y: 0.22))
-        loadArmour(type: .pistol, position: .init(x: 0.271, y: 0.22))
+//        loadArmour(type: .granata, position: .init(x: 0.186, y: 0.22))
+//        loadArmour(type: .pistol, position: .init(x: 0.271, y: 0.22))
         self.weapons.forEach({
             print($0.position, " tgerfwdas")
         })
@@ -197,11 +197,11 @@ fileprivate extension GameScene {
         let viewPos: CGPoint = .init(
             x: viewSize.width / -2 + 50,
             y: viewSize.height / -2 + 50)
-        path.move(to: CGPoint(x: 0 + viewPos.x, y: 0 + viewPos.y))
-        
-        lvlanager.lvlBuilder
+        var positions = lvlanager.lvlBuilder
             .enemyGraundPosition
-            .forEach {
+        path.move(to: CGPoint(x: (positions.first!.x * viewSize.width) + viewPos.x, y: (positions.first!.y * viewSize.height) + viewPos.y))
+        positions.removeFirst()
+        positions.forEach {
             path.addLine(to: CGPoint(
                 x: ($0.x * viewSize.width) + viewPos.x,
                 y: ($0.y * viewSize.height) + viewPos.y)
@@ -326,7 +326,9 @@ fileprivate extension GameScene {
         if let name = self.lvlanager.lvlBuilder.appearence.backgroundTextureName ?? self.page.appearence.backgroundTextureName, !name.isEmpty {
             let sceneBackgroundNode = SKSpriteNode(texture: nil, size: size)
             sceneBackgroundNode.texture = .init(imageNamed: name)
+            sceneBackgroundNode.color = lvlanager.lvlBuilder.appearence.backgroundColor ?? page.appearence.backgroundColor!
             sceneBackgroundNode.zPosition = -1
+            sceneBackgroundNode.alpha = 0.2
             addChild(sceneBackgroundNode)
         }
         backgroundColor = lvlanager.lvlBuilder.appearence.backgroundColor ?? page.appearence.backgroundColor!

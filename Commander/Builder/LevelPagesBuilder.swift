@@ -25,7 +25,7 @@ struct LevelPagesBuilder: Equatable {
 extension [LevelPagesBuilder] {
     static var allData: Self {
         [
-            .init(title: "1", name: "America", zoom: 1, mapPosition: .init(x: -0.08, y: -0.05), appearence: .init(backgroundColor: .dark, secondaryColor: .container, backgroundTextureName: "enemyGround", enemyGroundTextureName: "enemyGround"), levels: [
+            .init(title: "1", name: "America", zoom: 1, mapPosition: .init(x: -0.08, y: -0.05), appearence: .init(backgroundColor: .dark, secondaryColor: .container, backgroundTextureName: nil, enemyGroundTextureName: "enemyGround"), levels: [
                 .init(position:
                         .init(x: 0.08, y: 0.2),
                       title: "11"),
@@ -60,7 +60,7 @@ extension [LevelPagesBuilder] {
                         .init(x: 0.36, y: 0.62),
                       title: "21")
             ]),
-            .init(title: "2", name: "Africa", zoom: 1, mapPosition: .init(x: -0.4, y: -0.3), appearence: .init(backgroundColor: .white, secondaryColor: .blue, backgroundTextureName: "enemyGround", enemyGroundTextureName: "enemyGround"), levels: [
+            .init(title: "2", name: "Africa", zoom: 1, mapPosition: .init(x: -0.4, y: -0.3), appearence: .init(backgroundColor: .white, secondaryColor: .blue, backgroundTextureName: nil, enemyGroundTextureName: "enemyGround"), levels: [
                 .init(position:
                         .init(x: 0.12, y: 0.16),
                       title: "201"),
@@ -98,7 +98,7 @@ extension [LevelPagesBuilder] {
                         .init(x: 0.3, y: 0.85),
                       title: "212")
             ]),//fix dots
-            .init(title: "3", name: "Europe", zoom: 0.7, mapPosition: .init(x: -0.44, y: -0.03), appearence: .init(backgroundColor: .accent, secondaryColor: .dark, backgroundTextureName: "enemyGround", enemyGroundTextureName: "enemyGround"), levels: [
+            .init(title: "3", name: "Europe", zoom: 0.7, mapPosition: .init(x: -0.44, y: -0.03), appearence: .init(backgroundColor: .accent, secondaryColor: .dark, backgroundTextureName: nil, enemyGroundTextureName: "enemyGround"), levels: [
                 .init(position:
                         .init(x: 0.2, y: 0.6),
                       title: "301"),
@@ -133,43 +133,43 @@ extension [LevelPagesBuilder] {
                         .init(x: 0.67, y: 0.455),
                       title: "311")
             ]),
-            .init(title: "4", name: "Australia", zoom: 1.6, mapPosition: .init(x: -0.76, y: -0.56), appearence: .init(backgroundColor: .red, secondaryColor: .orange, backgroundTextureName: "enemyGround", enemyGroundTextureName: "enemyGround"), levels: [//new dots
+            .init(title: "4", name: "Australia", zoom: 1.6, mapPosition: .init(x: -0.76, y: -0.56), appearence: .init(backgroundColor: .red, secondaryColor: .orange, backgroundTextureName: nil, enemyGroundTextureName: "enemyGround"), levels: [//new dots
                 .init(position:
                         .init(x: 0.12, y: 0.16),
-                      title: "201"),
+                      title: "401"),
                 .init(position:
                         .init(x: 0.08, y: 0.361),
-                      title: "202"),
+                      title: "402"),
                 .init(position:
                         .init(x: 0.24, y: 0.363),
-                      title: "203"),
+                      title: "403"),
                 .init(position:
                         .init(x: 0.15, y: 0.63),
-                      title: "204"),
+                      title: "404"),
                 .init(position:
                         .init(x: 0.46, y: 0.54),
-                      title: "205"),
+                      title: "405"),
                 .init(position:
                         .init(x: 0.4, y: 0.2),
-                      title: "206"),
+                      title: "406"),
                 .init(position:
                         .init(x: 0.66, y: 0.33),
-                      title: "207"),
+                      title: "407"),
                 .init(position:
                         .init(x: 0.83, y: 0.167),
-                      title: "208"),
+                      title: "408"),
                 .init(position:
                         .init(x: 0.824, y: 0.47),
-                      title: "209"),
+                      title: "409"),
                 .init(position:
                         .init(x: 0.9, y: 0.73),
-                      title: "210"),
+                      title: "410"),
                 .init(position:
                         .init(x: 0.65, y: 0.74),
-                      title: "211"),
+                      title: "411"),
                 .init(position:
                         .init(x: 0.3, y: 0.85),
-                      title: "212")
+                      title: "412")
             ]),
 
         ]

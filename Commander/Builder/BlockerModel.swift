@@ -53,8 +53,8 @@ extension [GameBuilderModel.BlockerModel] {
     static func allData(_ lvl: String) -> Self {
         switch lvl {
         default: [
-            .init(type: .tree6, position: .init(x: 0.2, y: 0.76)),
-            .init(type: .tree10, position: .init(x: 0.5, y: 0.55))
+//            .init(type: .tree6, position: .init(x: 0.2, y: 0.76)),
+//            .init(type: .tree10, position: .init(x: 0.5, y: 0.55))
         ]
         }
         //house, treese > 5 - multipliwers

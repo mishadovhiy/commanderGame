@@ -13,15 +13,19 @@ struct AppearenceGameBuilderModel: Equatable {
     
     let backgroundTextureName: String?
     let enemyGroundTextureName: String?
+    let backgroundTextureOpacity: CGFloat
     
     init(backgroundColor: UIColor? = nil,
          secondaryColor: UIColor? = nil,
          backgroundTextureName: String? = nil,
-         enemyGroundTextureName: String? = nil) {
+         enemyGroundTextureName: String? = nil,
+         backgroundTextureOpacity: CGFloat = 1
+    ) {
         self.backgroundColor = backgroundColor
         self.secondaryColor = secondaryColor
         self.backgroundTextureName = backgroundTextureName
         self.enemyGroundTextureName = enemyGroundTextureName
+        self.backgroundTextureOpacity = backgroundTextureOpacity
     }
 }
 

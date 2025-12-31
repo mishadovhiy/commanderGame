@@ -22,7 +22,7 @@ struct GameBuilderModel {
     }
     
     init(lvlModel: LevelModel) {
-        enemyGraundPosition = Self.positions(lvlModel.level)
+        enemyGraundPosition = Self.enemyGraund(lvlModel.level)
         enemyPerRound = .enemyList(lvlModel.level)
         health = Self.health(lvlModel.level)
         enemyHealthMult = 100
@@ -58,8 +58,158 @@ extension GameBuilderModel {
         }
     }
         
-    static func positions(_ lvl: String) -> [CGPoint] {
+    static func enemyGraund(_ lvl: String) -> [CGPoint] {
         switch lvl {
+        case "11":
+            [
+                .init(x: 0, y: 0.55), .init(x: 0.4, y: 0.55),
+                .init(x: 0.4, y: 0.2), .init(x: 1, y: 0.2)
+            ]
+        case "12":
+            [
+                .init(x: 0, y: 0.2), .init(x: 0.2, y: 0.2),
+                .init(x: 0.2, y: 0.6), .init(x: 0.6, y: 0.6),
+                .init(x: 0.6, y: 0.2), .init(x: 1, y: 0.2)
+            ]
+        case "13", "407":
+            [
+                .init(x: 0.2, y: 1), .init(x: 0.2, y: 0.5),
+                .init(x: 0.5, y: 0.5), .init(x:0.8, y: 0.5),
+                .init(x: 0.8, y: 0)
+            ]
+        case "14":
+            [
+                .init(x: 0, y: 0.3), .init(x: 0.4, y: 0.3),
+                .init(x: 0.4, y: 0.6), .init(x: 1, y: 0.6)
+            ]
+        case "15", "303":
+            [
+                .init(x: 0, y: 0.6), .init(x: 0.2, y: 0.6),
+                .init(x: 0.2, y: 0.2), .init(x: 0.6, y: 0.2),
+                .init(x: 0.6, y: 0.6), .init(x: 1, y: 0.6)
+            ]
+        case "16", "408":
+            [
+                .init(x: 0, y: 0.55), .init(x: 0.4, y: 0.55),
+                .init(x: 0.4, y: 0.2), .init(x: 0.8, y: 0.2),
+                .init(x: 0.8, y: 0.5), .init(x: 0.55, y: 0.5),
+                .init(x: 0.55, y: 1)
+            ]
+        case "17", "401":
+            [
+                .init(x: 0, y: 0.2), .init(x: 0.3, y: 0.2),
+                .init(x: 0.3, y: 0.45), .init(x: 0.5, y: 0.45),
+                .init(x: 0.5, y: 0.75), .init(x: 0.7, y: 0.75),
+                .init(x: 0.7, y: 0.45), .init(x: 1, y: 0.45)
+            ]
+        case "18", "409":
+            [
+                .init(x: 0, y: 0.6), .init(x: 0.2, y: 0.6),
+                .init(x: 0.2, y: 0.1), .init(x: 0.8, y: 0.1),
+                .init(x: 0.8, y: 0.6), .init(x: 0.4, y: 0.6),
+                .init(x: 0.4, y: 1)
+            ]
+        case "19", "403":
+            [
+                .init(x: 0, y: 0.2), .init(x: 0.3, y: 0.2),
+                .init(x: 0.3, y: 0.45), .init(x: 0.5, y: 0.45),
+                .init(x: 0.5, y: 0.75), .init(x: 1, y: 0.75)
+            ]
+        case "20", "402":
+            [
+                .init(x: 0.25, y: 0), .init(x: 0.25, y: 0.2),
+                .init(x: 0.4, y: 0.2), .init(x: 0.8, y: 0.2),
+                .init(x: 0.8, y: 0.5), .init(x: 0.6, y: 0.5),
+                .init(x: 0.6, y: 1)
+            ]
+        case "21", "404", "305":
+            [
+                .init(x: 0, y: 0.6), .init(x: 0.2, y: 0.6),
+                .init(x: 0.2, y: 0.1), .init(x: 0.8, y: 0.1),
+                .init(x: 0.8, y: 0.6), .init(x: 0.6, y: 0.6),
+                .init(x: 0.6, y: 1)
+            ]
+        case "201", "410", "304":
+            [
+                .init(x: 0, y: 0.2), .init(x: 0.2, y: 0.2),
+                .init(x: 0.2, y: 0.6), .init(x: 0.6, y: 0.6),
+                .init(x: 0.6, y: 0.2), .init(x: 1, y: 0.2)
+            ]
+        case "202", "302", "306":
+            [
+                .init(x: 0.2, y:0), .init(x:0.2, y:0.55),
+                .init(x: 0.2, y: 0.55), .init(x: 0.4, y: 0.55),
+                .init(x: 0.4, y: 0.2), .init(x: 0.8, y: 0.2),
+                .init(x: 0.8, y: 0.5), .init(x: 0.55, y: 0.5),
+                .init(x: 0.55, y: 1)
+            ]
+        case "203", "406", "308":
+            [
+                .init(x: 0.2, y: 1), .init(x: 0.2, y: 0.5),
+                .init(x: 0.5, y: 0.5), .init(x:0.8, y: 0.5),
+                .init(x: 0.8, y: 0)
+            ]
+        case "204", "307":
+            [
+                .init(x: 0, y: 0.6), .init(x: 0.2, y: 0.6),
+                .init(x: 0.2, y: 0.1), .init(x: 0.8, y: 0.1),
+                .init(x: 0.8, y: 0.6), .init(x: 0.4, y: 0.6),
+                .init(x: 0.4, y: 1)
+            ]
+        case "205", "411", "309":
+            [
+                .init(x: 0, y: 0.6), .init(x: 0.2, y: 0.6),
+                .init(x: 0.2, y: 0.2), .init(x: 0.6, y: 0.2),
+                .init(x: 0.6, y: 0.6), .init(x: 1, y: 0.6)
+            ]
+        case "206", "405", "310":
+            [
+                .init(x: 0, y: 0.2), .init(x: 0.3, y: 0.2),
+                .init(x: 0.3, y: 0.45), .init(x: 0.5, y: 0.45),
+                .init(x: 0.5, y: 0.75), .init(x: 0.7, y: 0.75),
+                .init(x: 0.7, y: 0.45), .init(x: 1, y: 0.45)
+            ]
+        case "207", "301":
+            [
+                .init(x: 0, y: 0.2), .init(x: 0.3, y: 0.2),
+                .init(x: 0.3, y: 0.45), .init(x: 0.5, y: 0.45),
+                .init(x: 0.5, y: 0.75), .init(x: 1, y: 0.75)
+            ]
+        case "208", "412", "311":
+            [
+                .init(x: 0.25, y: 0), .init(x: 0.25, y: 0.2),
+                .init(x: 0.4, y: 0.2), .init(x: 0.8, y: 0.2),
+                .init(x: 0.8, y: 0.5), .init(x: 0.6, y: 0.5),
+                .init(x: 0.6, y: 1)
+            ]
+        case "209": [
+            .init(x: 0, y: 0.6), .init(x: 0.2, y: 0.6),
+            .init(x: 0.2, y: 0.1), .init(x: 0.8, y: 0.1),
+            .init(x: 0.8, y: 0.6), .init(x: 0.6, y: 0.6),
+            .init(x: 0.6, y: 1)
+        ]
+        case "210":
+            [
+                .init(x: 0, y: 0.2), .init(x: 0.3, y: 0.2),
+                .init(x: 0.3, y: 0.45), .init(x: 0.5, y: 0.45),
+                .init(x: 0.5, y: 0.75), .init(x: 0.7, y: 0.75),
+                .init(x: 0.7, y: 0.45), .init(x: 1, y: 0.45)
+            ]
+        case "211":
+            [
+                .init(x: 0.2, y:0), .init(x:0.2, y:0.55),
+                .init(x: 0.2, y: 0.55), .init(x: 0.4, y: 0.55),
+                .init(x: 0.4, y: 0.2), .init(x: 0.8, y: 0.2),
+                .init(x: 0.8, y: 0.5), .init(x: 0.55, y: 0.5),
+                .init(x: 0.55, y: 1)
+            ]
+        case "212":
+            [
+                .init(x: 0, y: 0.6), .init(x: 0.2, y: 0.6),
+                .init(x: 0.2, y: 0.1), .init(x: 0.8, y: 0.1),
+                .init(x: 0.8, y: 0.6), .init(x: 0.4, y: 0.6),
+                .init(x: 0.4, y: 1)
+            ]
         default:
             [
                 .init(x: 0, y: 0), .init(x: 0.17, y: 0),
