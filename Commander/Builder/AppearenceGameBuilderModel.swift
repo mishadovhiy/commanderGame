@@ -32,8 +32,10 @@ struct AppearenceGameBuilderModel: Equatable {
 extension AppearenceGameBuilderModel {
     static func gameLevel(_ lvl: String) -> AppearenceGameBuilderModel? {
         switch lvl {
+        case "2":
+                .init(backgroundColor: .init(hex: "B69E6D"))
         case "13":
-            .init(backgroundColor: .red, secondaryColor: .orange)
+                .init(backgroundColor: .container, secondaryColor: .dark)
         default: nil
         }
     }
