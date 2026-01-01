@@ -438,8 +438,8 @@ extension [GameBuilderModel.BlockerModel] {
                 .init(type: .tree4, position: .init(x: 0.18, y: 0.62)),
                 .init(type: .tree10, position: .init(x: 0.4, y: 0.15)),
                 .init(type: .helicopter, position: .init(x: 0.7, y: 0.8)),
-                .init(type: .tree4, position: .init(x: 0.4, y: 0.5)),
-                .init(type: .tree6, position: .init(x: 0.35, y: 0.4)),
+                .init(type: .tree4, position: .init(x: 0.2, y: 0.5)),
+                .init(type: .tree6, position: .init(x: 0.3, y: 0.4)),
                 .init(type: .tree6, position: .init(x: 0.7, y: 0.6))
             ]
             

@@ -109,6 +109,12 @@ class EnemyNode: SKSpriteNode {
         })
     }
     
+    var isRemovingForce: Bool {
+        children.contains(where: {
+            $0.name == "explosure"
+        })
+    }
+    
     override func removeFromParent() {
         if isRemoving {
             return

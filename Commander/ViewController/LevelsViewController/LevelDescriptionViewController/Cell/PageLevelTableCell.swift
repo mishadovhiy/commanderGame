@@ -27,8 +27,8 @@ class PageLevelTableCell: UITableViewCell {
 
         let levelTitle = NSMutableAttributedString(string: data.pageModel.level)
         let attributedComponents = [
-            pageTitle: "continent",
-            levelTitle: "Lvl"
+            pageTitle: " continent",
+            levelTitle: " Lvl"
         ]
         attributedComponents.forEach {
             $0.key.append(.init(string: $0.value, attributes: [
@@ -37,6 +37,7 @@ class PageLevelTableCell: UITableViewCell {
             ]))
         }
         levelLabel.attributedText = levelTitle
+        levelLabel.numberOfLines = 0
         levelLabel.isHidden = data.pageModel.level.isEmpty
         pageLabel.attributedText = pageTitle
         pageLabel.textAlignment = data.pageModel.level.isEmpty ? .left : .right

@@ -12,12 +12,27 @@ class GameScene: SKScene {
     var page: LevelPagesBuilder!
     var lvlanager: LevelManager! {
         didSet {
-            gameVC?.roundLabel.text = "\(lvlanager.currentRound)/\(lvlanager.lvlBuilder.rounds)"
-            gameVC?.healthLabel.text = "\(lvlanager.progress.health)"
-            gameVC?.balanceLabel.text = "\(lvlanager.progress.earnedMoney)"
+            DispatchQueue.main.async { [weak self] in
+                guard let self else {
+                    return
+                }
+                gameVC?.roundLabel.text = "\(lvlanager.currentRound)/\(lvlanager.lvlBuilder.rounds)"
+                gameVC?.healthLabel.text = "\(lvlanager.progress.health)"
+                gameVC?.balanceLabel.text = "\(lvlanager.progress.earnedMoney)"
+            }
         }
     }
     private var canLoadRound = true
+    var loadingRound = false {
+        didSet {
+            DispatchQueue.main.async {
+                self.gameVC?.loadingRoundTitle.text = "Loading next round"
+                UIView.animate(withDuration: 0.3) {
+                    self.gameVC?.loadingRoundStackView.isHidden = !self.loadingRound
+                }
+            }
+        }
+    }
     private var levelCompleted = false
     private var gameVC: GameViewController? {
         view?.next as? GameViewController
@@ -49,6 +64,14 @@ class GameScene: SKScene {
     var enemies: [EnemyNode] {
         self.children.filter({
             !(($0 as? EnemyNode)?.isRemoving ?? true)
+        }).compactMap({
+            $0 as? EnemyNode
+        })
+    }
+    
+    var enemiesForce: [EnemyNode] {
+        self.children.filter({
+            !(($0 as? EnemyNode)?.isRemovingForce ?? true)
         }).compactMap({
             $0 as? EnemyNode
         })
@@ -153,9 +176,12 @@ class GameScene: SKScene {
     }
     
     func loadRaund() {
+        if loadingRound {
+            return
+        }
         if lvlanager.lvlBuilder.rounds <= lvlanager.currentRound {
             print(lvlanager.currentRound, "game completed ", lvlanager.lvlBuilder.rounds)
-            if enemies.isEmpty {
+            if enemiesForce.isEmpty {
                 didCompleteLevel()
             }
             return
@@ -182,17 +208,22 @@ class GameScene: SKScene {
         if totalCount >= 1 {
             self.canLoadRound = false
         }
-        lvlanager.lvlBuilder
-            .enemyPerRound[lvlanager.currentRound]
-            .forEach { type in
-                (0..<type.count).forEach { _ in
-                    self.loadEnemy(type.type, i: i, totalInRound: totalCount)
-                    i += 1
-                }
-               
-        }
-        lvlanager.currentRound += 1
-        print(lvlanager.currentRound, " yh5gt4erfwda ")
+        self.loadingRound = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: { [weak self] in
+            guard let self else { return }
+            lvlanager.lvlBuilder
+                .enemyPerRound[lvlanager.currentRound]
+                .forEach { type in
+                    (0..<type.count).forEach { _ in
+                        self.loadEnemy(type.type, i: i, totalInRound: totalCount)
+                        i += 1
+                    }
+                   
+            }
+            lvlanager.currentRound += 1
+            print(lvlanager.currentRound, " yh5gt4erfwda ")
+            loadingRound = false
+        })
     }
 
 }

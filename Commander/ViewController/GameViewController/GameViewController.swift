@@ -9,6 +9,8 @@ import SpriteKit
 
 class GameViewController: AudioViewController {
     
+    @IBOutlet weak var loadingRoundStackView: UIStackView!
+    @IBOutlet weak var loadingRoundTitle: UILabel!
     @IBOutlet weak var healthLabel: UILabel!
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var roundLabel: UILabel!
@@ -29,6 +31,7 @@ class GameViewController: AudioViewController {
     }
     override func loadView() {
         super.loadView()
+        self.loadingRoundStackView.isHidden = true
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.setupLabels()
         weaponTableView.register(.init(nibName: .init(describing: TableDataCell.self), bundle: nil), forCellReuseIdentifier: .init(describing: TableDataCell.self))
