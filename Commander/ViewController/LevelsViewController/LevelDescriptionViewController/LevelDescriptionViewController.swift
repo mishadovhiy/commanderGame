@@ -67,7 +67,7 @@ class LevelDescriptionViewController: UIViewController {
                                     })
                                                               
                     return .init(section: .init(difficulty.rawValue),
-                                 content:[ .init("\(progress[.normal]??.score ?? 0)"), .init("\(progress[.infinityHealth]??.score ?? 0)"), .init("\(progress[.singleLife]??.score ?? 0)")])
+                                 content:[ .init("\(progress[.normal]??.score ?? 0)"), .init("\(progress[.infinityRounds]??.score ?? 0)"), .init("\(progress[.singleLife]??.score ?? 0)")])
                                                                        
                                                                       
                                 })

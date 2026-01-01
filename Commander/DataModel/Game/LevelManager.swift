@@ -25,6 +25,7 @@ struct LevelManager {
     
 #warning("calc current balance here")
     var currentRound: Int = 0
+    var roundRepeated: Int = 0
     var progress: GameProgress = .init()
     var startTime: Date = .init()
     
@@ -32,7 +33,11 @@ struct LevelManager {
         self.lvlModel = lvl
         self.lvlBuilder = .init(lvlModel: lvl)
         progress.totalEnemies = lvlBuilder.enemyPerRound.flatMap({$0}).count
-        progress.health = lvlBuilder.health
+        if lvl.duration == .singleLife {
+            progress.health = 1
+        } else {
+            progress.health = lvlBuilder.health
+        }
     }
     
     //hits -> damage

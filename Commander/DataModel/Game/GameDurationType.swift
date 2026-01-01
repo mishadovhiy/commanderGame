@@ -8,5 +8,5 @@
 import Foundation
 
 enum GameDurationType: String, Codable, CaseIterable {
-    case infinityHealth, normal, singleLife
+    case infinityRounds, normal, singleLife
 }

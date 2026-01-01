@@ -16,7 +16,11 @@ class GameScene: SKScene {
                 guard let self else {
                     return
                 }
-                gameVC?.roundLabel.text = "\(lvlanager.currentRound)/\(lvlanager.lvlBuilder.rounds)"
+                if lvlanager.lvlModel.duration == .infinityRounds {
+                    gameVC?.roundLabel.text = "\(lvlanager.currentRound + lvlanager.roundRepeated)"
+                } else {
+                    gameVC?.roundLabel.text = "\(lvlanager.currentRound)/\(lvlanager.lvlBuilder.rounds)"
+                }
                 gameVC?.healthLabel.text = "\(lvlanager.progress.health)"
                 gameVC?.balanceLabel.text = "\(lvlanager.progress.earnedMoney)"
             }
@@ -221,6 +225,13 @@ class GameScene: SKScene {
                    
             }
             lvlanager.currentRound += 1
+            if lvlanager.lvlModel.duration == .infinityRounds {
+                lvlanager.progress.totalEnemies += totalCount
+            }
+            if lvlanager.lvlModel.duration == .infinityRounds && lvlanager.currentRound >= lvlanager.lvlBuilder.rounds - 1 {
+                lvlanager.roundRepeated += lvlanager.currentRound
+                lvlanager.currentRound = 0
+            }
             print(lvlanager.currentRound, " yh5gt4erfwda ")
             loadingRound = false
         })
