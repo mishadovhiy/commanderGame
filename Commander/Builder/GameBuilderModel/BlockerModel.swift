@@ -342,11 +342,108 @@ extension [GameBuilderModel.BlockerModel] {
                 .init(type: .tree4, position: .init(x: 0.74, y: 0.52)),
                 .init(type: .tree6, position: .init(x: 0.58, y: 0.465))
             ]
-        default: [
-//            .init(type: .tree6, position: .init(x: 0.2, y: 0.76)),
-//            .init(type: .tree10, position: .init(x: 0.5, y: 0.55))
-        ]
+        case "202":
+            [
+                .init(type: .tree6, position: .init(x: 0.1, y: 0.8)),
+                .init(type: .tree6, position: .init(x: 0.16, y: 0.7)),
+                .init(type: .tree4, position: .init(x: 0.14, y: 0.6)),
+
+                .init(type: .tree8, position: .init(x: 0.8, y: 0.9)),
+                .init(type: .tree6, position: .init(x: 0.35, y: 0.2)),
+            ]
+        case "203":
+            [
+                .init(type: .house2, position: .init(x: 0.3, y: 0.3)),
+                .init(type: .tree6, position: .init(x: 0.5, y: 0.4)),
+                .init(type: .tree9, position: .init(x: 0.7, y: 0.34)),
+                .init(type: .tree6, position: .init(x: 0.53, y: 0.24)),
+                .init(type: .tree4, position: .init(x: 0.76, y: 0.84)),
+            ]
+        case "204":
+            [
+                .init(type: .tree6, position: .init(x: 0.4, y: 0.38)),
+                .init(type: .tree6, position: .init(x: 0.485, y: 0.433)),
+                .init(type: .tree4, position: .init(x: 0.6, y: 0.46)),
+                .init(type: .tree5, position: .init(x: 0.4, y: 0.53)),
+                .init(type: .tree4, position: .init(x: 0.15, y: 0.5)),
+
+                .init(type: .box2, position: .init(x: 0.73, y: 0.42))
+            ]
+        case "205":
+            [
+                .init(type: .tree9, position: .init(x: 0.4, y: 0.7)),
+                .init(type: .tree6, position: .init(x: 0.5, y: 0.55)),
+                .init(type: .tree6, position: .init(x: 0.55, y: 0.65)),
+                .init(type: .house1, position: .init(x: 0.85, y: 0.34)),
+                .init(type: .tree5, position: .init(x: 0.15, y: 0.3))
+            ]
+        case "206":
+            [
+                .init(type: .house2, position: .init(x: 0.2, y: 0.75)),
+                .init(type: .tree6, position: .init(x: 0.7, y: 0.4)),
+                .init(type: .tree4, position: .init(x: 0.65, y: 0.45)),
+                .init(type: .tree9, position: .init(x: 0.8, y: 0.29)),
+                .init(type: .tree6, position: .init(x: 0.53, y: 0.24)),
+                .init(type: .tree4, position: .init(x: 0.2, y: 0.5)),
+
+            ]
+        case "208":
+            [
+                .init(type: .house2, position: .init(x: 0.2, y: 0.65)),
+                .init(type: .box1, position: .init(x: 0.5, y: 0.53)),
+                .init(type: .tree6, position: .init(x: 0.34, y: 0.7)),
+                .init(type: .tree8, position: .init(x: 0.47, y: 0.74)),
+                .init(type: .tree6, position: .init(x: 0.15, y: 0.4)),
+                .init(type: .tree6, position: .init(x: 0.33, y: 0.6)),
+            ]
+        case "210":
+            [
+                .init(type: .house2, position: .init(x: 0.2, y: 0.75)),
+                .init(type: .tree6, position: .init(x: 0.7, y: 0.4)),
+                .init(type: .tree9, position: .init(x: 0.8, y: 0.34)),
+                .init(type: .tree6, position: .init(x: 0.53, y: 0.24))
+            ]
+        case "211":
+            [
+                .init(type: .tree6, position: .init(x: 0.1, y: 0.8)),
+                .init(type: .tree8, position: .init(x: 0.8, y: 0.85)),
+                .init(type: .tree6, position: .init(x: 0.35, y: 0.2)),
+                .init(type: .tree6, position: .init(x: 0.4, y: 0.5)),
+                .init(type: .tree5, position: .init(x: 0.17, y: 0.4)),
+                .init(type: .tree4, position: .init(x: 0.15, y: 0.2))
+            ]
+        case "209":
+            [
+                .init(type: .helicopter, position: .init(x: 0.4, y: 0.5)),
+                .init(type: .tree4, position: .init(x: 0.18, y: 0.3)),
+                .init(type: .tree9, position: .init(x: 0.7, y: 0.45)),
+                .init(type: .house2, position: .init(x: 0.4, y: 0.9)),
+                .init(type: .tree4, position: .init(x: 0.5, y: 0.55)),
+                .init(type: .tree6, position: .init(x: 0.17, y: 0.53))
+            ]
+        case "207", "301":
+            [
+                .init(type: lvl == "301" ? .helicopter : .house2, position: .init(x: 0.55, y: 0.2)),
+                .init(type: .tree8, position: .init(x: 0.8, y: 0.4)),
+                .init(type: .tree10, position: .init(x: 0.18, y: 0.6)),
+                .init(type: .tree6, position: .init(x: 0.7, y: 0.7)),
+                .init(type: .tree4, position: .init(x: 0.63, y: 0.45)),
+                .init(type: .oil, position: .init(x: 0.8, y: 0.75))
+
+            ]
+        case "201":
+            [
+                .init(type: .tree4, position: .init(x: 0.16, y: 0.5)),
+                .init(type: .tree6, position: .init(x: 0.21, y: 0.8)),
+                .init(type: .tree4, position: .init(x: 0.18, y: 0.62)),
+                .init(type: .tree10, position: .init(x: 0.4, y: 0.15)),
+                .init(type: .helicopter, position: .init(x: 0.7, y: 0.8)),
+                .init(type: .tree4, position: .init(x: 0.4, y: 0.5)),
+                .init(type: .tree6, position: .init(x: 0.35, y: 0.4)),
+                .init(type: .tree6, position: .init(x: 0.7, y: 0.6))
+            ]
+            
+        default: []
         }
-        //house, treese > 5 - multipliwers
     }
 }

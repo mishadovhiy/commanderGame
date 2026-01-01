@@ -94,13 +94,6 @@ extension GameBuilderModel {
                 .init(x: 0.8, y: 0.5), .init(x: 0.55, y: 0.5),
                 .init(x: 0.55, y: 1)
             ]
-        case "17", "401":
-            [
-                .init(x: 0, y: 0.2), .init(x: 0.3, y: 0.2),
-                .init(x: 0.3, y: 0.45), .init(x: 0.5, y: 0.45),
-                .init(x: 0.5, y: 0.75), .init(x: 0.7, y: 0.75),
-                .init(x: 0.7, y: 0.45), .init(x: 1, y: 0.45)
-            ]
         case "18", "409":
             [
                 .init(x: 0, y: 0.6), .init(x: 0.2, y: 0.6),
@@ -142,7 +135,7 @@ extension GameBuilderModel {
                 .init(x: 0.2, y: 0.6), .init(x: 0.6, y: 0.6),
                 .init(x: 0.6, y: 0.2), .init(x: 1, y: 0.2)
             ]
-        case "202", "306", "302":
+        case "202", "306", "302", "211":
             [
                 .init(x: 0.2, y:0), .init(x:0.2, y:0.55),
                 .init(x: 0.2, y: 0.55), .init(x: 0.4, y: 0.55),
@@ -169,7 +162,7 @@ extension GameBuilderModel {
                 .init(x: 0.2, y: 0.2), .init(x: 0.6, y: 0.2),
                 .init(x: 0.6, y: 0.6), .init(x: 1, y: 0.6)
             ]
-        case "206", "405", "310":
+        case "206", "405", "310", "210", "17", "401":
             [
                 .init(x: 0, y: 0.2), .init(x: 0.3, y: 0.2),
                 .init(x: 0.3, y: 0.45), .init(x: 0.5, y: 0.45),
@@ -195,21 +188,6 @@ extension GameBuilderModel {
             .init(x: 0.8, y: 0.6), .init(x: 0.6, y: 0.6),
             .init(x: 0.6, y: 1)
         ]
-        case "210":
-            [
-                .init(x: 0, y: 0.2), .init(x: 0.3, y: 0.2),
-                .init(x: 0.3, y: 0.45), .init(x: 0.5, y: 0.45),
-                .init(x: 0.5, y: 0.75), .init(x: 0.7, y: 0.75),
-                .init(x: 0.7, y: 0.45), .init(x: 1, y: 0.45)
-            ]
-        case "211":
-            [
-                .init(x: 0.2, y:0), .init(x:0.2, y:0.55),
-                .init(x: 0.2, y: 0.55), .init(x: 0.4, y: 0.55),
-                .init(x: 0.4, y: 0.2), .init(x: 0.8, y: 0.2),
-                .init(x: 0.8, y: 0.5), .init(x: 0.55, y: 0.5),
-                .init(x: 0.55, y: 1)
-            ]
         case "212":
             [
                 .init(x: 0, y: 0.6), .init(x: 0.2, y: 0.6),
