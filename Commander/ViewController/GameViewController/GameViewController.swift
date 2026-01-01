@@ -31,7 +31,6 @@ class GameViewController: AudioViewController {
         super.loadView()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.setupLabels()
-        loadScene()
         weaponTableView.register(.init(nibName: .init(describing: TableDataCell.self), bundle: nil), forCellReuseIdentifier: .init(describing: TableDataCell.self))
         weaponTableView.delegate = self
         weaponTableView.dataSource = self
@@ -40,10 +39,11 @@ class GameViewController: AudioViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue(label: "db", qos: .userInitiated).async {
+        DispatchQueue(label: "db", qos: .background).async {
             let db = DataBaseService.db
             DispatchQueue.main.async {
                 self.loadWeapons(db: db)
+                self.loadScene()
             }
         }
     }
@@ -241,12 +241,17 @@ difficulty: \(self.selectedLevel.difficulty?.rawValue ?? "-") durations: \(self.
         UIView.animate(withDuration: 0.3, animations: {
             self.editingWeaponImageView.superview?.superview?.isHidden = self.editingWeapon == nil
             if let type = self.editingWeapon?.type {
-                self.editingWeaponImageView.image = .init(named: type.rawValue)
-                let canUpgrade = self.editingWeapon?.canUpgrade ?? true
-                self.upgradeWeaponButton.isEnabled = canUpgrade
-                let title = canUpgrade ? "Upgrade\n\(self.editingWeapon?.upgradePrice ?? 0)" : "Max"
-                self.upgradeWeaponButton.setTitle(title, for: .init())
-                self.setWeaponTableData()
+                DispatchQueue(label: "db", qos: .userInitiated).async {
+                    let updatedNumber = DataBaseService.db.upgradedWeapons[type]?[.attackPower] ?? 0
+                    DispatchQueue.main.async {
+                        self.editingWeaponImageView.image = .init(named: type.rawValue + "/\(type.upgradedIconComponent(db: updatedNumber))")
+                        let canUpgrade = self.editingWeapon?.canUpgrade ?? true
+                        self.upgradeWeaponButton.isEnabled = canUpgrade
+                        let title = canUpgrade ? "Upgrade\n\(self.editingWeapon?.upgradePrice ?? 0)" : "Max"
+                        self.upgradeWeaponButton.setTitle(title, for: .init())
+                        self.setWeaponTableData()
+                    }
+                }
 
             }
         }, completion: { _ in

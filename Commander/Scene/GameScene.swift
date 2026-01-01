@@ -18,6 +18,7 @@ class GameScene: SKScene {
         }
     }
     private var canLoadRound = true
+    private var levelCompleted = false
     private var gameVC: GameViewController? {
         view?.next as? GameViewController
     }
@@ -80,8 +81,6 @@ class GameScene: SKScene {
             print(first.name, " jjsbdjbdsj ")
             return false
         }
-
-        
         
         let path = enemyGround?.path
         let strokedPath = path?.copy(
@@ -91,6 +90,13 @@ class GameScene: SKScene {
             miterLimit: 10
         )
         if strokedPath?.contains(position) ?? true {
+            return false
+        }
+        
+        if self.children.contains(where: {
+            $0.contains(position) && $0.name == "blockerNode"
+        }) {
+            print("blockerrr")
             return false
         }
 
@@ -123,8 +129,12 @@ class GameScene: SKScene {
         }
         
     }
-    
+
     func didCompleteLevel() {
+        if levelCompleted {
+            return
+        }
+        levelCompleted = true
         let levelManager = self.lvlanager ?? .init(.test)
         DispatchQueue(label: "db", qos: .userInitiated).async {
             DataBaseService.db.completedLevels.updateValue(levelManager.progress, forKey: levelManager.lvlModel)
@@ -230,6 +240,10 @@ fileprivate extension GameScene {
             node.removeFromParent()
             self.loadRaund()
             if self.lvlanager.progress.health <= 0 {
+                if self.levelCompleted {
+                    return
+                }
+                self.levelCompleted = true
                 self.gameVC?.play(.loose)
                 self.gameVC?.dismiss(animated: true) {
                     UIApplication.shared.activeWindow?.rootViewController?.present(vc: AlertViewController.initiate(data: AlertModel.init(title: "", type: .tableView([
@@ -347,7 +361,6 @@ extension GameScene: SKPhysicsContactDelegate {
         }) {
             let enemy = a as? EnemyNode ?? b as! EnemyNode
             let armour = a as? WeaponNode ?? b as! WeaponNode
-            print("contadsx")
             armour.shoot(enemy: enemy, force: true)
         }
         if [a, b].contains(where: {

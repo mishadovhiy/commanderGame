@@ -18,9 +18,13 @@ class LevelViewController: UIViewController {
         loadLevelButtons()
         updateButtonsConstraints()
     }
-    
+        
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        setCompletedLevels()
+    }
+    
+    func setCompletedLevels() {
         DispatchQueue(label: "db", qos: .userInitiated).async {
             let db = DataBaseService.db.completedLevels
             let keys = Array(db.keys)
@@ -48,6 +52,7 @@ class LevelViewController: UIViewController {
             }
         }
     }
+
     
     func drawLevelGround() {
         guard let view else {

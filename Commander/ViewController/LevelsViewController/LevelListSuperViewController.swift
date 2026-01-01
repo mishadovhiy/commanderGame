@@ -54,7 +54,6 @@ class LevelListSuperViewController: UIViewController {
             let hide = self.selectedLevel.level.isEmpty
             let hideStart = selectedLevel.hasEmptyValue
             levelDescriptionVC?.selectedLevelUpdated()
-            print(selectedLevel, " hyrgtfrdsd")
             if selectedLevel.duration == nil && self.bottomPanelNavigation?.viewControllers.count != 1 {
                 bottomPanelNavigation?.popToRootViewController(animated: true)
             }
@@ -77,7 +76,13 @@ class LevelListSuperViewController: UIViewController {
     
     @IBAction private func startGameDidPress(_ sender: Any) {
         homeParentVC?.play(.success1)
-        self.present(GameViewController.initiate(self.selectedLevel, page: levelPageVC!.currentPageData), animated: true)
+        let vc = GameViewController.initiate(self.selectedLevel, page: levelPageVC!.currentPageData)
+        vc.didDismiss = { [weak self] in
+            self?.levelPageVC?.viewControllers?.forEach {
+                ($0 as? LevelViewController)?.setCompletedLevels()
+            }
+        }
+        self.present(vc, animated: true)
     }
     
     @IBAction private func upgradeDidPress(_ sender: UIButton) {
