@@ -25,7 +25,7 @@ struct LevelPagesBuilder: Equatable {
 extension [LevelPagesBuilder] {
     static var allData: Self {
         [
-            .init(title: "1", name: "America", zoom: 1, mapPosition: .init(x: -0.08, y: -0.05), appearence: .init(backgroundColor: .dark, secondaryColor: .container, backgroundTextureName: "darkGround", enemyGroundTextureName: "enemyGround", backgroundTextureOpacity: 0.1), levels: [
+            .init(title: "1", name: "America", zoom: 1, mapPosition: .init(x: -0.08, y: -0.05), appearence: .init(backgroundColor: .init(hex: "D5B87C"), secondaryColor: .init(hex: "725B4A"), backgroundTextureName: "enemyGroundBrawn", enemyGroundTextureName: "enemyGround"), levels: [
                 .init(position:
                         .init(x: 0.08, y: 0.2),
                       title: "11"),

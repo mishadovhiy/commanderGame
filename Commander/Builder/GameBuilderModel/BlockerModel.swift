@@ -246,9 +246,101 @@ extension [GameBuilderModel.BlockerModel] {
             ]
         case "12":
             [
-                .init(type: .tree8, position: .init(x: 0.2, y: 0.2)),
-                .init(type: .house1, position: .init(x: 0.3, y: 0.4), sizeMultiplier: 0.4),
-                .init(type: .house2, position: .init(x: 0.7, y: 0.8), sizeMultiplier: 1)
+                .init(type: .tree8, position: .init(x: 0.5, y: 0.3)),
+                .init(type: .house1, position: .init(x: 0.4, y: 0.4385), sizeMultiplier: 0.4),
+                .init(type: .house2, position: .init(x: 0.842, y: 0.7123), sizeMultiplier: 1),
+                .init(type: .tree4, position: .init(x: 0.176, y: 0.8)),
+                .init(type: .tree6, position: .init(x: 0.5, y: 0.55)),
+                .init(type: .tree4, position: .init(x: 0.84, y: 0.5)),
+                .init(type: .oil, position: .init(x: 4, y: 0.5)),
+                .init(type: .box1, position: .init(x: 0.194, y: 0.1322)),
+                .init(type: .box2, position: .init(x: 0.2922, y: 0.126)),
+                .init(type: .tree4, position: .init(x: 0.15, y: 0.52)),
+                .init(type: .tree5, position: .init(x: 0.654, y: 0.9))
+            ]
+        case "13":
+            [
+                .init(type: .tree8, position: .init(x: 0.2, y: 0.1921234)),
+                .init(type: .tree10, position: .init(x: 0.7, y: 0.23242)),
+                .init(type: .helicopter, position: .init(x: 0.4, y: 0.3)),
+                .init(type: .tree6, position: .init(x: 0.29, y: 0.4)),
+                .init(type: .tree2, position: .init(x: 0.1, y: 0.8)),
+                .init(type: .tree4, position: .init(x: 0.5, y: 0.82123)),
+                .init(type: .tree6, position: .init(x: 0.76, y: 0.79342)),
+                .init(type: .oil, position: .init(x: 0.6, y: 0.43))
+            ]
+        case "14":
+            [
+                .init(type: .tree6, position: .init(x: 0.18, y: 0.73424)),
+                .init(type: .tree6, position: .init(x: 0.23, y: 0.6934489)),
+                .init(type: .tree8, position: .init(x: 0.8, y: 0.4)),
+                .init(type: .tree9, position: .init(x: 0.6, y: 0.2)),
+                .init(type: .tree5, position: .init(x: 0.3, y: 0.2)),
+                
+            ]
+        case "15":
+            [
+                .init(type: .helicopter, position: .init(x: 0.5, y: 0.63)),
+                .init(type: .tree6, position: .init(x: 0.35, y: 0.65)),
+                .init(type: .oil, position: .init(x: 0.85, y: 0.34)),
+                .init(type: .tree8, position: .init(x: 0.8, y: 0.5)),
+                .init(type: .tree6, position: .init(x: 0.16, y: 0.3)),
+                .init(type: .tree4, position: .init(x: 0.19, y: 0.4)),
+                .init(type: .tree6, position: .init(x: 0.19, y: 0.25))
+            ]
+        case "16":
+            [
+                .init(type: .tree8, position: .init(x: 0.2, y: 0.3)),
+                .init(type: .tree6, position: .init(x: 0.3, y: 0.41)),
+                .init(type: .helicopter, position: .init(x: 0.8, y: 0.9)),
+                .init(type: .tree4, position: .init(x: 0.5, y: 0.2)),
+                .init(type: .tree4, position: .init(x: 0.31, y: 0.23))
+            ]
+        case "17":
+            [
+                .init(type: .tree4, position: .init(x: 0.25, y: 0.66)),
+                .init(type: .tree6, position: .init(x: 0.15, y: 0.8)),
+                .init(type: .tree4, position: .init(x: 0.13, y: 0.7)),
+                .init(type: .tree6, position: .init(x: 0.21, y: 0.78)),
+                .init(type: .helicopter, position: .init(x: 0.6, y: 0.24)),
+                .init(type: .tree8, position: .init(x: 0.81, y: 0.2)),
+                .init(type: .tree4, position: .init(x: 0.68, y: 0.7)),
+            ]
+        case "18":
+            [
+                .init(type: .rock1, position: .init(x: 0.15, y: 0.4)),
+                .init(type: .tree6, position: .init(x: 0.4, y: 0.4)),
+                .init(type: .tree8, position: .init(x: 0.55, y: 0.48))
+            ]
+        case "19":
+            [
+                .init(type: .rock2, position: .init(x: 0.86, y: 0.45)),
+                .init(type: .tree8, position: .init(x: 0.19, y: 0.73)),
+                .init(type: .helicopter, position: .init(x: 0.7, y: 0.4)),
+                .init(type: .tree4, position: .init(x: 0.68, y: 0.69)),
+                .init(type: .tree9, position: .init(x: 0.8, y: 0.6)),
+                .init(type: .tree7, position: .init(x: 0.5, y: 0.23))
+            ]
+        case "20":
+            [
+                .init(type: .house2, position: .init(x: 0.2, y: 0.65)),
+                .init(type: .tree2, position: .init(x: 0.5, y: 0.54)),
+                .init(type: .tree6, position: .init(x: 0.34, y: 0.7)),
+                .init(type: .tree8, position: .init(x: 0.47, y: 0.74)),
+                .init(type: .tree6, position: .init(x: 0.15, y: 0.4)),
+                .init(type: .tree6, position: .init(x: 0.33, y: 0.6)),
+                .init(type: .tree2, position: .init(x: 0.85, y: 0.8)),
+
+            ]
+        case "21":
+            [
+                .init(type: .tree5, position: .init(x: 0.15, y: 0.43)),
+                .init(type: .helicopter, position: .init(x: 0.45, y: 0.75)),
+                .init(type: .tree6, position: .init(x: 0.5, y: 0.6)),
+                .init(type: .tree6, position: .init(x: 0.43, y: 0.57)),
+                .init(type: .tree6, position: .init(x: 0.57, y: 0.7)),
+                .init(type: .tree4, position: .init(x: 0.74, y: 0.52)),
+                .init(type: .tree6, position: .init(x: 0.58, y: 0.465))
             ]
         default: [
 //            .init(type: .tree6, position: .init(x: 0.2, y: 0.76)),

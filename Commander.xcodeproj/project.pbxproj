@@ -213,10 +213,7 @@
 		823095372EF03FDA00989895 /* Builder */ = {
 			isa = PBXGroup;
 			children = (
-				823497EB2EEB590B00F82871 /* GameBuilderModel.swift */,
-				8265846F2F0454EF003EC450 /* BlockerModel.swift */,
-				8265846D2F045366003EC450 /* EnemyRound.swift */,
-				8265846B2F03D22E003EC450 /* AppearenceGameBuilderModel.swift */,
+				82DAF4612F068EEC0008291E /* GameBuilderModel */,
 				8260E24D2EED43C5002E29C0 /* LevelPagesBuilder.swift */,
 			);
 			path = Builder;
@@ -507,6 +504,17 @@
 				82C637DA2EEF4C360064F917 /* DataBaseService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		82DAF4612F068EEC0008291E /* GameBuilderModel */ = {
+			isa = PBXGroup;
+			children = (
+				823497EB2EEB590B00F82871 /* GameBuilderModel.swift */,
+				8265846F2F0454EF003EC450 /* BlockerModel.swift */,
+				8265846D2F045366003EC450 /* EnemyRound.swift */,
+				8265846B2F03D22E003EC450 /* AppearenceGameBuilderModel.swift */,
+			);
+			path = GameBuilderModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
