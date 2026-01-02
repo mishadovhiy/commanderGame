@@ -35,13 +35,20 @@ struct AlertModel {
     }
     
     struct TitleCellModel: AlertCellModel {
-        
+        let isSmallText: Bool
+        let attributedString: NSAttributedString?
         let button: ButtonModel?
         private let unselectableTitle: String?
         
-        init(button: ButtonModel? = nil, title: String? = nil) {
+        init(button: ButtonModel? = nil,
+             title: String? = nil,
+             isSmallText: Bool = false,
+             attributedString: NSAttributedString? = nil
+        ) {
             self.button = button
             self.unselectableTitle = title
+            self.isSmallText = isSmallText
+            self.attributedString = attributedString
         }
         
         var title: String {

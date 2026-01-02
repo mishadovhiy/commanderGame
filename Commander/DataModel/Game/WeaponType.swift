@@ -33,7 +33,7 @@ enum WeaponType: String, Codable, CaseIterable {
     var textureSize: CGSize {
         switch self {
         case .pistol:
-                .init(width: 45, height: 45)
+                .init(width: 20, height: 20)
         case .basuka:
                 .init(width: 20, height: 20)
         case .granata:

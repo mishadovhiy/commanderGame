@@ -84,6 +84,7 @@ extension UIView {
     func addDarkOverlay() {
         let view = DestinationOutMaskedView()
         view.layer.zPosition = 999
+        view.isUserInteractionEnabled = false
         addSubview(view)
     }
     
@@ -99,6 +100,7 @@ extension UIView {
         let view = UIVisualEffectView(effect: effect)
         let vibracity = UIVisualEffectView(effect: effect)
         view.contentView.addSubview(vibracity)
+        view.isUserInteractionEnabled = false
         insertSubview(view, at: 0)
 
         [view, vibracity].forEach {

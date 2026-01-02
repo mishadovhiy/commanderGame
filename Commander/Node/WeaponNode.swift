@@ -66,6 +66,7 @@ class WeaponNode: SKSpriteNode {
         let componentName = db.upgradedWeapons[type]?[.attackPower]
         let imageSize = type.textureSize
         let child = SKSpriteNode(texture: .init(imageNamed: type.rawValue + "/\(type.upgradedIconComponent(db: componentName ?? 0))"), color: .clear, size: .init(width: imageSize.width, height: imageSize.height))
+        child.name = "texture"
         self.addChild(child)
         addChild(AudioContainerNode(audioNames: [.shoot1, .shoot2], canPlaySound: canPlaySound))
         self.zPosition = 50

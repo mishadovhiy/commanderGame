@@ -77,7 +77,7 @@ class GameViewController: AudioViewController {
     
     private func setWeaponTableData() {
         weaponTableData = [
-            .init(icon: nil, title: editingWeapon?.name ?? "", text: "Price: $\(editingWeapon?.upgradePrice ?? 0)"),
+            .init(icon: nil, title: editingWeapon?.type.rawValue, text: "Price: $\(editingWeapon?.upgradePrice ?? 0)"),
             .init(icon: nil, title: "Upgrade", text: """
                 Level: \(editingWeapon?.upgrade?.rawValue ?? "-")
                 Damage: \(editingWeapon?.damage ?? 0)
@@ -112,16 +112,29 @@ class GameViewController: AudioViewController {
     @IBAction private func menuPressed(_ sender: Any) {
         play(.menu1)
         gameScene?.isPaused = true
+        let text = NSMutableAttributedString(string: "")
+        let dict = [
+            ("Level\n", " " + self.selectedLevel.level + " " + "\n\n"),
+            
+            (" Difficulty:", " " + ((self.selectedLevel.difficulty?.rawValue ?? "-") + " ")),
+            (" Type:", " " + (self.selectedLevel.duration?.rawValue ?? "") + " ")
+        ]
+        dict.forEach {
+            text.append(.init(string: $0.0, attributes: [
+                .font: UIFont.systemFont(ofSize: 15, weight: .semibold)
+            ]))
+            text.append(.init(string: $0.1, attributes: [
+                .font: UIFont.systemFont(ofSize: 12, weight: .medium),
+                .foregroundColor: UIColor.dark.withAlphaComponent(0.7).cgColor
+                
+            ]))
+        }
 let vc = AlertViewController.initiate(data: .init(title: "Menu", type: .collectionView([
-    AlertModel.TitleCellModel(title: """
-level: \(self.selectedLevel.level)
-page: \(self.selectedLevel.levelPage)
-difficulty: \(self.selectedLevel.difficulty?.rawValue ?? "-") durations: \(self.selectedLevel.duration?.rawValue ?? "-")
-"""),
+    AlertModel.TitleCellModel(attributedString: text),
     AlertModel.TitleCellModel(button: .init(title: "Sound", toAlert: {
 .init(title: "Sound", type: .soundSettingsData, buttons: [])
 })),
-    AlertModel.TitleCellModel(button: .init(title: "Close", didPress: { [weak self] in
+    AlertModel.TitleCellModel(button: .init(title: "Exit game", didPress: { [weak self] in
         guard let self else { return }
         let vc = self.presentedViewController ?? self
         vc.dismiss(animated: true) {

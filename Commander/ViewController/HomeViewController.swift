@@ -16,7 +16,7 @@ class HomeViewController: AudioViewController {
     private var levelAnimating: Bool = false
     var currentPage: LevelPagesBuilder?
     override var audioFiles: [AudioFileNameType] {
-        AudioFileNameType.allCases.filter({$0.type == .menu})
+        AudioFileNameType.allCases.filter({$0.type == .menu || $0.type == .music})
     }
     override func loadView() {
         super.loadView()
@@ -35,6 +35,11 @@ class HomeViewController: AudioViewController {
         loadLevelListChild()
         self.view.addSubview(DestinationOutMaskedView(type: .borders))
         blackSafeAreaMaskOverlayView?.alpha = 0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.play(.loop1)
     }
     
     private var levelChild: LevelListSuperViewController? {

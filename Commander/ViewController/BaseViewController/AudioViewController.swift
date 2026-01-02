@@ -18,6 +18,9 @@ class AudioViewController: BaseViewController {
         audioPlayers = audioFiles.compactMap({
             let player = try? AVAudioPlayer(contentsOf: Bundle.main.url(forResource: $0.rawValue, withExtension: $0.format.rawValue)!)
             player?.volume = $0.volume
+            if $0.rawValue.lowercased().contains("loop") {
+                player?.numberOfLoops = -1
+            }
             return player
         })
         setVoluem()

@@ -85,6 +85,7 @@
 		82C637D72EEF4B6C0064F917 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637D62EEF4B6C0064F917 /* KeychainService.swift */; };
 		82C637D92EEF4B980064F917 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637D82EEF4B980064F917 /* Keys.swift */; };
 		82C637DB2EEF4C360064F917 /* DataBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637DA2EEF4C360064F917 /* DataBaseService.swift */; };
+		82D832622F07A36800237902 /* loop1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 82D832612F07A36800237902 /* loop1.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -169,6 +170,7 @@
 		82C637D62EEF4B6C0064F917 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		82C637D82EEF4B980064F917 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		82C637DA2EEF4C360064F917 /* DataBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseService.swift; sourceTree = "<group>"; };
+		82D832612F07A36800237902 /* loop1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = loop1.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,6 +339,7 @@
 				8235D1962F007C1600D48EB0 /* loose.m4a */,
 				8235D17D2F002D7700D48EB0 /* explosure4.m4a */,
 				8235D17E2F002D7700D48EB0 /* hit1.m4a */,
+				82D832612F07A36800237902 /* loop1.m4a */,
 				8235D1802F002D7700D48EB0 /* hit2.m4a */,
 				8235D1762EFFF59F00D48EB0 /* menu1.m4a */,
 				8235D1822F002D7700D48EB0 /* menu2.m4a */,
@@ -582,6 +585,7 @@
 				82B65DA62EFEF61A007EC20D /* Tiny5-Regular.otf in Resources */,
 				823497CE2EEB1FAA00F82871 /* Assets.xcassets in Resources */,
 				823497CF2EEB1FAA00F82871 /* GameScene.sks in Resources */,
+				82D832622F07A36800237902 /* loop1.m4a in Resources */,
 				8260E2822EEE50BD002E29C0 /* TableDataCell.xib in Resources */,
 				8235D1772EFFF59F00D48EB0 /* menu1.m4a in Resources */,
 				8235D1972F007C1600D48EB0 /* loose.m4a in Resources */,

@@ -35,7 +35,7 @@ class TableDataCell: UITableViewCell {
 //        }
         nameLabel.text = data.title
         descriptionLabel.text = data.text
-        
+        descriptionLabel.alpha = 0.6
         nameLabel.isHidden = nameLabel.text?.isEmpty ?? true
         descriptionLabel.isHidden = descriptionLabel.text?.isEmpty ?? true
         iconImageView.isHidden = iconImageView.image == nil

@@ -10,7 +10,7 @@ import Foundation
 enum AudioFileNameType: String, CaseIterable {
     case explosure1, explosure, explosure3, explosure4
     case shoot1, shoot2, hit1, hit2
-    case menu1, menu2, menu3
+    case menu1, menu2, menu3, loop1
     case weaponUpgrade, success1, success2, coins, loose
     
     typealias SoundType = DataBaseModel.Settings.Sound.Voluem.CodingKeys
@@ -20,6 +20,8 @@ enum AudioFileNameType: String, CaseIterable {
         case .menu1, .menu2, .menu3, .weaponUpgrade,
                 .success1, .success2, .coins, .loose:
                 .menu
+        case .loop1:
+                .music
         default:
                 .gameSound
         }

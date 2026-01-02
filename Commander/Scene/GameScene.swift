@@ -30,7 +30,7 @@ class GameScene: SKScene {
     var loadingRound = false {
         didSet {
             DispatchQueue.main.async {
-                self.gameVC?.loadingRoundTitle.text = "Loading next round"
+                self.gameVC?.loadingRoundTitle.text = "Loading round # \(self.lvlanager.currentRound)"
                 UIView.animate(withDuration: 0.3) {
                     self.gameVC?.loadingRoundStackView.isHidden = !self.loadingRound
                 }
@@ -136,13 +136,27 @@ class GameScene: SKScene {
         })
         super.touchesBegan(touches, with: event)
         guard let touch = touches.first else { return }
-        let location = touch.location(in: self)
         #warning("todo: weapon child pressed")
-        if let weapon = atPoint(location) as? WeaponNode {
-            weapon.isEditing.toggle()
+        var found = false
+        weapons.forEach({
+            let location = touch.location(in: $0)
+
+            $0.children.forEach({
+                if $0.name == "texture",
+                   !found,
+                   $0.contains(location),
+                   let weapon = $0.parent as? WeaponNode
+                {
+                    weapon.isEditing.toggle()
+                    gameVC?.didSetEditingWeaponNode()
+
+                    found = true
+                }
+            })
+        })
+        if !found {
             gameVC?.didSetEditingWeaponNode()
         }
-        
     }
     
     func loadArmour(type: WeaponType, position: CGPoint) {

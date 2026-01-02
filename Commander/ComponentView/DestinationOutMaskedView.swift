@@ -42,7 +42,7 @@ class DestinationOutMaskedView: UIView {
         blackView.layer.name = "blackView"
         blackView.clipsToBounds = true
         addSubview(blackView)
-        
+        isUserInteractionEnabled = false
         super.didMoveToSuperview()
         [self, blackView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false

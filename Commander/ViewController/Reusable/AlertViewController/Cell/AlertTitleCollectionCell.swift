@@ -9,9 +9,27 @@ import UIKit
 
 class AlertTitleCollectionCell: UICollectionViewCell {
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        contentView.addDarkOverlay()
+        contentView.insertSubview(ContainerMaskedView(isHorizontal: nil), at: 0)
+        titleLabel.textAlignment = .center
+    }
     
     func set(data: AlertModel.TitleCellModel) {
-        titleLabel.text = data.title
+        titleLabel.textColor = data.button?.didPress == nil && data.button?.toAlert == nil ? .dark : .white
+        titleLabel.font = data.isSmallText ? .systemFont(ofSize: 12, weight: .medium) : .systemFont(ofSize: 15, weight: .semibold)
+
+        if let text = data.attributedString {
+            titleLabel.text = nil
+            titleLabel.attributedText = text
+
+        } else {
+            titleLabel.attributedText = nil
+            titleLabel.text = data.title
+        }
+        self.backgroundColor = data.button?.didPress == nil && data.button?.toAlert == nil ? .clear : .dark
     }
 }

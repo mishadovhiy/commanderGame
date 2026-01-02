@@ -64,6 +64,9 @@ class AlertViewController: AudioViewController {
             $0 is UINavigationController
         }) as? UINavigationController
         let vc = childNav?.viewControllers.last as? AlertChildProtocol
+        if tag == nil && button == nil {
+            return
+        }
         let action = button ?? vc?.dataModel?.buttons[tag!]
         
         if let action = action?.didPress {

@@ -89,8 +89,11 @@ class LevelListSuperViewController: UIViewController {
             self?.levelPageVC?.viewControllers?.forEach {
                 ($0 as? LevelViewController)?.setCompletedLevels()
             }
+            self?.homeParentVC?.play(.loop1)
         }
-        homeParentVC?.present(vc, animated: true)
+        homeParentVC?.present(vc, animated: true) {
+            self.homeParentVC?.stop()
+        }
     }
     
     @IBAction private func upgradeDidPress(_ sender: UIButton) {
@@ -196,6 +199,7 @@ extension LevelListSuperViewController {
         loadPageChild()
         loadBottomNavigationChild()
         loadRightNavigationChild()
+        lockedLevelsView?.addBlurView()
     }
         
     func loadRightNavigationChild() {
