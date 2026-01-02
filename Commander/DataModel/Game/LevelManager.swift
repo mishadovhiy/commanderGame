@@ -14,6 +14,11 @@ struct GameProgress: Codable {
     var totalEnemies: Int = 0
     var health: Int = 0
     
+    var moneyResult: Int {
+        let float = CGFloat(earnedMoney) / 20
+        return Int(float)
+    }
+    
     var score: Int {
        Int(CGFloat(killedEnemies) / CGFloat(totalEnemies) * 100)
     }
@@ -32,7 +37,12 @@ struct LevelManager {
     init(_ lvl: LevelModel) {
         self.lvlModel = lvl
         self.lvlBuilder = .init(lvlModel: lvl)
-        progress.totalEnemies = lvlBuilder.enemyPerRound.flatMap({$0}).count
+        print(lvlBuilder.enemyPerRound, " yhrtegrfesda ")
+        progress.totalEnemies = lvlBuilder.enemyPerRound.reduce(0, { result, element in
+            return result + element.reduce(0, { partialResult, element2 in
+                return partialResult + element2.count
+            })
+        })
         if lvl.duration == .singleLife {
             progress.health = 1
         } else {

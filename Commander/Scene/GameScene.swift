@@ -10,19 +10,13 @@ import GameplayKit
 
 class GameScene: SKScene {
     var page: LevelPagesBuilder!
+    var canPlaySound: Bool!
+
     var lvlanager: LevelManager! {
         didSet {
             DispatchQueue.main.async { [weak self] in
-                guard let self else {
-                    return
-                }
-                if lvlanager.lvlModel.duration == .infinityRounds {
-                    gameVC?.roundLabel.text = "\(lvlanager.currentRound + lvlanager.roundRepeated)"
-                } else {
-                    gameVC?.roundLabel.text = "\(lvlanager.currentRound)/\(lvlanager.lvlBuilder.rounds)"
-                }
-                gameVC?.healthLabel.text = "\(lvlanager.progress.health)"
-                gameVC?.balanceLabel.text = "\(lvlanager.progress.earnedMoney)"
+                guard let self else { return }
+                gameVC?.progressUpdated(lvlManager: lvlanager)
             }
         }
     }
@@ -54,9 +48,7 @@ class GameScene: SKScene {
             print($0.position, " tgerfwdas")
         })
         loadBlockers()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(2), execute: {
-            self.loadRaund()
-        })
+        self.loadRaund()
     }
         
     var enemyGround: SKShapeNode? {
@@ -170,7 +162,7 @@ class GameScene: SKScene {
         }
         
     }
-    var canPlaySound: Bool!
+
     func soundDidChange() {
         DispatchQueue(label: "sound", qos: .userInitiated).async {
             let canPlay = DataBaseService.db.settings.sound.voluem.gameSound
@@ -195,7 +187,10 @@ class GameScene: SKScene {
         levelCompleted = true
         let levelManager = self.lvlanager ?? .init(.test)
         DispatchQueue(label: "db", qos: .userInitiated).async {
-            DataBaseService.db.completedLevels.updateValue(levelManager.progress, forKey: levelManager.lvlModel)
+            let oldProgress = DataBaseService.db.completedLevels[levelManager.lvlModel]
+            if levelManager.progress.score >= oldProgress?.score ?? 0 {
+                DataBaseService.db.completedLevels.updateValue(levelManager.progress, forKey: levelManager.lvlModel)
+            }
             #warning("save new balance to keychain")
             print("game completed ", levelManager.lvlModel)
             DispatchQueue.main.async {
@@ -234,8 +229,6 @@ class GameScene: SKScene {
             return
         }
         
-        print(lvlanager.currentRound, " tefrwdsax")
-        var i = 0
         let totalCount = lvlanager.lvlBuilder
             .enemyPerRound[lvlanager.currentRound].reduce(0) { partialResult, round in
                 return round.count + partialResult
@@ -246,26 +239,30 @@ class GameScene: SKScene {
         self.loadingRound = true
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: { [weak self] in
             guard let self else { return }
-            lvlanager.lvlBuilder
-                .enemyPerRound[lvlanager.currentRound]
-                .forEach { type in
-                    (0..<type.count).forEach { _ in
-                        self.loadEnemy(type.type, i: i, totalInRound: totalCount)
-                        i += 1
-                    }
-                   
-            }
-            lvlanager.currentRound += 1
-            if lvlanager.lvlModel.duration == .infinityRounds {
-                lvlanager.progress.totalEnemies += totalCount
-            }
-            if lvlanager.lvlModel.duration == .infinityRounds && lvlanager.currentRound >= lvlanager.lvlBuilder.rounds - 1 {
-                lvlanager.roundRepeated += lvlanager.currentRound
-                lvlanager.currentRound = 0
-            }
-            print(lvlanager.currentRound, " yh5gt4erfwda ")
-            loadingRound = false
+            self.performLoadRaund(totalCount)
         })
+    }
+    
+    func performLoadRaund(_ totalNewEnemiesCount: Int) {
+        var i = 0
+        lvlanager.lvlBuilder
+            .enemyPerRound[lvlanager.currentRound]
+            .forEach { type in
+                (0..<type.count).forEach { _ in
+                    self.loadEnemy(type.type, i: i, totalInRound: totalNewEnemiesCount)
+                    i += 1
+                }
+               
+        }
+        lvlanager.currentRound += 1
+        if lvlanager.lvlModel.duration == .infinityRounds {
+            lvlanager.progress.totalEnemies += totalNewEnemiesCount
+        }
+        if lvlanager.lvlModel.duration == .infinityRounds && lvlanager.currentRound >= lvlanager.lvlBuilder.rounds - 1 {
+            lvlanager.roundRepeated += lvlanager.currentRound
+            lvlanager.currentRound = 0
+        }
+        loadingRound = false
     }
 
 }
@@ -444,12 +441,12 @@ extension GameScene: SKPhysicsContactDelegate {
             let enemy = a as? EnemyNode ?? b as! EnemyNode
             let bullet = a as? BulletNode ?? b as! BulletNode
             let killed = enemy.bulletHitted(bullet)
-            if killed {
+            if killed && !enemy.isRemoving {
                 lvlanager.progress.earnedMoney += enemy.totalHealth
+                print(enemy.totalHealth, " grefdsxxv")
                 lvlanager.progress.killedEnemies += 1
                 enemy.removeFromParent()
                 self.loadRaund()
-            } else {
             }
             bullet.removeFromParent()
         }

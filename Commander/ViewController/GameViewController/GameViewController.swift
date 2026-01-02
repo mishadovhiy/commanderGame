@@ -88,6 +88,17 @@ class GameViewController: AudioViewController {
         weaponTableView.reloadData()
     }
     
+    func progressUpdated(lvlManager: LevelManager) {
+        if lvlManager.lvlModel.duration == .infinityRounds {
+            roundLabel.text = "\(lvlManager.currentRound + lvlManager.roundRepeated)"
+        } else {
+            roundLabel.text = "\(lvlManager.currentRound)/\(lvlManager.lvlBuilder.rounds)"
+        }
+        healthLabel.text = "\(lvlManager.progress.health)"
+        
+        balanceLabel.text = "\(lvlManager.progress.moneyResult). \(lvlManager.progress.killedEnemies)/\(lvlManager.progress.totalEnemies) = \(lvlManager.progress.score)"
+    }
+    
     @IBAction private func speedPressed(_ sender: UIButton) {
         play(.menu1)
         if sender.tag == 2 {

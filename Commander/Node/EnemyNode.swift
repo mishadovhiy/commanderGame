@@ -72,7 +72,7 @@ class EnemyNode: SKSpriteNode {
             return false
         }
         print(bullet.damage, " ", health)
-        audioContainer?.play(.hit1)
+//        audioContainer?.play(.hit1)
         health -= bullet.damage
         let newPercent = CGFloat(health) / CGFloat(totalHealth)
         if newPercent > 0 {
@@ -120,7 +120,7 @@ class EnemyNode: SKSpriteNode {
             return
         }
         self.removeAllActions()
-        audioContainer?.play(.explosure1)
+//        audioContainer?.play(.explosure1)
         let explosure = SKSpriteNode(texture: .init(image: .exposure), size: .init(width: 5, height: 5))
         explosure.name = "explosure"
         addChild(explosure)
