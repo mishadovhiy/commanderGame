@@ -15,7 +15,13 @@ class LevelListSuperViewController: UIViewController {
     @IBOutlet private weak var upgradeButton: UIButton!
     @IBOutlet private weak var bottomPanelStackView: UIStackView!
     @IBOutlet private weak var pageContainerView: UIView!
-    
+    var completedLevels: [Int] = []
+    var lastCompletedLevel: Int?
+    var lockedLevelsView: UIView? {
+        (pageContainerView.subviews.first(where: {
+            $0 is UIStackView
+        }) as? UIStackView)?.arrangedSubviews.first
+    }
     override func loadView() {
         super.loadView()
         loadUI()
@@ -78,6 +84,8 @@ class LevelListSuperViewController: UIViewController {
         homeParentVC?.play(.success1)
         let vc = GameViewController.initiate(self.selectedLevel, page: levelPageVC!.currentPageData)
         vc.didDismiss = { [weak self] in
+            self?.completedLevels.removeAll()
+            self?.selectedLevel = .init(levelPage: self?.selectedLevel.levelPage ?? "1")
             self?.levelPageVC?.viewControllers?.forEach {
                 ($0 as? LevelViewController)?.setCompletedLevels()
             }
@@ -106,13 +114,17 @@ class LevelListSuperViewController: UIViewController {
                     $0.difficulty == self.selectedLevel.difficulty
                 ].contains(false)
             })
+            let selectedLevel = Int(self.selectedLevel.level) ?? 0
+            let last = (self.lastCompletedLevel ?? 0) + 1
+            let isUnlocked = last >= selectedLevel
             DispatchQueue.main.async {
+                let isFirst = self.levelPageVC?.currentPageData.levels.first?.title == self.selectedLevel.level
                 self.bottomPanelNavigation?.pushViewController(
                     DifficultyViewController.initiate(data: GameDurationType.allCases.compactMap({ duration in
                         let contains = completedKeys.contains(where: {
                             $0.duration == duration
                         })
-                        return .init(title: duration.rawValue, checkmarkCount: contains ? 1 : 0)
+                        return .init(title: duration.rawValue, checkmarkCount: contains ? 1 : 0, isLocked: isUnlocked ? (last == selectedLevel ? (duration == .normal || isFirst ? false : true) : false) : ((isFirst && duration == .normal ? false : true)))
                     }), didSelect: { value in
                         self.selectedLevel.duration = .init(rawValue: value)
                     }), animated: true)
@@ -205,13 +217,31 @@ extension LevelListSuperViewController {
                     $0.level == self.selectedLevel.level
                 ].contains(false)
             })
+            let levelKeys = Array(db.keys)
+            let lastCompleted = levelKeys.topCompletedLevel
+            let completedLevels: [Int]?
+            if self.completedLevels.isEmpty {
+                completedLevels = levelKeys.completedPages
+            } else {
+                completedLevels = nil
+            }
             DispatchQueue.main.async {
+                if let completedLevels {
+                    self.completedLevels = completedLevels
+                }
+                self.lastCompletedLevel = Int(lastCompleted?.level ?? "") ?? 0
                 let vc = self.bottomPanelNavigation?.viewControllers.first as? DifficultyViewController
+                
+                let isFirst = self.levelPageVC?.currentPageData.levels.first?.title == self.selectedLevel.level
+                let isUnlocked = ((self.lastCompletedLevel ?? 0) + 1 >= (Int(self.selectedLevel.level) ?? 0)) || isFirst
                 vc?.updateData(Difficulty.allCases.compactMap({ difficulty in
                     let keys = completedKeys.filter({
                         $0.difficulty == difficulty
                     })
-                    return .init(title: difficulty.rawValue, checkmarkCount: keys.count)
+                    return .init(
+                        title: difficulty.rawValue,
+                        checkmarkCount: keys.count,
+                        isLocked: !isUnlocked)
                 }), animated: animated)
             }
         }
@@ -221,7 +251,7 @@ extension LevelListSuperViewController {
         let rootVC = DifficultyViewController
             .initiate(
                 data: Difficulty.allCases.compactMap({
-                    .init(title: $0.rawValue, checkmarkCount: 0)
+                    .init(title: $0.rawValue, checkmarkCount: 0, isLocked: true)
                 }),
                 didSelect: { value in
                     self.selectedLevel.difficulty = .init(rawValue: value)
@@ -242,7 +272,7 @@ extension LevelListSuperViewController {
     
     func loadPageChild() {
         let childVC = LevelsPageViewController.initiate()
-        pageContainerView.addSubview(childVC.view)
+        pageContainerView.insertSubview(childVC.view, at: 0)
         childVC.view
             .translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

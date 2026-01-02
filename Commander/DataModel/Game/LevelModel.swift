@@ -20,6 +20,28 @@ struct LevelModel: Codable, Hashable, Equatable {
     }    
 }
 
+extension [LevelModel] {
+    var topCompletedLevel: Self.Element? {
+        self.sorted(by: {
+            Int($0.level) ?? 0 >= Int($1.level) ?? 0
+        }).first
+    }
+    
+    var completedPages: [Int] {
+        let pages = [LevelPagesBuilder].allData
+        var dict: [String: Int] = [:]
+        self.forEach { level in
+            dict.updateValue((dict[level.levelPage] ?? 0) + 1, forKey: level.levelPage)
+        }
+        return dict.filter({ level in
+            let c = pages.first(where: {$0.title == level.key})
+            return c?.levels.count ?? 0 <= level.value
+        }).compactMap({
+            Int($0.key) ?? 0
+        })
+    }
+}
+
 extension LevelModel {
     static var test: Self {
         .init(level: "0", difficulty: .easy, duration: .normal)

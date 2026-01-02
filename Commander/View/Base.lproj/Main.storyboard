@@ -555,17 +555,56 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Yah-ol-Wln">
-                                <rect key="frame" x="59" y="59" width="734" height="279"/>
+                                <rect key="frame" x="59" y="59" width="734" height="279.66666666666669"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PqH-fW-QiH">
-                                        <rect key="frame" x="0.0" y="0.0" width="734" height="227"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="734" height="227.66666666666666"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IfC-JS-dSA">
-                                                <rect key="frame" x="0.0" y="0.0" width="584" height="227"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="584" height="227.66666666666666"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="J3u-gV-QFZ">
+                                                        <rect key="frame" x="58.333333333333343" y="45.666666666666671" width="467.33333333333326" height="136.66666666666663"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tGZ-1X-zke">
+                                                                <rect key="frame" x="0.0" y="0.0" width="467.33333333333331" height="136.66666666666666"/>
+                                                                <subviews>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2GU-4f-VkG">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="467.33333333333331" height="136.66666666666666"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level is locked" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zf4-Jc-ZKQ">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="467.33333333333331" height="136.66666666666666"/>
+                                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                                                                <color key="textColor" name="extraDarkColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                    </stackView>
+                                                                </subviews>
+                                                                <color key="backgroundColor" red="0.17254901960784313" green="0.14900000393390656" blue="0.082000002264976501" alpha="0.14999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="2GU-4f-VkG" secondAttribute="trailing" id="WEh-3I-TGG"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="2GU-4f-VkG" secondAttribute="bottom" id="Y7Y-ae-BWo"/>
+                                                                    <constraint firstItem="2GU-4f-VkG" firstAttribute="top" secondItem="tGZ-1X-zke" secondAttribute="top" id="YqN-Hk-uen"/>
+                                                                    <constraint firstItem="2GU-4f-VkG" firstAttribute="leading" secondItem="tGZ-1X-zke" secondAttribute="leading" id="nWv-in-K7v"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hasContainer" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="J3u-gV-QFZ" firstAttribute="width" secondItem="IfC-JS-dSA" secondAttribute="width" multiplier="0.8" id="EGb-hO-Ur4"/>
+                                                    <constraint firstItem="J3u-gV-QFZ" firstAttribute="centerX" secondItem="IfC-JS-dSA" secondAttribute="centerX" id="OjG-iU-8MD"/>
+                                                    <constraint firstItem="J3u-gV-QFZ" firstAttribute="height" secondItem="IfC-JS-dSA" secondAttribute="height" multiplier="0.6" id="Py8-Nc-CQ2"/>
+                                                    <constraint firstItem="J3u-gV-QFZ" firstAttribute="centerY" secondItem="IfC-JS-dSA" secondAttribute="centerY" id="gGH-a4-vgP"/>
+                                                </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Peu-fv-o1r">
-                                                <rect key="frame" x="584" y="0.0" width="150" height="227"/>
+                                                <rect key="frame" x="584" y="0.0" width="150" height="227.66666666666666"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iie-mt-9El">
                                                         <rect key="frame" x="0.0" y="0.0" width="150" height="44"/>
@@ -604,7 +643,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1cj-md-N39">
-                                                        <rect key="frame" x="0.0" y="88" width="150" height="139"/>
+                                                        <rect key="frame" x="0.0" y="87.999999999999986" width="150" height="139.66666666666663"/>
                                                         <color key="backgroundColor" name="AccentColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="fKK-oS-AeC"/>
@@ -625,7 +664,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="woi-4I-5rs">
-                                        <rect key="frame" x="0.0" y="227" width="734" height="52"/>
+                                        <rect key="frame" x="0.0" y="227.66666666666669" width="734" height="52"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="52" id="CPO-fl-dLV"/>
                                         </constraints>
@@ -1487,7 +1526,7 @@
             <color red="0.4779999852180481" green="0.36899998784065247" blue="0.078000001609325409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="darkColor">
-            <color red="0.17254901960784313" green="0.14901960784313725" blue="0.082352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.17299999296665192" green="0.14900000393390656" blue="0.082000002264976501" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="extraDarkColor">
             <color red="0.093999996781349182" green="0.090000003576278687" blue="0.082000002264976501" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -55,6 +55,7 @@ class DifficultyViewController: AudioViewController {
             if i != 0 {
                 print(i, " tefrwds ", newData.count, " trfedwsa")
                 button?.setTitle(newData[i - 1].title + " (\(newData[i - 1].checkmarkCount))", for: .init())
+                button?.isEnabled = !newData[i - 1].isLocked
                 print(button?.title(for: .normal), " gtefrwdsa")
                 setButtonSelected(view: button ?? $0, animated: animated)
             }
@@ -94,5 +95,6 @@ extension DifficultyViewController {
     struct DifficultyDataModel {
         let title: String
         let checkmarkCount: Int
+        let isLocked: Bool
     }
 }

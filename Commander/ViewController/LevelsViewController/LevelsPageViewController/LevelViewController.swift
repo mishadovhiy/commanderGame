@@ -24,11 +24,34 @@ class LevelViewController: UIViewController {
         setCompletedLevels()
     }
     
+    private var parentVC: LevelListSuperViewController? {
+        parent?.parent as? LevelListSuperViewController
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateButtonsConstraints()
+        drawLevelGround()
+
+    }
+    
     func setCompletedLevels() {
         DispatchQueue(label: "db", qos: .userInitiated).async {
             let db = DataBaseService.db.completedLevels
             let keys = Array(db.keys)
+            let last = self.parentVC?.completedLevels.sorted(by: {$0 >= $1}).last ?? 0
+            let current = Int(self.data.title) ?? 0
+            let isUlocked = last + 1 >= current
             DispatchQueue.main.async {
+                self.view.isUserInteractionEnabled = isUlocked
+                if self.parentVC?.lockedLevelsView?.isHidden != isUlocked {
+                    UIView.animate(withDuration: 0.3) {
+                        self.parentVC?.lockedLevelsView?.isHidden = isUlocked
+                    }
+                }
+                UIView.animate(withDuration: 0.2) {
+                    self.view.alpha = isUlocked ? 1 : 0.5
+                }
                 self.view.subviews.forEach { button in
                     if button.layer.name == "levelButton",
                        let stack = button.subviews.first(where: {
@@ -52,45 +75,7 @@ class LevelViewController: UIViewController {
             }
         }
     }
-
     
-    func drawLevelGround() {
-        guard let view else {
-            return
-        }
-        let path = CGMutablePath()
-        path.move(to: .zero)
-        
-        data.levels.forEach { model in
-            path.addLine(to: .init(
-                x: view.frame.width * model.position.x,
-                y: view.frame.height * model.position.y))
-        }
-
-        if let first = view.layer.sublayers?.first(where: {
-            $0.name == "CAShapeLayer"
-        }) as? CAShapeLayer {
-            first.path = path
-            return
-        }
-
-        
-        let shape = CAShapeLayer()
-        shape.path = path
-        shape.name = "CAShapeLayer"
-        shape.strokeColor = UIColor.container.cgColor
-        shape.fillColor = UIColor.clear.cgColor
-        shape.lineWidth = 2
-        view.layer.addSublayer(shape)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        print("ferwdasx ", view.frame.size)
-        updateButtonsConstraints()
-        drawLevelGround()
-
-    }
     #warning("refactor")
     func updateButtonsConstraints() {
         print(view.constraints.count, " ytrtgerf ")
@@ -133,6 +118,56 @@ class LevelViewController: UIViewController {
 
         })
     }
+    
+    @objc private func didSelectLevel(_ sender: UIButton) {
+        parentVC?.homeParentVC?.play(.menu2)
+        parentVC?.selectedLevel = .init(
+            level: data.levels[sender.tag].title,
+            levelPage: parentVC!.selectedLevel.levelPage)
+        parentVC?.homeParentVC?.setMap(for: parentVC?.homeParentVC?.currentPage, animated: false)
+        view.subviews.forEach({
+            if $0.layer.name == "levelButton" {
+                let background = $0.subviews.first(where: {
+                    $0.layer.name == "backgroundView"
+                })
+                background?.backgroundColor = sender.tag == $0.tag ? UIColor.accent.withAlphaComponent(0.4) : .dark.withAlphaComponent(0.15)
+            }
+        })
+    }
+}
+
+fileprivate
+extension LevelViewController {
+    func drawLevelGround() {
+        guard let view else {
+            return
+        }
+        let path = CGMutablePath()
+        path.move(to: .zero)
+        
+        data.levels.forEach { model in
+            path.addLine(to: .init(
+                x: view.frame.width * model.position.x,
+                y: view.frame.height * model.position.y))
+        }
+
+        if let first = view.layer.sublayers?.first(where: {
+            $0.name == "CAShapeLayer"
+        }) as? CAShapeLayer {
+            first.path = path
+            return
+        }
+
+        
+        let shape = CAShapeLayer()
+        shape.path = path
+        shape.name = "CAShapeLayer"
+        shape.strokeColor = UIColor.container.cgColor
+        shape.fillColor = UIColor.clear.cgColor
+        shape.lineWidth = 2
+        view.layer.addSublayer(shape)
+    }
+
     
     func loadLevelButtonBackground(_ button: UIView) {
         let view = UIView()
@@ -194,26 +229,6 @@ class LevelViewController: UIViewController {
 
             loadLevelProgress(button)
         }
-    }
-    
-    private var parentVC: LevelListSuperViewController? {
-        parent?.parent as? LevelListSuperViewController
-    }
-    
-    @objc func didSelectLevel(_ sender: UIButton) {
-        parentVC?.homeParentVC?.play(.menu2)
-        parentVC?.selectedLevel = .init(
-            level: data.levels[sender.tag].title,
-            levelPage: parentVC!.selectedLevel.levelPage)
-        parentVC?.homeParentVC?.setMap(for: parentVC?.homeParentVC?.currentPage, animated: false)
-        view.subviews.forEach({
-            if $0.layer.name == "levelButton" {
-                let background = $0.subviews.first(where: {
-                    $0.layer.name == "backgroundView"
-                })
-                background?.backgroundColor = sender.tag == $0.tag ? UIColor.accent.withAlphaComponent(0.4) : .dark.withAlphaComponent(0.15)
-            }
-        })
     }
 }
 

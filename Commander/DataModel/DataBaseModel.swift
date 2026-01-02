@@ -18,10 +18,7 @@ struct DataBaseModel: Codable {
             _upgradedWeapons = newValue
         }
     }
-    var completedLevels: [LevelModel: GameProgress] = [
-        .init(level: "11", levelPage: "1", difficulty: .easy, duration: .normal):.init(passedEnemyCount: 10, earnedMoney: 200, killedEnemies: 23, totalEnemies: 25),
-        .init(level: "11", levelPage: "1", difficulty: .easy, duration: .infinityRounds):.init(passedEnemyCount: 10, earnedMoney: 200, killedEnemies: 25, totalEnemies: 25),
-    ]
+    var completedLevels: [LevelModel: GameProgress] = [:]
     
     var settings: Settings = .init()
 }
