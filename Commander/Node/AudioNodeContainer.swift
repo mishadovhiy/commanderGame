@@ -11,14 +11,25 @@ import AVFoundation
 class AudioContainerNode: SKNode {
     
     private let audioNodes: [SKAudioNode]
-
+    private var durations: [AudioFileNameType: Double] = [:]
+    
     init(audioNames: [AudioFileNameType], canPlaySound: Bool) {
+        var durations: [AudioFileNameType: Double] = [:]
         audioNodes = audioNames.compactMap({
+            if let url = Bundle.main.url(
+                forResource: $0.rawValue,
+                withExtension: $0.format.rawValue) {
+                let audio = AVURLAsset(url: url)
+                durations.updateValue(audio.duration.seconds, forKey: $0)
+            }
+           
             let node = SKAudioNode(fileNamed: $0.rawValue + "." + $0.format.rawValue)
             node.autoplayLooped = false
             node.name = $0.rawValue
+            node.isPositional = true
             return node
         })
+        self.durations = durations
         super.init()
         audioNodes.forEach {
             self.addChild($0)
@@ -45,6 +56,7 @@ class AudioContainerNode: SKNode {
         audioNodes.forEach { node in
             let volume = (AudioFileNameType.init(rawValue: node.name ?? "") ?? .coins).volume
             node.avAudioNode?.engine?.mainMixerNode.outputVolume = canPlay ? volume : .zero
+            node.avAudioNode?.engine?.mainMixerNode.volume = canPlay ? volume : .zero
             node.run(.changeVolume(to: canPlay ? volume : 0, duration: 0))
         }
     }
@@ -60,7 +72,11 @@ class AudioContainerNode: SKNode {
         if audioNode.avAudioNode?.engine?.mainMixerNode.outputVolume == .zero || audioNode.hasActions() {
             return
         }
-        audioNode.run(.play())
-        
+
+        audioNode.run(.sequence([
+            .play(),
+            .wait(forDuration: self.durations[file] ?? 0),
+            .stop()
+        ]))
     }
 }

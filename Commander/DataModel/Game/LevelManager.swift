@@ -48,6 +48,7 @@ struct LevelManager {
         } else {
             progress.health = lvlBuilder.health
         }
+        progress.earnedMoney = lvlBuilder.startingMoney
     }
     
     //hits -> damage

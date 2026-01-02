@@ -155,6 +155,8 @@ extension WeaponNode {
         if enemy.parent == nil || enemy.isRemoving {
             targetEnemy = nil
             if let nextEnemyHolder {
+                targetEnemy = nextEnemyHolder
+
                 self.shoot(enemy: nextEnemyHolder)
             }
             return false
@@ -163,6 +165,8 @@ extension WeaponNode {
         if !force && !self.intersects(enemy) {
             self.targetEnemy = nil
             if let nextEnemyHolder {
+                self.targetEnemy = nextEnemyHolder
+
                 self.shoot(enemy: nextEnemyHolder)
             }
             return false
