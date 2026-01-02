@@ -20,13 +20,16 @@ class GameScene: SKScene {
             }
         }
     }
+    var currentRoundCount: Int = 0
     private var canLoadRound = true
     var loadingRound = false {
         didSet {
-            DispatchQueue.main.async {
-                self.gameVC?.loadingRoundTitle.text = "Loading round # \(self.lvlanager.currentRound)"
-                UIView.animate(withDuration: 0.3) {
-                    self.gameVC?.loadingRoundStackView.isHidden = !self.loadingRound
+            if loadingRound {
+                DispatchQueue.main.async {
+                    self.gameVC?.loadingRoundTitle.text = "Loading round # \(self.lvlanager.currentRound)\n(\(self.currentRoundCount))"
+                    UIView.animate(withDuration: 0.3) {
+                        self.gameVC?.loadingRoundStackView.isHidden = !self.loadingRound
+                    }
                 }
             }
         }
@@ -236,6 +239,7 @@ class GameScene: SKScene {
         if totalCount >= 1 {
             self.canLoadRound = false
         }
+        self.currentRoundCount = totalCount
         self.loadingRound = true
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: { [weak self] in
             guard let self else { return }

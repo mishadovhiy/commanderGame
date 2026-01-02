@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-enum EnemyType: String {
+enum EnemyType: String, CaseIterable {
     case soldeir
     case flight
     case militaryFlightSimple

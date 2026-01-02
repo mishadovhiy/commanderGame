@@ -22,9 +22,9 @@ struct GameBuilderModel {
     
     init(lvlModel: LevelModel) {
         enemyGraundPosition = Self.enemyGraund(lvlModel.level)
-        enemyPerRound = .enemyList(lvlModel.level)
+        enemyPerRound = .enemyList(lvlModel.level, page: lvlModel.levelPage)
         health = Self.health(lvlModel.level)
-        enemyHealthMult = Int(lvlModel.level) ?? 1
+        enemyHealthMult = Int(lvlModel.level) ?? 1 * ((lvlModel.difficulty?.index ?? 0) + 1)
         self.startingMoney = 100
         self.blockers = .allData(lvlModel.level)
         appearence = .gameLevel(lvlModel.level) ?? .init()

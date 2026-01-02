@@ -43,7 +43,7 @@ class LevelViewController: UIViewController {
             let current = Int(self.data.title) ?? 0
             let isUlocked = last + 1 >= current
             DispatchQueue.main.async {
-                self.view.isUserInteractionEnabled = isUlocked
+//                self.view.isUserInteractionEnabled = isUlocked
                 if self.parentVC?.lockedLevelsView?.isHidden != isUlocked {
                     UIView.animate(withDuration: 0.3) {
                         self.parentVC?.lockedLevelsView?.isHidden = isUlocked
@@ -125,6 +125,13 @@ class LevelViewController: UIViewController {
             level: data.levels[sender.tag].title,
             levelPage: parentVC!.selectedLevel.levelPage)
         parentVC?.homeParentVC?.setMap(for: parentVC?.homeParentVC?.currentPage, animated: false)
+        let builder = GameBuilderModel(lvlModel: parentVC!.selectedLevel)
+        var i = 0
+        builder.enemyPerRound.forEach { round in
+            print(i, " ", round, " rteds ", round.count)
+            i += 1
+        }
+        print(" hyrtegfesda ", builder.rounds)
         view.subviews.forEach({
             if $0.layer.name == "levelButton" {
                 let background = $0.subviews.first(where: {

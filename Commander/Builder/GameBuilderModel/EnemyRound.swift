@@ -15,54 +15,60 @@ extension GameBuilderModel {
 }
 
 extension [[GameBuilderModel.EnemyRound]] {
-    static func enemyList(_ lvl: String) -> Self {
+    static func numberOfRounds(_ lvl: Int, page: Int) -> Int {
+        let initialValue: Int
         switch lvl {
-        case "11":
-            [
-                [
-                    .init(type: .tankMBT, count: 5),
-                    .init(type: .flightVehicle, count: 5)
-                ]
-            ]
-//            [
-//                    [.init(type: .soldeir, count: 15),
-//                     .init(type: .soldeir, count: 20)],
-//                    [.init(type: .soldeir, count: 20),
-//                        .init(type: .vehicle, count: 10),
-//                    ],
-//                    [.init(type: .soldeir, count: 2),
-//                     .init(type: .flight, count: 5),
-//                     .init(type: .tankMBT, count: 2),
-//                     .init(type: .vehicle, count: 10)]
-//                ]
-        case "15":
-            [
-                    [.init(type: .soldeir, count: 15),
-                     .init(type: .vehicle, count: 20)],
-                    [.init(type: .soldeir, count: 20),
-                        .init(type: .vehicle, count: 10),
-                    ],
-                    [.init(type: .tankMBT, count: 5),
-                     .init(type: .flight, count: 10),
-                     .init(type: .tankMBT, count: 15),
-                     .init(type: .vehicle, count: 10)],
-                    [.init(type: .soldeir, count: 5),
-                     .init(type: .vehicle, count: 10),
-                     .init(type: .soldeir, count: 15),
-                     .init(type: .vehicle, count: 10)]
-                ]
-        default: [
-                [.init(type: .soldeir, count: 15),
-                 .init(type: .soldeir, count: 20)],
-                [.init(type: .soldeir, count: 20),
-                    .init(type: .vehicle, count: 10),
-                ],
-                [.init(type: .soldeir, count: 2),
-                 .init(type: .flight, count: 5),
-                 .init(type: .tankMBT, count: 2),
-                 .init(type: .vehicle, count: 10)]
-            ]
+        default:
+            initialValue = 30
+        }
+        let initial = initialValue + (page * 4)
+        return initial + (Int(Float(initial) * 0.5) * page - 1)
+    }
+    
+    static func levelMultiplier(page: Int) -> Int {
+        switch page {
+        case 1:
+            10
+        default: 100
         }
     }
+    
+    static func enemyList(_ lvl: String, page: String) -> Self {
+        let level = Int(lvl) ?? 0
+        let page = Int(page) ?? 0
+        let roundCount: Range<Int> = 0..<numberOfRounds(level, page: page)
+        let maxHealth = EnemyType.allCases.sorted(by: {$0.health >= $1.health}).first?.health ?? 0
+        
+        let pagePercent = Float(page) / Float(LevelPagesBuilder.maxPageCount)
+        let lvlNumberInPage = level - page * levelMultiplier(page: page)
+        let lvlPercent = (Float(lvlNumberInPage) / Float(LevelPagesBuilder.levelCount(per: page))).closesPercent
+        let enemiesPerPage = EnemyType.allCases.filter({
+            let healthPercent = Float($0.health) / Float(maxHealth)
+            return healthPercent.closesPercent <= pagePercent
+        }).sorted(by: {
+            $0.health <= $1.health
+        })
+        
+        let enemies = enemiesPerPage.filter({
+            let healthPercent = Float($0.health) / Float(enemiesPerPage.last?.health ?? 0)
+            return healthPercent.closesPercent <= lvlPercent
+        }).sorted(by: {
+            $0.health <= $1.health
+        })
+        print(lvlPercent, " htegrfsdsa ", lvlPercent)
+        return roundCount.compactMap { i in
+            let count = 15 + page + Int(lvlPercent * 10)
+            let roundPercent = (Float(i) / Float(roundCount.upperBound)).closesPercent
+            let enemies = enemies.filter({
+                let healthPercent = Float($0.health) / Float(enemies.last?.health ?? 0)
+                return healthPercent.closesPercent <= roundPercent
 
+            })
+
+            return enemies.compactMap({
+                .init(type: $0, count: count / enemies.count)
+            })
+        }
+    }
+    
 }

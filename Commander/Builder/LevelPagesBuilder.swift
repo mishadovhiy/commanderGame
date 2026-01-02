@@ -20,6 +20,15 @@ struct LevelPagesBuilder: Equatable {
         let position: CGPoint
         let title: String
     }
+    
+    static let maxPageCount: Int = 4
+    static func levelCount(per page: Int) -> Int {
+        switch page {
+        case 1, 3: 11
+            
+        default: 12
+        }
+    }
 }
 
 extension [LevelPagesBuilder] {
