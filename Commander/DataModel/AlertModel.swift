@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct AlertModel {
     let title: String
@@ -87,6 +88,9 @@ extension AlertModel.ViewControllerType {
         return .dict(dict: dict, didUpdate: { newValue in
             DispatchQueue(label: "db", qos: .userInitiated).async {
                 DataBaseService.db.settings.sound.voluem = try! .init(JSONSerialization.data(withJSONObject: newValue ?? [:], options: []))
+                DispatchQueue.main.async {
+                    (UIApplication.shared.activeWindow?.rootViewController as? BaseViewController)?.soundDidChange()
+                }
             }
         })
     }

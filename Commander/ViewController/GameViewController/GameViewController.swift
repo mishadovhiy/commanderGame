@@ -29,6 +29,7 @@ class GameViewController: AudioViewController {
     var gameBackgroundColor: UIColor {
         LevelManager(selectedLevel).lvlBuilder.appearence.backgroundColor ?? page.appearence.backgroundColor!
     }
+    
     override func loadView() {
         super.loadView()
         self.loadingRoundStackView.isHidden = true
@@ -46,7 +47,7 @@ class GameViewController: AudioViewController {
             let db = DataBaseService.db
             DispatchQueue.main.async {
                 self.loadWeapons(db: db)
-                self.loadScene()
+                self.loadScene(db: db)
             }
         }
     }
@@ -57,6 +58,11 @@ class GameViewController: AudioViewController {
         gameScene?.removeAllChildren()
         gameScene?.removeFromParent()
         view.removeFromSuperview()
+    }
+    
+    override func soundDidChange() {
+        super.soundDidChange()
+        gameScene?.soundDidChange()
     }
     
     private var gameScene: GameScene? {
@@ -330,9 +336,9 @@ extension GameViewController {
         }
     }
     
-    func loadScene() {
+    func loadScene(db: DataBaseModel) {
         if let view = view as! SKView? {
-            let scene = GameScene.configure(lvl: .init(self.selectedLevel), page: self.page)
+            let scene = GameScene.configure(lvl: .init(self.selectedLevel), page: self.page, canPlaySound: db.settings.sound.voluem.gameSound != 0)
             scene.scaleMode = .aspectFill
             
             view.presentScene(scene, transition: .doorsCloseHorizontal(withDuration: 0.6))

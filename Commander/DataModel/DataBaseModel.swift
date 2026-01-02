@@ -37,7 +37,7 @@ extension DataBaseModel {
                 var menu: CGFloat = 0.2
                 
                 
-                enum CodingKeys: String, CodingKey {
+                enum CodingKeys: String, CaseIterable, CodingKey {
                     case gameSound
                     case music
                     case menu

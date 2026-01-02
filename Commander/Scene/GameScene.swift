@@ -149,14 +149,31 @@ class GameScene: SKScene {
         DispatchQueue(label: "db", qos: .userInitiated).async {
             let db = DataBaseService.db
             DispatchQueue.main.async {
-                let node = WeaponNode(type: type, db: db)
+                let node = WeaponNode(type: type, db: db, canPlaySound: self.canPlaySound)
                 self.addChild(node)
                 node.updatePosition(position: position)
             }
         }
         
     }
-
+    var canPlaySound: Bool!
+    func soundDidChange() {
+        DispatchQueue(label: "sound", qos: .userInitiated).async {
+            let canPlay = DataBaseService.db.settings.sound.voluem.gameSound
+            self.canPlaySound = canPlay != 0
+            DispatchQueue.main.async {
+                self.children.forEach { node in
+                    if let audio = node.children.first(where: {
+                        $0 is AudioContainerNode
+                    }) as? AudioContainerNode {
+                        print(self.canPlaySound, " fdfsvfds ")
+                        audio.updateVolume(canPlay: canPlay != 0)
+                    }
+                }
+            }
+        }
+    }
+    
     func didCompleteLevel() {
         if levelCompleted {
             return
@@ -270,7 +287,7 @@ fileprivate extension GameScene {
         guard let path = enemyGround?.path else {
             return
         }
-        let node = EnemyNode(type: type, builder: lvlanager.lvlBuilder)
+        let node = EnemyNode(type: type, builder: lvlanager.lvlBuilder, canPlaySound: canPlaySound)
         self.addChild(node)
         node.run(in: path, i: CGFloat(i), appeared: {
             if i + 1 >= totalInRound {
@@ -428,11 +445,13 @@ extension GameScene: SKPhysicsContactDelegate {
 extension GameScene {
     static func configure(
         lvl: LevelManager,
-        page: LevelPagesBuilder
+        page: LevelPagesBuilder,
+        canPlaySound: Bool
     ) -> Self {
         let scene: Self = .init(fileNamed: Constants.Names.sceneName.rawValue)!
         scene.lvlanager = lvl
         scene.page = page
+        scene.canPlaySound = canPlaySound
         return scene
     }
 }

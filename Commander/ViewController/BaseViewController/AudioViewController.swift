@@ -20,11 +20,25 @@ class AudioViewController: BaseViewController {
             player?.volume = $0.volume
             return player
         })
-        //set fro db
-        setSoundEnabled(true, type: .menu)
-        setSoundEnabled(true, type: .music)
-        setSoundEnabled(true, type: .gameSound)
-
+        setVoluem()
+    }
+    
+    override func soundDidChange() {
+        super.soundDidChange()
+        setVoluem()
+    }
+    
+    func setVoluem() {
+        DispatchQueue(label: "sound", qos: .background).async {
+            let db = DataBaseService.db.settings.sound.voluem
+            let dict = try? db.dictionary() ?? [:]
+            DispatchQueue.main.async {
+                type(of: db).CodingKeys.allCases.forEach { key in
+                    let value = dict?[key.rawValue] as? Float ?? 0
+                    self.setSoundEnabled(value != 0, type: key)
+                }
+            }
+        }
     }
     
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {

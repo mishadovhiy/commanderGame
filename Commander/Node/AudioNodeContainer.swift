@@ -12,7 +12,7 @@ class AudioContainerNode: SKNode {
     
     private let audioNodes: [SKAudioNode]
 
-    init(audioNames: [AudioFileNameType]) {
+    init(audioNames: [AudioFileNameType], canPlaySound: Bool) {
         audioNodes = audioNames.compactMap({
             let node = SKAudioNode(fileNamed: $0.rawValue + "." + $0.format.rawValue)
             node.autoplayLooped = false
@@ -20,11 +20,10 @@ class AudioContainerNode: SKNode {
             return node
         })
         super.init()
-        //set from db
         audioNodes.forEach {
             self.addChild($0)
         }
-        self.updateVolume(canPlay: true)
+        updateVolume(canPlay: canPlaySound)
     }
     
     override func removeFromParent() {
@@ -42,6 +41,7 @@ class AudioContainerNode: SKNode {
     }
     
     func updateVolume(canPlay: Bool) {
+        print(canPlay, " gfeedwdsc ")
         audioNodes.forEach { node in
             let volume = (AudioFileNameType.init(rawValue: node.name ?? "") ?? .coins).volume
             node.avAudioNode?.engine?.mainMixerNode.outputVolume = canPlay ? volume : .zero

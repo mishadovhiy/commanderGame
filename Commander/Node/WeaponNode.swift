@@ -49,7 +49,7 @@ class WeaponNode: SKSpriteNode {
     }
       
     
-    init(type: WeaponType, db: DataBaseModel) {
+    init(type: WeaponType, db: DataBaseModel, canPlaySound: Bool) {
         self.type = type
         self.initialDamage = type.damage * 4
         self.initialDistance = type.distance
@@ -67,7 +67,7 @@ class WeaponNode: SKSpriteNode {
         let imageSize = type.textureSize
         let child = SKSpriteNode(texture: .init(imageNamed: type.rawValue + "/\(type.upgradedIconComponent(db: componentName ?? 0))"), color: .clear, size: .init(width: imageSize.width, height: imageSize.height))
         self.addChild(child)
-        addChild(AudioContainerNode(audioNames: [.shoot1, .shoot2]))
+        addChild(AudioContainerNode(audioNames: [.shoot1, .shoot2], canPlaySound: canPlaySound))
         self.zPosition = 50
     }
     

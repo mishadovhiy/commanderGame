@@ -12,13 +12,13 @@ class EnemyNode: SKSpriteNode {
     var health: Int
     var totalHealth: Int
     
-    init(type: EnemyType, builder: GameBuilderModel) {
+    init(type: EnemyType, builder: GameBuilderModel, canPlaySound: Bool) {
         self.type = type
         let level = Float(builder.enemyHealthMult)
         self.health = (type.health * Int(level))
         self.totalHealth = health
         super.init(texture: .init(imageNamed: "enemy/" + type.component.rawValue + "/1"), color: .clear, size: CGSize(width: 20, height: 20))
-        addChild(AudioContainerNode(audioNames: [.explosure1, .explosure3, .explosure4, .explosure, .hit1, .hit2, .coins]))
+        addChild(AudioContainerNode(audioNames: [.explosure1, .explosure3, .explosure4, .explosure, .hit1, .hit2, .coins], canPlaySound: canPlaySound))
         self.zRotation = .pi
         self.name = .init(describing: Self.self)
         self.physicsBody = .init(rectangleOf: size)

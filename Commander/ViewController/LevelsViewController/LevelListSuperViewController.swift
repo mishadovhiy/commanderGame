@@ -90,7 +90,7 @@ class LevelListSuperViewController: UIViewController {
                 ($0 as? LevelViewController)?.setCompletedLevels()
             }
         }
-        self.present(vc, animated: true)
+        homeParentVC?.present(vc, animated: true)
     }
     
     @IBAction private func upgradeDidPress(_ sender: UIButton) {

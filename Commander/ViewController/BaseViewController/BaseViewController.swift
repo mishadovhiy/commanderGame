@@ -21,4 +21,15 @@ class BaseViewController: UIViewController {
     deinit {
         didDismiss = nil
     }
+    
+    func soundDidChange() {
+        if let vc = presentedViewController as? BaseViewController {
+            vc.soundDidChange()
+        }
+        children.forEach {
+            if let vc = $0 as? BaseViewController {
+                vc.soundDidChange()
+            }
+        }
+    }
 }
