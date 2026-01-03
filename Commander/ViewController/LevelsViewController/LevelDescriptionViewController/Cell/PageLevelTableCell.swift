@@ -33,7 +33,7 @@ class PageLevelTableCell: UITableViewCell {
         ]
         attributedComponents.forEach {
             $0.key.append(.init(string: $0.value, attributes: [
-                .font: UIFont.systemFont(ofSize: 10),
+                .font: UIFont.systemFont(ofSize: 10).customFont(),
                 .foregroundColor: UIColor.white.withAlphaComponent(0.4)
             ]))
         }
@@ -46,7 +46,7 @@ class PageLevelTableCell: UITableViewCell {
         progressView.progress = data.progress
         let progressText: NSMutableAttributedString = .init(string: " \(Int(data.progress * 100))%")
         progressText.insert(.init(string: "\(data.completedLevelCount)/\(data.totalLevelCount)" + " ", attributes: [
-            .font: UIFont.systemFont(ofSize: 9, weight: .semibold),
+            .font: UIFont.systemFont(ofSize: 9, weight: .semibold).customFont(),
             .foregroundColor: UIColor.white.withAlphaComponent(0.15).cgColor
         ]), at: 0)
         progressLabel.attributedText = progressText

@@ -19,8 +19,8 @@ class AlertTitleCollectionCell: UICollectionViewCell {
     }
     
     func set(data: AlertModel.TitleCellModel) {
-        titleLabel.textColor = data.button?.didPress == nil && data.button?.toAlert == nil ? .dark : .white
-        titleLabel.font = data.isSmallText ? .systemFont(ofSize: 12, weight: .medium) : .systemFont(ofSize: 15, weight: .semibold)
+        titleLabel.textColor = data.button?.didPress == nil && data.button?.toAlert == nil ? .dark : .dark
+        titleLabel.font = data.isSmallText ? .systemFont(ofSize: 12, weight: .medium) : .systemFont(ofSize: 15, weight: .semibold).customFont()
 
         if let text = data.attributedString {
             titleLabel.text = nil
@@ -30,6 +30,6 @@ class AlertTitleCollectionCell: UICollectionViewCell {
             titleLabel.attributedText = nil
             titleLabel.text = data.title
         }
-        self.backgroundColor = data.button?.didPress == nil && data.button?.toAlert == nil ? .clear : .dark
+        self.backgroundColor = data.button?.didPress == nil && data.button?.toAlert == nil ? .clear : .white.withAlphaComponent(0.35)
     }
 }

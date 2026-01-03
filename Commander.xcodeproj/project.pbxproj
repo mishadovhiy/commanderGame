@@ -86,6 +86,7 @@
 		82C637D92EEF4B980064F917 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637D82EEF4B980064F917 /* Keys.swift */; };
 		82C637DB2EEF4C360064F917 /* DataBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C637DA2EEF4C360064F917 /* DataBaseService.swift */; };
 		82D832622F07A36800237902 /* loop1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 82D832612F07A36800237902 /* loop1.m4a */; };
+		82E165BA2F08C6720090859E /* AlertLevelProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E165B92F08C6720090859E /* AlertLevelProgressCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -171,6 +172,7 @@
 		82C637D82EEF4B980064F917 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		82C637DA2EEF4C360064F917 /* DataBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseService.swift; sourceTree = "<group>"; };
 		82D832612F07A36800237902 /* loop1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = loop1.m4a; sourceTree = "<group>"; };
+		82E165B92F08C6720090859E /* AlertLevelProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertLevelProgressCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -457,6 +459,7 @@
 			children = (
 				829CADC62EFA8E3E00548DB1 /* AlertTitleCollectionCell.swift */,
 				829CADC82EFA8E5600548DB1 /* AlertTitleTableCell.swift */,
+				82E165B92F08C6720090859E /* AlertLevelProgressCell.swift */,
 				829CADCA2EFA8E6800548DB1 /* AlertSegmentedTableCell.swift */,
 			);
 			path = Cell;
@@ -627,6 +630,7 @@
 				82C637DB2EEF4C360064F917 /* DataBaseService.swift in Sources */,
 				823498022EEB6B8B00F82871 /* EnemyNode.swift in Sources */,
 				823497CA2EEB1FAA00F82871 /* AppDelegate.swift in Sources */,
+				82E165BA2F08C6720090859E /* AlertLevelProgressCell.swift in Sources */,
 				829CADC32EFA8E0D00548DB1 /* AlertTableViewController.swift in Sources */,
 				820675AD2F012DBC00A14FCF /* BaseViewController.swift in Sources */,
 				826A32BF2EECEB01001D25B7 /* ButtonModel.swift in Sources */,

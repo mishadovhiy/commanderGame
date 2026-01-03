@@ -8,17 +8,24 @@
 import Foundation
 
 struct DataBaseModel: Codable {
-    private var _upgradedWeaponssss: [WeaponType: [WeaponUpgradeType: Int]]? = [:]
+    private var _upgradedWeaponsssss: [WeaponType: [WeaponUpgradeType: Int]]? = [:]
     
     var upgradedWeapons: [WeaponType: [WeaponUpgradeType: Int]] {
         get {
-            _upgradedWeaponssss ?? [:]
+            _upgradedWeaponsssss ?? [:]
         }
         set {
-            _upgradedWeaponssss = newValue
+            _upgradedWeaponsssss = newValue
         }
     }
-    var completedLevels: [LevelModel: GameProgress] = [:]
+    var completedLevels: [LevelModel: GameProgress] = [
+        .init(level: "11", levelPage: "1", difficulty: .easy, duration: .infinityRounds):
+                .init(passedEnemyCount: 0, earnedMoney: 100, killedEnemies: 100, totalEnemies: 100, health: 30, currentRound: 50, roundRepeated: 0, pageDivider: 0.25),
+        .init(level: "12", levelPage: "1", difficulty: .easy, duration: .infinityRounds):
+                .init(passedEnemyCount: 0, earnedMoney: 100, killedEnemies: 100, totalEnemies: 100, health: 30, currentRound: 50, roundRepeated: 0, pageDivider: 0.25),
+        .init(level: "12", levelPage: "1", difficulty: .hard, duration: .infinityRounds):
+                .init(passedEnemyCount: 0, earnedMoney: 100, killedEnemies: 100, totalEnemies: 100, health: 30, currentRound: 50, roundRepeated: 0, pageDivider: 0.25)
+    ]
     
     private var _progress: [LevelModel: UncomplitedProgress]? = [:]
     var progress: [LevelModel: UncomplitedProgress] {

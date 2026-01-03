@@ -153,6 +153,7 @@ extension CompletedLevelTableCell {
         let progress = stack?.arrangedSubviews.first(where: {
             $0 is UIProgressView
         }) as? UIProgressView
+        print(contentStack != nil)
         return (label, progress, titleLabel, subtitleLabel)
     }
     
@@ -170,13 +171,15 @@ extension CompletedLevelTableCell {
         let hstack = UIStackView()
         hstack.distribution = .fillProportionally
         hstack.alignment = .fill
-        hstack.axis = .horizontal
+        hstack.axis = .vertical
         hstack.tag = self.contentStackView.arrangedSubviews.count
-        let leftTitleStack = loadLeftTitleStack()
-        hstack.addArrangedSubview(leftTitleStack)
-        leftTitleStack.translatesAutoresizingMaskIntoConstraints = false
+        
+//        let leftTitleStack = loadLeftTitleStack()
+//        hstack.addArrangedSubview(leftTitleStack)
+//        leftTitleStack.translatesAutoresizingMaskIntoConstraints = false
 //        leftTitleStack.widthAnchor.constraint(equalTo: rightTitleLabel.widthAnchor).isActive = true
-        leftTitleStack.widthAnchor.constraint(equalToConstant: 30).isActive = true
+//        leftTitleStack.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        hstack.addArrangedSubview(loadLeftTitleStack())
         hstack.addArrangedSubview(loadRowContentStack())
         
         contentStackView.addArrangedSubview(hstack)
@@ -199,7 +202,7 @@ extension CompletedLevelTableCell {
         vstack.tag = i
         let label = UILabel()
         label.textColor = .white
-        label.font = .systemFont(ofSize: 10)
+        label.font = .systemFont(ofSize: 10).customFont()
         label.minimumScaleFactor = 0.2
         
         let progress = UIProgressView()
@@ -214,12 +217,12 @@ extension CompletedLevelTableCell {
         vstack.axis = .vertical
         
         let titleLabel = UILabel()
-        titleLabel.font = .systemFont(ofSize: 10)
+        titleLabel.font = .systemFont(ofSize: 10).customFont()
         titleLabel.textColor = .accent
         titleLabel.text = "title"
         titleLabel.tag = 0
         let subtitleLabel = UILabel()
-        subtitleLabel.font = .systemFont(ofSize: 10)
+        subtitleLabel.font = .systemFont(ofSize: 10).customFont()
         subtitleLabel.textColor = .white.withAlphaComponent(0.4)
         subtitleLabel.text = "subtitle"
         subtitleLabel.tag = 1

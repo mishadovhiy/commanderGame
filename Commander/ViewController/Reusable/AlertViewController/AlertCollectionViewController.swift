@@ -34,13 +34,18 @@ extension AlertCollectionViewController: UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let array = dataModel?.type.data as? [AlertModel.TitleCellModel] else {
-            fatalError()
-        }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: .init(describing: AlertTitleCollectionCell.self), for: indexPath) as! AlertTitleCollectionCell
-        cell.set(data: array[indexPath.row])
+        if let data = dataModel?.type.data[indexPath.row] as? AlertModel.TitleCellModel {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: .init(describing: AlertTitleCollectionCell.self), for: indexPath) as! AlertTitleCollectionCell
+            cell.set(data: data)
 
-        return cell
+            return cell
+        } else if let data = dataModel?.type.data[indexPath.row] as? AlertModel.LevelProgressModel {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: .init(describing: AlertLevelProgressCell.self), for: indexPath) as! AlertLevelProgressCell
+            cell.set(data)
+            return cell
+        } else {
+            return UICollectionViewCell()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -34,6 +34,11 @@ struct AlertModel {
         let segmentedChanged: (_ newValue: CGFloat)->()
     }
     
+    struct LevelProgressModel: AlertCellModel {
+        var title: String
+        let level: LevelModel
+    }
+    
     struct TitleCellModel: AlertCellModel {
         let isSmallText: Bool
         let attributedString: NSAttributedString?

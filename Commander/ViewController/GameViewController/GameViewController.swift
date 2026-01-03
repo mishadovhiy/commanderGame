@@ -124,25 +124,8 @@ class GameViewController: AudioViewController {
     @IBAction private func menuPressed(_ sender: Any) {
         play(.menu1)
         gameScene?.isPaused = true
-        let text = NSMutableAttributedString(string: "")
-        let dict = [
-            ("Level\n", " " + self.selectedLevel.level + " " + "\n\n"),
-            
-            (" Difficulty:", " " + ((self.selectedLevel.difficulty?.rawValue ?? "-") + " ")),
-            (" Type:", " " + (self.selectedLevel.duration?.rawValue ?? "") + " ")
-        ]
-        dict.forEach {
-            text.append(.init(string: $0.0, attributes: [
-                .font: UIFont.systemFont(ofSize: 15, weight: .semibold)
-            ]))
-            text.append(.init(string: $0.1, attributes: [
-                .font: UIFont.systemFont(ofSize: 12, weight: .medium),
-                .foregroundColor: UIColor.dark.withAlphaComponent(0.7).cgColor
-                
-            ]))
-        }
 let vc = AlertViewController.initiate(data: .init(title: "Menu", type: .collectionView([
-    AlertModel.TitleCellModel(attributedString: text),
+    AlertModel.LevelProgressModel(title: "s", level: self.selectedLevel),
     AlertModel.TitleCellModel(button: .init(title: "Sound", toAlert: {
 .init(title: "Sound", type: .soundSettingsData, buttons: [])
 })),
@@ -382,18 +365,30 @@ extension GameViewController {
     func loadWeapons(db: DataBaseModel) {
         WeaponType.allCases.forEach {
             let i = db.upgradedWeapons[$0]?[.attackPower] ?? 0
+            let stack = UIStackView()
+            stack.axis = .vertical
             let image = UIImageView(image: .init(named: $0.rawValue + "/\($0.upgradedIconComponent(db: i))"))
             image.layer.name = $0.rawValue
             image.contentMode = .scaleAspectFit
             image.translatesAutoresizingMaskIntoConstraints = false
-            image.heightAnchor.constraint(equalToConstant: 30).isActive = true
-            image.widthAnchor.constraint(equalToConstant: 35).isActive = true
-            weaponsStackView.addArrangedSubview(image)
+            stack.translatesAutoresizingMaskIntoConstraints = false
+
+            weaponsStackView.addArrangedSubview(stack)
+            stack.addArrangedSubview(image)
+            image.heightAnchor.constraint(equalToConstant: 25).isActive = true
+            stack.widthAnchor.constraint(equalToConstant: 35).isActive = true
+
             image.isUserInteractionEnabled = true
             image.addGestureRecognizer(UIPanGestureRecognizer(
                 target: self,
                 action: #selector(weaponDragging(_:))
             ))
+            let label = UILabel()
+            stack.addArrangedSubview(label)
+            label.text = "\($0.upgradeStepPrice)"
+            label.textColor = .white
+            label.textAlignment = .center
+            label.font = .systemFont(ofSize: 11, weight: .medium).customFont()
         }
         let backgroundView = UIView()
         weaponsStackView.superview?.insertSubview(backgroundView, at: 0)
