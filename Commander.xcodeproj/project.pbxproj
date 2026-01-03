@@ -831,6 +831,7 @@
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Commander/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Army defence";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.strategy-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -869,6 +870,7 @@
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Commander/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Army defence";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.strategy-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

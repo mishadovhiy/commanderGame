@@ -128,7 +128,7 @@ class LevelListSuperViewController: UIViewController {
                             $0.duration == duration
                         })
                         let isLocked = isUnlocked ? (last == selectedLevel ? (duration == .normal || isFirst ? false : true) : false) : ((isFirst && duration == .normal ? false : true))
-                        return .init(title: duration.rawValue, checkmarkCount: contains ? 1 : 0, isLocked: false)
+                        return .init(title: duration.rawValue, checkmarkCount: contains ? 1 : 0, isLocked: isLocked)
                     }), didSelect: { value in
                         self.selectedLevel.duration = .init(rawValue: value)
                     }), animated: true)
@@ -247,7 +247,7 @@ extension LevelListSuperViewController {
                     return .init(
                         title: difficulty.rawValue,
                         checkmarkCount: keys.count,
-                        isLocked: false)
+                        isLocked: isLocked)
                 }), animated: animated)
             }
         }

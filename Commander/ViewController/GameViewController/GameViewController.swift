@@ -97,7 +97,11 @@ class GameViewController: AudioViewController {
         }
         healthLabel.text = "\(lvlManager.progress.health)"
         
-        balanceLabel.text = "\(lvlManager.progress.moneyResult) \(lvlManager.progress.killedEnemies)/\(lvlManager.progress.passedEnemyCount)"
+        balanceLabel.text = "\(lvlManager.progress.moneyResult)"
+        self.enemyCountLabel.text = "\(lvlManager.progress.passedEnemyCount)/\(lvlManager.progress.killedEnemies)"
+        UIView.animate(withDuration: 0.16) {
+            self.updateWeaponsEnabled()
+        }
     }
     
     @IBAction private func speedPressed(_ sender: UIButton) {
@@ -227,6 +231,10 @@ let vc = AlertViewController.initiate(data: .init(title: "Menu", type: .collecti
 
             gameScene?.loadArmour(type: .init(rawValue: view.layer.name ?? "") ?? .basuka, position: percent)
         }
+        setInitialDraggingPosition(view: view)
+    }
+    
+    func setInitialDraggingPosition(view: UIView) {
         UIView.animate(withDuration: 0.3, delay: 0, animations: {
             view.center = self.weaponHolder ?? .zero
         }, completion: { _ in
@@ -254,6 +262,8 @@ let vc = AlertViewController.initiate(data: .init(title: "Menu", type: .collecti
 
     @IBAction private func deleteWeaponPressed(_ sender: Any) {
         play(.menu3)
+        let price = (Float(editingWeapon?.upgradePrice ?? 0) * (1350 * Float(gameScene?.lvlanager.progress.pageDivider ?? 0))) / 2
+        gameScene?.lvlanager.progress.earnedMoney += Int(price)
         editingWeapon?.removeFromParent()
         didSetEditingWeaponNode()
     }
@@ -362,6 +372,15 @@ extension GameViewController {
         }
     }
     
+    func updateWeaponsEnabled() {
+        weaponsStackView.arrangedSubviews.forEach {
+            let type = WeaponType(rawValue: $0.layer.name ?? "")
+            let canBuy = (self.gameScene?.lvlanager.progress.moneyResult ?? 0) >= (type?.upgradeStepPrice ?? 0)
+            $0.isUserInteractionEnabled = canBuy
+            $0.alpha = canBuy ? 1 : 0.5
+        }
+    }
+    
     func loadWeapons(db: DataBaseModel) {
         WeaponType.allCases.forEach {
             let i = db.upgradedWeapons[$0]?[.attackPower] ?? 0
@@ -372,7 +391,9 @@ extension GameViewController {
             image.contentMode = .scaleAspectFit
             image.translatesAutoresizingMaskIntoConstraints = false
             stack.translatesAutoresizingMaskIntoConstraints = false
-
+            stack.layer.name = $0.rawValue
+            stack.alpha = 0.5
+            stack.isUserInteractionEnabled = false
             weaponsStackView.addArrangedSubview(stack)
             stack.addArrangedSubview(image)
             image.heightAnchor.constraint(equalToConstant: 25).isActive = true

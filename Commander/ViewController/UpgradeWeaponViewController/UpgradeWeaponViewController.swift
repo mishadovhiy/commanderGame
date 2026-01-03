@@ -49,6 +49,9 @@ class UpgradeWeaponViewController: AudioViewController {
     }
     
     private func updateTableData(completion: @escaping()->()={}) {
+        if self.selectedAt == nil {
+            self.selectedAt = 0
+        }
         DispatchQueue(label: "db", qos: .userInitiated).async {
             let selectedWeapon = self.collectionData[self.selectedAt ?? 0]
             self.db = DataBaseService.db

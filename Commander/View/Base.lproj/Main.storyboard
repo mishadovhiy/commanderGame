@@ -870,14 +870,14 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserBalanceCell" id="uWS-OK-SIu" customClass="UserBalanceCell" customModule="Commander" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="50" width="178" height="65"/>
+                                                                <rect key="frame" x="0.0" y="50" width="178" height="35"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uWS-OK-SIu" id="5Ew-AB-79N">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="178" height="65"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="178" height="35"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="x3I-lz-Cy6">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="178" height="65"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="178" height="35"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="psh-Ec-IDc">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="178" height="35"/>
@@ -928,8 +928,8 @@
                                                                                         <constraint firstItem="tEE-25-HbP" firstAttribute="top" secondItem="psh-Ec-IDc" secondAttribute="top" constant="-10" id="mcI-NN-PWd"/>
                                                                                     </constraints>
                                                                                 </view>
-                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H58-ut-ndM">
-                                                                                    <rect key="frame" x="0.0" y="35" width="178" height="30"/>
+                                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H58-ut-ndM">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="178" height="0.0"/>
                                                                                     <color key="backgroundColor" red="0.6588235294117647" green="0.53725490196078429" blue="0.20392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -956,7 +956,7 @@
                                                                 </connections>
                                                             </tableViewCell>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeaponTypeCell" id="p3d-D1-dhE" customClass="WeaponTypeCell" customModule="Commander" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="115" width="178" height="64"/>
+                                                                <rect key="frame" x="0.0" y="85" width="178" height="64"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="p3d-D1-dhE" id="EwL-0H-cvB">
                                                                     <rect key="frame" x="0.0" y="0.0" width="178" height="64"/>
@@ -981,7 +981,7 @@
                                                                 </connections>
                                                             </tableViewCell>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WeaponBuyCell" id="5z9-6p-Rr8" customClass="WeaponBuyCell" customModule="Commander" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="179" width="178" height="66"/>
+                                                                <rect key="frame" x="0.0" y="149" width="178" height="66"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5z9-6p-Rr8" id="FPU-g6-kBT">
                                                                     <rect key="frame" x="0.0" y="0.0" width="178" height="66"/>

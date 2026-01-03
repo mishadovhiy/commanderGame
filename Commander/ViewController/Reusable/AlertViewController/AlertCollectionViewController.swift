@@ -49,8 +49,8 @@ extension AlertCollectionViewController: UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let array = dataModel?.type.data as? [AlertModel.TitleCellModel] {
-            parentVC?.buttonModelPressed(array[indexPath.row].button)
+        if let data = dataModel?.type.data[indexPath.row] as? AlertModel.TitleCellModel {
+            parentVC?.buttonModelPressed(data.button)
 
         }
     }

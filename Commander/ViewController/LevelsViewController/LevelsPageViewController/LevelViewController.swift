@@ -43,7 +43,7 @@ class LevelViewController: UIViewController {
             let current = Int(self.data.title) ?? 0
             let isUlocked = last + 1 >= current
             DispatchQueue.main.async {
-//                self.view.isUserInteractionEnabled = isUlocked
+                self.view.isUserInteractionEnabled = isUlocked
                 if self.parentVC?.lockedLevelsView?.isHidden != isUlocked {
                     UIView.animate(withDuration: 0.3) {
                         self.parentVC?.lockedLevelsView?.isHidden = isUlocked
