@@ -239,6 +239,9 @@ let vc = AlertViewController.initiate(data: .init(title: "Menu", type: .collecti
         view.isUserInteractionEnabled = false
         let percent = positionPercent(view)
         if gameScene?.canPlace(at: percent) ?? false {
+            let weapon = WeaponType(rawValue: view.layer.name ?? "")
+            gameScene?.lvlanager.progress.earnedMoney -= ((weapon?.upgradeStepPrice ?? 0) * Int((gameScene?.lvlanager.progress.pageDivider ?? 0) * 1350))
+
             gameScene?.loadArmour(type: .init(rawValue: view.layer.name ?? "") ?? .basuka, position: percent)
         }
         UIView.animate(withDuration: 0.3, delay: 0, animations: {
@@ -257,10 +260,13 @@ let vc = AlertViewController.initiate(data: .init(title: "Menu", type: .collecti
     
     @IBAction private func upgradeWeaponPressed(_ sender: Any) {
         play(.coins)
-        print((editingWeapon?.upgrade?.index ?? -1) + 1, " yh5rtegfd")
-        editingWeapon?.upgrade = .allCases[(editingWeapon?.upgrade?.index ?? -1) + 1]
-        editingWeapon?.isEditing = false
-        didSetEditingWeaponNode()
+        let price = editingWeapon?.upgradePrice ?? 0
+        if gameScene?.lvlanager.progress.moneyResult ?? 0 >= price  {
+            gameScene?.lvlanager.progress.earnedMoney -= (price * Int((gameScene?.lvlanager.progress.pageDivider ?? 0) * 1350))
+            editingWeapon?.upgrade = .allCases[(editingWeapon?.upgrade?.index ?? -1) + 1]
+            editingWeapon?.isEditing = false
+            didSetEditingWeaponNode()
+        }
     }
 
     @IBAction private func deleteWeaponPressed(_ sender: Any) {
