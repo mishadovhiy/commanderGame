@@ -8,14 +8,14 @@
 import Foundation
 
 struct DataBaseModel: Codable {
-    private var _upgradedWeaponsss: [WeaponType: [WeaponUpgradeType: Int]]? = [:]
+    private var _upgradedWeaponssss: [WeaponType: [WeaponUpgradeType: Int]]? = [:]
     
     var upgradedWeapons: [WeaponType: [WeaponUpgradeType: Int]] {
         get {
-            _upgradedWeaponsss ?? [:]
+            _upgradedWeaponssss ?? [:]
         }
         set {
-            _upgradedWeaponsss = newValue
+            _upgradedWeaponssss = newValue
         }
     }
     var completedLevels: [LevelModel: GameProgress] = [:]

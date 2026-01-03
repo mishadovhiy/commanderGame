@@ -145,15 +145,13 @@ class GameScene: SKScene {
                    let weapon = $0.parent as? WeaponNode
                 {
                     weapon.isEditing.toggle()
-                    gameVC?.didSetEditingWeaponNode()
-
+                    self.gameVC?.didSetEditingWeaponNode()
                     found = true
                 }
             })
         })
-        if !found {
-            gameVC?.didSetEditingWeaponNode()
-        }
+
+        
     }
     
     func loadArmour(type: WeaponType, position: CGPoint) {

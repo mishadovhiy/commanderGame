@@ -272,7 +272,7 @@ let vc = AlertViewController.initiate(data: .init(title: "Menu", type: .collecti
     public func didSetEditingWeaponNode() {
         play(.menu1)
         self.view.isUserInteractionEnabled = false
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.15, animations: {
             self.editingWeaponImageView.superview?.superview?.isHidden = self.editingWeapon == nil
             if let type = self.editingWeapon?.type {
                 DispatchQueue(label: "db", qos: .userInitiated).async {

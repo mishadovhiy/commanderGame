@@ -62,6 +62,13 @@ extension [[GameBuilderModel.EnemyRound]] {
                 .init(type: $0, count: count / enemies.count)
             })
         }
+//        return (0..<10).compactMap({ _ in
+//            EnemyType.allCases.sorted(by: {
+//                $0.health <= $1.health
+//            }).compactMap({
+//                .init(type: $0, count: 10)
+//            })
+//        })
     }
     
 }

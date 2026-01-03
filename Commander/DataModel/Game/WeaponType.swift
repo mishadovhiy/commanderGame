@@ -16,15 +16,22 @@ enum WeaponType: String, Codable, CaseIterable {
     case granata
     
     var distance: Int {
-        100
+        switch self {
+        case .pistol:
+            80
+        case .basuka:
+            110
+        case .granata:
+            160
+        }
     }
     
     var shootingDelay: TimeInterval {
         switch self {
-        case .basuka:
-            1.2
         case .pistol:
             0.2
+        case .basuka:
+            1.2
         case .granata:
             0.5
         }
@@ -47,18 +54,18 @@ enum WeaponType: String, Codable, CaseIterable {
     
     var damage: Int {
         switch self {
+        case .pistol:
+            10
+        case .granata:
+            90
 //        case .fire:
 //            5
         case .basuka:
-            70
+            450
 //        case .flight:
 //            40
 //        case .stopper:
 //            1
-        case .pistol:
-            15
-        case .granata:
-            40
         }
     }
     
@@ -71,7 +78,9 @@ enum WeaponType: String, Codable, CaseIterable {
     
     var upgradeStepPrice: Int {
         switch self {
-        default: 50
+        case .pistol: 50
+        case .granata: 120
+        case .basuka: 200
         }
     }
     
@@ -94,19 +103,12 @@ enum WeaponType: String, Codable, CaseIterable {
     func upgradedIconComponent(db upgrade: Int) -> Int {
         let max = maxIconsUpgrades
         let upgradePercent = CGFloat(upgrade) / CGFloat(maxUpgradeLevel)
-        if self == .basuka {
-            print(upgradePercent, " yhrtgefds ")
-        }
         let percent = Int(upgradePercent * CGFloat(max))
         if percent == 0 {
             return 1
         }
         if percent >= maxIconsUpgrades {
             return maxIconsUpgrades
-        }
-        if self == .basuka {
-            print(percent, " rtegrfwdasx")
-
         }
         return percent
     }

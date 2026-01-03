@@ -59,9 +59,9 @@ enum EnemyType: String, CaseIterable {
     var speed: Int {
         switch self {
         case .soldeir:
-            15
+            20
         case .flight:
-            13
+            15
         case .militaryFlightSimple:
             8
         case .mulutaryFlightComplex:
@@ -79,7 +79,7 @@ enum EnemyType: String, CaseIterable {
         case .vehicle:
             7
         case .fastVehicle:
-            25
+            30
         case .armouredVehicle:
             10
         case .flightVehicle:

@@ -22,6 +22,7 @@ class WeaponNode: SKSpriteNode {
         didSet {
             print("upgradeChanged ", upgrade)
             self.size = .init(width: distance, height: distance)
+            self.updatePhysicsBody()
         }
     }
     var upgradePrice: Int {
@@ -50,6 +51,13 @@ class WeaponNode: SKSpriteNode {
         })
     }
       
+    private func updatePhysicsBody() {
+        self.physicsBody = .init(rectangleOf: self.size)
+        self.physicsBody?.categoryBitMask = PhysicsCategory.weapon
+        self.physicsBody?.contactTestBitMask = PhysicsCategory.enemy
+        self.physicsBody?.collisionBitMask = 0
+        self.physicsBody?.affectedByGravity = false
+    }
     
     init(type: WeaponType, db: DataBaseModel, canPlaySound: Bool) {
         self.type = type
@@ -60,11 +68,7 @@ class WeaponNode: SKSpriteNode {
         self.size = .init(width: distance, height: distance)
         self.upgrade = nil
         self.name = .init(describing: Self.self)
-        self.physicsBody = .init(rectangleOf: self.size)
-        self.physicsBody?.categoryBitMask = PhysicsCategory.weapon
-        self.physicsBody?.contactTestBitMask = PhysicsCategory.enemy
-        self.physicsBody?.collisionBitMask = 0
-        self.physicsBody?.affectedByGravity = false
+        self.updatePhysicsBody()
         let componentName = db.upgradedWeapons[type]?[.attackPower]
         let imageSize = type.textureSize
         let child = SKSpriteNode(texture: .init(imageNamed: type.rawValue + "/\(type.upgradedIconComponent(db: componentName ?? 0))"), color: .clear, size: .init(width: imageSize.width, height: imageSize.height))

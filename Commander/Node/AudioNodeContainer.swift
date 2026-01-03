@@ -52,7 +52,6 @@ class AudioContainerNode: SKNode {
     }
     
     func updateVolume(canPlay: Bool) {
-        print(canPlay, " gfeedwdsc ")
         audioNodes.forEach { node in
             let volume = (AudioFileNameType.init(rawValue: node.name ?? "") ?? .coins).volume
             node.avAudioNode?.engine?.mainMixerNode.outputVolume = canPlay ? volume : .zero
