@@ -12,9 +12,10 @@ class EnemyNode: SKSpriteNode {
     var health: Int
     var totalHealth: Int
     
-    init(type: EnemyType, builder: GameBuilderModel, canPlaySound: Bool) {
+    init(type: EnemyType, builder: GameBuilderModel, level: Int, canPlaySound: Bool) {
         self.type = type
-        let level = Float(builder.enemyHealthMult)
+        let levelPercent = Float(level) / Float(LevelPagesBuilder.maxPageCount)
+        let level = Float(builder.enemyHealthMult) * ((levelPercent * 50) + 10)
         self.health = (type.health * Int(level))
         self.totalHealth = health
         super.init(texture: .init(imageNamed: "enemy/" + type.component.rawValue + "/1"), color: .clear, size: CGSize(width: 20, height: 20))

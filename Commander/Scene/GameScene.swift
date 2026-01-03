@@ -24,11 +24,13 @@ class GameScene: SKScene {
     private var canLoadRound = true
     var loadingRound = false {
         didSet {
-            if loadingRound {
-                DispatchQueue.main.async {
-                    self.gameVC?.loadingRoundTitle.text = "Loading round # \(self.lvlanager.currentRound)\n(\(self.currentRoundCount))"
-                    UIView.animate(withDuration: 0.3) {
-                        self.gameVC?.loadingRoundStackView.isHidden = !self.loadingRound
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.3) {
+                    self.gameVC?.loadingRoundStackView.isHidden = !self.loadingRound
+                }
+                if self.loadingRound {
+                    DispatchQueue.main.async {
+                        self.gameVC?.loadingRoundTitle.text = "Loading round # \(self.lvlanager.progress.currentRound)\n(\(self.currentRoundCount))"
                     }
                 }
             }
@@ -183,12 +185,18 @@ class GameScene: SKScene {
         }
     }
     
+    func saveScore() {
+        let prize = Float(lvlanager.lvlBuilder.prize) * (Float(lvlanager.progress.score) / 100)
+        let balance = Int(KeychainService.getToken(forKey: .balance) ?? "") ?? 0
+        let _ = KeychainService.saveToken("\(balance + Int(prize))", forKey: .balance)
+    }
+    
     func didCompleteLevel() {
         if levelCompleted {
             return
         }
         levelCompleted = true
-        let levelManager = self.lvlanager ?? .init(.test)
+        let levelManager = self.lvlanager!
         DispatchQueue(label: "db", qos: .userInitiated).async {
             let oldProgress = DataBaseService.db.completedLevels[levelManager.lvlModel]
             if levelManager.progress.score >= oldProgress?.score ?? 0 {
@@ -196,6 +204,7 @@ class GameScene: SKScene {
             }
             #warning("save new balance to keychain")
             print("game completed ", levelManager.lvlModel)
+            self.saveScore()
             DispatchQueue.main.async {
                 self.gameVC?.play(.success2)
 
@@ -212,14 +221,14 @@ class GameScene: SKScene {
         if loadingRound {
             return
         }
-        if lvlanager.lvlBuilder.rounds <= lvlanager.currentRound {
-            print(lvlanager.currentRound, "game completed ", lvlanager.lvlBuilder.rounds)
+        if lvlanager.lvlBuilder.rounds <= lvlanager.progress.currentRound {
+            print(lvlanager.progress.currentRound, "game completed ", lvlanager.lvlBuilder.rounds)
             if enemiesForce.isEmpty {
                 didCompleteLevel()
             }
             return
         }
-        print(lvlanager.currentRound, " tefrwdsax ")
+        print(lvlanager.progress.currentRound, " tefrwdsax ")
 //        if lvlanager.lvlBuilder.enemyPerRound.count <= lvlanager.currentRound {
 //            print("rfsdaefr")
 //            return
@@ -233,7 +242,7 @@ class GameScene: SKScene {
         }
         
         let totalCount = lvlanager.lvlBuilder
-            .enemyPerRound[lvlanager.currentRound].reduce(0) { partialResult, round in
+            .enemyPerRound[lvlanager.progress.currentRound].reduce(0) { partialResult, round in
                 return round.count + partialResult
             }
         if totalCount >= 1 {
@@ -250,7 +259,7 @@ class GameScene: SKScene {
     func performLoadRaund(_ totalNewEnemiesCount: Int) {
         var i = 0
         lvlanager.lvlBuilder
-            .enemyPerRound[lvlanager.currentRound]
+            .enemyPerRound[lvlanager.progress.currentRound]
             .forEach { type in
                 (0..<type.count).forEach { _ in
                     self.loadEnemy(type.type, i: i, totalInRound: totalNewEnemiesCount)
@@ -258,13 +267,13 @@ class GameScene: SKScene {
                 }
                
         }
-        lvlanager.currentRound += 1
+        lvlanager.progress.currentRound += 1
         if lvlanager.lvlModel.duration == .infinityRounds {
             lvlanager.progress.totalEnemies += totalNewEnemiesCount
         }
-        if lvlanager.lvlModel.duration == .infinityRounds && lvlanager.currentRound >= lvlanager.lvlBuilder.rounds - 1 {
-            lvlanager.roundRepeated += lvlanager.currentRound
-            lvlanager.currentRound = 0
+        if lvlanager.lvlModel.duration == .infinityRounds && lvlanager.progress.currentRound >= lvlanager.lvlBuilder.rounds - 1 {
+            lvlanager.progress.roundRepeated += lvlanager.progress.currentRound
+            lvlanager.progress.currentRound = 0
         }
         loadingRound = false
     }
@@ -302,7 +311,7 @@ fileprivate extension GameScene {
         guard let path = enemyGround?.path else {
             return
         }
-        let node = EnemyNode(type: type, builder: lvlanager.lvlBuilder, canPlaySound: canPlaySound)
+        let node = EnemyNode(type: type, builder: lvlanager.lvlBuilder, level: Int(lvlanager.lvlModel.levelPage) ?? 0, canPlaySound: canPlaySound)
         self.addChild(node)
         node.run(in: path, i: CGFloat(i), appeared: {
             if i + 1 >= totalInRound {
@@ -316,6 +325,9 @@ fileprivate extension GameScene {
             if self.lvlanager.progress.health <= 0 {
                 if self.levelCompleted {
                     return
+                }
+                if self.lvlanager.lvlModel.duration != .normal {
+                    self.saveScore()
                 }
                 self.levelCompleted = true
                 self.gameVC?.play(.loose)

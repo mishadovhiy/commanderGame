@@ -14,7 +14,9 @@ class WeaponNode: SKSpriteNode {
     private let initialDistance: Int
     let totalUpgrade: [WeaponUpgradeType: Int]
     var damage: Int {
-        initialDamage * ((upgrade?.index ?? 0) + 1)
+        let upgradeIndex = (upgrade?.index ?? 0) + 1
+        let staticUpgrade = (totalUpgrade[.attackPower] ?? 0) + 1
+        return (initialDamage * upgradeIndex) * staticUpgrade
     }
     var upgrade: Difficulty? = nil {
         didSet {

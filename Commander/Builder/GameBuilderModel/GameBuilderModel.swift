@@ -19,7 +19,7 @@ struct GameBuilderModel {
     var rounds: Int {
         enemyPerRound.count
     }
-    
+    let prize: Int
     init(lvlModel: LevelModel) {
         enemyGraundPosition = Self.enemyGraund(lvlModel.level)
         enemyPerRound = .enemyList(lvlModel.level, page: lvlModel.levelPage)
@@ -28,6 +28,7 @@ struct GameBuilderModel {
         self.startingMoney = 100
         self.blockers = .allData(lvlModel.level)
         appearence = .gameLevel(lvlModel.level) ?? .init()
+        self.prize = Self.prize(lvlModel.level, page: lvlModel.levelPage, difficulty: lvlModel.difficulty ?? .easy)
     }
 }
 
@@ -39,17 +40,27 @@ struct GameBuilderMiniModel {
     let startingMoney: Int
     
     var rounds: Int
-    
+    let prize: Int
     init(data: GameBuilderModel) {
         health = data.health
         enemyHealthMult = data.enemyHealthMult
         startingMoney = data.startingMoney
         rounds = data.rounds
+        prize = data.prize
     }
 }
 
 fileprivate
 extension GameBuilderModel {
+    static func prize(_ lvl: String, page: String, difficulty: Difficulty) -> Int {
+        let level = Int(lvl) ?? 0
+        let page = Int(page) ?? 0
+        let pagePercent = Float(page) / Float(LevelPagesBuilder.maxPageCount)
+        let lvlNumberInPage = level - page * LevelPagesBuilder.levelMultiplier(page: page)
+        let stepLvl: Float = 50 * Float(lvlNumberInPage)
+        let stepPage: Float = 100 * Float(pagePercent)
+        return 350 + ((Int(stepLvl) + Int(stepPage)) * (difficulty.index + 1))
+    }
     
     static func health(_ lvl: String) -> Int {
         switch lvl {

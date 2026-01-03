@@ -9,6 +9,7 @@ import UIKit
 
 class PageLevelTableCell: UITableViewCell {
 
+    @IBOutlet private weak var prizeLabel: UILabel!
     @IBOutlet private weak var progressView: UIProgressView!
     @IBOutlet private weak var progressLabel: UILabel!
     @IBOutlet private weak var startingMoneyLabel: UILabel!
@@ -36,6 +37,7 @@ class PageLevelTableCell: UITableViewCell {
                 .foregroundColor: UIColor.white.withAlphaComponent(0.4)
             ]))
         }
+        prizeLabel.text = "\(data.builder?.prize ?? 0)"
         levelLabel.attributedText = levelTitle
         levelLabel.numberOfLines = 0
         levelLabel.isHidden = data.pageModel.level.isEmpty

@@ -131,7 +131,6 @@ class LevelViewController: UIViewController {
             print(i, " ", round, " rteds ", round.count)
             i += 1
         }
-        print(" hyrtegfesda ", builder.rounds)
         view.subviews.forEach({
             if $0.layer.name == "levelButton" {
                 let background = $0.subviews.first(where: {

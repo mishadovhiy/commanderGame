@@ -8,17 +8,27 @@
 import Foundation
 
 struct DataBaseModel: Codable {
-    private var _upgradedWeapons: [WeaponType: [WeaponUpgradeType: Int]]? = [:]
+    private var _upgradedWeaponsss: [WeaponType: [WeaponUpgradeType: Int]]? = [:]
     
     var upgradedWeapons: [WeaponType: [WeaponUpgradeType: Int]] {
         get {
-            _upgradedWeapons ?? [:]
+            _upgradedWeaponsss ?? [:]
         }
         set {
-            _upgradedWeapons = newValue
+            _upgradedWeaponsss = newValue
         }
     }
     var completedLevels: [LevelModel: GameProgress] = [:]
+    
+    private var _progress: [LevelModel: UncomplitedProgress]? = [:]
+    var progress: [LevelModel: UncomplitedProgress] {
+        get {
+            _progress ?? [:]
+        }
+        set {
+            _progress = newValue
+        }
+    }
     
     var settings: Settings = .init()
 }

@@ -22,11 +22,20 @@ struct LevelPagesBuilder: Equatable {
     }
     
     static let maxPageCount: Int = 4
+    
     static func levelCount(per page: Int) -> Int {
         switch page {
         case 1, 3: 11
             
         default: 12
+        }
+    }
+    
+    static func levelMultiplier(page: Int) -> Int {
+        switch page {
+        case 1:
+            10
+        default: 100
         }
     }
 }

@@ -14,8 +14,14 @@ struct GameProgress: Codable {
     var totalEnemies: Int = 0
     var health: Int = 0
     
+    var currentRound: Int = 0
+    var roundRepeated: Int = 0
+    
+    let pageDivider: CGFloat
+    
     var moneyResult: Int {
-        let float = CGFloat(earnedMoney) / 20
+        let divider = pageDivider * 1350
+        let float = CGFloat(earnedMoney) / divider
         return Int(float)
     }
     
@@ -29,15 +35,13 @@ struct LevelManager {
     let lvlBuilder: GameBuilderModel
     
 #warning("calc current balance here")
-    var currentRound: Int = 0
-    var roundRepeated: Int = 0
-    var progress: GameProgress = .init()
-    var startTime: Date = .init()
+    var progress: GameProgress
     
-    init(_ lvl: LevelModel) {
+    init(_ lvl: LevelModel, dbProgress: GameProgress? = nil) {
         self.lvlModel = lvl
         self.lvlBuilder = .init(lvlModel: lvl)
-        print(lvlBuilder.enemyPerRound, " yhrtegrfesda ")
+        self.progress = dbProgress ?? .init(pageDivider: CGFloat(Int(lvl.levelPage) ?? 0) / CGFloat(LevelPagesBuilder.maxPageCount))
+        print(lvlBuilder.enemyPerRound, " yhrtegrfesda ", progress.pageDivider)
         progress.totalEnemies = lvlBuilder.enemyPerRound.reduce(0, { result, element in
             return result + element.reduce(0, { partialResult, element2 in
                 return partialResult + element2.count
@@ -48,10 +52,13 @@ struct LevelManager {
         } else {
             progress.health = lvlBuilder.health
         }
-        progress.earnedMoney = lvlBuilder.startingMoney
+        progress.earnedMoney = Int(CGFloat(lvlBuilder.startingMoney) * (CGFloat(progress.pageDivider) * 1350))
     }
-    
-    //hits -> damage
-    //enemyKilled { //saves money
-    //enemy passed
+}
+
+
+struct UncomplitedProgress: Codable {
+    let gameProgress: GameProgress
+    let weapons: [WeaponType: CGPoint]
+    let weaponUpdates: [WeaponType: WeaponUpgradeType]
 }

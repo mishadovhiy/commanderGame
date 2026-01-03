@@ -9,6 +9,7 @@ import SpriteKit
 
 class GameViewController: AudioViewController {
     
+    @IBOutlet weak var enemyCountLabel: UILabel!
     @IBOutlet weak var loadingRoundStackView: UIStackView!
     @IBOutlet weak var loadingRoundTitle: UILabel!
     @IBOutlet weak var healthLabel: UILabel!
@@ -90,13 +91,13 @@ class GameViewController: AudioViewController {
     
     func progressUpdated(lvlManager: LevelManager) {
         if lvlManager.lvlModel.duration == .infinityRounds {
-            roundLabel.text = "\(lvlManager.currentRound + lvlManager.roundRepeated)"
+            roundLabel.text = "\(lvlManager.progress.currentRound + lvlManager.progress.roundRepeated)"
         } else {
-            roundLabel.text = "\(lvlManager.currentRound)/\(lvlManager.lvlBuilder.rounds)"
+            roundLabel.text = "\(lvlManager.progress.currentRound)/\(lvlManager.lvlBuilder.rounds)"
         }
         healthLabel.text = "\(lvlManager.progress.health)"
         
-        balanceLabel.text = "\(lvlManager.progress.moneyResult). \(lvlManager.progress.killedEnemies)/\(lvlManager.progress.totalEnemies) = \(lvlManager.progress.score)"
+        balanceLabel.text = "\(lvlManager.progress.moneyResult) \(lvlManager.progress.killedEnemies)/\(lvlManager.progress.passedEnemyCount)"
     }
     
     @IBAction private func speedPressed(_ sender: UIButton) {

@@ -37,7 +37,7 @@ class AudioViewController: BaseViewController {
             let dict = try? db.dictionary() ?? [:]
             DispatchQueue.main.async {
                 type(of: db).CodingKeys.allCases.forEach { key in
-                    let value = dict?[key.rawValue] as? Float ?? 0
+                    let value = dict?[key.rawValue] as? CGFloat ?? 0
                     self.setSoundEnabled(value != 0, type: key)
                 }
             }
@@ -61,9 +61,6 @@ class AudioViewController: BaseViewController {
             $0.url?.lastPathComponent.contains(name.rawValue) ?? false
         }) else {
             print("audio file names ", name.rawValue, " has not been initialised")
-            audioPlayers.forEach {
-                print($0.url, "gterfsd ", $0.url?.lastPathComponent)
-            }
             return
         }
         if player.volume == 0 {

@@ -127,7 +127,8 @@ class LevelListSuperViewController: UIViewController {
                         let contains = completedKeys.contains(where: {
                             $0.duration == duration
                         })
-                        return .init(title: duration.rawValue, checkmarkCount: contains ? 1 : 0, isLocked: isUnlocked ? (last == selectedLevel ? (duration == .normal || isFirst ? false : true) : false) : ((isFirst && duration == .normal ? false : true)))
+                        let isLocked = isUnlocked ? (last == selectedLevel ? (duration == .normal || isFirst ? false : true) : false) : ((isFirst && duration == .normal ? false : true))
+                        return .init(title: duration.rawValue, checkmarkCount: contains ? 1 : 0, isLocked: false)
                     }), didSelect: { value in
                         self.selectedLevel.duration = .init(rawValue: value)
                     }), animated: true)
@@ -238,6 +239,7 @@ extension LevelListSuperViewController {
                 
                 let isFirst = self.levelPageVC?.currentPageData.levels.first?.title == self.selectedLevel.level
                 let isUnlocked = ((self.lastCompletedLevel ?? 0) + 1 >= (Int(self.selectedLevel.level) ?? 0)) || isFirst
+                let isLocked = !isUnlocked
                 vc?.updateData(Difficulty.allCases.compactMap({ difficulty in
                     let keys = completedKeys.filter({
                         $0.difficulty == difficulty
@@ -245,7 +247,7 @@ extension LevelListSuperViewController {
                     return .init(
                         title: difficulty.rawValue,
                         checkmarkCount: keys.count,
-                        isLocked: !isUnlocked)
+                        isLocked: false)
                 }), animated: animated)
             }
         }

@@ -98,6 +98,9 @@ class UpgradeWeaponViewController: AudioViewController {
             let selectedWeapon = self.collectionData[self.selectedAt ?? 0]
             let balance = KeychainService.getToken(forKey: .balance) ?? ""
             let lvl = DataBaseService.db.upgradedWeapons[selectedWeapon]?[type] ?? 0
+            if lvl >= selectedWeapon.maxUpgradeLevel {
+                return
+            }
             let price = selectedWeapon.upgradeStepPrice * (lvl + 1)
             
             if Int(balance) ?? 0 >= price {
