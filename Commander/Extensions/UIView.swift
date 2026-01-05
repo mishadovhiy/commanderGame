@@ -221,6 +221,16 @@ extension UIViewController {
             self.present(vc, animated: true, completion: completion)
         }
     }
+    
+    func topPresentingViewController<T: UIViewController> (_ type: T.Type) -> T? {
+        if let vc = self.presentedViewController {
+            if let vc = vc as? T {
+                return vc
+            }
+            return vc.topPresentingViewController(type)
+        }
+        return nil
+    }
 }
 
 extension UIApplication {

@@ -28,7 +28,6 @@ class UpgradeWeaponViewController: AudioViewController {
         tableView.backgroundColor = ContainerMaskedView.Constants.primaryBorderColor
         tableView.superview?.backgroundColor = ContainerMaskedView.Constants.primaryBorderColor
         self.view.backgroundColor = .dark
-        updateTableData()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         loadCellsSeparetor()
         collectionVIew.layer.borderWidth = 2
@@ -39,6 +38,11 @@ class UpgradeWeaponViewController: AudioViewController {
         collectionVIew.superview?.layer.borderColor = UIColor.dark.cgColor
         //ContainerMaskedView.Constants.primaryBorderColor.cgColor
         
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateTableData()
     }
     
     override func viewDidAppear(_ animated: Bool) {

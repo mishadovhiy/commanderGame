@@ -25,7 +25,10 @@ class LevelViewController: UIViewController {
     }
     
     private var parentVC: LevelListSuperViewController? {
-        parent?.parent as? LevelListSuperViewController
+//        if !Thread.isMainThread {
+//            fatalError()
+//        }
+        return parent?.parent as? LevelListSuperViewController
     }
     
     override func viewDidLayoutSubviews() {
@@ -36,10 +39,10 @@ class LevelViewController: UIViewController {
     }
     
     func setCompletedLevels() {
+        let last = self.parentVC?.completedLevels.sorted(by: {$0 >= $1}).last ?? 0
         DispatchQueue(label: "db", qos: .userInitiated).async {
             let db = DataBaseService.db.completedLevels
             let keys = Array(db.keys)
-            let last = self.parentVC?.completedLevels.sorted(by: {$0 >= $1}).last ?? 0
             let current = Int(self.data.title) ?? 0
             let isUlocked = last + 1 >= current
             DispatchQueue.main.async {

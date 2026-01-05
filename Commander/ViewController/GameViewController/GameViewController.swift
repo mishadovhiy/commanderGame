@@ -54,11 +54,48 @@ class GameViewController: AudioViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        saveProgress {
+            self.gameScene?.removeAllActions()
+            self.gameScene?.removeAllChildren()
+            self.gameScene?.removeFromParent()
+            self.view.removeFromSuperview()
+        }
         super.viewDidDisappear(animated)
-        gameScene?.removeAllActions()
-        gameScene?.removeAllChildren()
-        gameScene?.removeFromParent()
-        view.removeFromSuperview()
+    }
+    
+    func saveProgress(completed:@escaping()->() = {}) {
+        let size = view.frame.size
+
+        guard let scene = gameScene,
+              let lvl = gameScene?.lvlanager.lvlModel,
+              let progress = gameScene?.lvlanager.progress
+        else {
+            return
+        }
+        let result: UncomplitedProgress = .init(
+            gameProgress: progress,
+            weapons: Dictionary(uniqueKeysWithValues: gameScene!.weapons.map({
+                let x = (($0.position.x + (size.width / 2)) / size.width)
+                let y = (($0.position.y + (size.height / 2)) / size.height)
+print("sfdsfdf ", $0.position.x)
+                return ($0.type.rawValue + ($0.name ?? ""), CGPoint(x: x, y: y))
+            })),
+            weaponUpdates: Dictionary(uniqueKeysWithValues: gameScene!.weapons.map({
+                ($0.type.rawValue + ($0.name ?? ""), $0.upgrade)
+            })))
+        DispatchQueue(label: "db", qos: .userInitiated).async {
+            DataBaseService.db.progress
+                .updateValue(result, forKey: lvl)
+            DispatchQueue.main.async {
+                completed()
+            }
+        }
+    }
+    
+    func applicationWillResignActive() {
+        print("rfwesdsf")
+        
+        saveProgress()
     }
     
     override func soundDidChange() {
@@ -362,7 +399,7 @@ extension GameViewController {
     
     func loadScene(db: DataBaseModel) {
         if let view = view as! SKView? {
-            let scene = GameScene.configure(lvl: .init(self.selectedLevel), page: self.page, canPlaySound: db.settings.sound.voluem.gameSound != 0)
+            let scene = GameScene.configure(lvl: .init(self.selectedLevel), page: self.page, progress: db.progress[self.selectedLevel], canPlaySound: db.settings.sound.voluem.gameSound != 0)
             scene.scaleMode = .aspectFill
             
             view.presentScene(scene, transition: .doorsCloseHorizontal(withDuration: 0.6))

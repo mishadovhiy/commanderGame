@@ -53,4 +53,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         self.window = window
     }
+    
+    @available(iOS 13.0, *)
+    func sceneWillResignActive(_ scene: UIScene) {
+        let gameVC = UIApplication.shared.activeWindow?.rootViewController?.topPresentingViewController(GameViewController.self)
+        gameVC?.applicationWillResignActive()
+    }
 }

@@ -45,6 +45,7 @@
 		8235D1942F002D7700D48EB0 /* weaponUpgrade.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8235D1872F002D7700D48EB0 /* weaponUpgrade.m4a */; };
 		8235D1952F002D7700D48EB0 /* success1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8235D1852F002D7700D48EB0 /* success1.m4a */; };
 		8235D1972F007C1600D48EB0 /* loose.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8235D1962F007C1600D48EB0 /* loose.m4a */; };
+		8239D9472F0AC00C007C88E6 /* IcloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8239D9462F0AC00C007C88E6 /* IcloudService.swift */; };
 		8260E23D2EED37BF002E29C0 /* LevelListSuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E23C2EED37BF002E29C0 /* LevelListSuperViewController.swift */; };
 		8260E23F2EED381A002E29C0 /* LevelsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E23E2EED3819002E29C0 /* LevelsPageViewController.swift */; };
 		8260E2412EED383E002E29C0 /* LevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8260E2402EED383E002E29C0 /* LevelViewController.swift */; };
@@ -130,6 +131,7 @@
 		8235D1862F002D7700D48EB0 /* success2.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = success2.m4a; sourceTree = "<group>"; };
 		8235D1872F002D7700D48EB0 /* weaponUpgrade.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = weaponUpgrade.m4a; sourceTree = "<group>"; };
 		8235D1962F007C1600D48EB0 /* loose.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = loose.m4a; sourceTree = "<group>"; };
+		8239D9462F0AC00C007C88E6 /* IcloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IcloudService.swift; sourceTree = "<group>"; };
 		8260E23C2EED37BF002E29C0 /* LevelListSuperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelListSuperViewController.swift; sourceTree = "<group>"; };
 		8260E23E2EED3819002E29C0 /* LevelsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsPageViewController.swift; sourceTree = "<group>"; };
 		8260E2402EED383E002E29C0 /* LevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewController.swift; sourceTree = "<group>"; };
@@ -508,6 +510,7 @@
 			children = (
 				82C637D62EEF4B6C0064F917 /* KeychainService.swift */,
 				82C637DA2EEF4C360064F917 /* DataBaseService.swift */,
+				8239D9462F0AC00C007C88E6 /* IcloudService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -656,6 +659,7 @@
 				8260E23F2EED381A002E29C0 /* LevelsPageViewController.swift in Sources */,
 				8289ABB42EF3D60300F78DD0 /* DestinationOutMaskedView.swift in Sources */,
 				82C637D92EEF4B980064F917 /* Keys.swift in Sources */,
+				8239D9472F0AC00C007C88E6 /* IcloudService.swift in Sources */,
 				82C637CB2EEF4A2D0064F917 /* DataBaseModel.swift in Sources */,
 				823497F52EEB5C0200F82871 /* LevelManager.swift in Sources */,
 				829CADCB2EFA8E6800548DB1 /* AlertSegmentedTableCell.swift in Sources */,

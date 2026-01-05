@@ -59,6 +59,6 @@ struct LevelManager {
 
 struct UncomplitedProgress: Codable {
     let gameProgress: GameProgress
-    let weapons: [WeaponType: CGPoint]
-    let weaponUpdates: [WeaponType: WeaponUpgradeType]
+    let weapons: [String: CGPoint]
+    let weaponUpdates: [String: Difficulty?]
 }

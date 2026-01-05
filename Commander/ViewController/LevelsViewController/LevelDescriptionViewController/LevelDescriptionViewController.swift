@@ -32,9 +32,6 @@ class LevelDescriptionViewController: UIViewController {
         db: DataBaseModel,
         allKeys: [LevelModel]
     ) -> [CompletedLevelTableCell.ContentDataModel] {
-        guard let selectedLevel = parentLevelListVC?.selectedLevel else {
-            return []
-        }
         let completedLevels = Set(allKeys.compactMap({
             $0.level
         }))
@@ -112,8 +109,10 @@ class LevelDescriptionViewController: UIViewController {
         if self.view == nil {
             return
         }
+        let selectedLevel = self.parentLevelListVC?.selectedLevel ?? .init()
+        let levelBuilder = self.parentLevelListVC?.levelPageVC?.currentPageData
+
         DispatchQueue(label: "db", qos: .userInitiated).async {
-            let selectedLevel = self.parentLevelListVC?.selectedLevel ?? .init()
             let dataBase = DataBaseService.db
             let allLevelsForPageKeys = Array(dataBase.completedLevels.keys.filter({
                 ($0.levelPage) == selectedLevel.levelPage
@@ -123,7 +122,6 @@ class LevelDescriptionViewController: UIViewController {
             }))
             self.levelsTableData.removeAll()
             let builder = GameBuilderModel(lvlModel: selectedLevel)
-            let levelBuilder = self.parentLevelListVC?.levelPageVC?.currentPageData
             let completedLevels = Set(allLevelsForPageKeys.compactMap({
                 $0.level
             }))

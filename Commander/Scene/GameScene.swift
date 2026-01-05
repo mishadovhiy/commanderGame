@@ -11,7 +11,8 @@ import GameplayKit
 class GameScene: SKScene {
     var page: LevelPagesBuilder!
     var canPlaySound: Bool!
-
+    var progress: UncomplitedProgress?
+    
     var lvlanager: LevelManager! {
         didSet {
             DispatchQueue.main.async { [weak self] in
@@ -47,6 +48,22 @@ class GameScene: SKScene {
         loadSceneBackground()
         loadGraund()
         updateGraundPosition()
+        if let progress,
+           !progress.weapons.isEmpty
+        {
+            if self.lvlanager.progress.currentRound >= 2 {
+                self.lvlanager.progress.currentRound -= 1
+            }
+            progress.weapons.forEach { (key, value) in
+                
+                let upgrade = progress.weaponUpdates[key] ?? nil
+                let type: WeaponType = .allCases.first(where: {
+                    key.contains($0.rawValue)
+                }) ?? .granata
+                print(type, " jknfgsjkfgsfgsijlgrsjgfrs gdr kjlfghd")
+                loadArmour(type: type, upgrade: upgrade, position: value)
+            }
+        }
 //        loadArmour(type: .granata, position: .init(x: 0.186, y: 0.22))
 //        loadArmour(type: .pistol, position: .init(x: 0.271, y: 0.22))
         self.weapons.forEach({
@@ -154,11 +171,11 @@ class GameScene: SKScene {
         
     }
     
-    func loadArmour(type: WeaponType, position: CGPoint) {
+    func loadArmour(type: WeaponType, upgrade: Difficulty? = nil, position: CGPoint) {
         DispatchQueue(label: "db", qos: .userInitiated).async {
             let db = DataBaseService.db
             DispatchQueue.main.async {
-                let node = WeaponNode(type: type, db: db, canPlaySound: self.canPlaySound)
+                let node = WeaponNode(type: type, db: db, upgrade: upgrade, canPlaySound: self.canPlaySound)
                 self.addChild(node)
                 node.updatePosition(position: position)
             }
@@ -471,12 +488,20 @@ extension GameScene {
     static func configure(
         lvl: LevelManager,
         page: LevelPagesBuilder,
+        progress: UncomplitedProgress?,
         canPlaySound: Bool
     ) -> Self {
         let scene: Self = .init(fileNamed: Constants.Names.sceneName.rawValue)!
         scene.lvlanager = lvl
+        if let progress = progress {
+            scene.lvlanager.progress = progress.gameProgress
+        }
         scene.page = page
         scene.canPlaySound = canPlaySound
+        scene.progress = progress
+        if progress != nil {
+            print("progressloadeddas ", progress)
+        }
         return scene
     }
 }

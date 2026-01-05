@@ -59,15 +59,16 @@ class WeaponNode: SKSpriteNode {
         self.physicsBody?.affectedByGravity = false
     }
     
-    init(type: WeaponType, db: DataBaseModel, canPlaySound: Bool) {
+    init(type: WeaponType, db: DataBaseModel, upgrade: Difficulty? = nil, canPlaySound: Bool) {
         self.type = type
+        
         self.initialDamage = type.damage * 4
         self.initialDistance = type.distance
         self.totalUpgrade = db.upgradedWeapons[type] ?? [:]
         super.init(texture: nil, color: .clear, size: .zero)
         self.size = .init(width: distance, height: distance)
-        self.upgrade = nil
-        self.name = .init(describing: Self.self)
+        self.upgrade = upgrade
+        self.name = UUID().uuidString
         self.updatePhysicsBody()
         let componentName = db.upgradedWeapons[type]?[.attackPower]
         let imageSize = type.textureSize
@@ -85,6 +86,7 @@ class WeaponNode: SKSpriteNode {
         self.position = .init(
             x: (position.x * viewSize.width) - (viewSize.width / 2),
             y: (position.y * viewSize.height) - (viewSize.height / 2))
+        print("fgsadfsadsf ", position.x)
         bullets?.forEach {
             $0?.removeFromParent()
         }

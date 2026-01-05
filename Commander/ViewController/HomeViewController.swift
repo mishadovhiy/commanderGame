@@ -40,6 +40,20 @@ class HomeViewController: AudioViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.play(.loop1)
+//        let dict: [String: Any] = [
+//            "level": 5,
+//            "coins": 120,
+//            "weapons": ["gun", "rocket"],
+//            "premium": true
+//        ]
+//        let data = try? JSONSerialization.data(
+//            withJSONObject: dict,
+//            options: []
+//        )
+//        IcloudService().writeData(data ?? .init(), type: .uncompletedProgress)
+        let data = IcloudService().load(type: .uncompletedProgress)
+        let dict = try? JSONSerialization.jsonObject(with: data ?? .init()) as? [String: Any] ?? [:]
+        print(dict, " grterfwedscv ")
     }
     
     private var levelChild: LevelListSuperViewController? {
