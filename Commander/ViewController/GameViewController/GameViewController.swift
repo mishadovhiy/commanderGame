@@ -86,6 +86,9 @@ print("sfdsfdf ", $0.position.x)
         DispatchQueue(label: "db", qos: .userInitiated).async {
             DataBaseService.db.progress
                 .updateValue(result, forKey: lvl)
+            let data = try? JSONEncoder().encode(DataBaseService.db.progress)
+            IcloudService().writeData(
+                data ?? .init(), type: .uncompletedProgress)
             DispatchQueue.main.async {
                 completed()
             }

@@ -52,8 +52,13 @@ class HomeViewController: AudioViewController {
 //        )
 //        IcloudService().writeData(data ?? .init(), type: .uncompletedProgress)
         let data = IcloudService().load(type: .uncompletedProgress)
-        let dict = try? JSONSerialization.jsonObject(with: data ?? .init()) as? [String: Any] ?? [:]
-        print(dict, " grterfwedscv ")
+        let decoded = try? JSONDecoder().decode([LevelModel: UncomplitedProgress].self, from: data ?? .init())
+        if let decoded,
+           !decoded.isEmpty {
+            DispatchQueue(label: "db", qos: .userInitiated).async {
+                DataBaseService.db.progress = decoded
+            }
+        }
     }
     
     private var levelChild: LevelListSuperViewController? {
