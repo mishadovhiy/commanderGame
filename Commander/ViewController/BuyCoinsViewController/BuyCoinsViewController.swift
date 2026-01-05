@@ -43,18 +43,10 @@ extension BuyCoinsViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if options[indexPath.row] <= 0 {
-            if options[indexPath.row] == -1 {
-                DispatchQueue(label: "db", qos: .userInitiated).async {
-                    DataBaseService.db.upgradedWeapons.removeAll()
-                    DispatchQueue.main.async {
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                }
-            }
             return
         }
-        let token = KeychainService.getToken(forKey: .balance) ?? ""
-        let _ = KeychainService.saveToken("\((Int(token) ?? 0) + options[indexPath.row])", forKey: .balance)
+        let token = KeychainService.getToken(forKey: .balanceValue) ?? ""
+        let _ = KeychainService.saveToken("\((Int(token) ?? 0) + options[indexPath.row])", forKey: .balanceValue)
         self.navigationController?.popViewController(animated: true)
     }
     

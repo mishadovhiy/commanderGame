@@ -9,11 +9,11 @@ import Foundation
 import Security
 #warning("todo: calculate storage for all logged users indeed single user")
 enum KeychainKey: String, CaseIterable {
-    case balance
+    case balanceValue
     
     var defaultValue: String? {
         switch self {
-        case .balance: "650"
+        case .balanceValue: "650"
         default: nil
         }
     }
@@ -31,9 +31,9 @@ struct KeychainService {
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key.key,
             kSecValueData as String: data,
-            kSecAttrSynchronizable as String: kCFBooleanTrue ?? true,
+            kSecAttrSynchronizable as String: kCFBooleanTrue!,
             kSecAttrService as String: appGroupName,
-            kSecAttrAccessGroup as String: appGroupName,
+            kSecAttrAccessGroup as String: Keys.keychainGroupName,
             kSecAttrAccessible as String: kSecAttrAccessibleWhenUnlocked
         ] as [String : Any]
         
@@ -56,11 +56,11 @@ struct KeychainService {
         let query = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key.key,
-            kSecReturnData as String: true,
+            kSecReturnData as String: kCFBooleanTrue!,
             kSecMatchLimit as String: kSecMatchLimitOne,
-            kSecAttrSynchronizable as String: kCFBooleanTrue ?? true,
+            kSecAttrSynchronizable as String: kSecAttrSynchronizableAny,
             kSecAttrService as String: appGroupName,
-            kSecAttrAccessGroup as String: appGroupName
+            kSecAttrAccessGroup as String: Keys.keychainGroupName
         ] as [String : Any]
         
         var tokenData: AnyObject?

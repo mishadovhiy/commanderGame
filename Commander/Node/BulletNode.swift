@@ -37,6 +37,9 @@ class BulletNode: SKSpriteNode {
         run(.repeatForever(.animate(withNormalTextures: (0..<fireTexture.animationsCount).compactMap({
             .init(imageNamed: "fire\(fireTexture.i)/" + "\($0)")
         }), timePerFrame: 0.1)))
+        self.run(.wait(forDuration: 5.0)) { [weak self] in
+            self?.removeFromParent()
+        }
     }
     
     override func removeFromParent() {

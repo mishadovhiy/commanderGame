@@ -46,9 +46,10 @@ class GameViewController: AudioViewController {
         super.viewDidLoad()
         DispatchQueue(label: "db", qos: .background).async {
             let db = DataBaseService.db
+            let cloud = IcloudService().loadDataBaseCopy
             DispatchQueue.main.async {
-                self.loadWeapons(db: db)
-                self.loadScene(db: db)
+                self.loadWeapons(db: cloud)
+                self.loadScene(db: cloud, localDB: db)
             }
         }
     }
@@ -84,11 +85,8 @@ print("sfdsfdf ", $0.position.x)
                 ($0.type.rawValue + ($0.name ?? ""), $0.upgrade)
             })))
         DispatchQueue(label: "db", qos: .userInitiated).async {
-            DataBaseService.db.progress
-                .updateValue(result, forKey: lvl)
-            let data = try? JSONEncoder().encode(DataBaseService.db.progress)
-            IcloudService().writeData(
-                data ?? .init(), type: .uncompletedProgress)
+            var service = IcloudService()
+            service.loadDataBaseCopy.progress.updateValue(result, forKey: lvl)
             DispatchQueue.main.async {
                 completed()
             }
@@ -315,7 +313,8 @@ let vc = AlertViewController.initiate(data: .init(title: "Menu", type: .collecti
             self.editingWeaponImageView.superview?.superview?.isHidden = self.editingWeapon == nil
             if let type = self.editingWeapon?.type {
                 DispatchQueue(label: "db", qos: .userInitiated).async {
-                    let updatedNumber = DataBaseService.db.upgradedWeapons[type]?[.attackPower] ?? 0
+                    let updatedNumber = self.gameScene?.db.upgradedWeapons[type]?[.attackPower] ?? 0
+                    //DataBaseService.db.upgradedWeapons[type]?[.attackPower] ?? 0
                     DispatchQueue.main.async {
                         self.editingWeaponImageView.image = .init(named: type.rawValue + "/\(type.upgradedIconComponent(db: updatedNumber))")
                         let canUpgrade = self.editingWeapon?.canUpgrade ?? true
@@ -400,9 +399,9 @@ extension GameViewController {
         }
     }
     
-    func loadScene(db: DataBaseModel) {
+    func loadScene(db: CloudDataBaseModel, localDB: DataBaseModel) {
         if let view = view as! SKView? {
-            let scene = GameScene.configure(lvl: .init(self.selectedLevel), page: self.page, progress: db.progress[self.selectedLevel], canPlaySound: db.settings.sound.voluem.gameSound != 0)
+            let scene = GameScene.configure(lvl: .init(self.selectedLevel), page: self.page, db: db, canPlaySound: localDB.settings.sound.voluem.gameSound != 0)
             scene.scaleMode = .aspectFill
             
             view.presentScene(scene, transition: .doorsCloseHorizontal(withDuration: 0.6))
@@ -421,7 +420,7 @@ extension GameViewController {
         }
     }
     
-    func loadWeapons(db: DataBaseModel) {
+    func loadWeapons(db: CloudDataBaseModel) {
         WeaponType.allCases.forEach {
             let i = db.upgradedWeapons[$0]?[.attackPower] ?? 0
             let stack = UIStackView()

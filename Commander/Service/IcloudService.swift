@@ -8,23 +8,25 @@
 import Foundation
 
 struct IcloudService {
-    var url: URL? {
+    private var icloudURL: URL? {
         FileManager.default.url(
             forUbiquityContainerIdentifier: nil
         )?.appendingPathComponent("Documents")
     }
     
-    enum DataType: String {
-        case uncompletedProgress
-        case completedProgress
+    private var localURL: URL? {
+        FileManager.default.urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        ).first
     }
     
-    func writeData(_ data: Data, type: DataType) {
-        guard let dir = url else {
+    func writeData(_ data: Codable, type: DataType, local: Bool = true) {
+        guard let dir = local ? self.localURL : icloudURL else {
             print("iCloud not available")
             return
         }
-        
+        print("wrignfsdsa ")
         let url = dir.appendingPathComponent(type.rawValue)
         
         do {
@@ -32,16 +34,33 @@ struct IcloudService {
                 at: dir,
                 withIntermediateDirectories: true
             )
-            
-            try data.write(to: url, options: .atomic)
+            let dataModel = try data.encode()
+            try dataModel?.write(to: url, options: .atomic)
+            if local {
+                self.writeData(data, type: type, local: false)
+            }
         } catch {
             print(error, " ", #function, #file, #line)
             return
         }
     }
     
-    func load(type: DataType) -> Data? {
-        guard let dir = url else {
+    func launchLocalDB(completion: @escaping()->()) {
+        DispatchQueue(label: "db", qos: .background).async {
+            let data = load(type: .dataBase, isLocal: false) as? IcloudService.DataType.Responses.Cloud
+            if let data {
+                writeData(data, type: .dataBase)
+            } else {
+                writeData(IcloudService.DataType.Responses.Cloud.init(), type: .dataBase)
+            }
+            DispatchQueue.main.async {
+                completion()
+            }
+        }
+    }
+    
+    func load(type: DataType, isLocal: Bool = true) -> Codable? {
+        guard let dir = isLocal ? self.localURL : icloudURL else {
             print("iCloud not available")
             return nil
         }
@@ -49,11 +68,40 @@ struct IcloudService {
         let url = dir.appendingPathComponent(type.rawValue)
         do {
             let data = try Data(contentsOf: url)
-            return data
+//            let response = try JSONDecoder().decode(type.responseType.self, from: data)
+            return try type.responseType.init(data)
         }
         catch {
             print(error, " ", #function, #file, #line)
             return nil
+        }
+    }
+    
+    enum DataType: String {
+        case dataBase
+
+        var responseType: Codable.Type {
+            switch self {
+            case .dataBase:
+                CloudDataBaseModel.self
+            }
+        }
+        
+        struct Responses {
+            typealias Cloud = CloudDataBaseModel
+        }
+    }
+    
+    var loadCloudDataBase: DataType.Responses.Cloud? {
+        return load(type: .dataBase) as? DataType.Responses.Cloud
+    }
+    
+    var loadDataBaseCopy: DataType.Responses.Cloud {
+        get {
+            load(type: .dataBase, isLocal: true) as? DataType.Responses.Cloud ?? .init()
+        }
+        set {
+            writeData(newValue, type: .dataBase, local: true)
         }
     }
 }

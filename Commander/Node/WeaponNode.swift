@@ -59,7 +59,7 @@ class WeaponNode: SKSpriteNode {
         self.physicsBody?.affectedByGravity = false
     }
     
-    init(type: WeaponType, db: DataBaseModel, upgrade: Difficulty? = nil, canPlaySound: Bool) {
+    init(type: WeaponType, db: CloudDataBaseModel, upgrade: Difficulty? = nil, canPlaySound: Bool) {
         self.type = type
         
         self.initialDamage = type.damage * 4

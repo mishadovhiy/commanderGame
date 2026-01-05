@@ -18,13 +18,9 @@ class UpgradeWeaponViewController: AudioViewController {
     override var audioFiles: [AudioFileNameType] {
         [.weaponUpgrade, .menu1, .menu2, .menu3, .coins, .success1, .success2]
     }
-    var db: DataBaseModel?
+    var db: IcloudService.DataType.Responses.Cloud?
     override func loadView() {
         super.loadView()
-        collectionVIew.delegate = self
-        collectionVIew.dataSource = self
-        tableView.delegate = self
-        tableView.dataSource = self
         tableView.backgroundColor = ContainerMaskedView.Constants.primaryBorderColor
         tableView.superview?.backgroundColor = ContainerMaskedView.Constants.primaryBorderColor
         self.view.backgroundColor = .dark
@@ -42,12 +38,15 @@ class UpgradeWeaponViewController: AudioViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionVIew.delegate = self
+        collectionVIew.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
         updateTableData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        updateTableData()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
 
     }
@@ -56,21 +55,23 @@ class UpgradeWeaponViewController: AudioViewController {
         if self.selectedAt == nil {
             self.selectedAt = 0
         }
-        DispatchQueue(label: "db", qos: .userInitiated).async {
+        tableData.removeAll()
+        DispatchQueue(label: "db", qos: .background).async {
             let selectedWeapon = self.collectionData[self.selectedAt ?? 0]
-            self.db = DataBaseService.db
-            let db = DataBaseService.db.upgradedWeapons
-            self.tableData = [
-                UserBalanceCellModel(balance: Float(KeychainService.getToken(forKey: .balance) ?? "") ?? 0)
+            self.db = IcloudService().loadDataBaseCopy
+            let db = self.db!
+            var tableData = self.tableData
+            tableData = [
+                UserBalanceCellModel(balance: Float(KeychainService.getToken(forKey: .balanceValue) ?? "") ?? 0)
             ]
             if self.selectedAt != nil {
-                self.tableData.append(WeaponTypeModel(
+                tableData.append(WeaponTypeModel(
                     title: selectedWeapon.rawValue))
             }
             
-            self.tableData.append(contentsOf: WeaponUpgradeType
+            tableData.append(contentsOf: WeaponUpgradeType
                 .allCases.compactMap({
-                    let lvl = db[selectedWeapon]?[$0] ?? 0
+                    let lvl = db.upgradedWeapons[selectedWeapon]?[$0] ?? 0
                     
                 return WeaponBuyModel(
                     percent: Float(lvl) / (Float(selectedWeapon.maxUpgradeLevel) * Float($0.maxUpgradeDivider)),
@@ -79,8 +80,10 @@ class UpgradeWeaponViewController: AudioViewController {
                     price: selectedWeapon.upgradeStepPrice * (lvl + 1),
                     type: $0)
             }))
-            print(self.tableData.count, " tgerfwedaw ")
             DispatchQueue.main.async {
+                self.tableData = tableData
+                print(self.tableData.count, " tgerfwedaw ")
+
                 self.tableView.reloadData()
                 self.collectionVIew.reloadData()
                 completion()
@@ -100,21 +103,24 @@ class UpgradeWeaponViewController: AudioViewController {
     @objc func buyWeaponPressed(_ sender: UIButton) {
         error = nil
         tableView.reloadData()
+        let layerName = sender.layer.name ?? ""
         DispatchQueue(label: "db", qos: .userInitiated).async {
-            let type: WeaponUpgradeType = .init(rawValue: sender.layer.name ?? "") ?? .attackPower
+            let type: WeaponUpgradeType = .init(rawValue: layerName) ?? .attackPower
             let selectedWeapon = self.collectionData[self.selectedAt ?? 0]
-            let balance = KeychainService.getToken(forKey: .balance) ?? ""
-            let lvl = DataBaseService.db.upgradedWeapons[selectedWeapon]?[type] ?? 0
+            let balance = KeychainService.getToken(forKey: .balanceValue) ?? ""
+            let lvl = self.db?.upgradedWeapons[selectedWeapon]?[type] ?? 0
             if lvl >= selectedWeapon.maxUpgradeLevel {
                 return
             }
             let price = selectedWeapon.upgradeStepPrice * (lvl + 1)
             
             if Int(balance) ?? 0 >= price {
-                let _ = KeychainService.saveToken("\((Int(balance) ?? 0) - price)", forKey: .balance)
-                var updateDict = DataBaseService.db.upgradedWeapons[selectedWeapon] ?? [:]
+                let _ = KeychainService.saveToken("\((Int(balance) ?? 0) - price)", forKey: .balanceValue)
+                var updateDict = self.db?.upgradedWeapons[selectedWeapon] ?? [:]
                 updateDict.updateValue(lvl + 1, forKey: type)
-                DataBaseService.db.upgradedWeapons.updateValue(updateDict, forKey: selectedWeapon)
+                self.db?.upgradedWeapons.updateValue(updateDict, forKey: selectedWeapon)
+                var service = IcloudService()
+                service.loadDataBaseCopy = self.db ?? .init()
                 DispatchQueue.main.async {
                    //here paren
                     self.updateTableData()
@@ -165,6 +171,9 @@ extension UpgradeWeaponViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if tableData.isEmpty {
+            return UITableViewCell()
+        }
         let data = tableData[indexPath.row]
         if let data = data as? UserBalanceCellModel {
             let cell = tableView.dequeueReusableCell(

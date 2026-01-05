@@ -8,7 +8,7 @@
 import UIKit
 
 class HomeViewController: AudioViewController {
-
+    
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet private weak var mapImageView: UIImageView!
     @IBOutlet private weak var contentStackView: UIStackView!
@@ -32,34 +32,17 @@ class HomeViewController: AudioViewController {
         contentStackView.layer.shadowColor = UIColor.black.cgColor
         contentStackView.layer.shadowOffset = .init(width: 2, height: 2)
         contentStackView.layer.shadowRadius = 0
-        loadLevelListChild()
         self.view.addSubview(DestinationOutMaskedView(type: .borders))
         blackSafeAreaMaskOverlayView?.alpha = 0
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.play(.loop1)
-//        let dict: [String: Any] = [
-//            "level": 5,
-//            "coins": 120,
-//            "weapons": ["gun", "rocket"],
-//            "premium": true
-//        ]
-//        let data = try? JSONSerialization.data(
-//            withJSONObject: dict,
-//            options: []
-//        )
-//        IcloudService().writeData(data ?? .init(), type: .uncompletedProgress)
-        let data = IcloudService().load(type: .uncompletedProgress)
-        let decoded = try? JSONDecoder().decode([LevelModel: UncomplitedProgress].self, from: data ?? .init())
-        if let decoded,
-           !decoded.isEmpty {
-            DispatchQueue(label: "db", qos: .userInitiated).async {
-                DataBaseService.db.progress = decoded
-            }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        IcloudService().launchLocalDB {
+            self.loadLevelListChild()
         }
     }
+
     
     private var levelChild: LevelListSuperViewController? {
         children.first(where: {
@@ -83,7 +66,7 @@ class HomeViewController: AudioViewController {
         }
         let page = self.startView.isHidden ? page : nil
         self.levelAnimating = true
-
+        
         self.performSetMap(for: page, animated: animated, completion: {
             completion()
             self.levelAnimating = false
@@ -125,7 +108,7 @@ class HomeViewController: AudioViewController {
             self.levelChild?.view.layer.shadowRadius = startPressed ? 7 : 0
             self.contentStackView.layer.shadowRadius = startPressed ? 7 : 0
             self.contentStackView.layer.shadowOpacity = startPressed ? 0.3 : 0
-
+            
         }, completion: { _ in
             self.setMap(for: self.currentPage ?? [LevelPagesBuilder].allData.first)
         })

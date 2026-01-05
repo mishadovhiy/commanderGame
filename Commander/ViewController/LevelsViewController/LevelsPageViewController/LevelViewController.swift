@@ -41,7 +41,7 @@ class LevelViewController: UIViewController {
     func setCompletedLevels() {
         let last = self.parentVC?.completedLevels.sorted(by: {$0 >= $1}).last ?? 0
         DispatchQueue(label: "db", qos: .userInitiated).async {
-            let db = DataBaseService.db.completedLevels
+            let db = IcloudService().loadDataBaseCopy.completedLevels
             let keys = Array(db.keys)
             let current = Int(self.data.title) ?? 0
             let isUlocked = last + 1 >= current

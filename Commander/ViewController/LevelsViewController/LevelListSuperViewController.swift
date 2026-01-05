@@ -109,7 +109,7 @@ class LevelListSuperViewController: UIViewController {
     func toGameDurationPicker() {
         homeParentVC?.play(.menu1)
         DispatchQueue(label: "db", qos: .userInitiated).async {
-            let db = DataBaseService.db.completedLevels
+            let db = IcloudService().loadDataBaseCopy.completedLevels
             let completedKeys = db.keys.filter({
                 ![
                     $0.levelPage == self.selectedLevel.levelPage,
@@ -215,7 +215,7 @@ extension LevelListSuperViewController {
     
     func updateBottomNavigationDifficulties(animated: Bool = false) {
         DispatchQueue.init(label: "db", qos: .userInitiated).async {
-            let db = DataBaseService.db.completedLevels
+            let db = IcloudService().loadDataBaseCopy.completedLevels
             let completedKeys = db.keys.filter({
                 ![
                     $0.levelPage == self.selectedLevel.levelPage,

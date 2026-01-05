@@ -29,7 +29,7 @@ class LevelDescriptionViewController: UIViewController {
     }
     
     private func singleLevel(
-        db: DataBaseModel,
+        db: CloudDataBaseModel,
         allKeys: [LevelModel]
     ) -> [CompletedLevelTableCell.ContentDataModel] {
         let completedLevels = Set(allKeys.compactMap({
@@ -75,7 +75,7 @@ class LevelDescriptionViewController: UIViewController {
                         
     }
     
-    private func multipleLevels(db: DataBaseModel, allKeys: [LevelModel]) -> [CompletedLevelTableCell.ContentDataModel] {
+    private func multipleLevels(db: CloudDataBaseModel, allKeys: [LevelModel]) -> [CompletedLevelTableCell.ContentDataModel] {
         var result: [CompletedLevelTableCell.ContentDataModel] = []
         GameDurationType.allCases.forEach { duration in
             let keys = allKeys.filter({
@@ -113,7 +113,7 @@ class LevelDescriptionViewController: UIViewController {
         let levelBuilder = self.parentLevelListVC?.levelPageVC?.currentPageData
 
         DispatchQueue(label: "db", qos: .userInitiated).async {
-            let dataBase = DataBaseService.db
+            let dataBase = IcloudService().loadDataBaseCopy
             let allLevelsForPageKeys = Array(dataBase.completedLevels.keys.filter({
                 ($0.levelPage) == selectedLevel.levelPage
             }))

@@ -11,8 +11,7 @@ import GameplayKit
 class GameScene: SKScene {
     var page: LevelPagesBuilder!
     var canPlaySound: Bool!
-    var progress: UncomplitedProgress?
-    
+    var db: CloudDataBaseModel!
     var lvlanager: LevelManager! {
         didSet {
             DispatchQueue.main.async { [weak self] in
@@ -48,7 +47,7 @@ class GameScene: SKScene {
         loadSceneBackground()
         loadGraund()
         updateGraundPosition()
-        if let progress,
+        if let progress = db.progress[self.lvlanager.lvlModel],
            !progress.weapons.isEmpty
         {
             if self.lvlanager.progress.currentRound >= 2 {
@@ -172,15 +171,9 @@ class GameScene: SKScene {
     }
     
     func loadArmour(type: WeaponType, upgrade: Difficulty? = nil, position: CGPoint) {
-        DispatchQueue(label: "db", qos: .userInitiated).async {
-            let db = DataBaseService.db
-            DispatchQueue.main.async {
-                let node = WeaponNode(type: type, db: db, upgrade: upgrade, canPlaySound: self.canPlaySound)
-                self.addChild(node)
-                node.updatePosition(position: position)
-            }
-        }
-        
+        let node = WeaponNode(type: type, db: self.db, upgrade: upgrade, canPlaySound: self.canPlaySound)
+        self.addChild(node)
+        node.updatePosition(position: position)
     }
 
     func soundDidChange() {
@@ -202,8 +195,8 @@ class GameScene: SKScene {
     
     func saveScore() {
         let prize = Float(lvlanager.lvlBuilder.prize) * (Float(lvlanager.progress.score) / 100)
-        let balance = Int(KeychainService.getToken(forKey: .balance) ?? "") ?? 0
-        let _ = KeychainService.saveToken("\(balance + Int(prize))", forKey: .balance)
+        let balance = Int(KeychainService.getToken(forKey: .balanceValue) ?? "") ?? 0
+        let _ = KeychainService.saveToken("\(balance + Int(prize))", forKey: .balanceValue)
     }
     
     func didCompleteLevel() {
@@ -213,9 +206,10 @@ class GameScene: SKScene {
         levelCompleted = true
         let levelManager = self.lvlanager!
         DispatchQueue(label: "db", qos: .userInitiated).async {
-            let oldProgress = DataBaseService.db.completedLevels[levelManager.lvlModel]
+            var service = IcloudService()
+            let oldProgress = service.loadDataBaseCopy.completedLevels[levelManager.lvlModel]
             if levelManager.progress.score >= oldProgress?.score ?? 0 {
-                DataBaseService.db.completedLevels.updateValue(levelManager.progress, forKey: levelManager.lvlModel)
+                service.loadDataBaseCopy.completedLevels.updateValue(levelManager.progress, forKey: levelManager.lvlModel)
             }
             #warning("save new balance to keychain")
             print("game completed ", levelManager.lvlModel)
@@ -488,20 +482,17 @@ extension GameScene {
     static func configure(
         lvl: LevelManager,
         page: LevelPagesBuilder,
-        progress: UncomplitedProgress?,
+        db: CloudDataBaseModel!,
         canPlaySound: Bool
     ) -> Self {
         let scene: Self = .init(fileNamed: Constants.Names.sceneName.rawValue)!
         scene.lvlanager = lvl
-        if let progress = progress {
+        if let progress = db.progress[lvl.lvlModel] {
             scene.lvlanager.progress = progress.gameProgress
         }
+        scene.db = db
         scene.page = page
         scene.canPlaySound = canPlaySound
-        scene.progress = progress
-        if progress != nil {
-            print("progressloadeddas ", progress)
-        }
         return scene
     }
 }
