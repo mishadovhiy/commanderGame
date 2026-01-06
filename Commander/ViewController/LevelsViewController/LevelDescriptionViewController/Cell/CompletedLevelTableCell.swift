@@ -153,7 +153,6 @@ extension CompletedLevelTableCell {
         let progress = stack?.arrangedSubviews.first(where: {
             $0 is UIProgressView
         }) as? UIProgressView
-        print(contentStack != nil)
         return (label, progress, titleLabel, subtitleLabel)
     }
     

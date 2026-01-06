@@ -38,12 +38,7 @@ class LevelsPageViewController: UIPageViewController {
 
 extension LevelsPageViewController {
     static func initiate() -> Self {
-        UIStoryboard(name: "Main", bundle: nil)
-            .instantiateViewController(
-                withIdentifier: .init(
-                    describing: Self.self
-                )
-            ) as! Self
+        initiateDefault("LevelPicker")
     }
 }
 

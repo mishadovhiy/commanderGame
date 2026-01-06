@@ -35,16 +35,16 @@ class LevelDescriptionViewController: UIViewController {
         let completedLevels = Set(allKeys.compactMap({
             $0.level
         }))
-        print(completedLevels.count, " gyrhtef")
+        let header: [String] = GameDurationType.allCases.compactMap({
+            $0.rawValue.addingSpacesBeforeLargeLetters.capitalized
+        })
         //todo: return list, for each level name
         var result: [CompletedLevelTableCell.ContentDataModel] = []
         completedLevels.forEach { levelName in
             result.append(
                 .init(section: levelName, sortIndex: levelName.numbers ?? 0,
                              data:
-                        .init(topTitles: GameDurationType.allCases.compactMap({
-                            $0.rawValue.addingSpacesBeforeLargeLetters.capitalized
-                        }),
+                        .init(topTitles: header,
                               tableData:
                                 Difficulty.allCases
                             .compactMap({ difficulty in
@@ -184,9 +184,6 @@ extension LevelDescriptionViewController: UITableViewDelegate, UITableViewDataSo
 
 extension LevelDescriptionViewController {
     static func initiate() -> Self {
-        let vc = UIStoryboard(name: "Main", bundle: nil)
-            .instantiateViewController(withIdentifier: .init(
-                describing: Self.self)) as! Self
-        return vc
+        initiateDefault("LevelPicker")
     }
 }

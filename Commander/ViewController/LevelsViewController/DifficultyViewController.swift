@@ -42,7 +42,6 @@ class DifficultyViewController: AudioViewController {
             difficultyStackView.addArrangedSubview(button)
             button.addSubview(ContainerMaskedView(isHorizontal: false))
         }
-        print(difficultyStackView.arrangedSubviews.count, " egrfwdas")
         difficultyStackView.backgroundColor = ContainerMaskedView.Constants.primaryBorderColor
         self.updateData(data)
     }
@@ -53,10 +52,8 @@ class DifficultyViewController: AudioViewController {
             let button = $0 as? UIButton
             let i = button?.tag ?? 0
             if i != 0 {
-                print(i, " tefrwds ", newData.count, " trfedwsa")
                 button?.setTitle(newData[i - 1].title + " (\(newData[i - 1].checkmarkCount))", for: .init())
                 button?.isEnabled = !newData[i - 1].isLocked
-                print(button?.title(for: .normal), " gtefrwdsa")
                 setButtonSelected(view: button ?? $0, animated: animated)
             }
         }

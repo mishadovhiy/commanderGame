@@ -81,7 +81,6 @@ class LevelViewController: UIViewController {
     
     #warning("refactor")
     func updateButtonsConstraints() {
-        print(view.constraints.count, " ytrtgerf ")
         if !view.constraints.isEmpty {
             view.constraints.forEach {
                 if let button = ($0.firstItem as? UIButton ?? $0.secondItem as? UIButton) {
@@ -131,7 +130,6 @@ class LevelViewController: UIViewController {
         let builder = GameBuilderModel(lvlModel: parentVC!.selectedLevel)
         var i = 0
         builder.enemyPerRound.forEach { round in
-            print(i, " ", round, " rteds ", round.count)
             i += 1
         }
         view.subviews.forEach({
@@ -243,9 +241,7 @@ extension LevelViewController {
 
 extension LevelViewController {
     static func initiate(data: LevelPagesBuilder) -> Self {
-        let vc = UIStoryboard(name: "Main", bundle: nil)
-            .instantiateViewController(withIdentifier: .init(
-                describing: Self.self)) as! Self
+        let vc = initiateDefault("LevelPicker")
         vc.data = data
         return vc
     }

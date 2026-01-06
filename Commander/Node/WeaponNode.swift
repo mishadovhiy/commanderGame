@@ -20,7 +20,6 @@ class WeaponNode: SKSpriteNode {
     }
     var upgrade: Difficulty? = nil {
         didSet {
-            print("upgradeChanged ", upgrade)
             self.size = .init(width: distance, height: distance)
             self.updatePhysicsBody()
         }
@@ -86,7 +85,6 @@ class WeaponNode: SKSpriteNode {
         self.position = .init(
             x: (position.x * viewSize.width) - (viewSize.width / 2),
             y: (position.y * viewSize.height) - (viewSize.height / 2))
-        print("fgsadfsadsf ", position.x)
         bullets?.forEach {
             $0?.removeFromParent()
         }

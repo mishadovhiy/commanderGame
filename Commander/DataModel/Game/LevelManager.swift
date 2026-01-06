@@ -41,7 +41,6 @@ struct LevelManager {
         self.lvlModel = lvl
         self.lvlBuilder = .init(lvlModel: lvl)
         self.progress = dbProgress ?? .init(pageDivider: CGFloat(Int(lvl.levelPage) ?? 0) / CGFloat(LevelPagesBuilder.maxPageCount))
-        print(lvlBuilder.enemyPerRound, " yhrtegrfesda ", progress.pageDivider)
         progress.totalEnemies = lvlBuilder.enemyPerRound.reduce(0, { result, element in
             return result + element.reduce(0, { partialResult, element2 in
                 return partialResult + element2.count

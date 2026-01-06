@@ -18,7 +18,6 @@ class BulletNode: SKSpriteNode {
         self.armour = armour
         let texture: SKTexture?
         if armour.type.hasBullet {
-            print("hasasasd")
             texture = .init(imageNamed: "fire\(fireTexture.i)/" + "1")
         } else {
             texture = nil

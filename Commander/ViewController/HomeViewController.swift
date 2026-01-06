@@ -70,6 +70,11 @@ class HomeViewController: AudioViewController {
         self.performSetMap(for: page, animated: animated, completion: {
             completion()
             self.levelAnimating = false
+            if page == nil {
+                DispatchQueue(label: "db", qos: .background).async {
+                    IcloudService().load(type: .dataBase, isLocal: false)
+                }
+            }
         })
         
     }

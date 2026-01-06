@@ -52,7 +52,6 @@ struct KeychainService {
     }
         
     static func getToken(forKey key: KeychainKey, optional:Bool = false) -> String? {
-        print("getTokengetToken")
         let query = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: key.key,
@@ -71,14 +70,6 @@ struct KeychainService {
             
             return new
         }
-#if DEBUG
-        print("Error Retrieving Token from Key Chain ", key)
-#if os(iOS)
-        print("iOS")
-#else
-        print("notios")
-#endif
-#endif
         return key.defaultValue
     }
 }

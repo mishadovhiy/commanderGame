@@ -78,7 +78,6 @@ class GameViewController: AudioViewController {
             weapons: Dictionary(uniqueKeysWithValues: gameScene!.weapons.map({
                 let x = (($0.position.x + (size.width / 2)) / size.width)
                 let y = (($0.position.y + (size.height / 2)) / size.height)
-print("sfdsfdf ", $0.position.x)
                 return ($0.type.rawValue + ($0.name ?? ""), CGPoint(x: x, y: y))
             })),
             weaponUpdates: Dictionary(uniqueKeysWithValues: gameScene!.weapons.map({
@@ -93,9 +92,7 @@ print("sfdsfdf ", $0.position.x)
         }
     }
     
-    func applicationWillResignActive() {
-        print("rfwesdsf")
-        
+    func applicationWillResignActive() {        
         saveProgress()
     }
     

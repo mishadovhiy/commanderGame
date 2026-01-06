@@ -59,15 +59,9 @@ class GameScene: SKScene {
                 let type: WeaponType = .allCases.first(where: {
                     key.contains($0.rawValue)
                 }) ?? .granata
-                print(type, " jknfgsjkfgsfgsijlgrsjgfrs gdr kjlfghd")
                 loadArmour(type: type, upgrade: upgrade, position: value)
             }
         }
-//        loadArmour(type: .granata, position: .init(x: 0.186, y: 0.22))
-//        loadArmour(type: .pistol, position: .init(x: 0.271, y: 0.22))
-        self.weapons.forEach({
-            print($0.position, " tgerfwdas")
-        })
         loadBlockers()
         self.loadRaund()
     }
@@ -118,7 +112,6 @@ class GameScene: SKScene {
             }
             return false
         }) {
-            print(first.name, " jjsbdjbdsj ")
             return false
         }
         
@@ -185,7 +178,6 @@ class GameScene: SKScene {
                     if let audio = node.children.first(where: {
                         $0 is AudioContainerNode
                     }) as? AudioContainerNode {
-                        print(self.canPlaySound, " fdfsvfds ")
                         audio.updateVolume(canPlay: canPlay != 0)
                     }
                 }
@@ -212,7 +204,6 @@ class GameScene: SKScene {
                 service.loadDataBaseCopy.completedLevels.updateValue(levelManager.progress, forKey: levelManager.lvlModel)
             }
             #warning("save new balance to keychain")
-            print("game completed ", levelManager.lvlModel)
             self.saveScore()
             DispatchQueue.main.async {
                 self.gameVC?.play(.success2)
@@ -231,19 +222,13 @@ class GameScene: SKScene {
             return
         }
         if lvlanager.lvlBuilder.rounds <= lvlanager.progress.currentRound {
-            print(lvlanager.progress.currentRound, "game completed ", lvlanager.lvlBuilder.rounds)
             if enemiesForce.isEmpty {
                 didCompleteLevel()
             }
             return
         }
-        print(lvlanager.progress.currentRound, " tefrwdsax ")
-//        if lvlanager.lvlBuilder.enemyPerRound.count <= lvlanager.currentRound {
-//            print("rfsdaefr")
-//            return
-//        }
+
         if enemies.count >= 1 {
-            print("jkhdfsukhsakd ", enemies.count)
             return
         }
         if !canLoadRound {
@@ -365,7 +350,6 @@ fileprivate extension GameScene {
             if imageSize == .zero {
                 imageSize = .init(width: 20, height: 20)
             }
-            print(imageSize, " hygfgdh")
             let node = SKSpriteNode(
                 texture: .init(imageNamed: blocker.type.assetName),
                 size: .init(
@@ -468,7 +452,6 @@ extension GameScene: SKPhysicsContactDelegate {
             let killed = enemy.bulletHitted(bullet)
             if killed && !enemy.isRemoving {
                 lvlanager.progress.earnedMoney += enemy.totalHealth
-                print(enemy.totalHealth, " grefdsxxv")
                 lvlanager.progress.killedEnemies += 1
                 enemy.removeFromParent()
                 self.loadRaund()

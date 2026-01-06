@@ -42,7 +42,6 @@ extension UIView {
             layer.name?.contains("DarkOverlay") ?? false
         }
         set {
-            print("egrfseads")
             if !newValue {
                 return
             }
@@ -50,7 +49,6 @@ extension UIView {
                 return
             }
             layer.name = "\(layer.name ?? "")DarkOverlay"
-            print("rtegrfseda")
             addDarkOverlay()
         }
     }
@@ -69,7 +67,6 @@ extension UIView {
             layer.name?.contains("hasContainer") ?? false
         }
         set {
-            print("egrfseads")
             if !newValue {
                 return
             }

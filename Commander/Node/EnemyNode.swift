@@ -72,7 +72,6 @@ class EnemyNode: SKSpriteNode {
         }) as? SKSpriteNode else {
             return false
         }
-        print(bullet.damage, " rgfdsfdsa ", health)
         audioContainer?.play(.hit1)
         health -= bullet.damage
         let newPercent = CGFloat(health) / CGFloat(totalHealth)
@@ -83,8 +82,6 @@ class EnemyNode: SKSpriteNode {
                 let newAssetIndex = CGFloat(assets.damaged) * newPercent
                 if let image = UIImage(named: "enemy/" + type.component.rawValue + "/damaged/" + "\(Int(newAssetIndex))") {
                     self.texture = .init(image: image)
-                } else {
-                    print("noimageforasset ", Int(newAssetIndex))
                 }
             }
             let explosure = SKSpriteNode(texture: .init(image: .hit), size: .init(width: 15, height: 15))

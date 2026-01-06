@@ -297,6 +297,10 @@ extension LevelListSuperViewController {
 }
 
 extension LevelListSuperViewController {
+    static func initiate() -> Self {
+        initiateDefault("LevelPicker")
+    }
+    
     struct Constants {
         enum Names: String {
             case rightPanelNavigation, bottomPanelNavigation

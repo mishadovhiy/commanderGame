@@ -19,7 +19,13 @@ extension [[GameBuilderModel.EnemyRound]] {
         let initialValue: Int
         switch lvl {
         default:
-            initialValue = 30
+            let value: Int
+            if lvl % 2 != 0 {
+                value = 5
+            } else {
+                value = 15
+            }
+            initialValue = page >= 3 ? 30 : value * page
         }
         let initial = initialValue + (page * 4)
         return initial + (Int(Float(initial) * 0.5) * page - 1)
@@ -28,7 +34,11 @@ extension [[GameBuilderModel.EnemyRound]] {
     static func enemyList(_ lvl: String, page: String) -> Self {
         let level = Int(lvl) ?? 0
         let page = Int(page) ?? 0
-        let roundCount: Range<Int> = 0..<numberOfRounds(level, page: page)
+        let rangeMax = numberOfRounds(level, page: page)
+        if rangeMax <= 0 {
+            return []
+        }
+        let roundCount: Range<Int> = 0..<rangeMax
         let maxHealth = EnemyType.allCases.sorted(by: {$0.health >= $1.health}).first?.health ?? 0
         
         let pagePercent = Float(page) / Float(LevelPagesBuilder.maxPageCount)
@@ -47,8 +57,6 @@ extension [[GameBuilderModel.EnemyRound]] {
         }).sorted(by: {
             $0.health <= $1.health
         })
-        print(lvlPercent, " htegrfsdsa ", lvlPercent)
-        print(lvl, " threggfeljfdsKDFS ", page, " hgjhjghjgdcsbhjxczhjbcbhjdfsbnv ")
         return roundCount.compactMap { i in
             let count = 15 + page + Int(lvlPercent * 10)
             let roundPercent = (Float(i) / Float(roundCount.upperBound)).closesPercent

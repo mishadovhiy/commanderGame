@@ -21,12 +21,11 @@ struct IcloudService {
         ).first
     }
     
-    func writeData(_ data: Codable, type: DataType, local: Bool = true) {
+    func writeData(_ data: Codable, type: DataType, local: Bool = true, ignoreUpdate: Bool = false) {
         guard let dir = local ? self.localURL : icloudURL else {
             print("iCloud not available")
             return
         }
-        print("wrignfsdsa ")
         let url = dir.appendingPathComponent(type.rawValue)
         
         do {
@@ -36,7 +35,7 @@ struct IcloudService {
             )
             let dataModel = try data.encode()
             try dataModel?.write(to: url, options: .atomic)
-            if local {
+            if local, !ignoreUpdate {
                 self.writeData(data, type: type, local: false)
             }
         } catch {
@@ -49,9 +48,9 @@ struct IcloudService {
         DispatchQueue(label: "db", qos: .background).async {
             let data = load(type: .dataBase, isLocal: false) as? IcloudService.DataType.Responses.Cloud
             if let data {
-                writeData(data, type: .dataBase)
+                writeData(data, type: .dataBase, local: true, ignoreUpdate: true)
             } else {
-                writeData(IcloudService.DataType.Responses.Cloud.init(), type: .dataBase)
+                writeData(IcloudService.DataType.Responses.Cloud.init(), type: .dataBase, local: true)
             }
             DispatchQueue.main.async {
                 completion()
@@ -69,7 +68,11 @@ struct IcloudService {
         do {
             let data = try Data(contentsOf: url)
 //            let response = try JSONDecoder().decode(type.responseType.self, from: data)
-            return try type.responseType.init(data)
+            let result = try type.responseType.init(data)
+            if !isLocal {
+                self.writeData(result, type: .dataBase, local: false, ignoreUpdate: true)
+            }
+            return result
         }
         catch {
             print(error, " ", #function, #file, #line)

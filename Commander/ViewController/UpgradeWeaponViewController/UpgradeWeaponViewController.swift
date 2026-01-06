@@ -82,8 +82,6 @@ class UpgradeWeaponViewController: AudioViewController {
             }))
             DispatchQueue.main.async {
                 self.tableData = tableData
-                print(self.tableData.count, " tgerfwedaw ")
-
                 self.tableView.reloadData()
                 self.collectionVIew.reloadData()
                 completion()
