@@ -134,7 +134,7 @@ class HomeViewController: AudioViewController {
 fileprivate
 extension HomeViewController {
     func loadLevelListChild() {
-        let vc = LevelListSuperViewController.initiateDefault()
+        let vc = LevelListSuperViewController.initiate()
         vc.view.isHidden = true
         vc.view.layer.shadowColor = UIColor.black.cgColor
         vc.view.layer.shadowRadius = 0

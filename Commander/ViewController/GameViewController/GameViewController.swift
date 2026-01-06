@@ -174,6 +174,27 @@ let vc = AlertViewController.initiate(data: .init(title: "Menu", type: .collecti
         vc.dismiss(animated: true) {
             self.dismiss(animated: true)
         }
+    })),
+    AlertModel.TitleCellModel(button: .init(title: "Delete Progress and quit", toAlert: {
+        .init(title: "Are you suze", type: .collectionView([
+            AlertModel.TitleCellModel.init(title: "no"),
+            AlertModel.TitleCellModel.init(button: .init(title: "yes", didPress: {
+                let vc = self.presentedViewController ?? self
+                let lvl = self.selectedLevel
+                vc.dismiss(animated: true) {
+                    self.dismiss(animated: true) {
+                        guard let lvl else {
+                            return
+                        }
+                        DispatchQueue(label: "db", qos: .background).async {
+                            var dbModel = IcloudService()
+                            dbModel.loadDataBaseCopy.progress.removeValue(forKey: lvl)
+                        }
+                    }
+                }
+                
+            }))
+        ]), buttons: [])
     }))
 ]), buttons: []))
         vc.didDismiss = { [weak self] in

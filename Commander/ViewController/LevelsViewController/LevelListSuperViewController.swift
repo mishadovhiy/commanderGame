@@ -9,6 +9,9 @@ import UIKit
 
 class LevelListSuperViewController: UIViewController {
     
+    @IBOutlet weak var progressSuperView: UIView!
+    @IBOutlet weak var levelProgressView: UIProgressView!
+    @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet private weak var bottomBarConstraint: NSLayoutConstraint!
     @IBOutlet private weak var startButton: UIButton!
     @IBOutlet private weak var rightPanelStackView: UIStackView!
@@ -195,6 +198,7 @@ fileprivate
 extension LevelListSuperViewController {
     func loadUI() {
         view.backgroundColor = .clear
+        progressSuperView.isHidden = true
         bottomPanelStackView.isHidden = true
         bottomPanelStackView.layer.zPosition = -1
         loadPageChild()
@@ -215,7 +219,8 @@ extension LevelListSuperViewController {
     
     func updateBottomNavigationDifficulties(animated: Bool = false) {
         DispatchQueue.init(label: "db", qos: .userInitiated).async {
-            let db = IcloudService().loadDataBaseCopy.completedLevels
+            let dbData = IcloudService().loadDataBaseCopy
+            let db = dbData.completedLevels
             let completedKeys = db.keys.filter({
                 ![
                     $0.levelPage == self.selectedLevel.levelPage,
@@ -230,7 +235,28 @@ extension LevelListSuperViewController {
             } else {
                 completedLevels = nil
             }
+            let needLevelProgress: Bool
+            let uncompletedLevel = dbData.progress[self.selectedLevel]
+
+            if self.selectedLevel.level.isEmpty {
+                needLevelProgress = false
+            } else {
+                needLevelProgress = (uncompletedLevel?.gameProgress.currentRound ?? 0) >= 1
+            }
+            let gameBuilder = GameBuilderModel(lvlModel: self.selectedLevel)
+            let uncompletedProgress = Float(uncompletedLevel?.gameProgress.currentRound ?? 0) / Float(gameBuilder.rounds)
             DispatchQueue.main.async {
+                if uncompletedProgress.isFinite && !uncompletedProgress.isNaN {
+                    self.progressLabel.text = "\(Int(uncompletedProgress * 100))"
+                } else {
+                    self.progressLabel.text = ""
+                }
+                self.levelProgressView.progress = uncompletedProgress
+                UIView.animate(withDuration: 0.2) {
+                    if self.progressSuperView.isHidden != !needLevelProgress {
+                        self.progressSuperView.isHidden = !needLevelProgress
+                    }
+                }
                 if let completedLevels {
                     self.completedLevels = completedLevels
                 }
