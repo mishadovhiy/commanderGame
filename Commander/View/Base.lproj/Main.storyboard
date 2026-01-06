@@ -588,53 +588,6 @@
             </objects>
             <point key="canvasLocation" x="87.323943661971839" y="61.832061068702288"/>
         </scene>
-        <!--Difficulty View Controller-->
-        <scene sceneID="cnT-XG-jKU">
-            <objects>
-                <viewController storyboardIdentifier="DifficultyViewController" id="QQt-0D-dsb" customClass="DifficultyViewController" customModule="Commander" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Jig-MZ-gnV">
-                        <rect key="frame" x="0.0" y="0.0" width="852" height="393"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="AFy-T8-Pdr">
-                                <rect key="frame" x="62" y="0.0" width="728" height="336"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZD-20-hP3">
-                                        <rect key="frame" x="0.0" y="0.0" width="728" height="336"/>
-                                        <color key="backgroundColor" name="AccentColor"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Back">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hasDarkOverlay" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="backNavigationPressed:" destination="QQt-0D-dsb" eventType="touchUpInside" id="8NV-Rm-hXs"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="pn5-mB-Z2O"/>
-                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                        <constraints>
-                            <constraint firstItem="pn5-mB-Z2O" firstAttribute="bottom" secondItem="AFy-T8-Pdr" secondAttribute="bottom" constant="2" id="6DY-wX-Nkt"/>
-                            <constraint firstItem="AFy-T8-Pdr" firstAttribute="top" secondItem="Jig-MZ-gnV" secondAttribute="top" id="R6O-ow-FAT"/>
-                            <constraint firstItem="AFy-T8-Pdr" firstAttribute="leading" secondItem="pn5-mB-Z2O" secondAttribute="leading" constant="3" id="Z1h-ba-fwL"/>
-                            <constraint firstItem="pn5-mB-Z2O" firstAttribute="trailing" secondItem="AFy-T8-Pdr" secondAttribute="trailing" constant="3" id="ZAx-2m-x24"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="backNavigationButton" destination="dZD-20-hP3" id="tHQ-Fo-Ly0"/>
-                        <outlet property="difficultyStackView" destination="AFy-T8-Pdr" id="Zz5-Xw-xM9"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JCJ-qG-NqB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1018" y="2660"/>
-        </scene>
         <!--Upgrade Weapon View Controller-->
         <scene sceneID="rmx-w5-hap">
             <objects>
@@ -1153,9 +1106,6 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

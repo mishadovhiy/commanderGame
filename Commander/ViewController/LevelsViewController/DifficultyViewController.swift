@@ -81,9 +81,7 @@ extension DifficultyViewController {
         data: [DifficultyDataModel],
         didSelect: @escaping(_ value: String) -> ()
     ) -> Self {
-        let vc = UIStoryboard(name: "Main", bundle: nil)
-            .instantiateViewController(withIdentifier: .init(
-                describing: Self.self)) as! Self
+        let vc = initiateDefault("LevelPicker")
         vc.data = data
         vc.didSelect = didSelect
         return vc

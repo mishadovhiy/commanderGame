@@ -455,6 +455,53 @@
             </objects>
             <point key="canvasLocation" x="187" y="2689"/>
         </scene>
+        <!--Difficulty View Controller-->
+        <scene sceneID="FLy-Do-zwn">
+            <objects>
+                <viewController storyboardIdentifier="DifficultyViewController" id="hXJ-jf-yDe" customClass="DifficultyViewController" customModule="Commander" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pGx-eM-P2U">
+                        <rect key="frame" x="0.0" y="0.0" width="852" height="393"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="tbK-kV-FS2">
+                                <rect key="frame" x="62" y="0.0" width="728" height="336"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Jh-XF-Yvt">
+                                        <rect key="frame" x="0.0" y="0.0" width="728" height="336"/>
+                                        <color key="backgroundColor" name="AccentColor"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Back">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hasDarkOverlay" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="backNavigationPressed:" destination="hXJ-jf-yDe" eventType="touchUpInside" id="bY8-b8-vpI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="XvL-uW-Q0N"/>
+                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <constraints>
+                            <constraint firstItem="tbK-kV-FS2" firstAttribute="leading" secondItem="XvL-uW-Q0N" secondAttribute="leading" constant="3" id="95W-H8-gX2"/>
+                            <constraint firstItem="XvL-uW-Q0N" firstAttribute="trailing" secondItem="tbK-kV-FS2" secondAttribute="trailing" constant="3" id="fDb-De-Vgm"/>
+                            <constraint firstItem="tbK-kV-FS2" firstAttribute="top" secondItem="pGx-eM-P2U" secondAttribute="top" id="i9w-JE-xhi"/>
+                            <constraint firstItem="XvL-uW-Q0N" firstAttribute="bottom" secondItem="tbK-kV-FS2" secondAttribute="bottom" constant="2" id="jZI-aj-JEP"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backNavigationButton" destination="7Jh-XF-Yvt" id="H4j-np-QdH"/>
+                        <outlet property="difficultyStackView" destination="tbK-kV-FS2" id="DOS-jj-phs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T2d-BW-bR7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1018" y="2660"/>
+        </scene>
     </scenes>
     <resources>
         <image name="locked" width="323" height="418"/>
