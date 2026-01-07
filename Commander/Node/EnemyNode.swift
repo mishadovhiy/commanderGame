@@ -18,9 +18,16 @@ class EnemyNode: SKSpriteNode {
         let level = Float(builder.enemyHealthMult) * ((levelPercent * 50) + 10)
         self.health = (type.health * Int(level))
         self.totalHealth = health
-        super.init(texture: .init(imageNamed: "enemy/" + type.component.rawValue + "/1"), color: .clear, size: CGSize(width: 20, height: 20))
+        let image = UIImage(named: "enemy/" + type.component.rawValue + "/1")
+        var size = image?.size ?? .zero
+        
+        if size.width >= 20 {
+            let mult = size.width / size.height
+            size = .init(width: 20, height: 20 / mult)
+        }
+        super.init(texture: .init(image: image!), color: .clear, size: size)
         addChild(AudioContainerNode(audioNames: [.explosure1, .explosure3, .explosure4, .explosure, .hit1, .hit2, .coins], canPlaySound: canPlaySound))
-        self.zRotation = .pi
+//        self.zRotation = .pi
         self.name = .init(describing: Self.self)
         self.physicsBody = .init(rectangleOf: size)
         self.physicsBody?.categoryBitMask = PhysicsCategory.enemy

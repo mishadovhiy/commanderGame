@@ -57,6 +57,7 @@ extension [[GameBuilderModel.EnemyRound]] {
         }).sorted(by: {
             $0.health <= $1.health
         })
+//        return testEnemyList
         return roundCount.compactMap { i in
             let count = 15 + page + Int(lvlPercent * 10)
             let roundPercent = (Float(i) / Float(roundCount.upperBound)).closesPercent
@@ -70,13 +71,16 @@ extension [[GameBuilderModel.EnemyRound]] {
                 .init(type: $0, count: count / enemies.count)
             })
         }
-//        return (0..<10).compactMap({ _ in
-//            EnemyType.allCases.sorted(by: {
-//                $0.health <= $1.health
-//            }).compactMap({
-//                .init(type: $0, count: 10)
-//            })
-//        })
+    }
+    
+    private static var testEnemyList: Self {
+        (0..<10).compactMap({ _ in
+            EnemyType.allCases.sorted(by: {
+                $0.health <= $1.health
+            }).compactMap({
+                .init(type: $0, count: 10)
+            })
+        })
     }
     
 }
