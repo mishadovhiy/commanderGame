@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		820675AD2F012DBC00A14FCF /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820675AC2F012DBC00A14FCF /* BaseViewController.swift */; };
+		822380D62F0ED49B003AFDE4 /* BinaryFloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822380D52F0ED49B003AFDE4 /* BinaryFloatingPoint.swift */; };
+		822380D82F0ED4A3003AFDE4 /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822380D72F0ED4A3003AFDE4 /* UITableViewCell.swift */; };
+		822380DA2F0ED4B1003AFDE4 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822380D92F0ED4B1003AFDE4 /* String.swift */; };
+		822380DC2F0ED4CB003AFDE4 /* Encodable+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822380DB2F0ED4CB003AFDE4 /* Encodable+Decodable.swift */; };
+		822380DE2F0ED4E1003AFDE4 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822380DD2F0ED4E1003AFDE4 /* UIFont.swift */; };
+		822380E02F0ED50C003AFDE4 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822380DF2F0ED50C003AFDE4 /* UILabel.swift */; };
+		822380E22F0ED528003AFDE4 /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822380E12F0ED528003AFDE4 /* UINavigationController.swift */; };
+		822380E42F0ED536003AFDE4 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822380E32F0ED536003AFDE4 /* UIColor.swift */; };
+		822380E62F0ED541003AFDE4 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822380E52F0ED541003AFDE4 /* UIApplication.swift */; };
+		822380E82F0ED54D003AFDE4 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822380E72F0ED54D003AFDE4 /* UIViewController.swift */; };
 		823497CA2EEB1FAA00F82871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823497C02EEB1FAA00F82871 /* AppDelegate.swift */; };
 		823497CB2EEB1FAA00F82871 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823497C32EEB1FAA00F82871 /* GameScene.swift */; };
 		823497CC2EEB1FAA00F82871 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823497C42EEB1FAA00F82871 /* GameViewController.swift */; };
@@ -93,6 +103,16 @@
 
 /* Begin PBXFileReference section */
 		820675AC2F012DBC00A14FCF /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		822380D52F0ED49B003AFDE4 /* BinaryFloatingPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryFloatingPoint.swift; sourceTree = "<group>"; };
+		822380D72F0ED4A3003AFDE4 /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
+		822380D92F0ED4B1003AFDE4 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		822380DB2F0ED4CB003AFDE4 /* Encodable+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Decodable.swift"; sourceTree = "<group>"; };
+		822380DD2F0ED4E1003AFDE4 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		822380DF2F0ED50C003AFDE4 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		822380E12F0ED528003AFDE4 /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		822380E32F0ED536003AFDE4 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		822380E52F0ED541003AFDE4 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		822380E72F0ED54D003AFDE4 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		823497A52EEB1F9000F82871 /* Commander.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Commander.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		823497C02EEB1FAA00F82871 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		823497C12EEB1FAA00F82871 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -418,7 +438,17 @@
 		826A32C82EED05C6001D25B7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				822380E52F0ED541003AFDE4 /* UIApplication.swift */,
+				822380E12F0ED528003AFDE4 /* UINavigationController.swift */,
+				822380E72F0ED54D003AFDE4 /* UIViewController.swift */,
 				826A32C62EED05BF001D25B7 /* UIView.swift */,
+				822380DF2F0ED50C003AFDE4 /* UILabel.swift */,
+				822380D72F0ED4A3003AFDE4 /* UITableViewCell.swift */,
+				822380E32F0ED536003AFDE4 /* UIColor.swift */,
+				822380DD2F0ED4E1003AFDE4 /* UIFont.swift */,
+				822380DB2F0ED4CB003AFDE4 /* Encodable+Decodable.swift */,
+				822380D92F0ED4B1003AFDE4 /* String.swift */,
+				822380D52F0ED49B003AFDE4 /* BinaryFloatingPoint.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -632,9 +662,13 @@
 				823497EC2EEB590C00F82871 /* GameBuilderModel.swift in Sources */,
 				8260E26E2EEDB53A002E29C0 /* LevelDescriptionViewController.swift in Sources */,
 				82C637C72EEF41A10064F917 /* UpgradeWeaponCell.swift in Sources */,
+				822380E82F0ED54D003AFDE4 /* UIViewController.swift in Sources */,
 				823497FB2EEB661900F82871 /* WeaponType.swift in Sources */,
 				82C637C52EEF41920064F917 /* WeaponBuyCell.swift in Sources */,
+				822380E42F0ED536003AFDE4 /* UIColor.swift in Sources */,
+				822380E22F0ED528003AFDE4 /* UINavigationController.swift in Sources */,
 				82C637DB2EEF4C360064F917 /* DataBaseService.swift in Sources */,
+				822380D82F0ED4A3003AFDE4 /* UITableViewCell.swift in Sources */,
 				823498022EEB6B8B00F82871 /* EnemyNode.swift in Sources */,
 				823497CA2EEB1FAA00F82871 /* AppDelegate.swift in Sources */,
 				82E165BA2F08C6720090859E /* AlertLevelProgressCell.swift in Sources */,
@@ -658,14 +692,18 @@
 				823497CB2EEB1FAA00F82871 /* GameScene.swift in Sources */,
 				8260E2412EED383E002E29C0 /* LevelViewController.swift in Sources */,
 				82C637BE2EEF40100064F917 /* WeaponUpgradeType.swift in Sources */,
+				822380E62F0ED541003AFDE4 /* UIApplication.swift in Sources */,
 				826A32C12EECEB0E001D25B7 /* MessageModel.swift in Sources */,
 				82C637C92EEF41AF0064F917 /* WeaponTypeCell.swift in Sources */,
 				8260E23F2EED381A002E29C0 /* LevelsPageViewController.swift in Sources */,
 				8289ABB42EF3D60300F78DD0 /* DestinationOutMaskedView.swift in Sources */,
 				82C637D92EEF4B980064F917 /* Keys.swift in Sources */,
+				822380DE2F0ED4E1003AFDE4 /* UIFont.swift in Sources */,
 				8239D9472F0AC00C007C88E6 /* IcloudService.swift in Sources */,
 				82C637CB2EEF4A2D0064F917 /* DataBaseModel.swift in Sources */,
+				822380DC2F0ED4CB003AFDE4 /* Encodable+Decodable.swift in Sources */,
 				823497F52EEB5C0200F82871 /* LevelManager.swift in Sources */,
+				822380DA2F0ED4B1003AFDE4 /* String.swift in Sources */,
 				829CADCB2EFA8E6800548DB1 /* AlertSegmentedTableCell.swift in Sources */,
 				8265846E2F045366003EC450 /* EnemyRound.swift in Sources */,
 				826A32C72EED05BF001D25B7 /* UIView.swift in Sources */,
@@ -679,9 +717,11 @@
 				8289ABB62EF4F38700F78DD0 /* HomeViewController.swift in Sources */,
 				823497F22EEB5AB400F82871 /* GameDurationType.swift in Sources */,
 				8235D1702EFFA8D000D48EB0 /* AudioFileNameType.swift in Sources */,
+				822380E02F0ED50C003AFDE4 /* UILabel.swift in Sources */,
 				8234980A2EEB739F00F82871 /* WeaponNode.swift in Sources */,
 				823497CC2EEB1FAA00F82871 /* GameViewController.swift in Sources */,
 				829CADC52EFA8E1800548DB1 /* AlertCollectionViewController.swift in Sources */,
+				822380D62F0ED49B003AFDE4 /* BinaryFloatingPoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
